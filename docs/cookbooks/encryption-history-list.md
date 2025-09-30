@@ -1,9 +1,3 @@
----
-noteId: "71cbdeb09dd011f0b67f67467df34666"
-tags: []
-
----
-
 ## Encryption + HistoryList (Cookbook)
 
 1) Generate:

@@ -1,9 +1,3 @@
----
-noteId: "6d8868a09dd011f0b67f67467df34666"
-tags: []
-
----
-
 ## Synthetic Data
 
 - Generate encryption dataset:
