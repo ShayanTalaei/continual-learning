@@ -12,8 +12,9 @@ dataset:
 agent:
   type: history_agent
   lm_config:
-    model: "gemini-2.5-pro"
+    model: "gemini-2.5-flash"
     temperature: 0.0
+    thinking_budget: 512
     max_output_tokens: 1024
   memory_config:
     _type: history_list

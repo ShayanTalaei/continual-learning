@@ -18,7 +18,7 @@ def apply_mapping(text: str, mapping: Dict[str, str]) -> str:
 
 
 def generate_samples(n: int, length: int, mapping: Dict[str, str]) -> List[Dict[str, str]]:
-    letters = string.ascii_lowercase
+    letters = list(mapping.keys())
     rows: List[Dict[str, str]] = []
     for _ in range(n):
         s = "".join(random.choice(letters) for _ in range(length))
