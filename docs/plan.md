@@ -4,238 +4,32 @@ tags: []
 
 ---
 
-## Minimal Plan: QA Task with History-List Memory Agent
+## Continual Learning Plan (Trimmed)
 
 ### Goals
 - **Generic** abstractions for `Environment`, `Agent`, `Memory`, and `LanguageModel`.
 - **Minimal** runnable QA demo using a single-turn QA environment.
 - **Modular** so we can later plug in multi-step envs, other memories, and other LMs.
 
-### Core Interfaces (aligned with Gym-style patterns) ✅
-- `Environment.reset() -> obs` initializes the environment and returns the first observation.
-- `Environment.step(action) -> (obs, feedback, done, info)` advances the environment. `feedback` is a dict (task-specific), `done` indicates episode termination.
-- `EnvDataset`: loads a list of `Environment` instances.
-- `Agent.act(obs: str) -> str` returns the next action.
-- `Agent.observe(obs: str, feedback: dict, done: bool) -> None` receives the transition aftermath (for memory updates, learning signals).
-- `Agent.reset() -> None` resets internal state between episodes.
-- `MemoryModule`: `update(entry) -> None`, `recall() -> Any`.
-- `LanguageModel`: `call(system_prompt: str, user_prompt: str) -> str`.
-  
-Task-specific evaluation lives in the environment implementation itself (e.g., `MathQAEnv.step` can compute correctness by parsing boxed answers). If desired, expose a helper `Environment.evaluate(action) -> dict` used inside `step`.
-  
-`StepResult` (runtime record): `{obs: str, action: str, feedback: dict, done: bool}`.
+### Implemented (see structured docs)
+- Quickstart: `docs/quickstart.md`
+- Concepts: `docs/concepts/` (runtime, agents, memory, environments, language_model, logging)
+- Reference: `docs/reference/config.md`
+- Guides: `docs/guides/` (running-benchmarks, synthetic-data)
+- Cookbooks: `docs/cookbooks/` (encryption-history-list)
 
-### Concrete Implementations for Phase 1
-- `HistoryList` memory: append-only list of entries with optional max length; returns the list for recall.
-- `QAEnv` and `QAEnvDataset`: single-turn QA pairs `(question, answer)`; `step` returns ground-truth to compute feedback.
-- `MemoryAgent`:
-  - Builds prompts from `(recall, current obs)`.
-  - Calls LM to get an answer.
-  - On feedback, adds a structured entry `(obs, action, feedback)` to history.
-  - Provides optional `ReflectionPolicy` hook(s) to run at episode end (and optionally per step) to synthesize guidance and write `_type="reflection"` entries.
-- `LanguageModel` implementations:
-  - `GeminiClient` (already scaffolded). We will rely on Gemini directly for this project and skip mocks for now.
-  
-Task-specific environment subclassing for evaluation (example):
-- `MathQAEnv(QAEnv)`: overrides `evaluate(action)` to extract boxed answers or parse numeric forms, then compares against canonical target. Keeps `QAEnvDataset` simple while isolating evaluation logic in the env.
+### High-level notes
+- Agents are task-agnostic; `HistoryAgent` specializes prompt/update for `HistoryList`.
+- Datasets route to env subclasses via `task_type`/`env_class`; `.jsonl` or HF datasets supported.
+- Logging writes to a run-scoped file; console verbosity per component.
 
-### Run Loop ✅
-`RunTime.run()`:
-1. Iterate over environments from `EnvDataset` (optionally limit via config).
-2. For each environment (episode loop):
-   - `obs = environment.reset()`; `agent.reset()`
-   - `done = False`
-   - while not `done`:
-     - `action = agent.act(obs)`
-     - `obs, feedback, done, info = environment.step(action)`  (env computes task-specific feedback)
-     - `agent.observe(obs, feedback, done)`  (may trigger per-step reflection if enabled)
-     - record `StepResult`
-   - After loop ends, call `agent.end_episode()` (triggers episode-level reflection if configured).
-   - Aggregate per-env metrics from recorded `StepResult`s.
-
-### Prompt Format (minimal, plain text) ✅
-- System: "You are a helpful QA assistant. Use prior history when useful."
-- User: a compact block:
-  - Optional history lines (last `k`, e.g., 10): `Q: ... A: ... F: ...`
-  - Current: `Q: <obs>`
-
-### Data Flow ✅
-1. `EnvDataset` yields `QAEnv(question, answer, metadata)`.
-2. `RunTime` asks `Agent` to act using `LanguageModel` with memory-augmented prompt.
-3. `RunTime` computes feedback and sends to `Agent`.
-4. `Agent` updates `HistoryList` with an `Entry` capturing `(obs, action, feedback)`.
-
-### Minimal Types ✅
-- `Entry` with fields: `_type` (e.g., "experience"), `content` (stringified record). Keep simple for now.
-- `HistoryListConfig` with `max_length: int = 100`.
-- `MemoryAgentConfig`:
-  - `memory_config: HistoryListConfig`
-  - `lm_config: LMConfig`
-  - `history_k: int = 10` (how many to include in prompt)
-- `Feedback` dict shape: `{correct: bool, target: str, message: str}` (extensible by envs)
-- `StepResult` as described above
-
-### Agent Hierarchy and Memory Updates ✅
-- Base `Agent`: `act`, `observe`, `reset` as defined above.
-- `MemoryAgent(Agent)`: centralizes memory handling and exposes a single extension point:
-  - `update_memory(obs, action, feedback, done) -> None` (called by `observe`).
-  - Default behavior (no-reflection): append `ExperienceEntry` to memory.
-- `ReflexionAgent(MemoryAgent)`: overrides `update_memory` (and optionally `end_episode`) to run reflection using the LM and append `ReflectionEntry` in addition to experiences.
-  - Minimal policy: reflections at episode end summarizing what worked/failed.
-  - Optional extension: per-step micro-reflections if desired.
-
-### Config Hierarchy (Pydantic) ✅
-- `RunTimeConfig`:
-  - `max_envs_to_visit: Optional[int]`
-  - `max_steps_per_episode: Optional[int]` (safety cap)
-- `EnvDatasetConfig` (base):
-  - `dataset_path: Optional[str]` (enables `QAEnvDataset` to load via `datasets`)
-- `QAEnvDatasetConfig(EnvDatasetConfig)`:
-  - `question_field: str`, `answer_field: str`
-- `AgentConfig` (base) — used generically by `Agent[C]`.
-- `HistoryAgentConfig(AgentConfig)`:
-  - `lm_config: LMConfig`
-  - `memory_config: HistoryListConfig`
-  - `history_k: int = 10`
-- `ReflexionAgentConfig(HistoryAgentConfig)`:
-  - `reflection_config: ReflectionConfig`
-- `LMConfig` → `GeminiConfig` (adds `thinking_budget`, etc.).
-- `MemoryModuleConfig` → `HistoryListConfig`.
-- `ReflectionConfig`:
-  - `enabled: bool = False`
-  - `mode: Literal["episode_end", "per_step", "both"] = "episode_end"`
-  - `max_tokens: Optional[int]` (if needed)
-  - `system_prompt: Optional[str]` (override default reflexion prompt)
-
-### Memory Entry Modularization ✅
-- Use a single generic entry object to keep the memory flexible:
-  - `Entry`: `{ _type: str, content: str }`
-    - Atomic logging pattern (recommended):
-      - `_type="Observation"`, `content=<obs>`
-      - `_type="Action"`, `content=<action>`
-      - `_type="Feedback"`, `content=<feedback-json-or-text>`
-    - Other examples:
-      - `_type="Reflection"`, `content="short advice text"`
-      - `_type="Summary"`, `_type="Retrieval"`, etc.
-- The `HistoryList` stores `List[Entry]` and truncates to `max_length`.
-
-### Milestones (implements in order)
-1) Interfaces and Configs ✅
-   - Update `Environment` to Gym-style: `reset() -> obs`, `step(action) -> (obs, feedback, done, info)`.
-   - Update `Agent` to: `act(obs) -> action`, `observe(obs, feedback, done)`, `reset()`, and add `end_episode()`.
-   - Define config classes:
-     - `RunTimeConfig`: `max_envs_to_visit`, `max_steps_per_episode`.
-     - `EnvDatasetConfig` and `QAEnvDatasetConfig`.
-     - `LMConfig`/`GeminiConfig`.
-     - `MemoryModuleConfig`/`HistoryListConfig`.
-     - `AgentConfig` → `MemoryAgentConfig` → `ReflexionAgentConfig`.
-
-2) Memory: HistoryList ✅
-   - Ensure `HistoryList` stores a discriminated union `Entry` type: `ExperienceEntry | ReflectionEntry`.
-   - Expose `update(entry)` and `recall()`; enforce `max_length` truncation.
-   - Fix `memory_factory` to select by `_type` or `type` consistently with `HistoryListConfig`.
-
-3) QA Environment and Dataset ✅
-   - `QAEnv(question, answer, metadata)` implementing `reset` and single-step `step`:
-     - On `reset`, return the question; internal flag `done=False`.
-     - On `step(action)`, compute feedback: exact match by default; return `(obs=None, feedback, done=True, info={"target": answer})`.
-   - `QAEnvDataset` loads an in-memory list of QA pairs for the demo.
-   - Optional subclass `MathQAEnv(QAEnv)` overriding evaluation (e.g., boxed answer extraction) later.
-
-4) Language Model ✅
-   - Implement `LanguageModel` base signature; rely on `GeminiClient` for calls.
-   - Ensure `lm_factory.get_lm_client` returns `GeminiClient` given `GeminiConfig`.
-
-5) Agents ✅
-   - `MemoryAgent`:
-     - Holds `memory`, `lm`, `history_k`.
-     - `act(obs)`: build prompt from last `k` entries + current obs, call LM, return action.
-     - `observe(obs, feedback, done)`: call `update_memory(obs, action, feedback, done)`.
-     - `update_memory(...)` default: append `ExperienceEntry`.
-     - `end_episode()`: default no-op.
-   - `ReflexionAgent(MemoryAgent)`:
-     - Override `update_memory` (optionally) if per-step reflections are needed.
-     - Override `end_episode()` to synthesize reflections from the trajectory using the LM and append a `ReflectionEntry`.
-
-6) RunTime Loop ✅
-   - `run()` iterates envs; for each:
-     - `obs = env.reset()`; `agent.reset()`
-     - loop steps with safety cap from `RunTimeConfig`:
-       - `action = agent.act(obs)`
-       - `obs, feedback, done, info = env.step(action)`
-       - `agent.observe(obs, feedback, done)`
-       - record `StepResult`
-       - if `done`: break
-     - `agent.end_episode()`
-     - accumulate metrics (e.g., accuracy) from feedbacks.
-
-7) Demo and Instructions
-   - Add a minimal demo in docs (or `examples/`) showing how to:
-     - Build `QAEnvDataset` from a few QA pairs.
-     - Instantiate `ReflexionAgent` or `MemoryAgent` with `HistoryList` and `GeminiClient`.
-     - Run `RunTime` and print accuracy and saved memory entries.
-
----
-
-## Implementation Spec (Bottom-Up)
-
-### Environments ✅
-
-#### Base Interfaces ✅
-- `Environment`
-  - Purpose: Standard Gym-style text environment protocol for single-/multi-turn tasks.
-  - Functions:
-    - `reset() -> str`
-      - Purpose: Initialize episode state and return the first observation string.
-    - `step(action: str) -> tuple[str | None, dict, bool, dict]`
-      - Purpose: Advance environment with the agent action.
-      - Returns: `(next_obs, feedback, done, info)`
-        - `next_obs: Optional[str]` — the next observation, or `None` if terminal.
-        - `feedback: dict` — task-specific evaluation, minimally `{correct: bool, target: str, message: str}`.
-        - `done: bool` — whether the episode has terminated.
-        - `info: dict` — auxiliary details (e.g., normalized answers, metadata ids).
-    - `evaluate(action: str) -> dict` (optional helper)
-      - Purpose: Centralize evaluation logic for reusability; `step` can call this internally.
-
-- `EnvDataset`
-  - Purpose: Provide a collection of `Environment` instances for the runtime.
-  - Fields:
-    - `config: EnvDatasetConfig` — dataset configuration.
-    - `dataset: list[Environment]` — list of ready-to-run envs.
-  - Functions:
-    - `load_dataset() -> list[Environment]`
-      - Purpose: Build the list of environments from source (in-memory or files).
-    - `get_dataset() -> list[Environment]`
-      - Purpose: Accessor for the constructed environments.
-
-#### QA Specializations
-- `QAEnv(Environment)`
-  - Fields:
-    - `question: str` — the prompt presented to the agent.
-    - `answer: str` — ground-truth answer string.
-    - `metadata: dict` — dataset/source meta.
-    - `_done: bool` — internal terminal flag (single-turn).
-  - Functions:
-    - `reset() -> str`
-      - Purpose: Set `_done=False` and return `question`.
-    - `step(action: str) -> (None, dict, True, dict)`
-      - Purpose: Single-step episode; compute feedback via exact string match.
-      - Feedback: `{correct: action == answer, target: answer, message: "exact-match"}`.
-      - Info: `{}` or `{"question_id": ..., "source": ...}` from `metadata`.
-    - `evaluate(action: str) -> dict`
-      - Purpose: Isolated evaluation used by `step`; enables easy overrides.
-
-- `QAEnvDataset(EnvDataset)`
-  - Fields:
-    - `items: list[dict]` — in-memory rows with `question`, `answer`, `metadata`.
-  - Functions:
-    - `load_dataset() -> list[Environment]`
-      - Purpose: Wrap each row as a `QAEnv` instance and return the list.
-
-- Optional later: `MathQAEnv(QAEnv)`
-  - Purpose: Override `evaluate` to extract boxed or normalized numeric answers before comparison.
-
----
+### Remaining TODOs
+- Add example configs for AIME/GPQA/MMLU-Pro.
+- Implement `ReflexionAgent` and episode-level reflection.
+- Multi-trial runtime orchestration (`num_trials`, `early_stop_on_success`, `carry_memory_across_trials`).
+- Per-task metrics reporting (e.g., MCQ confusion stats).
+- Seed management in `main` (set random/np/torch if present).
+- Optional JSON formatter and rotating logs in logger utilities.
 
 ### Memory Modules ✅
 

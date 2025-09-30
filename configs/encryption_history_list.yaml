@@ -15,7 +15,7 @@ agent:
     model: "gemini-2.5-flash"
     temperature: 0.0
     thinking_budget: 512
-    max_output_tokens: 1024
+    max_output_tokens: 10000
   memory_config:
     _type: history_list
     max_length: null
