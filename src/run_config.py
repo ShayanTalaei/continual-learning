@@ -2,7 +2,6 @@ from typing import Optional, Literal, Dict, Any
 from pydantic import BaseModel
 
 from src.run_time import RunTimeConfig
-from src.data.qa_dataset import QAEnvDatasetConfig
 
 
 class OutputConfig(BaseModel):
@@ -13,7 +12,7 @@ class OutputConfig(BaseModel):
 
 class RunConfig(BaseModel):
     runtime: RunTimeConfig
-    dataset: QAEnvDatasetConfig
+    dataset: Dict[str, Any]  # includes a `type` key to select dataset from registry
     agent: Dict[str, Any]
     output: Optional[OutputConfig] = None
     seed: Optional[int] = None

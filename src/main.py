@@ -8,7 +8,7 @@ import yaml
 
 from src.run_config import RunConfig
 from src.agent.registry import AGENT_REGISTRY
-from src.data.qa_dataset import QAEnvDataset
+from src.data.dataset_factory import build_dataset
 from src.run_time import RunTime
 from src.utils.logger import setup_logger, child, add_console
 
@@ -57,9 +57,9 @@ def main() -> None:
     root_logger.info("Instantiated agent: %s", agent_type)
 
     dataset_logger = child(root_logger, "dataset")
-    if run_conf.dataset.verbose:
+    if run_conf.dataset.get("verbose", True):
         add_console(dataset_logger, log_level)
-    dataset = QAEnvDataset(run_conf.dataset, logger=dataset_logger)
+    dataset = build_dataset(run_conf.dataset, logger=dataset_logger)
     root_logger.info("Dataset ready with %d environments", len(dataset.get_dataset()))
     runtime_logger = child(root_logger, "runtime")
     if run_conf.runtime.verbose:
