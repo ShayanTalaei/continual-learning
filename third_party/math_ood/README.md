@@ -1,3 +1,9 @@
+---
+noteId: "8be758d09e8c11f0b67f67467df34666"
+tags: []
+
+---
+
 # OMEGA: Can LLMs Reason Outside the Box in Math? Evaluating Exploratory, Compositional, and Transformative Generalization
 
 [![arXiv](https://img.shields.io/badge/arXiv-preprint-b31b1b.svg)](https://arxiv.org/abs/2506.18880)

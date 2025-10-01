@@ -1,3 +1,9 @@
+---
+noteId: "8be77fe09e8c11f0b67f67467df34666"
+tags: []
+
+---
+
 # Compositional Math Problem Settings
 [![HuggingFace](https://img.shields.io/badge/🤗%20HuggingFace-Datasets-yellow)](https://huggingface.co/datasets/allenai/omega-compositional)
 
