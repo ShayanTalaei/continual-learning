@@ -106,42 +106,41 @@ tags: []
 - `AgentConfig`
   - Purpose: Base class for concrete agent configs.
 
-#### MemoryAgent (generic base, task-agnostic)
+#### MemoryAgent (abstract base, task-agnostic)
 - `MemoryAgent[C <: AgentConfig](Agent[C])`
-  - Purpose: Task-agnostic orchestrator for agents that use a `MemoryModule` and an `LM`.
+  - Purpose: Abstract orchestrator for agents that use a `MemoryModule` and an `LM`.
   - Fields:
     - `memory: MemoryModule` — pluggable memory backend (any type via factory).
     - `lm: LanguageModel` — pluggable LM client.
     - `config: MemoryAgentConfig` — includes LM and memory configs.
     - `_last_action: str | None` — cache last action for `observe`.
-    - `_trajectory: list[ExperienceEntry]` — per-episode buffer for reflections.
+    - `_trajectory: list[Any]` — per-episode buffer for reflections.
   - Functions:
     - `act(obs: str) -> str`
       - Purpose: Format prompt using recent memory entries and return LM output as action.
       - Steps: recall memory → format N latest entries → build `(system_prompt, user_prompt)` → `lm.call(...)`.
     - `observe(obs: str | None, feedback: dict, done: bool) -> None`
-      - Purpose: Create `ExperienceEntry` from `(obs_prev, _last_action, feedback)` and call `update_memory`.
+      - Purpose: Delegate event creation to hooks and update memory.
       - Also appends to `_trajectory` for episode-level reflection.
-    - `update_memory(obs: str | None, action: str, feedback: dict, done: bool) -> None`
-      - Purpose: Extension point; default appends `ExperienceEntry` to memory.
     - `end_episode() -> None`
       - Purpose: Default no-op; subclass may implement reflection here.
-  - Hooks (to be implemented/overridden by concrete agents):
+  - Hooks (must be implemented by concrete agents):
     - `build_system_prompt() -> str`
-    - `build_user_prompt(obs: str, history: list[Entry], k: int) -> str`
-    - `update_memory_with_entry(entry: Entry) -> None`
-    - `end_episode() -> None`
-  - Logging convention (recommended, still task-agnostic):
-    - The base `observe` can log atomic entries for Observation, Action, Feedback; concrete agents can extend/override.
+    - `build_user_prompt(obs: str, history: list[Any], k: int | None) -> str`
+    - `create_observation_event(obs: str) -> Any`
+    - `create_action_event(action: str) -> Any`
+    - `create_feedback_event(feedback: dict) -> Any`
+  - Logging convention (recommended):
+    - The base logs Observation/Action/Feedback through the hook-created events.
 
-#### HistoryAgent (specialized, task-agnostic formatting)
+#### HistoryAgent (concrete over HistoryList)
 - `HistoryAgent(MemoryAgent[HistoryAgentConfig])`
   - Purpose: Concrete agent operating over `HistoryList` memory.
   - Fields:
     - `memory_config: HistoryListConfig`, `history_k: int`, `system_prompt: Optional[str]` in its config.
   - Behavior:
-    - Prompt: formats last `k` entries as `"<TYPE>: <content>"`, followed by a generic line for the next observation (e.g., `Observation: <obs>`). Avoids QA-specific labels.
-    - Update: on `observe`, writes atomic entries: Observation, Action, Feedback.
+    - Prompt: formats last `k` entries as `"<TYPE>: <content>"`, followed by `Q: <obs>`.
+    - Update: writes atomic entries via hooks: Observation, Action, Feedback.
     - `end_episode()`: no-op for now; extension point for Reflexion.
 
 #### ReflexionAgent

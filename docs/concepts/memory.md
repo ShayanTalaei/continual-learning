@@ -7,7 +7,7 @@ tags: []
 ## Memory
 
 - `MemoryModule` interface; `HistoryList` implementation with max_length.
-- `Entry { _type: str, content: str }` with atomic Observation/Action/Feedback entries.
+- `Entry { type: str, content: str }` with atomic Observation/Action/Feedback entries.
 - Factory: `build_memory` via `_type` discriminator.
 
 
