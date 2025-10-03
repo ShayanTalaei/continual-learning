@@ -1,7 +1,10 @@
 .env
 .vscode/
 
+notebooks/
+
 *pyc
+*.pyc
 
 outputs/
 data/
