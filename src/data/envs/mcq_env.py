@@ -33,6 +33,7 @@ class MCQEnv(QAEnv):
             correct = normalize(act) == normalize(target)
             msg = "mcq-fallback"
 
-        return {"correct": correct, "target": self.answer, "message": msg, "extra": {"choices": choices}}
+        score = 1 if correct else 0
+        return {"score": score, "target": self.answer, "message": msg, "extra": {"choices": choices}}
 
 

@@ -26,8 +26,10 @@ class MathQAEnv(QAEnv):
         if a_f is not None and t_f is not None:
             tol = 1e-6
             correct = abs(a_f - t_f) <= tol
-            return {"correct": correct, "target": self.answer, "message": "numeric-compare", "extra": {"normalized_action": act_n, "normalized_target": tgt_n}}
+            score = 1 if correct else 0
+            return {"score": score, "target": self.answer, "message": "numeric-compare", "extra": {"normalized_action": act_n, "normalized_target": tgt_n}}
         correct = act_n == tgt_n
-        return {"correct": correct, "target": self.answer, "message": "normalized-exact", "extra": {"normalized_action": act_n, "normalized_target": tgt_n}}
+        score = 1 if correct else 0
+        return {"score": score, "target": self.answer, "message": "normalized-exact", "extra": {"normalized_action": act_n, "normalized_target": tgt_n}}
 
 

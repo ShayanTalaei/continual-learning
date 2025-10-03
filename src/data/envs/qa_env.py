@@ -33,7 +33,8 @@ class QAEnv(Environment):
         else:
             predicted_answer = action
         correct = (predicted_answer == self.answer)
+        score = 1 if correct else 0
         message = "Correct!" if correct else f"Incorrect! The correct answer is {self.answer}."
-        return {"correct": correct, "target": self.answer, "message": message}
+        return {"score": score, "target": self.answer, "message": message}
 
 

@@ -157,7 +157,7 @@ def evaluate_answer(
     tgt_norm = _strip_latex_markers(_normalize_ws(target or ""))
 
     def resp(correct: bool, msg: str, extra: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        out = {"correct": correct, "target": target, "message": msg}
+        out = {"score": 1 if correct else 0, "target": target, "message": msg}
         if extra:
             out["extra"] = extra
         return out
