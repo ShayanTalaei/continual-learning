@@ -3,12 +3,10 @@ from abc import ABC, abstractmethod
 from src.agent.agent import Agent, AgentConfig
 from src.memory.memory_module import MemoryModule, MemoryModuleConfig
 from src.memory.memory_factory import build_memory
-from src.lm.language_model import LMConfig, LanguageModel
-from src.lm.lm_factory import get_lm_client
+from contextlib import contextmanager
 
 
 class MemoryAgentConfig(AgentConfig):
-    lm_config: LMConfig
     memory_config: MemoryModuleConfig
     history_k: int | None = None
     system_prompt: str | None = None
@@ -17,8 +15,9 @@ class MemoryAgentConfig(AgentConfig):
 class MemoryAgent(Agent[MemoryAgentConfig], ABC):
     def __init__(self, config: MemoryAgentConfig, logger=None):
         super().__init__(config, logger=logger)
+        if config.lm_config is None:
+            raise ValueError("MemoryAgent requires lm_config in config")
         self.memory: MemoryModule = build_memory(config.memory_config)
-        self.lm: LanguageModel = get_lm_client(config.lm_config)
         self._last_action: str | None = None
         self._trajectory: List[Any] = []
         self.logger.info("MemoryAgent init: history_k=%s", self.config.history_k)
@@ -43,7 +42,19 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
     @abstractmethod
     def create_feedback_event(self, feedback: dict) -> Any:
         pass
-
+    
+    @contextmanager
+    def eval_mode(self):
+        prev = self.training
+        memory_prev = self.memory.training
+        try:
+            self.training = False
+            self.memory.training = False
+            yield self
+        finally:
+            self.training = prev
+            self.memory.training = memory_prev
+            
     def act(self, obs: str) -> str:
         self.logger.info("Act: obs_len=%d", len(obs))
         history = self.memory.recall()
@@ -96,3 +107,16 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         # No reflections in the minimal MemoryAgent
         self.logger.info("End episode: trajectory_len=%d", len(self._trajectory))
         self._trajectory = []
+
+    def clone_for_episode(self, training: bool, share_memory: bool = True) -> "MemoryAgent":
+        clone = self.__class__(self.config, logger=self.logger)
+        # Share LM to save resources
+        clone.lm = self.lm
+        # Optionally share memory (safe for eval when training=False)
+        if share_memory:
+            clone.memory = self.memory
+        clone.training = training
+        self.memory.training = training
+        clone._trajectory = []
+        clone._last_action = None
+        return clone

@@ -14,15 +14,17 @@ class HistoryAgent(MemoryAgent):
         super().__init__(config, logger=logger)
 
     def build_system_prompt(self) -> str:
-        return "You are a helpful QA assistant. Use prior history when useful."
+        return "You are a helpful assistant. Use prior history when useful."
 
     def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
         lines: List[str] = []
+        lines.append("Here is a list of your previous experiences:")
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
         for entry in recent:
             entry_type = entry.type.upper()
             lines.append(f"{entry_type}: {entry.content}")
-        lines.append(f"Q: {obs}")
+        lines.append("Here is the current observation:")
+        lines.append(f"{obs}")
         return "\n\n".join(lines)
 
     def create_observation_event(self, obs: str) -> Any:
