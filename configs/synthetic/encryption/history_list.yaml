@@ -1,8 +1,16 @@
 runtime:
   max_envs_to_visit: 20
   max_steps_per_episode: 1
+  scores_path: scores.jsonl
 
-dataset:
+train_dataset:
+  question_field: question
+  answer_field: answer
+  instruction_template: "Decrypt the following message: {question}\nThink step by step and finally put your answer in \\boxed{{}}. For example, if your answer is 'hello', you should finally output \\boxed{{hello}}."
+  task_type: exact
+  dataset_path: data/synthetic/encryption/train_100.jsonl
+
+validation_dataset:
   question_field: question
   answer_field: answer
   instruction_template: "Decrypt the following message: {question}\nThink step by step and finally put your answer in \\boxed{{}}. For example, if your answer is 'hello', you should finally output \\boxed{{hello}}."
@@ -24,7 +32,6 @@ agent:
 
 output:
   results_dir: outputs/synthetic/encryption
-  save_memory_path: outputs/synthetic/encryption/memory.jsonl
   log_level: INFO
 
 

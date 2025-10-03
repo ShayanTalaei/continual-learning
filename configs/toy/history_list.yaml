@@ -1,8 +1,19 @@
 runtime:
   max_envs_to_visit: 10
   max_steps_per_episode: 1
+  scores_path: scores.jsonl
 
-dataset:
+train_dataset:
+  question_field: question
+  answer_field: answer
+  instruction_template: "Question: {question}\nPut your answer in \\boxed{{}}."
+  items:
+    - { question: "What is Shayan's family name?", answer: "Talaei", id: 1 }
+    - { question: "What is Brad's surname?", answer: "Brown", id: 2 }
+    - { question: "What is Shayan's surname?", answer: "Talaei", id: 3 }
+  task_type: exact
+
+validation_dataset:
   question_field: question
   answer_field: answer
   instruction_template: "Question: {question}\nPut your answer in \\boxed{{}}."
@@ -26,7 +37,6 @@ agent:
 
 output:
   results_dir: outputs/toy
-  save_memory_path: outputs/toy/memory.jsonl
   log_level: INFO
 
 

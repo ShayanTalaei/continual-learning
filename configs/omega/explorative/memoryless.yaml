@@ -1,0 +1,39 @@
+## OMEGA (allenai/omega-explorative) — MemorylessAgent on first 20 examples
+
+runtime:
+  max_envs_to_visit: 0
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 100
+
+train_dataset: null
+
+validation_dataset:
+  hf_dataset: "allenai/omega-explorative"
+  hf_subset: "numbertheory_ordered_lte"
+  split: "train"
+  input_field: "messages"
+  target_field: "ground_truth"
+  instruction_template: null
+  max_samples: 100
+  shuffle: false
+  seed: 42
+  eval_mode: numeric_tol
+  eval_tolerance: 1e-6
+  expect_boxed: true
+
+agent:
+  type: memoryless_agent
+  lm_config:
+    model: "gemini-2.5-flash"
+    temperature: 0.0
+    max_output_tokens: 65536
+    log_calls: true
+  system_prompt: "You are a careful math assistant."
+
+output:
+  results_dir: outputs/omega/explorative_memoryless_agent/65k_flash
+  log_level: INFO
+
+
