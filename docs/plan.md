@@ -23,8 +23,17 @@ tags: []
 - Datasets route to env subclasses via `task_type`/`env_class`; `.jsonl` or HF datasets supported.
 - Logging writes to a run-scoped file; console verbosity per component.
 
+### Recently Implemented ✅
+- **Memory snapshots**: `save_snapshot()` and `load_snapshot()` APIs for persistent memory state.
+- **Validation system**: Parallel validation with configurable frequency and worker count.
+- **Agent modes**: Training/evaluation modes with context managers and memory freezing.
+- **Agent cloning**: `clone_for_episode()` for parallel execution with isolated state.
+- **LLM call logging**: Structured JSON logging with context-aware organization.
+- **Thread-safe logging**: Generic JSON logging utilities with per-file locks.
+- **Config organization**: Moved configs to organized folders by dataset type.
+- **Score organization**: Separate training/validation score files with episode-based naming.
+
 ### Remaining TODOs
-- Add example configs for AIME/GPQA/MMLU-Pro.
 - Implement `ReflexionAgent` and episode-level reflection.
 - Multi-trial runtime orchestration (`num_trials`, `early_stop_on_success`, `carry_memory_across_trials`).
 - Per-task metrics reporting (e.g., MCQ confusion stats).
@@ -102,9 +111,19 @@ tags: []
       - Purpose: Reset internal state between episodes.
     - `end_episode() -> None`
       - Purpose: Optional end-of-episode hook for summary/cleanup.
+    - `train() / eval()`
+      - Purpose: Toggle the agent's training mode (affects whether long-term memory is updated).
+    - `eval_mode()` (context manager)
+      - Purpose: Temporarily set eval mode within a `with` block; restores previous mode on exit.
+    - `clone_for_episode(training: bool, share_memory: bool = True) -> Agent`
+      - Purpose: Create a per-episode clone with independent short-term state (e.g., `_trajectory`), optional shared long-term memory, and explicit training flag.
 
 - `AgentConfig`
   - Purpose: Base class for concrete agent configs.
+  - Common fields (shared across agents):
+    - `lm_config: LMConfig` — language model configuration.
+    - `system_prompt: Optional[str]` — override default system instruction.
+    - `verbose: bool = True` — console logging verbosity.
 
 #### MemoryAgent (abstract base, task-agnostic)
 - `MemoryAgent[C <: AgentConfig](Agent[C])`
@@ -121,9 +140,14 @@ tags: []
       - Steps: recall memory → format N latest entries → build `(system_prompt, user_prompt)` → `lm.call(...)`.
     - `observe(obs: str | None, feedback: dict, done: bool) -> None`
       - Purpose: Delegate event creation to hooks and update memory.
-      - Also appends to `_trajectory` for episode-level reflection.
+      - Always appends to `_trajectory` for episode-level reflection.
+      - Updates to long-term memory are performed only when `self.training` is True.
     - `end_episode() -> None`
       - Purpose: Default no-op; subclass may implement reflection here.
+  - Training/Eval semantics:
+    - In eval mode: long-term memory (e.g., `HistoryList`) is frozen (no `memory.update(...)`).
+    - Short-term state (e.g., `_trajectory`, `_last_action`) can still be written per-episode.
+    - Provide a zero-side-effect `eval_act(obs: str) -> str` in concrete subclasses for efficiency; default fallback can use `with agent.eval_mode(): act(obs)`.
   - Hooks (must be implemented by concrete agents):
     - `build_system_prompt() -> str`
     - `build_user_prompt(obs: str, history: list[Any], k: int | None) -> str`
@@ -142,6 +166,16 @@ tags: []
     - Prompt: formats last `k` entries as `"<TYPE>: <content>"`, followed by `Q: <obs>`.
     - Update: writes atomic entries via hooks: Observation, Action, Feedback.
     - `end_episode()`: no-op for now; extension point for Reflexion.
+
+#### MemorylessAgent (no persistent memory)
+- `MemorylessAgent(Agent[AgentConfig])`
+  - Purpose: Agent without persistent memory across steps/episodes.
+  - Fields:
+    - Inherits common fields from `AgentConfig`: `lm_config`, `system_prompt?`, `verbose?`.
+  - Behavior:
+    - Act: builds prompt from only the current observation and calls the LM.
+    - Observe: maintains an ephemeral `_trajectory` per step and clears it each step (no writes to a memory backend).
+    - End of episode: no-op.
 
 #### ReflexionAgent
 - `ReflexionAgent(MemoryAgent)`
@@ -178,12 +212,15 @@ tags: []
   - Functions:
     - `call(system_prompt: str, user_prompt: str) -> str`
       - Purpose: Synchronous call returning model text output.
+    - `enable_call_logging(calls_dir: str) -> None`
+      - Purpose: Enable call logging to `calls_dir` (under timestamped results dir) when `LMConfig.log_calls` is true.
 
 - `LMConfig`
   - Fields:
     - `model: str` — provider/model identifier (e.g., `"gemini-1.5-pro"`).
     - `temperature: float = 0.2`
     - `max_output_tokens: int = 2048`
+    - `log_calls: bool = false` — when true, input and output of LM calls are saved as JSON files under `llm_calls/` in the run's results directory.
 
 - `GeminiConfig(LMConfig)`
   - Fields:
@@ -191,10 +228,11 @@ tags: []
 
 - `get_lm_client(lm_config: LMConfig) -> LanguageModel`
   - Purpose: Return a concrete client (e.g., `GeminiClient`) based on `lm_config.model`.
+  - Runtime wiring: `main` will call `agent.lm.enable_call_logging(<results_dir>/llm_calls)` when `lm_config.log_calls` is true.
 
 ---
 
-### Runtime Logic ✅
+### Runtime Logic and Scoring ✅
 
 - `RunTime`
   - Purpose: Orchestrate running a dataset of environments through an agent.
@@ -205,7 +243,7 @@ tags: []
   - Functions:
     - `run() -> dict`
       - Purpose: Iterate over environments, run episodes, aggregate metrics.
-      - Returns: summary metrics (e.g., overall accuracy) and per-env logs.
+      - Returns: summary metrics (e.g., `mean_score`) and per-env logs.
     - `run_episode(environment: Environment) -> list[StepResult]`
       - Purpose: Execute one full episode using the Gym-style loop; returns recorded steps.
 
@@ -213,6 +251,11 @@ tags: []
   - Fields:
     - `max_envs_to_visit: Optional[int]` — subset for quick runs.
     - `max_steps_per_episode: Optional[int]` — safety cap for multi-turn envs.
+    - `scores_path: Optional[str]` — when set, write streaming `scores.jsonl` and snapshot `scores.json`.
+    - `runtime_type: Literal["sequential", "parallel"] = "sequential"` — parallel only valid for memoryless agent.
+    - `num_parallel_episodes: Optional[int]` — cap parallelism when `runtime_type="parallel"`.
+    - `validation_freq: Optional[int]` — run validation every N training episodes (omit to disable).
+    - `validation_num_workers: Optional[int]` — parallelism for validation (defaults to `num_parallel_episodes` if unset).
 
 - `StepResult`
   - Fields:
@@ -328,13 +371,19 @@ These additions keep runtime control simple and make memory and agent behavior m
 
 ### Prompting and Agents
 - Agents remain task-agnostic; they may accept `system_prompt` overrides.
-- History agents format memory generically: `<TYPE>: <content>` lines and `Observation: <obs>`.
+- History agents format memory generically: `<TYPE>: <content>` lines and `Q: <obs>`.
 - Task-specific prompt nuances should be encoded either in `system_prompt` or in an env-specific subclass if strictly necessary.
 
 ### Feedback Schema and Aggregation ✅
-- Uniform feedback across envs: `{correct: bool, target: str, message: str, extra?: dict}`.
-- Runtime aggregates overall accuracy via `feedback.correct`.
-- Per-task metrics can be added later by reading `feedback.extra`.
+- Uniform feedback across envs: `{score: number, target: str, message: str, extra?: dict}`.
+  - Binary evaluations: `score` ∈ {1, 0}.
+  - Non-binary evaluations: `score` normalized to [0, 1] when possible.
+- Backward compatibility: if `correct`/`is_correct` present, map to `score` with a deprecation log.
+- Runtime aggregates `mean_score` over steps (and provides per-episode totals/means).
+
+### Online Score Monitoring Outputs ✅
+- `scores.jsonl`: one line per step containing `{ episode_index, step_index, score, episode_cum_score, timestamp }`.
+- `scores.json`: snapshot with per-episode totals/means and overall aggregates.
 
 ### Mapping to Benchmarks
 - AIME: `task_type="numeric"` → `MathQAEnv` (normalization/tolerance).
@@ -359,7 +408,8 @@ These additions keep runtime control simple and make memory and agent behavior m
 ### Config Structure (YAML) ✅
 - Top-level keys:
   - `runtime`: fields of `RunTimeConfig`
-  - `dataset`: fields of `QAEnvDatasetConfig`
+  - `train_dataset`: fields of `QAEnvDatasetConfig`
+  - `validation_dataset`: fields of `QAEnvDatasetConfig`
   - `lm`: fields of `LMConfig`/`GeminiConfig`
   - `memory`: fields of `MemoryModuleConfig` (e.g., `{ _type: "history_list", max_length: 200 }`)
   - `agent`: `{ type: "history_agent", ... }` plus its config fields
@@ -369,13 +419,15 @@ These additions keep runtime control simple and make memory and agent behavior m
 ### Schema Mapping ✅
 - `RunConfig`
   - `runtime: RunTimeConfig`
-  - `dataset: QAEnvDatasetConfig`
+  - `train_dataset: QAEnvDatasetConfig`
+  - `validation_dataset: QAEnvDatasetConfig`
   - `lm: LMConfig|GeminiConfig`
   - `memory: MemoryModuleConfig`
   - `agent: { type: str, ... }` (fields merged for that agent)
   - `output: OutputConfig`
   - `seed: Optional[int]`
 - `OutputConfig`: `{ results_dir?: str, save_memory_path?: str, log_level?: "DEBUG"|"INFO"|"WARN"|"ERROR" }`
+  - Behavior: At runtime the actual results directory is suffixed with a timestamp `YYYYMMDD_HHMMSS` and the effective config is copied as `config.yaml` inside it.
 
 ### Entrypoint Flow ✅
 1) Load YAML file; resolve relative paths to YAML dir.
@@ -388,6 +440,7 @@ These additions keep runtime control simple and make memory and agent behavior m
 - Map `agent.type` → `(ConfigClass, AgentClass)`
   - `history_agent` → `(HistoryAgentConfig, HistoryAgent)`
   - `memory_agent` → `(MemoryAgentConfig, MemoryAgent)`
+  - `memoryless_agent` → `(MemorylessAgentConfig, MemorylessAgent)`
   - future: `reflexion_agent` → `ReflexionAgent`
 
 ### Examples ✅
