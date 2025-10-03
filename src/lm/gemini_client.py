@@ -1,10 +1,12 @@
 import os
-from typing import Optional
+import time
+from typing import Optional, Dict, Any
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai.types import GenerateContentConfig, ThinkingConfig
 from google.oauth2 import service_account
+from logging import Logger
 
 from .language_model import LMConfig, LanguageModel
 
@@ -16,8 +18,8 @@ class GeminiConfig(LMConfig):
 class GeminiClient(LanguageModel):
     """Synchronous Gemini client compatible with `LanguageModel` interface."""
 
-    def __init__(self, config: GeminiConfig):
-        super().__init__(config=config)
+    def __init__(self, config: GeminiConfig, logger: Optional[Logger] = None):
+        super().__init__(config=config, logger=logger)
         self._gemini_client: Optional[genai.Client] = None
 
     def call(
@@ -25,7 +27,7 @@ class GeminiClient(LanguageModel):
         system_prompt: str,
         user_prompt: str
     ) -> str:
-
+        call_id = self._begin_call(system_prompt, user_prompt)
         generate_content_config = GenerateContentConfig(
             system_instruction=system_prompt,
             temperature=self.config.temperature ,
@@ -38,13 +40,47 @@ class GeminiClient(LanguageModel):
             # response_mime_type="application/json"
         )
 
-        response = self._client().models.generate_content(
-            model=self.config.model,
-            contents=[{"role": "user", "parts": [{"text": user_prompt}]}],
-            config=generate_content_config,
-        )
-        
-        return response.text
+        start_time = time.time()
+        last_err: Optional[Exception] = None
+        for attempt in range(1, self.config.max_retries + 2):
+            try:
+                response = self._client().models.generate_content(
+                    model=self.config.model,
+                    contents=[{"role": "user", "parts": [{"text": user_prompt}]}],
+                    config=generate_content_config,
+                )
+                duration = time.time() - start_time
+                metrics = self._extract_metrics(response, duration)
+                text = response.text
+                if text is None:
+                    raise ValueError("Response text is None")
+                self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
+                return text
+            except Exception as e:
+                last_err = e
+                if attempt > self.config.max_retries:
+                    self.logger.warning(f"Error at attempt {attempt}: Max retries reached, stopping retries")
+                    break
+                else:
+                    self.logger.warning(f"Warning at attempt {attempt}: Retrying to call Gemini: {e}")
+                delay = min(self.config.starting_delay * (self.config.backoff_factor ** attempt), self.config.max_delay)
+                time.sleep(delay)
+        # On failure, record error
+        self._end_call(call_id, "", extra={"error": str(last_err)})
+        return ""
+
+    def _extract_metrics(self, response: Any, duration: float) -> Optional[Dict[str, Any]]:
+        try:
+            usage = getattr(response, "usage_metadata", None)
+            return {
+                "duration": duration,
+                "input_tokens": getattr(usage, "prompt_token_count", None) if usage else None,
+                "thinking_tokens": getattr(usage, "thoughts_token_count", None) if usage else None,
+                "output_tokens": getattr(usage, "candidates_token_count", None) if usage else None,
+                "total_tokens": getattr(usage, "total_token_count", None) if usage else None,
+            }
+        except Exception:
+            return None
 
     def _client(self) -> genai.Client:
         if self._gemini_client is None:
