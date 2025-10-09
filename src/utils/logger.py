@@ -70,13 +70,24 @@ def enable_json_logging(base_dir: str) -> None:
 
 @contextlib.contextmanager
 def json_log_context(**kwargs: Any):
+    # Only update keys present in kwargs (and not None)
     current = dict(_json_ctx.get()) if _json_ctx.get() else {}
-    merged = {**current, **{k: v for k, v in kwargs.items() if v is not None}}
+    update_keys = {k: v for k, v in kwargs.items() if v is not None}
+    # Save previous values for only the keys being replaced
+    prev_values = {k: current[k] for k in update_keys if k in current}
+    merged = {**current, **update_keys}
     token = _json_ctx.set(merged)
     try:
         yield
     finally:
-        _json_ctx.reset(token)
+        # Restore only the keys that were replaced to their previous values
+        ctx = dict(_json_ctx.get()) if _json_ctx.get() else {}
+        for k in update_keys:
+            if k in prev_values:
+                ctx[k] = prev_values[k]
+            else:
+                ctx.pop(k, None)
+        _json_ctx.set(ctx)
 
 
 def json_get_context() -> Dict[str, Any]:
@@ -155,4 +166,114 @@ def jsonl_append(path: Union[str, Path], record: Dict[str, Any]) -> None:
         with open(p, "a") as f:
             f.write(line)
             f.flush()
+
+
+# ------------------------------------
+# Scores logging helper utilities (API)
+# ------------------------------------
+
+def score_file_for_mode(scores_path: str, mode: str, num_seen_episodes: int) -> Path:
+    """Compute the JSONL file path for a given mode.
+
+    For training: scores.jsonl
+    For validation: {num_seen_episodes}_seen_episodes_scores.jsonl
+    """
+    base = Path(scores_path)
+    scores_dir = base if base.is_dir() or base.suffix == "" else base.parent
+    scores_dir.mkdir(parents=True, exist_ok=True)
+    mode_dir = scores_dir / "scores" / mode
+    mode_dir.mkdir(parents=True, exist_ok=True)
+    if mode == "train":
+        filename = "scores.jsonl"
+    else:
+        filename = f"{num_seen_episodes}_seen_episodes_scores.jsonl"
+    return mode_dir / filename
+
+
+def build_score_record(
+    *,
+    mode: str,
+    environment: Any,
+    episode_index: int,
+    step_index: int,
+    score: float,
+    episode_cum_score: float,
+    observation: Optional[str],
+    action: Optional[str],
+    feedback: Optional[Dict[str, Any]],
+    info: Optional[Dict[str, Any]],
+    lm_model: Optional[str],
+    agent_type: Optional[str],
+    step_start: Optional[datetime],
+    step_end: Optional[datetime],
+    duration_ms: Optional[float],
+    verbose_score_logging: bool,
+) -> Dict[str, Any]:
+    rec: Dict[str, Any] = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "mode": mode,
+        "episode_index": episode_index,
+        "step_index": step_index,
+        "score": score,
+        "episode_cum_score": episode_cum_score,
+        "env_id": getattr(environment, "env_id", None),
+        "env_type": getattr(environment, "env_type", None),
+    }
+    if verbose_score_logging:
+        if observation is not None:
+            rec["observation"] = observation
+        if action is not None:
+            rec["action"] = action
+        if feedback is not None:
+            rec["feedback_message"] = feedback.get("message")
+            rec["target"] = feedback.get("target")
+            rec["feedback_extra"] = feedback.get("extra")
+            msg = feedback.get("message") or ""
+            if isinstance(msg, str) and "Incorrect due to " in msg and "!" in msg:
+                try:
+                    rec["error_type"] = msg.split("Incorrect due to ", 1)[1].split("!", 1)[0]
+                except Exception:
+                    pass
+        if info is not None:
+            rec["env_info"] = info
+        if agent_type is not None:
+            rec["agent_type"] = agent_type
+        if lm_model is not None:
+            rec["lm_model"] = lm_model
+        if step_start is not None and step_end is not None and duration_ms is not None:
+            rec["timing"] = {
+                "step_start": step_start.isoformat() + "Z",
+                "step_end": step_end.isoformat() + "Z",
+                "duration_ms": duration_ms,
+            }
+    return rec
+
+
+def write_score_record(path: Union[str, Path], record: Dict[str, Any]) -> None:
+    jsonl_append(path, record)
+
+
+class ValidationLogsBuffer:
+    """Buffers validation logs and flushes them sorted by (episode_index, step_index)."""
+
+    def __init__(self) -> None:
+        self._entries: List[Tuple[int, int, Path, Dict[str, Any]]] = []
+        self._lock: Lock = Lock()
+
+    def clear(self) -> None:
+        with self._lock:
+            self._entries = []
+
+    def add(self, episode_index: int, step_index: int, path: Union[str, Path], record: Dict[str, Any]) -> None:
+        p = Path(path)
+        with self._lock:
+            self._entries.append((episode_index, step_index, p, record))
+
+    def flush(self) -> None:
+        with self._lock:
+            entries = list(self._entries)
+            self._entries = []
+        entries.sort(key=lambda t: (t[0], t[1]))
+        for _, _, p, rec in entries:
+            jsonl_append(p, rec)
 
