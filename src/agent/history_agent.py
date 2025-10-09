@@ -14,7 +14,10 @@ class HistoryAgent(MemoryAgent):
         super().__init__(config, logger=logger)
 
     def build_system_prompt(self) -> str:
-        return "You are a helpful assistant. Use prior history when useful."
+        if self.config.system_prompt:
+            return self.config.system_prompt
+        else:   
+            return "You are a helpful assistant. Use prior history when useful."
 
     def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
         lines: List[str] = []

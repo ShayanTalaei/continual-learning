@@ -1,6 +1,6 @@
 from typing import Optional, List
 from src.agent.agent import Agent, AgentConfig
-
+from src.utils import logger as jsonlogger
 
 class MemorylessAgentConfig(AgentConfig):
     pass
@@ -24,7 +24,9 @@ class MemorylessAgent(Agent[MemorylessAgentConfig]):
     def act(self, obs: str) -> str:
         system_prompt = self.build_system_prompt()
         user_prompt = self.build_user_prompt(obs)
-        action = self.lm.call(system_prompt, user_prompt) or ""
+        # Add action context for logging organization
+        with jsonlogger.json_log_context(call_type="action"):
+            action = self.lm.call(system_prompt, user_prompt) or ""
         action = action.strip()
         self._trajectory = [obs, action]
         return action

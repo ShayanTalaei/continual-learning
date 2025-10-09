@@ -3,7 +3,10 @@ from abc import ABC, abstractmethod
 from src.agent.agent import Agent, AgentConfig
 from src.memory.memory_module import MemoryModule, MemoryModuleConfig
 from src.memory.memory_factory import build_memory
+from src.lm.language_model import LanguageModel
+from src.lm.lm_factory import get_lm_client
 from contextlib import contextmanager
+from src.utils import logger as jsonlogger
 
 
 class MemoryAgentConfig(AgentConfig):
@@ -69,7 +72,8 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
             self._trajectory.append(obs_event)
         self.logger.info("Logged Observation")
         
-        action = self.lm.call(system_prompt, user_prompt)
+        with jsonlogger.json_log_context(call_type="action"):
+            action = self.lm.call(system_prompt, user_prompt)
         if action is None:
             self.logger.warning("No action returned from LM")
             action = ""
