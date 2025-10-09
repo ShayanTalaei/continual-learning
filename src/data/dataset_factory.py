@@ -40,7 +40,7 @@ def build_dataset(conf: Any, logger: Optional[Logger] = None) -> EnvDataset:
         return DatasetCls(ds_conf, logger=logger)
 
     # Heuristic fallback for omega datasets without explicit type
-    if "hf_dataset" in cfg_dict and str(cfg_dict["hf_dataset"]).startswith("allenai/omega"):
+    if "hf_dataset" in cfg_dict and "omega" in str(cfg_dict["hf_dataset"]):
         ds_conf = OmegaMathEnvDatasetConfig(**cfg_dict)
         log.debug("Building OmegaMathEnvDataset for %s", ds_conf.hf_dataset)
         return OmegaMathEnvDataset(ds_conf, logger=logger)

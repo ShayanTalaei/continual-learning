@@ -5,7 +5,16 @@ from src.data.env import Environment
 
 
 class QAEnv(Environment):
-    def __init__(self, question: str, answer: str, metadata: Dict[str, Any], instruction_template: Optional[str] = None, logger: Optional[Logger] = None):
+    def __init__(self, 
+                 env_id: str,
+                 env_type: str,
+                 question: str, 
+                 answer: str, 
+                 metadata: Dict[str, Any], 
+                 instruction_template: Optional[str] = None, 
+                 logger: Optional[Logger] = None,
+                 ):
+        super().__init__(env_id, env_type)
         self.question = question
         self.answer = answer
         self.metadata = metadata

@@ -13,6 +13,10 @@ class Environment(ABC):
     step(action: str) -> (next_obs, feedback, done, info)
       Advance the environment with the given action.
     """
+    
+    def __init__(self, env_id: str, env_type: str):
+        self.env_id = env_id
+        self.env_type = env_type
 
     @abstractmethod
     def reset(self) -> str:
