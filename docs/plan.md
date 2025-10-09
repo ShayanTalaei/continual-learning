@@ -177,29 +177,100 @@ tags: []
     - Observe: maintains an ephemeral `_trajectory` per step and clears it each step (no writes to a memory backend).
     - End of episode: no-op.
 
-#### ReflexionAgent
+#### ReflexionAgent ✅
 - `ReflexionAgent(MemoryAgent)`
-  - Purpose: Adds reflection using the LM to write `ReflectionEntry`s.
+  - Purpose: Adds self-reflection capability inspired by "Reflexion: Language Agents with Verbal Reinforcement Learning" (Shinn et al., 2023). After each episode, the agent uses the LM to analyze its trajectory and generate verbal reflections that are stored in memory and included in future prompts.
+  - Inherits from: `MemoryAgent` for maximum flexibility and reuse of memory infrastructure.
   - Fields:
-    - `config: ReflexionAgentConfig` — adds reflection options.
+    - `config: ReflexionAgentConfig` — includes reflection-specific options.
+    - Inherits `memory`, `lm`, `_trajectory`, `_last_action` from `MemoryAgent`.
   - Functions:
-    - `update_memory(obs, action, feedback, done) -> None`
-      - Purpose: Optionally perform per-step micro-reflection (if enabled), then call base to append experience.
+    - `build_system_prompt() -> str`
+      - Purpose: Override to include reflection-aware system prompt.
+      - Default: "You are a helpful assistant. Learn from your past experiences and reflections to improve performance."
+    - `build_user_prompt(obs: str, history: List[Any], k: int | None) -> str`
+      - Purpose: Format prompt with reflections prominently featured, followed by recent history and current observation.
+      - Structure:
+        1. Extract reflections from history (filter by `type="Reflection"`)
+        2. If reflections exist: "Previous Reflections:\n{reflections}\n\n"
+        3. Extract recent experiences (non-reflection entries)
+        4. If experiences exist: "Recent History:\n{experiences}\n\n"
+        5. "Current Task:\n{obs}"
+    - `should_reflect() -> bool`
+      - Purpose: Determine if reflection should be generated after current episode.
+      - Logic:
+        - Return False if not training mode
+        - Return False if reflection disabled in config
+        - If `reflect_on_failure_only`: check if episode was unsuccessful
+        - Else: return True
+    - `generate_reflection() -> str | None`
+      - Purpose: Call LM to generate a self-reflection based on episode trajectory.
+      - Steps:
+        1. Build trajectory summary from `_trajectory`
+        2. Format reflection prompt (system + user)
+        3. Call `self.lm.call(system_prompt, user_prompt)`
+        4. Return cleaned reflection text
+    - `build_reflection_prompt() -> tuple[str, str]`
+      - Purpose: Produce (system_prompt, user_prompt) for reflection generation.
+      - System prompt: Task-agnostic instruction to analyze failures and devise improvements.
+      - User prompt: Includes trajectory with observations, actions, and feedback.
     - `end_episode() -> None`
-      - Purpose: Synthesize episode reflections from `_trajectory` using LM and append a `ReflectionEntry`.
-    - `build_reflection_prompt(trajectory: list[ExperienceEntry]) -> tuple[str, str]`
-      - Purpose: Produce prompts that elicit concise “dos/don’ts” based on the episode.
+      - Purpose: Override to generate and store reflection after episode completion.
+      - Steps:
+        1. Check `should_reflect()`
+        2. If True: call `generate_reflection()`
+        3. If reflection generated: create reflection event and update memory
+        4. Clear `_trajectory` (inherited behavior)
+    - `create_reflection_event(reflection: str) -> Any`
+      - Purpose: Create a reflection entry compatible with the memory module.
+      - Returns: `Entry(type="Reflection", content=reflection)`
 
 - `ReflexionAgentConfig(MemoryAgentConfig)`
-  - Fields:
-    - `reflection_config: ReflectionConfig` — mode and prompting for reflections.
+  - Purpose: Configuration for ReflexionAgent with reflection-specific settings.
+  - Fields (in addition to inherited `MemoryAgentConfig` fields):
+    - `enable_reflection: bool = True` — master toggle for reflection generation.
+    - `reflect_on_failure_only: bool = False` — if True, only generate reflections when episode score is below threshold.
+    - `failure_threshold: float = 1.0` — score threshold below which episode is considered a failure.
+    - `max_reflections_in_prompt: int | None = 5` — limit number of past reflections shown in prompt (most recent); None = all.
+    - `reflection_system_prompt: str | None = None` — override default reflection generation system prompt.
+    - `reflection_few_shot_examples: str | None = None` — optional few-shot examples for reflection generation.
 
-- `ReflectionConfig`
-  - Fields:
-    - `enabled: bool = True` — master toggle.
-    - `mode: Literal["episode_end", "per_step", "both"] = "episode_end"` — trigger mode.
-    - `system_prompt: Optional[str]` — override default system instruction.
-    - `max_tokens: Optional[int]` — budget for reflections.
+- **Default Reflection Prompts** (task-agnostic, based on original Reflexion paper):
+  - System prompt for reflection generation:
+    ```
+    You are a self-reflective AI assistant. You will be given a trajectory of your attempt to solve a task, including your observations, actions, and feedback received. Your task failed or was suboptimal. Analyze what went wrong and provide a concise reflection (2-4 sentences) that explains:
+    1) What strategy or approach you took
+    2) Why it didn't work or what mistake you made
+    3) What you should do differently next time
+    
+    Be specific and actionable. Focus on the reasoning or approach, not just the surface-level error.
+    ```
+  
+  - User prompt template:
+    ```
+    Trajectory:
+    {formatted_trajectory}
+    
+    Reflection:
+    ```
+  
+  - Trajectory formatting:
+    - Each step: "Step {i}:\n  Observation: {obs}\n  Action: {action}\n  Feedback: {feedback}"
+    - Episode outcome: "Final Result: {outcome}"
+
+- **Integration with Memory**:
+  - Reflections stored as `Entry(type="Reflection", content=str)` in the same memory module as experiences.
+  - Memory recall returns mixed history (experiences + reflections).
+  - Agent's `build_user_prompt()` filters and organizes them appropriately.
+  - Works with `HistoryList` and any future memory modules that support typed entries.
+
+- **Key Design Decisions**:
+  1. **Inherit from MemoryAgent**: Maximum code reuse, works with any memory module.
+  2. **Task-agnostic prompts**: Reflection prompts reference generic "observations", "actions", "feedback" without assuming task structure.
+  3. **Flexible triggering**: Can reflect on every episode or only failures.
+  4. **Memory-first design**: Reflections stored in memory, not separate storage, for simplicity.
+  5. **Training-mode gated**: Reflections only generated during training to avoid contaminating eval.
+  6. **Configurable prominence**: Reflections shown before recent history in prompts to maximize impact.
 
 ---
 
@@ -327,6 +398,75 @@ tags: []
     - `generator_template: Optional[str]`, `cheatsheet_template: Optional[str]`
 
 These additions keep runtime control simple and make memory and agent behavior modular enough to express both Reflexion and Dynamic Cheatsheet patterns.
+
+### 3) Checkpointing and Resume (Runtime/Agent/Memory)
+- Goals:
+  - Persist training progress and agent state at a configurable cadence.
+  - Allow seamless resume from any checkpoint directory (including a `latest` pointer).
+  - Keep implementation minimally invasive and memory-first (agent delegates persistence to memory when present).
+
+- Config additions (extend `RunTimeConfig`):
+  - `checkpoint_dir: Optional[str]` — base directory for checkpoints (resolved under `results_dir` if relative).
+  - `checkpoint_every_episodes: Optional[int]` — frequency to checkpoint during training.
+  - `checkpoint_keep_last: Optional[int]` — retain only the N most recent checkpoints (older ones pruned).
+  - `checkpoint_on_start: bool = False` — checkpoint initial state before training begins.
+  - `resume_from: Optional[str]` — absolute or relative path to a checkpoint directory (or `latest`).
+  - `start_episode_index: int = 0` — internal value used to skip already-processed episodes after resume.
+
+- Agent API (default no-op for stateless agents):
+  - `save_checkpoint(checkpoint_dir: str, snapshot_id: int) -> dict` — writes agent manifest and delegates memory snapshot; returns a small manifest.
+  - `load_checkpoint(checkpoint_dir: str) -> None` — restores agent; delegates to memory snapshot if present.
+
+- Runtime wiring (`RunTime.run()`):
+  - Invoke `_maybe_checkpoint(episode_index, train_steps_total)` after each episode completes and counters are updated.
+  - Optional: call `_save_checkpoint(0, 0)` at the very beginning when `checkpoint_on_start` is true.
+  - Implement `_save_checkpoint(...)` to:
+    - Create `checkpoint_dir/ep_{episode_index:06d}`.
+    - Write `runtime.json` with `{ episode_index, train_steps_total, timestamp, agent_type, memory_snapshot_path? }`.
+    - Call `agent.save_checkpoint(<ep_dir>, snapshot_id=episode_index)`.
+    - Maintain a `latest` symlink or `latest.json` pointer to the newest checkpoint.
+    - Enforce retention when `checkpoint_keep_last` is set by pruning older `ep_*` directories.
+  - Skipping logic for resume:
+    - If `start_episode_index > 0`, set `self.num_seen_episodes = start_episode_index` prior to the loop and skip environments with index ≤ `start_episode_index`.
+
+- Entrypoint wiring (`main.py`):
+  - Resolve `runtime.checkpoint_dir` relative to the timestamped `results_dir` when not absolute (mirrors `scores_path`).
+  - When `runtime.resume_from` is provided:
+    - Normalize the path (if `latest`, resolve the pointer) and read `runtime.json` to extract `episode_index` and snapshot pointers.
+    - Instantiate the agent as usual, then call `agent.load_checkpoint(resume_from)`.
+    - Set `runtime.start_episode_index = episode_index` so the runtime skips processed episodes.
+
+- Checkpoint layout (example under a run's `results_dir`):
+  - `checkpoints/ep_000010/`
+    - `runtime.json` — minimal run metadata.
+    - `agent.json` — agent type, version, and config summary.
+    - `memory.*` — memory snapshot file(s) written by the memory implementation.
+  - `checkpoints/latest` — symlink to the latest `ep_*` (or a `latest.json` pointer).
+
+- Resume semantics:
+  - `resume_from` may point to an `ep_*` directory or the `latest` pointer.
+  - Agent is recreated from config, then restored via `load_checkpoint()`.
+  - Training continues from `start_episode_index + 1`, producing new checkpoints in the current run directory.
+
+- Optional extensions:
+  - Best-validation checkpoints: tag a checkpoint as `best_val` when validation improves and maintain a `best` pointer.
+  - Atomicity: write manifests to a temp file and rename to avoid torn writes.
+
+- Config example (memoryless baseline):
+```yaml
+runtime:
+  max_envs_to_visit: 0
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 100
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 10
+  checkpoint_keep_last: 3
+  checkpoint_on_start: false
+  resume_from: null
+  start_episode_index: 0
+```
 
 ---
 
