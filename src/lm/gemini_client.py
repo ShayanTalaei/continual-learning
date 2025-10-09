@@ -4,9 +4,10 @@ from typing import Optional, Dict, Any
 
 from dotenv import load_dotenv
 from google import genai
-from google.genai.types import GenerateContentConfig, ThinkingConfig
+from google.genai.types import GenerateContentConfig, ThinkingConfig, GenerationConfig
 from google.oauth2 import service_account
 from logging import Logger
+from src.utils import logger as jsonlogger
 
 from .language_model import LMConfig, LanguageModel
 
@@ -14,6 +15,7 @@ load_dotenv(override=True)
 
 class GeminiConfig(LMConfig):
     thinking_budget: Optional[int] = None
+    stop_sequences: Optional[list[str]] = ["FEEDBACK", "OBSERVATION"]
 
 class GeminiClient(LanguageModel):
     """Synchronous Gemini client compatible with `LanguageModel` interface."""
@@ -28,15 +30,21 @@ class GeminiClient(LanguageModel):
         user_prompt: str
     ) -> str:
         call_id = self._begin_call(system_prompt, user_prompt)
+        ctx = jsonlogger.json_get_context()
+        response_schema = ctx.get("response_schema")
+        use_json_mode = response_schema is not None
         generate_content_config = GenerateContentConfig(
             system_instruction=system_prompt,
             temperature=self.config.temperature ,
             max_output_tokens=self.config.max_output_tokens,
+            response_mime_type=("application/json" if use_json_mode else None),
             thinking_config=(
                 ThinkingConfig(thinking_budget=self.config.thinking_budget)
                 if self.config.thinking_budget is not None
                 else None
             ),
+            response_schema=response_schema if use_json_mode else None,
+            stop_sequences=self.config.stop_sequences,
             # response_mime_type="application/json"
         )
 

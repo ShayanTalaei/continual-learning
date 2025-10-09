@@ -9,7 +9,7 @@ from logging import Logger, getLogger
 class LMConfig(BaseModel):
     model: str
     temperature: float = 0.2
-    max_output_tokens: int = 2048
+    max_output_tokens: int = 8192
     log_calls: bool = False
     # Retry/backoff
     max_retries: int = 5
@@ -28,8 +28,6 @@ class LLMResponseMetrics(BaseModel):
 class LanguageModel:
     def __init__(self, config: LMConfig, logger: Optional[Logger] = None):
         self.config = config
-        self._log_calls: bool = False
-        self._calls_dir: Optional[Path] = None
         self._lock: Lock = Lock()
         # Track call_id to path via the generic logger return
         self._call_paths: Dict[str, Path] = {}
@@ -38,20 +36,16 @@ class LanguageModel:
     def call(self, system_prompt: str, user_prompt: str) -> str:
         raise NotImplementedError
 
-    # Logging helpers (thread-safe)
-    def enable_call_logging(self, calls_dir: str) -> None:
-        self._log_calls = True
-        self._calls_dir = Path(calls_dir)
-        self._calls_dir.mkdir(parents=True, exist_ok=True)
-        jsonlogger.enable_json_logging(str(self._calls_dir))
-
     def _begin_call(self, system_prompt: str, user_prompt: str) -> Optional[str]:
-        if not (self._log_calls and self._calls_dir):
+        if not self.config.log_calls:
             return None
         ctx: Dict[str, Any] = jsonlogger.json_get_context()
-        # Build subdirs based on context
+        # Build subdirs based on context: mode/call_type structure
         subdirs = []
         mode = ctx.get("mode")
+        call_type = ctx.get("call_type")  # e.g., "reflection"
+        
+        # Always start with mode
         if mode == "val" or mode == "validation":
             # Nest validation under validation/val_{num_seen_episodes}
             num_seen_episodes = ctx.get("num_seen_episodes")
@@ -60,6 +54,17 @@ class LanguageModel:
                 subdirs.append(f"val_{int(num_seen_episodes)}")
         elif mode:
             subdirs.append(str(mode))
+        else:
+            # Default mode if none specified
+            subdirs.append("default")
+        
+        # Add call_type subdirectory under mode (e.g., train/reflections/)
+        if call_type:
+            subdirs.append(f"{call_type}s")
+        else:
+            # Default call_type for regular action generation
+            subdirs.append("actions")
+        
         # Filename adds episode and step if available
         episode_index = ctx.get("episode_index")
         step_index = ctx.get("step_index")
@@ -72,8 +77,10 @@ class LanguageModel:
             "context": ctx,
         }
         call_id = jsonlogger.json_next_id()
-        # Compose filename with episode and step if present
+        # Compose filename with call_type, episode and step if present
         parts = []
+        if call_type:
+            parts.append(call_type)
         if episode_index is not None:
             parts.append(f"episode_{int(episode_index)}")
         if step_index is not None:
@@ -86,10 +93,10 @@ class LanguageModel:
         return call_id
 
     def _end_call(self, call_id: Optional[str], output: str, extra: Optional[Dict[str, Any]] = None) -> None:
-        if not call_id or not (self._log_calls and self._calls_dir):
+        if not call_id or not self.config.log_calls:
             return
         with self._lock:
-            path = self._call_paths.get(call_id, (self._calls_dir / f"{call_id}.json"))
+            path = self._call_paths.get(call_id, (jsonlogger.json_ensure_dir() / f"{call_id}.json"))
         updates: Dict[str, Any] = {
             "output": output,
             "timestamp_end": datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ"),
