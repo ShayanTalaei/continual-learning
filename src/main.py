@@ -11,7 +11,8 @@ from src.run_config import RunConfig
 from src.agent.registry import AGENT_REGISTRY
 from src.data.dataset_factory import build_dataset
 from src.run_time import RunTime
-from src.utils.logger import setup_logger, child, add_console
+from src.utils.logger import setup_logger, child, add_console, enable_json_logging
+from src.utils import checkpoint as cputil
 
 
 def resolve_paths(conf: Dict[str, Any]) -> Dict[str, Any]:
@@ -25,6 +26,14 @@ def resolve_paths(conf: Dict[str, Any]) -> Dict[str, Any]:
         if output.get("results_dir") and not os.path.isabs(output["results_dir"]):
             # Resolve output paths relative to the current working directory (project root)
             output["results_dir"] = str((Path.cwd() / output["results_dir"]).resolve())
+    # Resolve runtime.checkpoint_dir relative to results_dir if provided and relative
+    runtime = d.get("runtime")
+    if runtime and runtime.get("checkpoint_dir"):
+        cp_dir = runtime["checkpoint_dir"]
+        if output and output.get("results_dir") and not os.path.isabs(cp_dir):
+            # Don't resolve yet with timestamp; we will finalize after creating results_dir below
+            # Store relative path; we'll rewrite after results_dir is finalized
+            runtime["checkpoint_dir"] = cp_dir
     return d
 
 
@@ -60,16 +69,7 @@ def main() -> None:
         add_console(agent_logger, log_level)
     agent = AgentCls(agent_conf, logger=agent_logger)
     root_logger.info("Instantiated agent: %s", agent_type)
-    # Enable LM call logging if requested
-    try:
-        lm = getattr(agent, "lm", None)
-        lm_conf = getattr(agent_conf, "lm_config", None)
-        if lm and lm_conf and getattr(lm_conf, "log_calls", False) and results_dir:
-            calls_dir = str(Path(results_dir) / "llm_calls")
-            lm.enable_call_logging(calls_dir)
-            root_logger.info("Enabled LM call logging to %s", calls_dir)
-    except Exception as e:
-        root_logger.warning("Failed to enable LM call logging: %s", str(e))
+    enable_json_logging(str(Path(results_dir) / "llm_calls"))
 
     dataset_logger = child(root_logger, "dataset")
     if run_conf.train_dataset and run_conf.train_dataset.get("verbose", True):
@@ -87,6 +87,23 @@ def main() -> None:
     # If scores_path provided but not absolute, resolve relative to results_dir
     if run_conf.runtime.scores_path and results_dir and not os.path.isabs(run_conf.runtime.scores_path):
         run_conf.runtime.scores_path = str(Path(results_dir) / run_conf.runtime.scores_path)
+    # If checkpoint_dir provided but not absolute, resolve relative to results_dir
+    if getattr(run_conf.runtime, "checkpoint_dir", None) and results_dir and not os.path.isabs(run_conf.runtime.checkpoint_dir):
+        run_conf.runtime.checkpoint_dir = str(Path(results_dir) / run_conf.runtime.checkpoint_dir)
+    # Handle resume if requested
+    if getattr(run_conf.runtime, "resume_from", None):
+        cp_path = cputil.resolve_checkpoint_path(run_conf.runtime.resume_from)
+        manifest = cputil.read_runtime_manifest(cp_path)
+        try:
+            agent.load_checkpoint(str(cp_path))
+        except Exception:
+            pass
+        ep_idx = manifest.get("episode_index", 0) if isinstance(manifest, dict) else 0
+        try:
+            run_conf.runtime.start_episode_index = int(ep_idx)
+        except Exception:
+            run_conf.runtime.start_episode_index = 0
+
     runtime = RunTime(run_conf.runtime, train_dataset, agent, logger=runtime_logger, validation_dataset=val_dataset)
     root_logger.info("Starting runtime")
     results = runtime.run()
