@@ -1,0 +1,22 @@
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore hidden files and directories
+.*
+!/.gitignore
+
+# Ignore wandb logs
+wandb/
+
+# Ignore train/ft_models folder
+train/ft_models/
+/mamba/
+/xbrl/
+
+/lora_adapters/*/checkpoint-*/
+/data/train/DowJones30/
+
+data/train/xbrl_extract_raw.json
+
+docs/build
+/data/train/gemini/
