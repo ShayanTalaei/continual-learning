@@ -10,13 +10,6 @@ from vllm import LLM, SamplingParams
 from src.utils import logger as jsonlogger
 from .language_model import LMConfig, LanguageModel, LLMResponseMetrics
 
-# Optional JSON schema validation
-try:
-    import jsonschema
-    JSONSCHEMA_AVAILABLE = True
-except ImportError:
-    JSONSCHEMA_AVAILABLE = False
-
 
 class VLLMConfig(LMConfig):
     # model: inherited from LMConfig; use any HuggingFace model ID or local path
@@ -52,8 +45,10 @@ class VLLMClient(LanguageModel):
             if self._engine is not None:
                 return self._engine
                 
-            # Use the model string as-is (factory already routed based on "vllm" substring)
+            # Strip "vllm:" prefix if present (factory routes based on "vllm" substring)
             model_id = self.config.model
+            if model_id.startswith("vllm:"):
+                model_id = model_id[len("vllm:"):]
 
             kwargs: Dict[str, Any] = {
                 "model": model_id,
@@ -115,7 +110,7 @@ class VLLMClient(LanguageModel):
         return f"{system_prompt}\n\n{user_prompt}"
 
     def _validate_json_response(self, text: str, response_schema: Optional[Dict[str, Any]]) -> str:
-        """Validate and clean JSON response."""
+        """Clean and validate JSON response using standard library only."""
         if not response_schema or not self.config.json_validation:
             return text
         
@@ -130,22 +125,13 @@ class VLLMClient(LanguageModel):
             if cleaned_text.endswith(suffix):
                 cleaned_text = cleaned_text[:-len(suffix)].strip()
         
-        # Validate JSON syntax
+        # Validate JSON syntax only (no schema validation to match GeminiClient behavior)
         try:
             parsed_json = json.loads(cleaned_text)
+            return json.dumps(parsed_json)  # Return clean JSON
         except json.JSONDecodeError as e:
             self.logger.warning(f"JSON validation failed: {e}")
             return text  # Return original if validation fails
-        
-        # Validate against schema if jsonschema is available
-        if JSONSCHEMA_AVAILABLE and response_schema:
-            try:
-                jsonschema.validate(parsed_json, response_schema)
-            except jsonschema.ValidationError as e:
-                self.logger.warning(f"Schema validation failed: {e}")
-                return text  # Return original if schema validation fails
-        
-        return json.dumps(parsed_json)  # Return clean JSON
 
     def call(self, system_prompt: str, user_prompt: str) -> str:
         call_id = self._begin_call(system_prompt, user_prompt)

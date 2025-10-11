@@ -14,7 +14,7 @@ def get_lm_client(lm_config: LMConfig, logger: Optional[Logger] = None) -> Langu
             lm_config = GeminiConfig(**lm_config.model_dump())
         return GeminiClient(lm_config, logger=logger)
 
-    if "vllm" in model_str:
+    if model_str.startswith("vllm:"):
         # Accept LMConfig or VLLMConfig; coerce if needed
         if not isinstance(lm_config, VLLMConfig):
             lm_config = VLLMConfig(**lm_config.model_dump())
