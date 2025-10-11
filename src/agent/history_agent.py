@@ -14,10 +14,10 @@ class HistoryAgent(MemoryAgent):
         super().__init__(config, logger=logger)
 
     def build_system_prompt(self) -> str:
-        if self.config.system_prompt:
-            return self.config.system_prompt
-        else:   
-            return "You are a helpful assistant. Use prior history when useful."
+        history_list_instructions = ("You will be given the previous experiences you've had and their feedback. "
+            "You should use this feedback to improve your performance in the subsequent actions.")
+        
+        return self.system_prompt + "\n\n" + history_list_instructions
 
     def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
         lines: List[str] = []
@@ -26,6 +26,8 @@ class HistoryAgent(MemoryAgent):
         for entry in recent:
             entry_type = entry.type.upper()
             lines.append(f"{entry_type}: {entry.content}")
+        if len(recent) == 0:
+            lines.append("No previous experiences.")
         lines.append("Here is the current observation:")
         lines.append(f"{obs}")
         return "\n\n".join(lines)

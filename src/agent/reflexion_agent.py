@@ -7,17 +7,27 @@ reflections that are stored in memory and used to improve future performance.
 """
 
 from typing import List, Any
+import os
 from src.agent.memory_agent import MemoryAgent, MemoryAgentConfig
 from src.memory.history_list import Entry, HistoryListConfig
 
 
 # Default prompts (task-agnostic, based on original Reflexion paper)
-DEFAULT_REFLECTION_SYSTEM_PROMPT = """You are a self-reflective AI assistant. You will be given a trajectory of your attempt to solve a task, including your observations, actions, and feedback received. Your task failed or was suboptimal. Analyze what went wrong and provide a concise reflection (2-4 sentences) that explains:
-1) What strategy or approach you took
-2) Why it didn't work or what mistake you made
-3) What you should do differently next time
+DEFAULT_REFLECTION_SYSTEM_PROMPT = """You are a self-reflective AI assistant. You will be given a trajectory of your attempt to solve a task, including your observations, actions, and feedback received. 
 
-Be specific and actionable. Focus on the reasoning or approach, not just the surface-level error."""
+Analyze the trajectory and provide a concise reflection (2-4 sentences) that captures key lessons:
+
+**If the task was successful:**
+- What strategy or approach led to the success?
+- What specific actions or reasoning were most effective?
+- How should you reinforce this behavior in future similar tasks?
+
+**If the task failed or was suboptimal:**
+- What strategy or approach did you take?
+- Why didn't it work or what mistake did you make?
+- What should you do differently next time to prevent such failures?
+
+Be specific and actionable. Focus on extractable lessons that can improve performance on subsequent tasks."""
 
 
 class ReflexionAgentConfig(MemoryAgentConfig):
@@ -33,7 +43,6 @@ class ReflexionAgentConfig(MemoryAgentConfig):
     failure_threshold: float = 1.0  # Score below this is considered failure
     
     # Prompt configuration
-    max_reflections_in_prompt: int | None = 5  # None = all reflections
     reflection_system_prompt: str | None = None  # Override default
     reflection_few_shot_examples: str | None = None  # Optional examples
     
@@ -64,11 +73,7 @@ class ReflexionAgent(MemoryAgent):
     
     def build_system_prompt(self) -> str:
         """Build system prompt with reflection awareness."""
-        if self.config.agent_system_prompt:
-            return self.config.agent_system_prompt
-        if self.config.system_prompt:
-            return self.config.system_prompt
-        return "You are a helpful assistant. Learn from your past experiences and reflections to improve performance."
+        return self.system_prompt + "\nYou need to learn from your past experiences and reflections to improve performance for the subsequent tasks."
     
     def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
         """
@@ -81,36 +86,27 @@ class ReflexionAgent(MemoryAgent):
         """
         lines: List[str] = []
         
-        # Filter reflections and experiences from history
-        reflections: List[Entry] = []
         experiences: List[Entry] = []
         
         for entry in history:
-            if entry.type == "Reflection":
-                reflections.append(entry)
-            else:
-                experiences.append(entry)
+            experiences.append(entry)
         
-        # Limit reflections if configured
-        if self.config.max_reflections_in_prompt is not None:
-            reflections = reflections[-self.config.max_reflections_in_prompt:]
-        
-        # Add reflections section
-        if reflections:
-            lines.append("=== Previous Reflections (lessons learned from past attempts) ===")
-            for i, reflection in enumerate(reflections, 1):
-                lines.append(f"Reflection {i}: {reflection.content}")
-            lines.append("")
-        
-        # Add recent history section (limited by k)
-        if experiences:
-            recent_experiences: List[Entry] = experiences[-k:] if k is not None else experiences
-            if recent_experiences:
-                lines.append("=== Recent History ===")
-                for entry in recent_experiences:
-                    entry_type = entry.type.upper()
+        recent_experiences: List[Entry] = experiences[-k:] if k is not None else experiences
+        if recent_experiences:
+            lines.append("=== Recent History ===")
+            for entry in recent_experiences:
+                entry_type = entry.type.upper()
+                # Format feedback entries to show relevant information
+                if entry.type == "Feedback" and isinstance(entry.content, dict):
+                    message = entry.content.get('message', '')
+                    score = entry.content.get('score')
+                    if score is not None:
+                        lines.append(f"{entry_type} (Score: {score}): {message}")
+                    else:
+                        lines.append(f"{entry_type}: {message}")
+                else:
                     lines.append(f"{entry_type}: {entry.content}")
-                lines.append("")
+            lines.append("")
         
         # Add current task
         lines.append("=== Current Task ===")
@@ -146,20 +142,16 @@ class ReflexionAgent(MemoryAgent):
         return True
     
     def _compute_episode_score(self) -> float:
-        """Compute total score from episode trajectory."""
+        """Compute total score from episode trajectory.
+        
+        Extracts score from feedback events which now store the full feedback dict.
+        """
         total_score = 0.0
         for event in self._trajectory:
             if event.type == "Feedback":
                 content = event.content
-                if isinstance(content, dict):
-                    if 'score' in content:
-                        total_score += float(content['score'])
-                    elif 'correct' in content:
-                        total_score += 1.0 if content['correct'] else 0.0
-                elif isinstance(content, str):
-                    if "correct" in content.lower() or "score" in content.lower():
-                        if "true" in content.lower() or "1" in content:
-                            total_score += 1.0
+                if isinstance(content, dict) and 'score' in content:
+                    total_score += float(content['score'])
         
         return total_score
     
@@ -203,8 +195,21 @@ class ReflexionAgent(MemoryAgent):
         # Add few-shot examples if provided
         user_prompt_parts: List[str] = []
         if self.config.reflection_few_shot_examples:
+            examples_text = self.config.reflection_few_shot_examples
+            # Support file injection via ${file:path} or direct path
+            try:
+                if examples_text.startswith("${file:") and examples_text.endswith("}"):
+                    path = examples_text[len("${file:"):-1]
+                    if os.path.exists(path):
+                        with open(path, "r") as f:
+                            examples_text = f.read()
+                elif os.path.exists(examples_text):
+                    with open(examples_text, "r") as f:
+                        examples_text = f.read()
+            except Exception:
+                pass
             user_prompt_parts.append("=== Examples ===")
-            user_prompt_parts.append(self.config.reflection_few_shot_examples)
+            user_prompt_parts.append(examples_text)
             user_prompt_parts.append("")
         
         user_prompt_parts.append("\n".join(trajectory_lines))
@@ -228,7 +233,14 @@ class ReflexionAgent(MemoryAgent):
             lines.append(f"  Action: {action_str}")
         
         if 'feedback' in step_data:
-            feedback_str = str(step_data['feedback'])
+            feedback = step_data['feedback']
+            # Format feedback dict to show key information
+            if isinstance(feedback, dict):
+                score = feedback.get('score', 'N/A')
+                message = feedback.get('message', '')
+                feedback_str = f"Score: {score}, Message: {message}"
+            else:
+                feedback_str = str(feedback)
             lines.append(f"  Feedback: {feedback_str}")
         
         return "\n".join(lines)
@@ -272,8 +284,12 @@ class ReflexionAgent(MemoryAgent):
         return Entry(type="Action", content=action)
     
     def create_feedback_event(self, feedback: dict) -> Any:
-        """Create a feedback entry for storage in memory."""
-        return Entry(type="Feedback", content=feedback.get("message", ""))
+        """Create a feedback entry for storage in memory.
+        
+        Store the full feedback dict to preserve score and other metadata
+        needed for reflection decisions.
+        """
+        return Entry(type="Feedback", content=feedback)
     
     def create_reflection_event(self, reflection: str) -> Any:
         """Create a reflection entry for storage in memory."""

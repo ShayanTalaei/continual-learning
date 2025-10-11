@@ -26,6 +26,18 @@ class Agent(Generic[C]):
         self.logger = logger or getLogger("agent")
         self.lm: LanguageModel = get_lm_client(config.lm_config, logger=child(self.logger, "lm"))
         self.training: bool = True
+        self._set_system_prompt()
+        
+
+    def _set_system_prompt(self):
+        if self.config.system_prompt:
+            if self.config.system_prompt.startswith("{file:"):
+                with open(self.config.system_prompt[len("{file:"):-1], "r") as f:
+                    self.system_prompt = f.read()
+            else:
+                self.system_prompt = self.config.system_prompt
+        else:
+            raise ValueError("System prompt is not set")
 
     def act(self, obs: str) -> str:
         raise NotImplementedError

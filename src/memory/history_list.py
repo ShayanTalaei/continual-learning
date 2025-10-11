@@ -6,7 +6,7 @@ from src.memory.memory_module import MemoryModule, MemoryModuleConfig
 
 class Entry(BaseModel):
     type: str
-    content: str
+    content: str|dict
 
 
 class HistoryListConfig(MemoryModuleConfig):

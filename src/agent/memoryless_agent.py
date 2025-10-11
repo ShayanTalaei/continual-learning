@@ -14,9 +14,7 @@ class MemorylessAgent(Agent[MemorylessAgentConfig]):
         self._trajectory: List[str] = []
 
     def build_system_prompt(self) -> str:
-        if self.config.system_prompt:
-            return self.config.system_prompt
-        return "You are a helpful assistant."
+        return self.system_prompt
 
     def build_user_prompt(self, obs: str) -> str:
         return f"Q: {obs}"

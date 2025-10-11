@@ -26,9 +26,7 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("MemoryAgent init: history_k=%s", self.config.history_k)
 
     def build_system_prompt(self) -> str:
-        if self.config.system_prompt:
-            return self.config.system_prompt
-        return "You are a helpful assistant. Use prior context when useful."
+        return self.system_prompt
 
     @abstractmethod
     def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
