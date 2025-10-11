@@ -18,6 +18,37 @@ Key idea at step t: memory is updated after each observation–action–feedback
 - Benchmark-ready environment subclasses (QA, numeric/boxed, MCQ)
 - YAML-driven runs via a single entrypoint
 
+### Environment Setup
+
+#### Option 1: Using Conda (Recommended)
+```bash
+# Create environment from environment.yml
+conda env create -f environment.yml
+
+# Activate the environment
+conda activate continual_learning
+```
+
+#### Option 2: Using pip
+```bash
+# Create a virtual environment
+python -m venv continual_learning_env
+source continual_learning_env/bin/activate  # On Windows: continual_learning_env\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+#### Updating the Environment
+To update the environment files with your current installation:
+```bash
+# Export current conda environment
+conda env export > environment.yml
+
+# Export pip requirements
+pip freeze > requirements.txt
+```
+
 ### Quickstart
 ```bash
 python -m src.main --config configs/toy_inmemory.yaml
