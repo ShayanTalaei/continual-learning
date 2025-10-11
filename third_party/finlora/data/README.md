@@ -1,3 +1,9 @@
+---
+noteId: "3d36b2c0a5f911f097f9d90551ec87df"
+tags: []
+
+---
+
 # FinLoRA Datasets
 
 > The XBRL extraction datasets will be published soon.
