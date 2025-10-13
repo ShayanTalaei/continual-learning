@@ -11,7 +11,7 @@ from threading import Lock
 from src.data.env import EnvDataset, Environment
 from src.utils import logger as jsonlogger
 from src.agent.agent import Agent
-from src.utils import checkpoint as cputil
+from src.utils.checkpoint import CheckpointManager
 
 
 class RunTimeConfig(BaseModel):
@@ -28,6 +28,8 @@ class RunTimeConfig(BaseModel):
     checkpoint_every_episodes: Optional[int] = None
     checkpoint_keep_last: Optional[int] = None
     checkpoint_on_start: bool = False
+    # Strategy (optional): "last_n" (default) or "top_k_val" when combined with keep_last
+    checkpoint_strategy: Optional[str] = None
     resume_from: Optional[str] = None
     start_episode_index: int = 0
 
@@ -53,6 +55,18 @@ class RunTime:
         self.num_seen_episodes = 0
         # Buffer for validation logs to preserve deterministic ordering (episode, step)
         self._val_logs_buffer = jsonlogger.ValidationLogsBuffer()
+        # Checkpoint manager (optional)
+        self._cp_manager: Optional[CheckpointManager] = None
+        if self.config.checkpoint_dir:
+            strategy = (self.config.checkpoint_strategy or "last_n").lower()
+            keep_count = int(self.config.checkpoint_keep_last or 0)
+            self._cp_manager = CheckpointManager(
+                base_dir=self.config.checkpoint_dir,
+                strategy=strategy,
+                keep_count=keep_count,
+                every_episodes=self.config.checkpoint_every_episodes,
+                logger=self.logger,
+            )
 
     def run(self) -> Dict[str, Any]:
         environments = self.train_dataset.get_dataset()
@@ -63,17 +77,17 @@ class RunTime:
         self.logger.info("Run: environments=%d", len(environments))
 
         # Optional checkpoint at start
-        if self.config.checkpoint_dir and self.config.checkpoint_on_start:
-            self._save_checkpoint(episode_index=self.config.start_episode_index, train_steps_total=0)
-
-        if self.config.run_validation_at_start:
-            with jsonlogger.json_log_context(mode="val"):
-                self._run_validation()
+        if self._cp_manager and self.config.checkpoint_on_start:
+            self._cp_manager.maybe_checkpoint_on_start(self.agent, episode_index=self.config.start_episode_index)
 
         train_steps_total = 0
         # Initialize counters if resuming
         if self.config.start_episode_index > 0:
             self.num_seen_episodes = self.config.start_episode_index
+        
+        if self.config.run_validation_at_start:
+            with jsonlogger.json_log_context(mode="val"):
+                self._run_validation()
 
         for idx, environment in enumerate(tqdm(environments, desc="Episodes", total=len(environments)), start=1):
             # Skip already-processed episodes on resume
@@ -91,12 +105,15 @@ class RunTime:
                 ep_score = sum(self._get_score(s.feedback) for s in steps)
                 self.logger.info("Episode %d: end steps=%d score_sum=%.3f", idx, len(steps), ep_score)
 
-            # Checkpoint after each episode if configured
-            self._maybe_checkpoint(self.num_seen_episodes, train_steps_total)
+            # Checkpoint after each episode if configured (delegated)
+            if self._cp_manager:
+                self._cp_manager.on_episode_end(self.agent, episode_index=self.num_seen_episodes, train_steps_total=train_steps_total)
 
             if self.num_seen_episodes % self.config.validation_freq == 0:
                 with jsonlogger.json_log_context(mode="val"):
-                    self._run_validation()
+                    mean_val = self._run_validation()
+                if self._cp_manager and mean_val is not None:
+                    self._cp_manager.on_validation_complete(self.agent, episode_index=self.num_seen_episodes, train_steps_total=train_steps_total, mean_val_score=mean_val)
 
         # Aggregates: mean score across steps
         total = 0
@@ -175,10 +192,10 @@ class RunTime:
             running_agent.end_episode()
         return steps
 
-    def _run_validation(self) -> None:
+    def _run_validation(self) -> Optional[float]:
         if self.validation_dataset is None:
             self.logger.warning("Validation requested but no validation dataset available")
-            return
+            return None
         val_ds: List[Environment] = self.validation_dataset.get_dataset()
         self.logger.info("Starting validation at train episode %d on %d examples", self.num_seen_episodes, len(val_ds))
         max_workers = self.config.validation_num_workers
@@ -200,6 +217,7 @@ class RunTime:
         self.logger.info("Validation finished: mean_score_val=%.3f total=%d", mean_score_val, total)
         # Flush validation logs in deterministic order
         self._val_logs_buffer.flush()
+        return mean_score_val
 
     def _get_score(self, feedback: Dict[str, Any]) -> float:
         if "score" in feedback:
@@ -267,39 +285,4 @@ class RunTime:
             return
         jsonlogger.write_score_record(scores_jsonl, rec)
 
-    # --------------------
-    # Checkpoint utilities
-    # --------------------
-    def _maybe_checkpoint(self, episode_index: int, train_steps_total: int) -> None:
-        if not self.config.checkpoint_dir:
-            return
-        if not self.config.checkpoint_every_episodes:
-            return
-        if self.config.checkpoint_every_episodes > 0 and episode_index % self.config.checkpoint_every_episodes == 0:
-            self._save_checkpoint(episode_index=episode_index, train_steps_total=train_steps_total)
-
-    def _save_checkpoint(self, episode_index: int, train_steps_total: int) -> None:
-        cp_base = self.config.checkpoint_dir
-        if not cp_base:
-            return
-        try:
-            ep_dir = cputil.create_checkpoint_dir(cp_base, episode_index)
-            # Agent checkpoint first (writes agent.json and memory snapshot)
-            manifest_agent = self.agent.save_checkpoint(str(ep_dir), episode_index)
-            # Runtime manifest
-            manifest_runtime = {
-                "episode_index": episode_index,
-                "train_steps_total": train_steps_total,
-                "agent_type": self.agent.__class__.__name__,
-            }
-            # Include memory snapshot name if present in agent manifest
-            if isinstance(manifest_agent, dict) and manifest_agent.get("memory_snapshot_path"):
-                manifest_runtime["memory_snapshot_path"] = manifest_agent["memory_snapshot_path"]
-            cputil.write_runtime_manifest(ep_dir, manifest_runtime)
-            # Update latest pointer and prune old ones
-            cputil.update_latest_pointer(Path(cp_base), ep_dir)
-            if self.config.checkpoint_keep_last and self.config.checkpoint_keep_last > 0:
-                cputil.prune_checkpoints(cp_base, self.config.checkpoint_keep_last)
-            self.logger.info("Saved checkpoint at %s", str(ep_dir))
-        except Exception as e:
-            self.logger.warning("Failed to save checkpoint: %s", str(e))
+    # (Checkpoint utilities removed; delegated to CheckpointManager)

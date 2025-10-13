@@ -6,6 +6,7 @@ from typing import Any, Dict
 
 import yaml
 from datetime import datetime
+from dotenv import load_dotenv
 
 from src.run_config import RunConfig
 from src.agent.registry import AGENT_REGISTRY
@@ -13,6 +14,9 @@ from src.data.dataset_factory import build_dataset
 from src.run_time import RunTime
 from src.utils.logger import setup_logger, child, add_console, enable_json_logging
 from src.utils import checkpoint as cputil
+
+# Load environment variables from .env file
+load_dotenv(override=True)
 
 
 def resolve_paths(conf: Dict[str, Any]) -> Dict[str, Any]:
@@ -24,8 +28,12 @@ def resolve_paths(conf: Dict[str, Any]) -> Dict[str, Any]:
     output = d.get("output")
     if output:
         if output.get("results_dir") and not os.path.isabs(output["results_dir"]):
-            # Resolve output paths relative to the current working directory (project root)
-            output["results_dir"] = str((Path.cwd() / output["results_dir"]).resolve())
+            # Prepend LOGS_DIR from environment if set, otherwise use current working directory
+            logs_dir = os.getenv("LOGS_DIR")
+            if logs_dir:
+                output["results_dir"] = str((Path(logs_dir) / output["results_dir"]).resolve())
+            else:
+                output["results_dir"] = str((Path.cwd() / output["results_dir"]).resolve())
     # Resolve runtime.checkpoint_dir relative to results_dir if provided and relative
     runtime = d.get("runtime")
     if runtime and runtime.get("checkpoint_dir"):
@@ -38,6 +46,8 @@ def resolve_paths(conf: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def main() -> None:
+    
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
