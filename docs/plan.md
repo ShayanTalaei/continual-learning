@@ -32,13 +32,21 @@ tags: []
 - **Thread-safe logging**: Generic JSON logging utilities with per-file locks.
 - **Config organization**: Moved configs to organized folders by dataset type.
 - **Score organization**: Separate training/validation score files with episode-based naming.
+- **ReflexionAgent**: Self-reflective agent with episode-level reflection (COMPLETE ✅)
+- **Checkpointing system**: Full checkpoint/resume with multiple strategies (COMPLETE ✅)
+- **TokasaurusClient**: Local inference for open-source models (COMPLETE ✅)
+- **Multi-step environments**: ALFWorld integration with few-shot prompting (COMPLETE ✅)
+- **Advanced math environments**: OMEGA Math with multiple eval modes and LLM feedback (COMPLETE ✅)
+- **Finer environment**: Financial entity recognition dataset support (COMPLETE ✅)
 
 ### Remaining TODOs
-- Implement `ReflexionAgent` and episode-level reflection.
 - Multi-trial runtime orchestration (`num_trials`, `early_stop_on_success`, `carry_memory_across_trials`).
 - Per-task metrics reporting (e.g., MCQ confusion stats).
 - Seed management in `main` (set random/np/torch if present).
 - Optional JSON formatter and rotating logs in logger utilities.
+- Dynamic Cheatsheet agent implementation.
+- Cartridge (prefix tuning) memory implementation.
+- Retrieval-based memory with top-k similarity search.
 
 ### Memory Modules ✅
 
