@@ -1,0 +1,87 @@
+## FinLoRA Finer — ReflexionAgent on local JSONL test set
+## Demonstrates self-reflection on financial tagging tasks
+## FinLoRA Finer — HistoryAgent on local JSONL test set
+
+runtime:
+  max_envs_to_visit: 10000
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 200
+  validation_freq: 50
+  # Checkpointing
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 50
+  # Use one of the following strategies:
+  # - last_n: keeps the last N checkpoints saved every `checkpoint_every_episodes`
+  # - top_k_val: keeps the top-K checkpoints by validation mean score (saved on validation)
+  checkpoint_strategy: top_k_val
+  checkpoint_keep_last: 5
+  checkpoint_on_start: false
+  resume_from: null
+  start_episode_index: 0
+
+train_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "train"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 2000
+  shuffle: false
+
+validation_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "val"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 1000
+  shuffle: false
+
+agent:
+  type: reflexion_agent
+
+  # LM configuration
+  lm_config:
+    # Use provider-prefixed model to dispatch to Tokasaurus
+    model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    temperature: 0.0
+    max_output_tokens: 8192
+    log_calls: true 
+    # Tokasaurus-specific fields (present on TokasaurusConfig)
+    base_url: "http://localhost:8080"
+    protocol: "openai"   # or "toka" if your server exposes /generate
+    stop_sequences: ["FEEDBACK", "OBSERVATION"]
+
+  # Memory configuration
+  memory_config:
+    _type: history_list
+    max_length: 2000
+
+  # History configuration
+  history_k: null  # null = use all history items
+
+  # Reflexion-specific configuration
+  enable_reflection: true
+  reflect_on_failure_only: true  # Only reflect on incorrect answers
+  failure_threshold: 1.0  # Score < 1.0 means incorrect
+  max_reflections_in_prompt: null
+
+  # Custom system prompt for financial tagging
+  system_prompt: "{file:src/data/prompts/finer/system_prompt.txt}"
+
+  # Use default reflection prompts (task-agnostic)
+  reflection_system_prompt: null
+  reflection_few_shot_examples: null
+
+  # Base agent settings
+  verbose: true
+
+output:
+  results_dir: outputs/finer/reflexion_agent/2000_steps_toka_llama3.1_8b_instruct
+  log_level: INFO
+
+

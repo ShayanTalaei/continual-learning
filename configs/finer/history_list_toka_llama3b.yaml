@@ -1,0 +1,58 @@
+## FinLoRA Finer — HistoryAgent on local JSONL test set
+
+runtime:
+  max_envs_to_visit: 10000
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 200
+  validation_freq: 50
+  # Checkpointing
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 5
+  checkpoint_keep_last: 1
+  checkpoint_on_start: false
+  resume_from: null
+  start_episode_index: 0
+
+train_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "train"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 2000
+  shuffle: false
+
+validation_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "val"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 1000
+  shuffle: false
+
+agent:
+  type: history_agent
+  lm_config:
+    # Use provider-prefixed model to dispatch to Tokasaurus
+    model: "toka:meta-llama/Llama-3.2-3B-Instruct"
+    temperature: 0.0
+    max_output_tokens: 2048
+    log_calls: true
+    # Tokasaurus-specific fields (present on TokasaurusConfig)
+    base_url: "http://localhost:8080"
+    protocol: "openai"   # or "toka" if your server exposes /generate
+    stop_sequences: ["FEEDBACK", "OBSERVATION"]
+    max_retries: 0
+  
+  system_prompt: "{file:src/data/prompts/finer/system_prompt.txt}"
+
+output:
+  results_dir: outputs/finer/history_agent/2000_steps_toka_llama3b
+  log_level: INFO
+
+
