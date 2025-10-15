@@ -49,8 +49,7 @@ from cartridges.initialization.random import KVFromRandomVectors
 from cartridges.structs import Conversation, write_conversations
 from cartridges.utils.wandb import WandBConfig
 
-# Import our converter
-from src.memory.distillation.convert_to_cartridges import convert_row_to_conversation
+# Note: Dataset conversion is now handled separately by convert_to_cartridges.py
 
 
 # ============================================================================
@@ -59,12 +58,16 @@ from src.memory.distillation.convert_to_cartridges import convert_row_to_convers
 
 class InputDatasetConfig(BaseModel):
     """Configuration for input dataset source."""
-    repo_id: str = Field(..., description="HuggingFace dataset repo ID")
-    split: str = Field(default="train", description="Dataset split to use")
-    is_converted: bool = Field(
-        default=False, 
-        description="If True, dataset is already in cartridges format. If False, will convert from intermediate format."
-    )
+    # Either use HuggingFace dataset or local pre-processed dataset
+    repo_id: Optional[str] = Field(None, description="HuggingFace dataset repo ID")
+    split: str = Field(default="train", description="Dataset split to use (for HF datasets)")
+    local_path: Optional[str] = Field(None, description="Path to local pre-processed parquet dataset")
+    
+    def __post_init__(self):
+        if not self.repo_id and not self.local_path:
+            raise ValueError("Must provide either repo_id or local_path")
+        if self.repo_id and self.local_path:
+            raise ValueError("Cannot provide both repo_id and local_path")
 
 
 class OutputConfig(BaseModel):
@@ -93,6 +96,7 @@ class TrainingConfig(BaseModel):
     lr: float = Field(default=1e-4, description="Learning rate")
     weight_decay: float = Field(default=0.0, description="Weight decay")
     optimizer: Literal["adam"] = Field(default="adam", description="Optimizer type")
+    gradient_checkpointing: bool = Field(default=False, description="Enable activation (gradient) checkpointing to reduce memory usage")
     
     # Checkpointing
     save_every_n_steps: Optional[int] = Field(default=100, description="Save checkpoint every N steps")
@@ -159,116 +163,49 @@ class DistillationConfig(BaseModel):
 # Helper Functions
 # ============================================================================
 
-def create_conversation_from_row(row: Dict[str, Any], tokenizer: AutoTokenizer, min_prob_mass: float = 0.99) -> Conversation:
-    """Create a Conversation object from a dataset row.
-    
-    Args:
-        row: Dataset row dictionary
-        tokenizer: Tokenizer for processing logprobs
-        min_prob_mass: Probability mass threshold for flattening logprobs
-        
-    Returns:
-        Conversation object
-    """
-    from src.memory.distillation.convert_to_cartridges import convert_openai_logprobs_to_top_logprobs
-    
-    messages = []
-    for message in row["messages"]:
-        content = message["content"]
-        role = message["role"]
-        token_ids = message.get("token_ids")
-        
-        # Process logprobs for assistant messages
-        top_logprobs = None
-        if role == "assistant" and message.get("logprobs"):
-            top_logprobs_obj = convert_openai_logprobs_to_top_logprobs(message["logprobs"], tokenizer)
-            if top_logprobs_obj:
-                top_logprobs = top_logprobs_obj.flatten(threshold=min_prob_mass)
-                if top_logprobs and len(top_logprobs.token_id) == 0:
-                    print(f"[Distill] Warning: Empty logprobs after flattening with threshold {min_prob_mass}")
-                    top_logprobs = None
-        
-        messages.append(Conversation.Message(
-            content=content,
-            role=role,
-            token_ids=token_ids,
-            top_logprobs=top_logprobs
-        ))
-    
-    return Conversation(
-        messages=messages,
-        system_prompt=row["system_prompt"],
-        metadata=row["metadata"],
-        type=row["type"],
-    )
 
-def load_and_convert_dataset(
-    config: DistillationConfig,
-    tokenizer: AutoTokenizer,
-    temp_dir: Path,
-) -> str:
-    """Load dataset from HF and convert to cartridges format if needed.
+def get_dataset_path(config: DistillationConfig) -> str:
+    """Get the path to the dataset for training.
     
     Args:
         config: Distillation configuration
-        tokenizer: Tokenizer for the model
-        temp_dir: Temporary directory for intermediate files
         
     Returns:
         Path to the cartridges-format dataset (parquet file)
     """
-    print(f"[Distill] Loading dataset from HuggingFace: {config.input_dataset.repo_id}")
+    if config.input_dataset.local_path:
+        # Use pre-processed local dataset
+        dataset_path = Path(config.input_dataset.local_path)
+        if not dataset_path.exists():
+            raise FileNotFoundError(f"Local dataset not found: {dataset_path}")
+        print(f"[Distill] Using pre-processed dataset: {dataset_path}")
+        return str(dataset_path)
     
-    # Load from HuggingFace
-    ds = load_dataset(config.input_dataset.repo_id, split=config.input_dataset.split)
-    print(f"[Distill] Loaded {len(ds)} samples")
-    
-    if config.input_dataset.is_converted:
-        # Already in cartridges format, save to temp location
-        print("[Distill] Dataset is already in cartridges format")
-        output_path = temp_dir / "dataset.parquet"
+    elif config.input_dataset.repo_id:
+        # Load from HuggingFace (assume already in cartridges format)
+        print(f"[Distill] Loading dataset from HuggingFace: {config.input_dataset.repo_id}")
+        ds = load_dataset(config.input_dataset.repo_id, split=config.input_dataset.split)
+        print(f"[Distill] Loaded {len(ds)} samples")
         
-        # Convert HF dataset to Conversation objects
-        conversations = []
-        for i in range(len(ds)):
-            row = ds[i]
-            conv = create_conversation_from_row(row, tokenizer, config.dataset.min_prob_mass)
-            conversations.append(conv)
-        
-        # Check if we have any logprobs
-        total_logprobs = sum(1 for conv in conversations for msg in conv.messages if msg.top_logprobs)
-        print(f"[Distill] Total messages with logprobs: {total_logprobs}")
-        
-        if total_logprobs == 0:
-            print("[Distill] Warning: No logprobs found! This may cause training issues.")
-        
-        write_conversations(conversations, str(output_path))
-        print(f"[Distill] Converted {len(conversations)} conversations to: {output_path}")
-        return str(output_path)
+        # Save to temp location for training
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            output_path = temp_path / "dataset.parquet"
+            
+            # Convert HF dataset to Conversation objects
+            conversations = []
+            for i in range(len(ds)):
+                row = ds[i]
+                # Assume the HF dataset is already in cartridges format
+                conv = Conversation(**row)
+                conversations.append(conv)
+            
+            write_conversations(conversations, str(output_path))
+            print(f"[Distill] Prepared {len(conversations)} conversations for training")
+            return str(output_path)
     
     else:
-        # Need to convert from intermediate format
-        print("[Distill] Converting from intermediate format to cartridges format...")
-        conversations = []
-        
-        for i in range(len(ds)):
-            row = ds[i]
-            try:    
-                conv = convert_row_to_conversation(row, tokenizer, config.dataset.min_prob_mass)
-                conversations.append(conv)
-            except Exception as e:
-                print(f"[Distill] Warning: Failed to convert sample {i}: {e}")
-                continue
-            
-            if (i + 1) % 20 == 0:
-                print(f"[Distill] Converted {i + 1}/{len(ds)} samples")
-        
-        # Save to temp parquet file
-        output_path = temp_dir / "dataset.parquet"
-        write_conversations(conversations, str(output_path))
-        print(f"[Distill] Converted {len(conversations)} conversations to: {output_path}")
-        
-        return str(output_path)
+        raise ValueError("Must provide either local_path or repo_id in input_dataset config")
 
 
 def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCacheFactory.Config:
@@ -461,19 +398,24 @@ def run_distillation(config: DistillationConfig):
     print(f"[Distill] Loading tokenizer: {config.model_name}")
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     
-    # Load and convert dataset
+    # Get dataset path
+    dataset_path = get_dataset_path(config)
+    
+    # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_path = Path(temp_dir)
-        
-        dataset_path = load_and_convert_dataset(config, tokenizer, temp_path)
-        
-        # Create KV cache factory config
         kv_cache_factory_config = create_kv_cache_factory(config.kv_cache, temp_path)
         
         # Create cartridges TrainConfig
         print("[Distill] Setting up training configuration...")
+        # Generate run name from dataset source
+        if config.input_dataset.local_path:
+            run_name = f"distill_{Path(config.input_dataset.local_path).stem}"
+        else:
+            run_name = f"distill_{Path(config.input_dataset.repo_id).name}"
+        
         train_config = TrainConfig(
-            name=f"distill_{Path(config.input_dataset.repo_id).name}",
+            name=run_name,
             output_dir=str(output_dir),
             
             # Model
@@ -499,6 +441,7 @@ def run_distillation(config: DistillationConfig):
             optimizer=config.training.optimizer,
             lr=config.training.lr,
             weight_decay=config.training.weight_decay,
+            gradient_checkpointing=config.training.gradient_checkpointing,
             
             # KV Cache
             kv_cache_initializer=kv_cache_factory_config,
@@ -513,7 +456,7 @@ def run_distillation(config: DistillationConfig):
             wandb=WandBConfig(
                 project=config.wandb.project or "cartridges-distillation",
                 entity=config.wandb.entity,
-                name=config.wandb.name or f"distill_{Path(config.input_dataset.repo_id).name}",
+                name=config.wandb.name or run_name,
             ) if config.wandb.enabled else None,
             
             # Misc

@@ -8,14 +8,25 @@ and converts it to the cartridges format (parquet with proper logprobs structure
 import sys
 import json
 import argparse
+import os
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 import numpy as np
 from transformers import AutoTokenizer
+from datasets import load_dataset
+
+# Set up cartridges environment variables BEFORE importing
+REPO_ROOT = Path(__file__).parent.parent.parent.parent
+CARTRIDGES_DIR = REPO_ROOT / "third_party" / "cartridges"
+
+# Cartridges requires these environment variables
+os.environ["CARTRIDGES_DIR"] = str(CARTRIDGES_DIR)
+if "CARTRIDGES_OUTPUT_DIR" not in os.environ:
+    # Default to ./outputs if not set
+    os.environ["CARTRIDGES_OUTPUT_DIR"] = str(REPO_ROOT / "outputs")
 
 # Add third_party/cartridges to path
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(REPO_ROOT / "third_party" / "cartridges"))
+sys.path.insert(0, str(CARTRIDGES_DIR))
 
 from cartridges.structs import Conversation, write_conversations
 from cartridges.clients.base import TopLogprobs, FlatTopLogprobs
@@ -143,33 +154,54 @@ def convert_row_to_conversation(
 
 
 def convert_dataset(
-    input_path: Path,
+    input_source: str,
     output_path: Path,
     model_name: str,
     min_prob_mass: float = 0.99,
     max_samples: Optional[int] = None,
+    input_type: str = "local",  # "local" or "huggingface"
+    split: str = "train",
 ):
     """Convert intermediate dataset to cartridges format.
     
     Args:
-        input_path: Path to intermediate JSONL file
+        input_source: Path to local JSONL file OR HuggingFace repo_id
         output_path: Path to output parquet file
         model_name: Model name for tokenizer (e.g., "meta-llama/Llama-3.1-8B-Instruct")
         min_prob_mass: Probability mass threshold for flattening logprobs
         max_samples: Optional limit on number of samples to convert
+        input_type: "local" for local file, "huggingface" for HF dataset
+        split: Dataset split to use (for HF datasets)
     """
     print(f"[Converter] Loading tokenizer for {model_name}...")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     print(f"[Converter] Tokenizer loaded")
     
-    print(f"[Converter] Reading intermediate dataset from {input_path}...")
-    rows = []
-    with open(input_path, "r") as f:
-        for i, line in enumerate(f):
+    if input_type == "huggingface":
+        print(f"[Converter] Loading dataset from HuggingFace: {input_source}")
+        dataset = load_dataset(input_source, split=split)
+        print(f"[Converter] Loaded {len(dataset)} samples from HuggingFace")
+        
+        # Convert HF dataset to list of rows
+        rows = []
+        for i, item in enumerate(dataset):
             if max_samples is not None and i >= max_samples:
                 break
-            row = json.loads(line.strip())
-            rows.append(row)
+            rows.append(item)
+    else:
+        print(f"[Converter] Reading intermediate dataset from {input_source}...")
+        input_path = Path(input_source)
+        if not input_path.exists():
+            raise FileNotFoundError(f"Input file not found: {input_path}")
+        
+        rows = []
+        with open(input_path, "r") as f:
+            for i, line in enumerate(f):
+                if max_samples is not None and i >= max_samples:
+                    break
+                row = json.loads(line.strip())
+                rows.append(row)
+    
     print(f"[Converter] Loaded {len(rows)} rows")
     
     print(f"[Converter] Converting to cartridges format...")
@@ -199,17 +231,26 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Example usage:
+  # Convert local JSONL file:
   python src/memory/distillation/convert_to_cartridges.py \\
     --input /path/to/dataset.jsonl \\
     --output /path/to/dataset.parquet \\
     --model meta-llama/Llama-3.1-8B-Instruct
+
+  # Convert HuggingFace dataset:
+  python src/memory/distillation/convert_to_cartridges.py \\
+    --input stalaei/distillation-dataset-test \\
+    --output /path/to/dataset.parquet \\
+    --model meta-llama/Llama-3.1-8B-Instruct \\
+    --input-type huggingface \\
+    --split train
 """
     )
     parser.add_argument(
         "--input",
         type=str,
         required=True,
-        help="Path to intermediate JSONL dataset"
+        help="Path to intermediate JSONL dataset OR HuggingFace repo_id"
     )
     parser.add_argument(
         "--output",
@@ -222,6 +263,19 @@ Example usage:
         type=str,
         required=True,
         help="Model name for tokenizer (e.g., meta-llama/Llama-3.1-8B-Instruct)"
+    )
+    parser.add_argument(
+        "--input-type",
+        type=str,
+        choices=["local", "huggingface"],
+        default="local",
+        help="Input type: 'local' for JSONL file, 'huggingface' for HF dataset (default: local)"
+    )
+    parser.add_argument(
+        "--split",
+        type=str,
+        default="train",
+        help="Dataset split to use (for HuggingFace datasets, default: train)"
     )
     parser.add_argument(
         "--min-prob-mass",
@@ -238,22 +292,26 @@ Example usage:
     
     args = parser.parse_args()
     
-    input_path = Path(args.input)
     output_path = Path(args.output)
     
-    if not input_path.exists():
-        print(f"ERROR: Input file not found: {input_path}", file=sys.stderr)
-        sys.exit(1)
+    # Validate input for local files
+    if args.input_type == "local":
+        input_path = Path(args.input)
+        if not input_path.exists():
+            print(f"ERROR: Input file not found: {input_path}", file=sys.stderr)
+            sys.exit(1)
     
     if not output_path.suffix == ".parquet":
         print("WARNING: Output file should have .parquet extension")
     
     convert_dataset(
-        input_path=input_path,
+        input_source=args.input,
         output_path=output_path,
         model_name=args.model,
         min_prob_mass=args.min_prob_mass,
         max_samples=args.max_samples,
+        input_type=args.input_type,
+        split=args.split,
     )
 
 

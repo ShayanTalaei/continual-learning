@@ -66,6 +66,7 @@ class TrainConfig(RunConfig):
     model: ModelConfig
     wandb: Optional[WandBConfig] = Field(default_factory=WandBConfig)
     dataset: TrainDataset.Config
+    gradient_checkpointing: bool = False
 
     # datasets for evaluating perplexity on other generations
     # NOTE: steps here is the number of **optimizer steps**, which we keep track of
@@ -169,6 +170,9 @@ def train(config: TrainConfig):
     )
 
     model = config.model.instantiate().to(local_rank).to(torch.bfloat16)
+    if config.gradient_checkpointing:
+        # Enable activation checkpointing. We assume model exposes this API.
+        model.gradient_checkpointing_enable()
     attn_config=AttnConfig(
         n_layers=model.config.num_hidden_layers,
         n_heads=model.config.num_key_value_heads,

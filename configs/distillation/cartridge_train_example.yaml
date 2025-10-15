@@ -9,13 +9,12 @@
 #   python -m src.memory.distillation.distill_into_cartridge \
 #     --config configs/distillation/cartridge_train_example.yaml
 
-# Input dataset (from HuggingFace)
+# Input dataset (pre-processed locally)
 input_dataset:
-  repo_id: "stalaei/distillation-dataset-test"
-  split: "train"
-  # Set to true if dataset is already converted to cartridges format
-  # Set to false if it's in intermediate format (needs conversion)
-  is_converted: false
+  local_path: "./data/processed_dataset.parquet"  # Path to pre-processed parquet file
+  # Alternative: use HuggingFace dataset (must be in cartridges format)
+  # repo_id: "stalaei/distillation-dataset-test"
+  # split: "train"
 
 # Output configuration
 output:
@@ -44,6 +43,7 @@ training:
   lr: 1e-4
   weight_decay: 0.0
   optimizer: "adam"
+  gradient_checkpointing: true
   
   # Checkpointing
   save_every_n_steps: 100
@@ -62,7 +62,7 @@ training:
 # Dataset processing
 dataset:
   packing_mode: "pad"  # Options: "pad" or "truncate"
-  packed_seq_length: 2048 #128000
+  packed_seq_length: 128000
   targets: "logits"  # Use logits for knowledge distillation
   top_k_logits: 20   # Should match top_logprobs from data generation
   min_prob_mass: 0.8  # Probability mass threshold for logprobs conversion
@@ -78,9 +78,12 @@ wandb:
 # Notes:
 # ============================================================================
 #
-# 1. The dataset should be generated using data_generation.py first
-# 2. If dataset is in intermediate format (from data_generation.py),
-#    set is_converted: false to auto-convert during training
+# 1. First, convert your dataset using convert_to_cartridges.py:
+#    python src/memory/distillation/convert_to_cartridges.py \
+#      --input /path/to/intermediate_dataset.jsonl \
+#      --output ./data/processed_dataset.parquet \
+#      --model meta-llama/Llama-3.1-8B-Instruct
+# 2. Then run training with this config pointing to the processed dataset
 # 3. top_k_logits should match top_logprobs from data generation config
 # 4. num_tokens determines cartridge size (memory vs accuracy tradeoff)
 # 5. Trained cartridge will be uploaded to HF and can be used with KVMemoryAgent
