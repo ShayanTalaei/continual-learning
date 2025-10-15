@@ -10,3 +10,4 @@ outputs/
 data/
 !src/data/
 
+wandb/

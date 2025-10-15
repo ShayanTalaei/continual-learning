@@ -1,0 +1,26 @@
+# Cartridges core dependencies (from pyproject.toml)
+torch>=2.0.0
+openai
+datasets
+transformers>=4.49.0,<=4.55
+numpy
+einops
+tqdm
+wandb
+pydrantic
+tiktoken
+peft
+evaluate
+markdown
+
+# Additional dependencies needed for training
+pandas
+pyarrow  # For parquet file handling
+huggingface_hub  # For uploading/downloading from HuggingFace
+pyyaml  # For config files
+
+# Optional but recommended
+matplotlib  # For plotting
+seaborn  # For visualizations
+
+
