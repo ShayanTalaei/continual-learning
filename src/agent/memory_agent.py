@@ -71,11 +71,10 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("Logged Observation")
         
         with jsonlogger.json_log_context(call_type="action"):
-            action = self.lm.call(system_prompt, user_prompt)
-        if action is None:
+            resp = self.lm.call(system_prompt, user_prompt)
+        action = (resp.get("text") or "").strip()
+        if not action:
             self.logger.warning("No action returned from LM")
-            action = ""
-        action = action.strip()
         self.logger.info(f"Action generated: {action[:25] + '...' + action[-25:] if len(action) > 50 else action}")
         
         self._last_action = action

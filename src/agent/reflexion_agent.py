@@ -261,10 +261,9 @@ class ReflexionAgent(MemoryAgent):
             # Add reflection-specific context for better logging organization
             # This will place reflection calls in a "reflections/" subdirectory
             with jsonlogger.json_log_context(call_type="reflection", episode_index=self._episode_index):
-                reflection = self.lm.call(system_prompt, user_prompt)
-            
+                resp = self.lm.call(system_prompt, user_prompt)
+            reflection = (resp.get("text") or "").strip()
             if reflection:
-                reflection = reflection.strip()
                 self.logger.info("Reflection generated: len=%d", len(reflection))
                 return reflection
             else:
