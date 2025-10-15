@@ -1,0 +1,62 @@
+## Data Generation Config for Memory Distillation
+## This config generates training data from a HistoryAgent checkpoint
+##
+## WORKFLOW:
+## 1. Run this config to generate intermediate dataset (JSONL with raw logprobs)
+##    python -m src.memory.distillation.data_generation --config configs/distillation/example_gen.yaml
+##
+## 2. Convert to cartridges format (parquet with proper structure)
+##    python src/memory/distillation/convert_to_cartridges.py \
+##      --input /matx/u/stalaei/logs/outputs/distillation/data/example_run/dataset.jsonl \
+##      --output /matx/u/stalaei/logs/outputs/distillation/data/example_run/dataset.parquet \
+##      --model meta-llama/Llama-3.1-8B-Instruct
+
+# Path to the HistoryAgent checkpoint directory containing memory snapshots
+# Example: outputs/finer/history_agent/run_20241014_123456/ep_000200
+checkpoint_dir: "/matx/u/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251012_235616/checkpoints/ep_000200"
+
+# Output directory for generated dataset
+output_dir: "/matx/u/stalaei/logs/outputs/distillation/data/example_run"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Memory formation strategy
+strategy:
+  # Strategy options: "exclude_current", "full_memory", "rolling_window", "failure_focus"
+  name: "exclude_current"
+  # Optional parameters for specific strategies:
+  # window_k: 50  # For rolling_window strategy
+  # exclude_current: true
+  # failure_focus: false
+
+# Agent configuration for prompt rendering
+agent_type: "history_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_simple_thinking.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8080"
+lm_temperature: 0.0
+lm_max_output_tokens: 512
+
+# Optional: capture top-k logprobs for distillation training
+# Set to an integer (e.g., 10) to capture logits, or null to skip
+top_logprobs: 20
+
+# Sampling parameters
+max_samples: null  # null = process all samples, or set a limit (e.g., 100)
+
+# Parallelism: number of threads for processing samples (default: 1)
+# Set to higher values (e.g., 4, 8) for faster processing with multiple threads
+num_threads: 20
+
+# Optional: upload to Hugging Face Hub after generation
+hf_repo_id: "stalaei/distillation-dataset-test"
+hf_private: false
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "v1"
+  description: "Memory distillation training data from HistoryAgent"
+
