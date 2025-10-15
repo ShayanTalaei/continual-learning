@@ -56,12 +56,37 @@ toka model=meta-llama/Llama-3.2-3B-Instruct \
      dp_size=2
 ```
 
+**Advanced High-Performance Configuration:**
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 toka model=meta-llama/Llama-3.1-8B-Instruct \
+     tp_size=4 \
+     port=8080 \
+     torch_compile=f \
+     kv_cache_num_tokens='(220000)' \
+     max_tokens_per_forward='(128*1024)' \
+     max_seqs_per_forward=128 \
+     use_hydragen=True \
+     hydragen_min_prefix_len=512 \
+     hydragen_min_group_size=32 \
+     cudagraph_max_size=16 \
+     stats_report_seconds=1 \
+     max_topk_logprobs=50
+```
+
 **Parameters:**
 - `dp_size`: Data parallel size (number of GPUs for data parallelism)
 - `pp_size`: Pipeline parallel size (number of pipeline stages)
+- `tp_size`: Tensor parallel size (number of GPUs for tensor parallelism)
 - `max_seqs_per_forward`: Maximum sequences processed per forward pass
+- `max_tokens_per_forward`: Maximum tokens processed per forward pass
 - `kv_cache_num_tokens`: KV cache size (affects memory usage)
 - `max_topk_logprobs`: Maximum top-k log probabilities for sampling
+- `torch_compile`: Enable/disable PyTorch compilation optimization
+- `use_hydragen`: Enable Hydragen for efficient prefix sharing
+- `hydragen_min_prefix_len`: Minimum prefix length for Hydragen grouping
+- `hydragen_min_group_size`: Minimum group size for Hydragen
+- `cudagraph_max_size`: Maximum size for CUDA graph optimization
+- `stats_report_seconds`: Interval for performance statistics reporting
 
 ## Configuration
 

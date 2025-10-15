@@ -1,7 +1,7 @@
 from typing import Optional, Literal, Dict, Any
 from pydantic import BaseModel
 
-from src.run_time import RunTimeConfig
+from run_time import RunTimeConfig
 
 
 class OutputConfig(BaseModel):

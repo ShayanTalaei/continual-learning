@@ -109,7 +109,7 @@ class RunTime:
             if self._cp_manager:
                 self._cp_manager.on_episode_end(self.agent, episode_index=self.num_seen_episodes, train_steps_total=train_steps_total)
 
-            if self.num_seen_episodes % self.config.validation_freq == 0:
+            if self.config.validation_freq is not None and self.num_seen_episodes % self.config.validation_freq == 0:
                 with jsonlogger.json_log_context(mode="val"):
                     mean_val = self._run_validation()
                 if self._cp_manager and mean_val is not None:
@@ -179,7 +179,7 @@ class RunTime:
                     action=action,
                     feedback=feedback,
                     info=info,
-                    lm_model=getattr(getattr(running_agent, "lm", None), "config", None).model if getattr(getattr(running_agent, "lm", None), "config", None) is not None else None,
+                    lm_model=running_agent.lm.config.model if running_agent.lm.config is not None else None,
                     agent_type=running_agent.__class__.__name__,
                     step_start=step_start,
                     step_end=step_end,

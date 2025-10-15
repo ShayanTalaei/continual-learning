@@ -27,7 +27,6 @@ agent:
     log_calls: true
     # Tokasaurus-specific fields (present on TokasaurusConfig)
     base_url: "http://localhost:8080"
-    protocol: "openai"   # or "toka" if your server exposes /generate
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 0
 

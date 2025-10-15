@@ -44,12 +44,11 @@ agent:
   lm_config:
     # Use provider-prefixed model to dispatch to Tokasaurus
     model: "toka:meta-llama/Llama-3.1-8B-Instruct"
-    temperature: 0.7
+    temperature: 0.0
     max_output_tokens: 2048
     log_calls: true
     # Tokasaurus-specific fields (present on TokasaurusConfig)
     base_url: "http://localhost:8080"
-    protocol: "openai"   # or "toka" if your server exposes /generate
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 5
   memory_config:
