@@ -5,7 +5,7 @@ from typing import Optional, Dict, Any, List
 import requests
 from logging import Logger
 
-from .language_model import LMConfig, LanguageModel
+from src.lm.language_model import LMConfig, LanguageModel
 from src.utils import logger as jsonlogger
 
 
@@ -15,7 +15,6 @@ class GenerationTruncatedError(RuntimeError):
 
 class TokasaurusConfig(LMConfig):
     base_url: str = "http://localhost:8080"
-    protocol: str = "openai"  # one of {"openai", "toka"}
     api_key: Optional[str] = None
     stop_sequences: Optional[List[str]] = ["FEEDBACK", "OBSERVATION"]
     timeout_s: float = 900.0
@@ -25,9 +24,9 @@ class TokasaurusConfig(LMConfig):
 class TokasaurusClient(LanguageModel):
     """Synchronous client for a local Tokasaurus server.
 
-    Supports two protocols:
-    - protocol == "openai": expects an OpenAI-compatible API at {base_url}/v1/chat/completions
-    - protocol == "toka": best-effort fallback to a minimal native JSON API at {base_url}/generate
+    Expects an OpenAI-compatible API:
+    - Chat completions at {base_url}/v1/chat/completions
+    - Cartridge chat completions at {base_url}/v1/cartridge/chat/completions
     """
 
     def __init__(self, config: TokasaurusConfig, logger: Optional[Logger] = None):
@@ -54,7 +53,13 @@ class TokasaurusClient(LanguageModel):
         except Exception:
             return False
 
-    def call(self, system_prompt: str, user_prompt: str) -> str:
+    def call(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        cartridges: Optional[List[Dict[str, Any]]] = None,
+        top_logprobs: Optional[int] = None,
+    ) -> Dict[str, Any]:
         call_id = self._begin_call(system_prompt, user_prompt)
         start_time = time.time()
         last_err: Optional[Exception] = None
@@ -65,25 +70,32 @@ class TokasaurusClient(LanguageModel):
             if not ping_ok:
                 self.logger.debug(
                     f"Health check failed for Tokasaurus server at {self.cfg.base_url} "
-                    f"(protocol={self.cfg.protocol}, model={self.cfg.model}). "
+                    f"(model={self.cfg.model}). "
                     "Proceeding anyway to allow cold start."
                 )
 
         for attempt in range(1, self.config.max_retries + 2):
             try:
-                if self.cfg.protocol == "openai":
-                    text, metrics = self._call_openai(system_prompt, user_prompt, start_time)
-                else:
-                    text, metrics = self._call_toka(system_prompt, user_prompt, start_time)
+                text, metrics, logprobs = self._chat_request(
+                    system_prompt,
+                    user_prompt,
+                    start_time,
+                    cartridges=cartridges,
+                    top_logprobs=top_logprobs,
+                )
                 self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                return text
+                response: Dict[str, Any] = {"text": text}
+                if metrics:
+                    response["metrics"] = metrics
+                if logprobs:
+                    response["logprobs"] = logprobs
+                return response
             except Exception as e:
                 last_err = e
                 error_type = type(e).__name__
                 
                 # Build detailed error context
                 error_context = {
-                    "protocol": self.cfg.protocol,
                     "base_url": self.cfg.base_url,
                     "model": self.cfg.model,
                     "error_type": error_type,
@@ -103,8 +115,7 @@ class TokasaurusClient(LanguageModel):
                 if attempt > self.config.max_retries:
                     self.logger.error(
                         f"Tokasaurus call FAILED after {attempt} attempts. "
-                        f"Protocol: {self.cfg.protocol}, URL: {self.cfg.base_url}, "
-                        f"Model: {self.cfg.model}, Error: {error_type}: {e}",
+                        f"URL: {self.cfg.base_url}, Model: {self.cfg.model}, Error: {error_type}: {e}",
                         extra=error_context
                     )
                     break
@@ -115,18 +126,38 @@ class TokasaurusClient(LanguageModel):
                 )
                 self.logger.warning(
                     f"Tokasaurus call failed at attempt {attempt}/{self.config.max_retries + 1}. "
-                    f"Protocol: {self.cfg.protocol}, URL: {self.cfg.base_url}, "
-                    f"Error: {error_type}: {e}. "
+                    f"URL: {self.cfg.base_url}, Error: {error_type}: {e}. "
                     f"Retrying in {delay:.2f}s...",
                     extra=error_context
                 )
                 time.sleep(delay)
 
         self._end_call(call_id, "", extra={"error": str(last_err) if last_err else "unknown"})
-        return ""
+        return {"text": ""}
 
-    def _call_openai(self, system_prompt: str, user_prompt: str, start_time: float) -> tuple[str, Optional[Dict[str, Any]]]:
-        url = f"{self.cfg.base_url}/v1/chat/completions"
+    def _chat_request(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        start_time: float,
+        *,
+        cartridges: Optional[List[Dict[str, Any]]] = None,
+        top_logprobs: Optional[int] = None,
+    ) -> tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+        """
+        Execute chat request and return (text, metrics, logprobs).
+        
+        Returns:
+            text: Generated text
+            metrics: Performance metrics (duration, token counts)
+            logprobs: Logprobs data (only when top_logprobs is requested)
+        """
+        # Select endpoint based on whether cartridges are provided
+        if cartridges is None:
+            url = f"{self.cfg.base_url}/v1/chat/completions"
+        else:
+            url = f"{self.cfg.base_url}/v1/cartridge/chat/completions"
+
         payload: Dict[str, Any] = {
             "model": self.cfg.model,
             "messages": [
@@ -136,8 +167,13 @@ class TokasaurusClient(LanguageModel):
             "temperature": self.cfg.temperature,
             "max_tokens": self.cfg.max_output_tokens,
         }
+        if cartridges is not None:
+            payload["cartridges"] = cartridges
         if self.cfg.stop_sequences:
             payload["stop"] = self.cfg.stop_sequences
+        if top_logprobs is not None:
+            payload["logprobs"] = True
+            payload["top_logprobs"] = int(top_logprobs)
 
         r = self._http.post(url, json=payload, headers=self._headers(), timeout=self.cfg.timeout_s)
         r.raise_for_status()
@@ -146,25 +182,32 @@ class TokasaurusClient(LanguageModel):
         # Extract content
         choices = data.get("choices") or []
         if not choices:
-            raise ValueError("No choices in OpenAI-compatible response")
+            raise ValueError("No choices in response")
         first = choices[0]
         message = first.get("message") or {}
         text: Optional[str] = message.get("content")
         if text is None:
-            # Some servers return delta or 'text'
+            # Some servers return 'text'
             text = first.get("text")
         if text is None:
             raise ValueError("No text content in response")
 
         duration = time.time() - start_time
         usage = data.get("usage") or {}
-        metrics = {
+        metrics: Dict[str, Any] = {
             "duration": duration,
             "input_tokens": usage.get("prompt_tokens"),
             "thinking_tokens": None,
             "output_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
         }
+        
+        # Extract logprobs if requested
+        logprobs: Optional[Dict[str, Any]] = None
+        if top_logprobs is not None:
+            logprobs_data = first.get("logprobs")
+            if logprobs_data is not None:
+                logprobs = logprobs_data
 
         # Detect truncation: finish_reason == "length" or output tokens == configured max
         finish_reason = first.get("finish_reason")
@@ -175,48 +218,6 @@ class TokasaurusClient(LanguageModel):
             raise GenerationTruncatedError(
                 f"Generation likely truncated at max_output_tokens={self.cfg.max_output_tokens} -> Text: {text}"
             )
-        return text, metrics
-
-    def _call_toka(self, system_prompt: str, user_prompt: str, start_time: float) -> tuple[str, Optional[Dict[str, Any]]]:
-        # Minimal JSON API; if your server differs, adjust as needed.
-        url = f"{self.cfg.base_url}/generate"
-        payload: Dict[str, Any] = {
-            "model": self.cfg.model,
-            "system": system_prompt,
-            "prompt": user_prompt,
-            "temperature": self.cfg.temperature,
-            "max_tokens": self.cfg.max_output_tokens,
-        }
-        if self.cfg.stop_sequences:
-            payload["stop"] = self.cfg.stop_sequences
-
-        r = self._http.post(url, json=payload, headers=self._headers(), timeout=self.cfg.timeout_s)
-        r.raise_for_status()
-        data = r.json()
-
-        text: Optional[str] = data.get("text") or data.get("output")
-        if text is None:
-            raise ValueError("No text field in toka response")
-
-        duration = time.time() - start_time
-        usage = data.get("usage") or {}
-        metrics = {
-            "duration": duration,
-            "input_tokens": usage.get("prompt_tokens"),
-            "thinking_tokens": None,
-            "output_tokens": usage.get("completion_tokens"),
-            "total_tokens": usage.get("total_tokens"),
-        }
-
-        # Detect truncation for toka API as well
-        finish_reason = data.get("finish_reason") or data.get("reason")
-        output_tokens = metrics.get("output_tokens")
-        if finish_reason == "length" or (
-            isinstance(output_tokens, int) and output_tokens >= self.cfg.max_output_tokens
-        ):
-            raise GenerationTruncatedError(
-                f"Generation likely truncated at max_output_tokens={self.cfg.max_output_tokens} -> Text: {text}"
-            )
-        return text, metrics
+        return text, metrics, logprobs
 
 

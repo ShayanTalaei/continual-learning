@@ -28,7 +28,7 @@ class GeminiClient(LanguageModel):
         self,
         system_prompt: str,
         user_prompt: str
-    ) -> str:
+    ) -> Dict[str, Any]:
         call_id = self._begin_call(system_prompt, user_prompt)
         ctx = jsonlogger.json_get_context()
         response_schema = ctx.get("response_schema")
@@ -63,7 +63,9 @@ class GeminiClient(LanguageModel):
                 if text is None:
                     raise ValueError("Response text is None")
                 self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                return text
+                result: Dict[str, Any] = {"text": text}
+
+                return result
             except Exception as e:
                 last_err = e
                 if attempt > self.config.max_retries:
@@ -75,7 +77,7 @@ class GeminiClient(LanguageModel):
                 time.sleep(delay)
         # On failure, record error
         self._end_call(call_id, "", extra={"error": str(last_err)})
-        return ""
+        return {"text": ""}
 
     def _extract_metrics(self, response: Any, duration: float) -> Optional[Dict[str, Any]]:
         try:

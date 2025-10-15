@@ -33,7 +33,7 @@ class LanguageModel:
         self._call_paths: Dict[str, Path] = {}
         self.logger = logger or getLogger("language_model")
         
-    def call(self, system_prompt: str, user_prompt: str) -> str:
+    def call(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
         raise NotImplementedError
 
     def _begin_call(self, system_prompt: str, user_prompt: str) -> Optional[str]:

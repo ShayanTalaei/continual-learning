@@ -2,11 +2,8 @@ from typing import Optional
 from logging import Logger
 from src.lm.language_model import LMConfig, LanguageModel
 from src.lm.gemini_client import GeminiClient, GeminiConfig
-try:
-    from src.lm.tokasaurus_client import TokasaurusClient, TokasaurusConfig
-except Exception:
-    TokasaurusClient = None  # type: ignore
-    TokasaurusConfig = None  # type: ignore
+from src.lm.tokasaurus_client import TokasaurusClient, TokasaurusConfig
+
 
 
 def get_lm_client(lm_config: LMConfig, logger: Optional[Logger] = None) -> LanguageModel:
