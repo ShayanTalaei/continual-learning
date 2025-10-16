@@ -449,7 +449,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         block_mask = create_block_mask(
             mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
             device=inputs_embeds.device,
-            # _compile=True
+            _compile=True
         )
         # --- end build block mask ---
 
@@ -469,7 +469,8 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             mode=mode,
         )
 
-        for decoder_layer in self.layers[: self.config.num_hidden_layers]:
+        for i, decoder_layer in enumerate(self.layers[: self.config.num_hidden_layers]):
+            print(f"At layer {i}")
             batch = decoder_layer(batch)
 
         hidden_states = self.norm(batch.hidden_states)
