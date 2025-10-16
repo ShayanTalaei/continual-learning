@@ -1,12 +1,12 @@
-from typing import List, Any
+from typing import List, Any, Union, Dict
 
 from src.agent.memory_agent import MemoryAgent, MemoryAgentConfig
 from src.memory.history_list import HistoryListConfig, Entry
 
 
 class HistoryAgentConfig(MemoryAgentConfig):
-    memory_config: HistoryListConfig
-    history_k: int | None = None
+    memory_config: HistoryListConfig  # type: ignore[assignment]
+    history_k: Union[int, None] = None
 
 
 class HistoryAgent(MemoryAgent):
@@ -19,18 +19,27 @@ class HistoryAgent(MemoryAgent):
         
         return self.system_prompt + "\n\n" + history_list_instructions
 
-    def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
-        lines: List[str] = []
-        lines.append("Here is a list of your previous experiences:")
+    def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
+        messages: List[dict] = []
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
+        
+        messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
+        # Add previous experiences as alternating user/assistant messages
         for entry in recent:
-            entry_type = entry.type.upper()
-            lines.append(f"{entry_type}: {entry.content}")
+            if entry.type == "Observation":
+                messages.append({"role": "user", "content": str(entry.content)})
+            elif entry.type == "Action":
+                messages.append({"role": "assistant", "content": str(entry.content)})
+            elif entry.type == "Feedback":
+                # Add feedback as a user message
+                messages.append({"role": "user", "content": f"Feedback: {entry.content}"})
         if len(recent) == 0:
-            lines.append("No previous experiences.")
-        lines.append("Here is the current observation:")
-        lines.append(f"{obs}")
-        return "\n\n".join(lines)
+            messages.append({"role": "user", "content": "No previous experiences."})
+        
+        # Add current observation as the final user message
+        messages.append({"role": "user", "content": f"Here is the current observation: {obs}"})
+        
+        return messages
 
     def create_observation_event(self, obs: str) -> Any:
         return Entry(type="Observation", content=obs)
