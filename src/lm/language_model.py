@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from pathlib import Path
 from threading import Lock
 from datetime import datetime
@@ -33,10 +33,20 @@ class LanguageModel:
         self._call_paths: Dict[str, Path] = {}
         self.logger = logger or getLogger("language_model")
         
-    def call(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
+    def call(self, messages: List[Dict[str, str]]) -> Dict[str, Any]:
+        """
+        Call the language model with a list of messages.
+        
+        Args:
+            messages: List of message dictionaries with 'role' and 'content' keys.
+                     Common roles: 'system', 'user', 'assistant'
+        
+        Returns:
+            Dictionary containing 'text' and optionally 'metrics' and 'logprobs'
+        """
         raise NotImplementedError
 
-    def _begin_call(self, system_prompt: str, user_prompt: str) -> Optional[str]:
+    def _begin_call(self, messages: List[Dict[str, str]]) -> Optional[str]:
         if not self.config.log_calls:
             return None
         ctx: Dict[str, Any] = jsonlogger.json_get_context()
@@ -72,8 +82,7 @@ class LanguageModel:
         payload = {
             "timestamp": datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ"),
             "model": getattr(self.config, "model", None),
-            "system_prompt": system_prompt,
-            "user_prompt": user_prompt,
+            "messages": messages,
             "context": ctx,
         }
         call_id = jsonlogger.json_next_id()
