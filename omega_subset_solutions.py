@@ -56,7 +56,11 @@ def run_gemini_calls(
     
     for _ in range(repeats):
         with jsonlogger.json_log_context(response_schema=schema):
-            txt = lm.call(system_prompt, user_prompt)
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+            txt = lm.call(messages)
         outputs.append(txt)
     return outputs
 

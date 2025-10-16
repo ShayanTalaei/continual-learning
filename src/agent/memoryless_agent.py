@@ -24,7 +24,11 @@ class MemorylessAgent(Agent[MemorylessAgentConfig]):
         user_prompt = self.build_user_prompt(obs)
         # Add action context for logging organization
         with jsonlogger.json_log_context(call_type="action"):
-            resp = self.lm.call(system_prompt, user_prompt)
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+            resp = self.lm.call(messages)
         action = (resp.get("text") or "").strip()
         self._trajectory = [obs, action]
         return action

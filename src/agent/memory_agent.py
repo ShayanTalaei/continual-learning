@@ -71,7 +71,11 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("Logged Observation")
         
         with jsonlogger.json_log_context(call_type="action"):
-            resp = self.lm.call(system_prompt, user_prompt)
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+            resp = self.lm.call(messages)
         action = (resp.get("text") or "").strip()
         if not action:
             self.logger.warning("No action returned from LM")
