@@ -116,7 +116,6 @@ def convert_row_to_conversation(
         Conversation object ready for cartridges training
     """
     messages = []
-    breakpoint()
     
     for msg in row["messages"]:
         # Tokenize the message content to get token_ids
@@ -140,7 +139,6 @@ def convert_row_to_conversation(
                     )
                 if top_logprobs is not None:
                     flat_logprobs = top_logprobs.flatten(threshold=min_prob_mass)
-                breakpoint()
             else:
                 raise ValueError(f"[Converter] No logprobs for entry {msg}")
     
