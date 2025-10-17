@@ -398,8 +398,6 @@ def train(config: TrainConfig):
                     if config.log_time:
                         torch.cuda.synchronize()
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
-                    
-                    breakpoint()
 
                     # TODO: fix this code -> we need to have many logprobs per token not one
                     topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[

@@ -213,15 +213,15 @@ def convert_dataset(
     print(f"[Converter] Converting to cartridges format...")
     conversations = []
     for i, row in enumerate(rows):
-        # try:
-        convo = convert_row_to_conversation(row, tokenizer, min_prob_mass)
-        conversations.append(convo)
-        
-        if (i + 1) % 100 == 0:
-            print(f"[Converter] Converted {i + 1}/{len(rows)} conversations...")
-        # except Exception as e:
-        #     print(f"[Converter] WARNING: Failed to convert row {i}: {e}")
-        #     continue
+        try:
+            convo = convert_row_to_conversation(row, tokenizer, min_prob_mass)
+            conversations.append(convo)
+            
+            if (i + 1) % 100 == 0:
+                print(f"[Converter] Converted {i + 1}/{len(rows)} conversations...")
+        except Exception as e:
+            print(f"[Converter] WARNING: Failed to convert row {i}: {e}")
+            continue
     
     print(f"[Converter] Successfully converted {len(conversations)} conversations")
     
