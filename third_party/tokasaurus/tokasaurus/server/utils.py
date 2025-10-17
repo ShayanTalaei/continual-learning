@@ -647,6 +647,7 @@ def make_completions_fingerprint(
     output: RequestOutput,
     add_logprobs: bool,
     topk: int | None,
+    request: TokasaurusRequest | None = None,
 ):
     """
     Sneaky way to send extra data back to the client while adhering to the API spec.
@@ -654,6 +655,10 @@ def make_completions_fingerprint(
     obj = {
         "completion_ids": [o.completion_ids for o in output.sequence_outputs],
     }
+    
+    # Include input_ids if request is provided
+    if request is not None:
+        obj["input_ids"] = request.input_ids
 
     # the default openai logprobs format involves many nested small objects which
     # can take a lot of time to serialize/deserialize and inflate the response size.
@@ -736,6 +741,7 @@ def process_chat_completions_output(
             output,
             add_logprobs=crequest.logprobs_in_fingerprint,
             topk=crequest.top_logprobs,
+            request=request,
         ),
     )
 
@@ -780,6 +786,7 @@ def process_completions_output(
             output,
             add_logprobs=crequest.logprobs_in_fingerprint,
             topk=crequest.logprobs,
+            request=request,
         ),
     )
 

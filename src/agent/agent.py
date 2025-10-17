@@ -1,4 +1,4 @@
-from typing import Optional, Generic, TypeVar
+from typing import Optional, Generic, TypeVar, Dict, Any, Union
 from logging import Logger, getLogger
 from pydantic import BaseModel
 from contextlib import contextmanager
@@ -12,8 +12,8 @@ import json
 
 
 class AgentConfig(BaseModel):
-    lm_config: LMConfig | None = None
-    system_prompt: str | None = None
+    lm_config: Optional[Dict[str, Any]] = None
+    system_prompt: Optional[str] = None
     verbose: bool = True
 
 
@@ -24,6 +24,8 @@ class Agent(Generic[C]):
     def __init__(self, config: C, logger: Optional[Logger] = None):
         self.config = config
         self.logger = logger or getLogger("agent")
+        if config.lm_config is None:
+            raise ValueError("lm_config is required but was None")
         self.lm: LanguageModel = get_lm_client(config.lm_config, logger=child(self.logger, "lm"))
         self.training: bool = True
         self._set_system_prompt()

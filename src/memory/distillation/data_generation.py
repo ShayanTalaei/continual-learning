@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Tuple, Optional, Literal
+from typing import List, Dict, Any, Tuple, Optional, Literal, cast
 from pathlib import Path
 import json
 import yaml
@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 
 from src.memory.distillation.strategies.exclude_current import ExcludeCurrentStrategy
+from src.memory.distillation.strategies.full_memory import FullMemoryStrategy
 from src.memory.distillation.strategies.base import MemoryFormationStrategy
 from src.agent.history_agent import HistoryAgent, HistoryAgentConfig
 from src.memory.history_list import HistoryList, HistoryListConfig
@@ -24,6 +25,13 @@ class StrategyConfig(BaseModel):
     window_k: Optional[int] = None
     exclude_current: bool = False
     failure_focus: bool = False
+    # Shuffling parameters for exclude_current strategy
+    do_shuffle: bool = False
+    num_shufflings: int = 1
+    # Parameters for full_memory strategy
+    memory_checkpoint_path: Optional[str] = None
+    target_dataset_config: Optional[Dict[str, Any]] = None
+    max_target_samples: Optional[int] = None
 
 
 class DataGenConfig(BaseModel):
@@ -44,9 +52,26 @@ class DataGenConfig(BaseModel):
     lm_temperature: float = 0.0
     lm_max_output_tokens: int = 512
     top_logprobs: Optional[int] = None
+    
+    # Retry configuration
+    lm_max_retries: int = 5
+    lm_starting_delay: float = 1.0
+    lm_backoff_factor: float = 2.0
+    lm_max_delay: float = 10.0
+    lm_timeout_s: float = 900.0
+    
+    # Full sequence tensor data for distillation training
+    include_full_sequence_data: bool = False
+
+    # Teacher messages text storage
+    include_teacher_messages_texts: bool = True
+
+    # Individual file saving for resume functionality
+    save_individual_files: bool = True
 
     # Sampling
     max_samples: Optional[int] = None
+    num_repeat_samples: int = 1
 
     # Parallelism
     num_threads: int = 1
@@ -66,13 +91,28 @@ class DataGenConfig(BaseModel):
 
 def _make_strategy(cfg: DataGenConfig) -> MemoryFormationStrategy:
     if cfg.strategy.name == "exclude_current":
-        return ExcludeCurrentStrategy()
+        return ExcludeCurrentStrategy(
+            do_shuffle=cfg.strategy.do_shuffle,
+            num_shufflings=cfg.strategy.num_shufflings
+        )
+    elif cfg.strategy.name == "full_memory":
+        if not cfg.strategy.memory_checkpoint_path:
+            raise ValueError("memory_checkpoint_path is required for full_memory strategy")
+        if not cfg.strategy.target_dataset_config:
+            raise ValueError("target_dataset_config is required for full_memory strategy")
+        
+        return FullMemoryStrategy(
+            memory_checkpoint_path=cfg.strategy.memory_checkpoint_path,
+            target_dataset_config=cfg.strategy.target_dataset_config,
+            max_target_samples=cfg.strategy.max_target_samples,
+            logger=None  # Will be set by the calling context
+        )
     raise ValueError(f"Unsupported strategy: {cfg.strategy.name}")
 
 
-def _make_teacher_agent(system_prompt_override: str | None) -> HistoryAgent:
+def _make_teacher_agent(system_prompt_override: Optional[str]) -> HistoryAgent:
     agent_cfg = HistoryAgentConfig(
-        memory_config=HistoryListConfig().model_dump(),
+        memory_config=HistoryListConfig(),
         history_k=None,
         system_prompt=system_prompt_override,
         # Dummy LM to avoid external calls; we won't use agent.lm
@@ -91,64 +131,46 @@ def _load_history(snapshot_path: Path) -> HistoryList:
     return HistoryList.load_snapshot(snapshot_path)
 
 
+def _get_existing_sample_ids(output_dir: Path) -> "set[str]":
+    """Get set of sample IDs that already exist as individual JSON files."""
+    existing_ids = set()
+    if output_dir.exists():
+        for json_file in output_dir.glob("*.json"):
+            if json_file.stem != "data_gen_config":  # Skip config file
+                existing_ids.add(json_file.stem)
+    return existing_ids
+
+
 def _to_conversation_row(
     system_prompt: str, 
-    user_prompt: str, 
+    chats: List[Dict[str, str]], 
     lm_response: Dict[str, Any], 
-    meta: Dict[str, Any]
+    meta: Dict[str, Any],
+    include_teacher_messages_texts: bool = True
 ) -> Dict[str, Any]:
-    """Create a conversation row compatible with cartridges format.
-    
-    This format includes:
-    - messages: list of message dicts with role, content, token_ids, logprobs
-    - system_prompt: separate field (also included in messages[0] for completeness)
-    - metadata: task-specific metadata
-    - type: dataset type label for organization
-    
-    The logprobs are in OpenAI format and will be converted to FlatTopLogprobs
-    by convert_to_cartridges.py for efficient knowledge distillation training.
-    
-    Args:
-        system_prompt: System prompt text
-        user_prompt: User prompt text
-        lm_response: Full LM response dict with 'text', 'metrics', 'logprobs'
-        meta: Additional metadata
-        
-    Returns:
-        Dict with messages, system_prompt, metadata, type, and raw logprobs
-    """
-    assistant_text = lm_response.get("text", "")
-    
-    messages: List[Dict[str, Any]] = [
-        {
-            "role": "system", 
-            "content": system_prompt,
-            # System and user messages don't need logprobs or token_ids
-            "token_ids": None,
-            "logprobs": None,
-        },
-        {
-            "role": "user", 
-            "content": user_prompt,
-            "token_ids": None,
-            "logprobs": None,
-        },
-        {
-            "role": "assistant", 
-            "content": assistant_text,
-            # Assistant message gets logprobs if available
-            "token_ids": None,  # Will be filled by converter
-            "logprobs": lm_response.get("logprobs"),  # OpenAI-style logprobs for distillation
-        },
-    ]
 
-    
-    return {
-        "messages": messages,
-        "system_prompt": system_prompt,  # Separate field for cartridges compatibility
+    # Base row data
+    row_data = {
         "metadata": meta,
         "type": "memory_distillation",  # Dataset type label
     }
+    
+    if include_teacher_messages_texts:
+        row_data["teacher_messages"] = [
+            {"role": "system", "content": system_prompt},
+        ] + chats
+    
+    row_data["input_messages"] = [
+        {"role": "system", "content": system_prompt},
+        chats[-1] # The last message in the chat which is the target task
+    ]
+    
+    row_data["output_message"] = lm_response['text']
+    row_data["output_ids"] = lm_response['output_ids']
+    row_data["topk_logprobs"] = lm_response['topk_logprobs']
+    row_data["topk_token_ids"] = lm_response['topk_token_ids']
+    
+    return row_data
 
 
 def _process_single_sample(
@@ -158,25 +180,14 @@ def _process_single_sample(
     teacher_agent: HistoryAgent,
     client: TokasaurusClient,
     top_logprobs: Optional[int],
+    include_teacher_messages_texts: bool = True,
+    output_dir: Optional[Path] = None,
+    save_individual_files: bool = True,
 ) -> Dict[str, Any]:
-    """Process a single sample to generate a training row.
-    
-    This function is designed to be thread-safe and can be called in parallel.
-    
-    Args:
-        sample: Sample from strategy.iter_samples()
-        history_entries: Full history entries list
-        strategy: Memory formation strategy
-        teacher_agent: Teacher agent for prompt building
-        client: LM client for inference
-        top_logprobs: Number of top logprobs to return
-        
-    Returns:
-        Conversation row dict
-    """
+
     memory_view = strategy.build_memory_for_sample(history_entries, sample)
     system_prompt = teacher_agent.build_system_prompt()
-    user_prompt = teacher_agent.build_user_prompt(
+    chats = teacher_agent.build_user_prompt(
         sample.observation, 
         memory_view, 
         teacher_agent.config.history_k
@@ -184,20 +195,35 @@ def _process_single_sample(
 
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ]
-    lm_response = client.call(
+    ] + chats
+    
+    lm_response = client.call_with_full_sequence_data(
         messages,
         cartridges=None,
-        top_logprobs=top_logprobs,
+        top_logprobs=top_logprobs,  # Number of top logprobs to return
     )
     
     row = _to_conversation_row(
         system_prompt, 
-        user_prompt, 
+        chats, 
         lm_response, 
-        sample.meta or {}
+        sample.meta or {},
+        include_teacher_messages_texts
     )
+    
+    # Add sample ID to the row
+    if sample.sample_id:
+        row["sample_id"] = sample.sample_id
+    
+    # Save individual JSON file if output_dir is provided and enabled
+    if output_dir and sample.sample_id and save_individual_files:
+        individual_file = output_dir / f"{sample.sample_id}.json"
+        try:
+            with open(individual_file, "w") as f:
+                json.dump(row, f, indent=2)
+        except Exception as e:
+            print(f"[DataGen] WARNING: Failed to save individual file {individual_file}: {e}")
+    
     return row
 
 
@@ -222,13 +248,20 @@ def run_data_generation(cfg: DataGenConfig) -> str:
         json.dump(cfg.model_dump(), f, indent=2)
     print(f"[DataGen] Config saved to: {config_path}")
 
-    snapshot = _find_latest_snapshot(cfg.checkpoint_dir)
-    print(f"[DataGen] Loading history from: {snapshot}")
-    history = _load_history(snapshot)
-    print(f"[DataGen] Loaded {len(history.recall())} history entries")
-
     strategy = _make_strategy(cfg)
     print(f"[DataGen] Using strategy: {cfg.strategy.name}")
+    
+    # For full_memory strategy, the memory is loaded within the strategy itself
+    if cfg.strategy.name == "full_memory":
+        history_entries = []  # Not used for full_memory strategy
+        print(f"[DataGen] Full memory strategy - memory loaded within strategy")
+    else:
+        # For other strategies, load from checkpoint_dir
+        snapshot = _find_latest_snapshot(cfg.checkpoint_dir)
+        print(f"[DataGen] Loading history from: {snapshot}")
+        history = _load_history(snapshot)
+        history_entries = history.recall()
+        print(f"[DataGen] Loaded {len(history_entries)} history entries")
     
     teacher_agent = _make_teacher_agent(cfg.system_prompt_override)
     print(f"[DataGen] Teacher agent initialized")
@@ -238,28 +271,64 @@ def run_data_generation(cfg: DataGenConfig) -> str:
         base_url=cfg.lm_base_url,
         temperature=cfg.lm_temperature,
         max_output_tokens=cfg.lm_max_output_tokens,
+        max_retries=cfg.lm_max_retries,
+        starting_delay=cfg.lm_starting_delay,
+        backoff_factor=cfg.lm_backoff_factor,
+        max_delay=cfg.lm_max_delay,
+        timeout_s=cfg.lm_timeout_s,
     )
     client = TokasaurusClient(lm_cfg)
     print(f"[DataGen] LM client initialized: {cfg.lm_model} @ {cfg.lm_base_url}")
 
-    history_entries = history.recall()
+    # Check for existing samples to enable resume functionality
+    existing_sample_ids = set()
+    if cfg.save_individual_files:
+        existing_sample_ids = _get_existing_sample_ids(out_dir)
+        if existing_sample_ids:
+            print(f"[DataGen] Found {len(existing_sample_ids)} existing samples, will skip them")
     
     # Determine total samples for progress bar
-    total_samples = cfg.max_samples if cfg.max_samples is not None else len(history_entries)
+    if cfg.strategy.name == "full_memory":
+        # For full_memory strategy, samples are based on target dataset size
+        full_memory_strategy = cast(FullMemoryStrategy, strategy)
+        total_samples = cfg.max_samples if cfg.max_samples is not None else len(full_memory_strategy.target_environments)
+    else:
+        total_samples = cfg.max_samples if cfg.max_samples is not None else len(history_entries)
     print(f"[DataGen] Starting sample generation (max_samples={cfg.max_samples}, num_threads={cfg.num_threads})...")
     
-    # Collect all samples first to enable parallel processing
+    # Collect all samples first to enable parallel processing, filtering out existing ones
     samples_to_process: List[Tuple[int, Any]] = []
     for count, sample in enumerate(strategy.iter_samples(history_entries)):
         if cfg.max_samples is not None and count >= cfg.max_samples:
             break
-        samples_to_process.append((count, sample))
+        
+        if cfg.num_repeat_samples == -1:
+            # No repetition - use original sample ID as-is
+            if sample.sample_id and sample.sample_id in existing_sample_ids:
+                print(f"[DataGen] Skipping existing sample: {sample.sample_id}")
+                continue
+            samples_to_process.append((count, sample))
+        else:
+            # Repeat each sample num_repeat_samples times
+            for repeat_idx in range(cfg.num_repeat_samples):
+                # Create a copy of the sample with updated ID
+                repeated_sample = sample.model_copy()
+                if repeated_sample.sample_id:
+                    repeated_sample.sample_id = f"{sample.sample_id}_repeat_{repeat_idx}"
+                
+                # Skip if sample already exists
+                if repeated_sample.sample_id and repeated_sample.sample_id in existing_sample_ids:
+                    print(f"[DataGen] Skipping existing sample: {repeated_sample.sample_id}")
+                    continue
+                    
+                samples_to_process.append((count * cfg.num_repeat_samples + repeat_idx, repeated_sample))
     
-    print(f"[DataGen] Collected {len(samples_to_process)} samples to process")
+    print(f"[DataGen] Collected {len(samples_to_process)} new samples to process")
     
     # Process samples in parallel while preserving order
     rows: Dict[int, Dict[str, Any]] = {}  # index -> row
     
+    # breakpoint()
     if cfg.num_threads == 1:
         # Single-threaded mode (original behavior)
         with tqdm(total=len(samples_to_process), desc="Generating samples", unit="sample") as pbar:
@@ -271,6 +340,9 @@ def run_data_generation(cfg: DataGenConfig) -> str:
                     teacher_agent,
                     client,
                     cfg.top_logprobs,
+                    cfg.include_teacher_messages_texts,
+                    out_dir,
+                    cfg.save_individual_files,
                 )
                 rows[idx] = row
                 pbar.update(1)
@@ -288,6 +360,9 @@ def run_data_generation(cfg: DataGenConfig) -> str:
                     teacher_agent,
                     client,
                     cfg.top_logprobs,
+                    cfg.include_teacher_messages_texts,
+                    out_dir,
+                    cfg.save_individual_files,
                 )
                 future_to_idx[future] = idx
             
@@ -300,12 +375,23 @@ def run_data_generation(cfg: DataGenConfig) -> str:
                         rows[idx] = row
                     except Exception as e:
                         print(f"\n[DataGen] ERROR processing sample {idx}: {e}")
-                        raise
+                        continue
                     pbar.update(1)
     
     # Convert to ordered list
     ordered_rows = [rows[i] for i in sorted(rows.keys())]
-    print(f"[DataGen] Finished generating {len(ordered_rows)} samples")
+    print(f"[DataGen] Finished generating {len(ordered_rows)} new samples")
+    
+    # Load existing samples to include in final dataset
+    if cfg.save_individual_files and existing_sample_ids:
+        print(f"[DataGen] Loading {len(existing_sample_ids)} existing samples...")
+        for sample_id in existing_sample_ids:
+            existing_file = out_dir / f"{sample_id}.json"
+            if existing_file.exists():
+                with open(existing_file, "r") as f:
+                    existing_row = json.load(f)
+                    ordered_rows.append(existing_row)
+        print(f"[DataGen] Total samples in final dataset: {len(ordered_rows)}")
 
     out_path = out_dir / f"dataset.{cfg.output_format}"
     

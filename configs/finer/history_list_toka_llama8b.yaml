@@ -55,7 +55,7 @@ agent:
     _type: history_list
     max_length: 2000
   history_k: null
-  system_prompt: "{file:src/data/prompts/finer/system_prompt_simple_thinking.txt}"
+  system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
 
 output:
   results_dir: outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct
