@@ -1,4 +1,4 @@
-from typing import Iterable, List, Dict, Any
+from typing import Iterable, List, Dict, Any, Optional, Tuple, Union
 from pydantic import BaseModel
 
 from src.memory.history_list import Entry
@@ -6,11 +6,12 @@ from src.memory.history_list import Entry
 
 class SampleSpec(BaseModel):
     observation: str
-    target_action: str | None = None
-    feedback: Dict[str, Any] | None = None
-    focus_key: tuple[int, int] | None = None  # (episode_id, step_id)
+    target_action: Optional[str] = None
+    feedback: Optional[Dict[str, Any]] = None
+    focus_key: Optional[Tuple[int, int]] = None  # (episode_id, step_id)
     memory_directives: Dict[str, Any] = {}
     meta: Dict[str, Any] = {}
+    sample_id: Optional[str] = None  # Unique identifier for this sample
 
 
 class MemoryFormationStrategy:

@@ -17,27 +17,27 @@ class HistoryAgent(MemoryAgent):
         history_list_instructions = ("You will be given the previous experiences you've had and their feedback. "
             "You should use this feedback to improve your performance in the subsequent actions.")
         
-        return self.system_prompt + "\n\n" + history_list_instructions
+        return self.system_prompt #+ "\n\n" + history_list_instructions
 
     def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
         messages: List[dict] = []
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
         
-        messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
+        # messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
         # Add previous experiences as alternating user/assistant messages
         for entry in recent:
-            if entry.type == "Observation":
+            if entry.type.lower() == "observation":
                 messages.append({"role": "user", "content": str(entry.content)})
-            elif entry.type == "Action":
+            elif entry.type.lower() == "action":
                 messages.append({"role": "assistant", "content": str(entry.content)})
-            elif entry.type == "Feedback":
+            elif entry.type.lower() == "feedback":
                 # Add feedback as a user message
-                messages.append({"role": "user", "content": f"Feedback: {entry.content}"})
-        if len(recent) == 0:
-            messages.append({"role": "user", "content": "No previous experiences."})
+                messages.append({"role": "user", "content": f"{entry.content}"}) #Feedback: 
+        # if len(recent) == 0:
+        #     messages.append({"role": "user", "content": "No previous experiences."})
         
         # Add current observation as the final user message
-        messages.append({"role": "user", "content": f"Here is the current observation: {obs}"})
+        messages.append({"role": "user", "content": f"{obs}"}) #Here is the current observation: 
         
         return messages
 

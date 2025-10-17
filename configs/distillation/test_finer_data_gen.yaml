@@ -1,0 +1,49 @@
+## Test Config for Full Sequence Data Generation
+## This config tests the new include_full_sequence_data feature
+
+# Path to the HistoryAgent checkpoint directory containing memory snapshots
+checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
+
+# Output directory for generated dataset
+output_dir: "/mnt/data/shayan_memory/test_finer_data_gen_without_teacher_messages"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Teacher messages text storage
+include_teacher_messages_texts: false
+
+# Memory formation strategy
+strategy:
+  name: "exclude_current"
+
+# Agent prompt rendering
+agent_type: "history_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8080"
+lm_temperature: 0.0
+lm_max_output_tokens: 2048
+
+# Optional: capture top-k logprobs for distillation training
+top_logprobs: 20
+
+# Enable full sequence tensor data for advanced distillation training
+include_full_sequence_data: true
+
+# Sampling parameters - limit to small number for testing
+max_samples: 200
+
+# Parallelism: use single thread for testing
+num_threads: 100
+
+# # Optional: upload to Hugging Face Hub after generation
+# hf_repo_id: "stalaei/distillation-dataset-full-sequence-test"
+# hf_private: false
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "test_v1"
+  description: "Test dataset with full sequence tensor data"
