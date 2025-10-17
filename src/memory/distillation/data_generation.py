@@ -32,6 +32,9 @@ class StrategyConfig(BaseModel):
     memory_checkpoint_path: Optional[str] = None
     target_dataset_config: Optional[Dict[str, Any]] = None
     max_target_samples: Optional[int] = None
+    # Optional slicing over target environments (applied before max_target_samples)
+    start_idx: Optional[int] = None
+    end_idx: Optional[int] = None
 
 
 class DataGenConfig(BaseModel):
@@ -105,6 +108,8 @@ def _make_strategy(cfg: DataGenConfig) -> MemoryFormationStrategy:
             memory_checkpoint_path=cfg.strategy.memory_checkpoint_path,
             target_dataset_config=cfg.strategy.target_dataset_config,
             max_target_samples=cfg.strategy.max_target_samples,
+            start_idx=cfg.strategy.start_idx,
+            end_idx=cfg.strategy.end_idx,
             logger=None  # Will be set by the calling context
         )
     raise ValueError(f"Unsupported strategy: {cfg.strategy.name}")

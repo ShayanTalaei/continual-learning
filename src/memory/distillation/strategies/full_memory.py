@@ -20,7 +20,10 @@ class FullMemoryStrategy(MemoryFormationStrategy):
                  memory_checkpoint_path: str,
                  target_dataset_config: Dict[str, Any],
                  max_target_samples: Optional[int] = None,
-                 logger=None):
+                 start_idx: Optional[int] = None,
+                 end_idx: Optional[int] = None,
+                 logger=None,
+                 **kwargs: Any):
         """Initialize the FullMemoryStrategy.
         
         Args:
@@ -32,6 +35,8 @@ class FullMemoryStrategy(MemoryFormationStrategy):
         self.memory_checkpoint_path = Path(memory_checkpoint_path)
         self.target_dataset_config = target_dataset_config
         self.max_target_samples = max_target_samples
+        self.start_idx = start_idx
+        self.end_idx = end_idx
         self.logger = logger
         
         # Load the memory snapshot
@@ -66,7 +71,13 @@ class FullMemoryStrategy(MemoryFormationStrategy):
         self.target_dataset = build_dataset(self.target_dataset_config, logger=self.logger)
         self.target_environments = self.target_dataset.get_dataset()
         
-        # Limit the number of samples if specified
+        # Apply optional slicing before max_target_samples
+        if self.start_idx is not None or self.end_idx is not None:
+            start = self.start_idx if self.start_idx is not None else 0
+            end = self.end_idx if self.end_idx is not None else None
+            self.target_environments = self.target_environments[start:end]
+        
+        # Limit the number of samples if specified (applied after slicing)
         if self.max_target_samples is not None:
             self.target_environments = self.target_environments[:self.max_target_samples]
         
