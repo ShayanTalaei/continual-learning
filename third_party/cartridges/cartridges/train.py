@@ -151,7 +151,7 @@ def train(config: TrainConfig):
     )
     logger.info(f"Global batch size: {config.global_batch_size}")
     logger.info(f"Num devices: {num_devices}")
-
+    
     logger.info(f"Train outputs will be saved to {config.run_dir}")
     tokenizer = AutoTokenizer.from_pretrained(config.model.pretrained_model_name_or_path)    
 

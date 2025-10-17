@@ -174,11 +174,24 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = False
+
+        # Name
+        self.run_name = None
     
     def no_evals(self):
         self.do_loss_evals = False
         self.do_gen_evals = False
+    
+    def init_from_text(self):
+        self.kv_cache.method = "text"
+        self.kv_cache.init_text_file = "/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt"
 
+    def finalize(self):
+        if self.run_name is None:
+            if self.input_dataset.local_path:
+                self.run_name = f"distill_{Path(self.input_dataset.local_path).stem}"
+            else:
+                self.run_name = f"distill_{Path(self.input_dataset.repo_id or 'unknown').name}"
 
 # ============================================================================
 # Helper Functions
@@ -462,14 +475,11 @@ def run_distillation(config: DistillationConfig):
         # Create cartridges TrainConfig
         print("[Distill] Setting up training configuration...")
         # Generate run name from dataset source
-        if config.input_dataset.local_path:
-            run_name = f"distill_{Path(config.input_dataset.local_path).stem}"
-        else:
-            run_name = f"distill_{Path(config.input_dataset.repo_id or 'unknown').name}"
         
         train_config = TrainConfig(
-            name=run_name,
+            name=config.run_name,
             output_dir=str(output_dir),
+            run_dir=str(output_dir / "run"),
             
             train_temperature=config.training.train_temperature,
             val_temperature=config.training.val_temperature,
