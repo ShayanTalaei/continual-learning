@@ -40,7 +40,7 @@ from huggingface_hub import HfApi, create_repo
 
 # Import cartridges components
 from cartridges.train import TrainConfig, train
-from cartridges.datasets import TrainDataset, DataSource
+from cartridges.datasets import TrainDataset, ShayanTrainDataset, DataSource
 from cartridges.models.config import HFModelConfig
 from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM
 from cartridges.cache import KVCacheFactory
@@ -116,11 +116,12 @@ class TrainingConfig(BaseModel):
 
 class DatasetConfig(BaseModel):
     """Configuration for dataset processing."""
-    packing_mode: Literal["pad", "truncate"] = Field(default="pad", description="Sequence packing mode")
+    packing_mode: Literal["pad", "truncate", "fixed_batch_size_then_pad"] = Field(default="pad", description="Sequence packing mode")
     packed_seq_length: int = Field(default=2048, description="Maximum sequence length")
-    targets: Literal["logits", "tokens"] = Field(default="logits", description="Training target type")
+    targets: Literal["logits", "tokens", "fixed_batch_size_then_pad"] = Field(default="logits", description="Training target type")
     top_k_logits: int = Field(default=20, description="Number of top-k logits to keep")
     min_prob_mass: float = Field(default=0.99, description="Minimum probability mass for logprobs conversion")
+    batch_size: Optional[int] = Field(default=1, description="Batch size")
 
 
 class WandBConfigWrapper(BaseModel):
@@ -425,12 +426,13 @@ def run_distillation(config: DistillationConfig):
             ),
             
             # Dataset
-            dataset=TrainDataset.Config(
+            dataset=ShayanTrainDataset.Config(
                 data_sources=[DataSource(path=dataset_path, type="local")],
                 packing_mode=config.dataset.packing_mode,
                 packed_seq_length=config.dataset.packed_seq_length,
                 targets=config.dataset.targets,
                 top_k_logits=config.dataset.top_k_logits,
+                batch_size=config.dataset.batch_size,
             ),
             
             # Training

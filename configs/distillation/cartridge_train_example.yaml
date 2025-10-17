@@ -11,7 +11,7 @@
 
 # Input dataset (pre-processed locally)
 input_dataset:
-  local_path: "./data/processed_dataset.parquet"  # Path to pre-processed parquet file
+  local_path: "/mnt/data/shayan_memory/test_finer_data_gen/dataset.jsonl"  # Path to pre-processed parquet file
   # Alternative: use HuggingFace dataset (must be in cartridges format)
   # repo_id: "stalaei/distillation-dataset-test"
   # split: "train"
@@ -29,8 +29,8 @@ model_name: "meta-llama/Llama-3.1-8B-Instruct"
 # KV Cache initialization
 kv_cache:
   method: "random"  # Options: "random" or "text"
-  num_tokens: 2048   # Size of the cartridge (number of KV tokens)
-  num_frozen_tokens: 0  # First N tokens frozen to prevent forgetting
+  num_tokens: 40000   # Size of the cartridge (number of KV tokens)
+  num_frozen_tokens: 4  # First N tokens frozen to prevent forgetting
   
   # For text initialization (if method: "text"):
   # init_text: "You are a helpful assistant..."
@@ -61,11 +61,12 @@ training:
 
 # Dataset processing
 dataset:
-  packing_mode: "pad"  # Options: "pad" or "truncate"
-  packed_seq_length: 128000
+  packing_mode: "fixed_batch_size_then_pad"  # Options: "pad" or "truncate"
+  packed_seq_length: 80000
   targets: "logits"  # Use logits for knowledge distillation
   top_k_logits: 20   # Should match top_logprobs from data generation
   min_prob_mass: 0.8  # Probability mass threshold for logprobs conversion
+  batch_size: 2
 
 # Weights & Biases logging (optional)
 wandb:
