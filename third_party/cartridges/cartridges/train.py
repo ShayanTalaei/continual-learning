@@ -33,6 +33,7 @@ from cartridges.datasets import (
     LossEvalDataset,
     TrainDataset,
     DataSource,
+    ShayanTrainDataset,
 )
 from cartridges.models.config import ModelConfig
 from cartridges.utils import get_logger, seed_everything
@@ -60,13 +61,16 @@ class GenerationEvalConfig(BaseConfig):
 
 
 class TrainConfig(RunConfig):
-    name: str = "default"  # A name for the run for wandb
+    name: str = "default"   # A name for the run for wandb
     output_dir: str = os.environ.get("CARTRIDGES_OUTPUT_DIR", ".")
 
     model: ModelConfig
     wandb: Optional[WandBConfig] = Field(default_factory=WandBConfig)
     dataset: TrainDataset.Config
     gradient_checkpointing: bool = False
+
+    train_temperature: float = 0.3
+    val_temperature: float = 1.0
 
     # datasets for evaluating perplexity on other generations
     # NOTE: steps here is the number of **optimizer steps**, which we keep track of
@@ -173,6 +177,7 @@ def train(config: TrainConfig):
     if config.gradient_checkpointing:
         # Enable activation checkpointing. We assume model exposes this API.
         model.gradient_checkpointing_enable()
+
     attn_config=AttnConfig(
         n_layers=model.config.num_hidden_layers,
         n_heads=model.config.num_key_value_heads,
@@ -371,30 +376,45 @@ def train(config: TrainConfig):
                 if do_step or not is_ddp
                 else wrapped_model.no_sync()
             )
+
+            # Needed for activation checkpointing to work
+            if is_ddp:
+                wrapped_model.module.model.train()
+            else:
+                wrapped_model.model.train()
+            
             with ddp_ctx_manager:
                 with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+
+                    assert batch.topk_token_ids is not None
+                    assert batch.topk_logprobs is not None
+                    assert batch.topk_token_idxs is not None
 
                     t0 = time.time()
                     outputs = wrapped_model(
                         input_ids=batch.input_ids.to(local_rank),
                         seq_ids=batch.element_ids.to(local_rank),
                         position_ids=batch.position_ids.to(local_rank),
+                        logits_to_keep=batch.topk_token_idxs.to(local_rank),
                     )
+
+                    assert outputs.logits.shape[1] == batch.topk_token_idxs.shape[0]
+                    
                     if config.log_time:
                         torch.cuda.synchronize()
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
 
-                    topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[
-                        0, 
-                        batch.topk_token_idxs.to(local_rank) - 1, 
-                        batch.topk_token_ids.to(local_rank)
-                    ] 
-
+                    topk_pred_logprobs = torch.gather(
+                        F.log_softmax(outputs.logits, dim=-1)[0],
+                        dim=-1,
+                        index=batch.topk_token_ids.to(local_rank),
+                    )
+                    
                     # ce is sum -p(x)logq(x), where p is the true distr and q is the model distr
                     ce_by_token = (
                         -batch.topk_logprobs.to(local_rank).exp()  # p(x), true distr
                         * topk_pred_logprobs  # q(x), model distr
-                    )
+                    ).sum(1)
 
                     loss = (ce_by_token.mean() / accumulate_grad_steps)
 
@@ -402,6 +422,7 @@ def train(config: TrainConfig):
                 # see here for an example: https://pytorch.org/docs/stable/notes/amp_examples.html
                 # but it should go inside the ddp context manager
                 t0 = time.time()
+                
                 loss.backward()
                 if config.log_time:
                     torch.cuda.synchronize()
@@ -438,7 +459,7 @@ def train(config: TrainConfig):
                     {
                         "loss": f"{accum_loss.item():.4f}",
                         "ppl": f"{torch.exp(accum_loss).item():.2f}",
-                        "optimizer_step": f"{optimizer_step}",
+                        "optimizer_step": f"{optimizer_step+1}",
                     }
                 )
 
@@ -570,23 +591,29 @@ def evaluate_perplexity(
         for batch in dataloader_pbar:
             batch: DatasetBatch
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+
+                assert batch.topk_token_ids is not None
+                assert batch.topk_logprobs is not None
+                assert batch.topk_token_idxs is not None
+
                 outputs = model(
                     input_ids=batch.input_ids.to(local_rank),
                     seq_ids=batch.element_ids.to(local_rank),
                     position_ids=batch.position_ids.to(local_rank),
+                    logits_to_keep=batch.topk_token_idxs.to(local_rank),
                 )
 
-                topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[
-                    0, 
-                    batch.topk_token_idxs.to(local_rank) - 1, 
-                    batch.topk_token_ids.to(local_rank)
-                ] 
-
+                topk_pred_logprobs = torch.gather(
+                    F.log_softmax(outputs.logits / config.val_temperature, dim=-1)[0],
+                    dim=-1,
+                    index=batch.topk_token_ids.to(local_rank),
+                )
+                
                 # ce is sum -p(x)logq(x), where p is the true distr and q is the model distr
                 ce_by_token = (
                     -batch.topk_logprobs.to(local_rank).exp()  # p(x), true distr
                     * topk_pred_logprobs  # q(x), model distr
-                )
+                ).sum(1)
 
                 epoch_loss += (ce_by_token.sum())
                 epoch_denom += ce_by_token.shape[0]
@@ -650,7 +677,6 @@ def evaluate_perplexity(
 
 def evaluate_generations(
     config: GenerationEvalConfig,
-    
     model: CacheAndModel,
     tokenizer: AutoTokenizer,
     dataset: GenerateEvalDataset,
@@ -709,6 +735,7 @@ def evaluate_generations(
             ]
             if len(elements) == 0:
                 continue
+            
             input_ids = torch.cat([elem.input_ids[0] for _, elem in elements]).to(local_rank)
             seq_ids = torch.cat(
                 [
@@ -719,6 +746,7 @@ def evaluate_generations(
             position_ids = torch.cat(
                 [torch.arange(elem.input_ids.shape[1], device=local_rank) for _, elem in elements]
             )
+            
             pred_ids: Dict[int, List[int]] = flex_generate(
                 input_ids=input_ids,
                 seq_ids=seq_ids,
@@ -919,6 +947,7 @@ class CacheAndModel(nn.Module):
         input_ids: torch.Tensor, 
         seq_ids: torch.Tensor, 
         position_ids: torch.Tensor,
+        logits_to_keep: torch.Tensor,
     ):
 
         out = self.model(
@@ -926,7 +955,8 @@ class CacheAndModel(nn.Module):
             seq_ids=seq_ids,
             position_ids=position_ids,
             use_cache=True,
-            past_key_values=self.cache
+            past_key_values=self.cache,
+            logits_to_keep=logits_to_keep,
         )
 
         return out

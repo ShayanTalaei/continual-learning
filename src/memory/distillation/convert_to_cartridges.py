@@ -119,7 +119,13 @@ def convert_row_to_conversation(
     
     for msg in row["messages"]:
         # Tokenize the message content to get token_ids
-        token_ids = tokenizer.encode(msg["content"], add_special_tokens=False)
+        token_ids = tokenizer.apply_chat_template(
+            [{
+                "content": msg["content"],
+                "role": msg["role"],
+            }],
+            add_system_message=False,
+        )
         
         # Convert logprobs if this is an assistant message with logprobs
         top_logprobs = None
@@ -135,7 +141,7 @@ def convert_row_to_conversation(
                     flat_logprobs = top_logprobs.flatten(threshold=min_prob_mass)
             else:
                 raise ValueError(f"[Converter] No logprobs for entry {msg}")
-        
+    
         messages.append(
             Conversation.Message(
                 role=msg["role"],

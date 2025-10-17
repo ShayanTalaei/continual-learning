@@ -99,6 +99,8 @@ def read_conversations(path: str) -> list[Conversation]:
         return _conversations_from_parquet(path)
     elif path_str.endswith(".pkl"):
         return _conversations_from_pkl(path)
+    elif path_str.endswith(".jsonl"):
+        return _conversations_from_jsonl(path)
     else:
         raise ValueError(f"Unsupported file extension: {path_str}")
 
@@ -135,6 +137,13 @@ def _conversations_from_pkl(path: str) -> list[Conversation]:
         return data["rows"]
     else:
         return data
+
+def _conversations_from_jsonl(path: str) -> list[Conversation]:
+    import json
+    with open(path) as f:
+        data = [json.loads(line) for line in f]
+    return data
+
 
 class TrainingExample(Conversation):
     # backwards compatibility

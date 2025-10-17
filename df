@@ -1,0 +1,640 @@
+[1mdiff --git a/configs/distillation/cartridge_train_example.yaml b/configs/distillation/cartridge_train_example.yaml[m
+[1mindex 869abc5..4406aec 100644[m
+[1m--- a/configs/distillation/cartridge_train_example.yaml[m
+[1m+++ b/configs/distillation/cartridge_train_example.yaml[m
+[36m@@ -11,7 +11,7 @@[m
+ [m
+ # Input dataset (pre-processed locally)[m
+ input_dataset:[m
+[31m-  local_path: "./data/processed_dataset.parquet"  # Path to pre-processed parquet file[m
+[32m+[m[32m  local_path: "/mnt/data/shayan_memory/test_finer_data_gen/dataset.jsonl"  # Path to pre-processed parquet file[m
+   # Alternative: use HuggingFace dataset (must be in cartridges format)[m
+   # repo_id: "stalaei/distillation-dataset-test"[m
+   # split: "train"[m
+[36m@@ -29,8 +29,8 @@[m [mmodel_name: "meta-llama/Llama-3.1-8B-Instruct"[m
+ # KV Cache initialization[m
+ kv_cache:[m
+   method: "random"  # Options: "random" or "text"[m
+[31m-  num_tokens: 2048   # Size of the cartridge (number of KV tokens)[m
+[31m-  num_frozen_tokens: 0  # First N tokens frozen to prevent forgetting[m
+[32m+[m[32m  num_tokens: 40000   # Size of the cartridge (number of KV tokens)[m
+[32m+[m[32m  num_frozen_tokens: 4  # First N tokens frozen to prevent forgetting[m
+   [m
+   # For text initialization (if method: "text"):[m
+   # init_text: "You are a helpful assistant..."[m
+[36m@@ -61,11 +61,12 @@[m [mtraining:[m
+ [m
+ # Dataset processing[m
+ dataset:[m
+[31m-  packing_mode: "pad"  # Options: "pad" or "truncate"[m
+[31m-  packed_seq_length: 128000[m
+[32m+[m[32m  packing_mode: "fixed_batch_size_then_pad"  # Options: "pad" or "truncate"[m
+[32m+[m[32m  packed_seq_length: 80000[m
+   targets: "logits"  # Use logits for knowledge distillation[m
+   top_k_logits: 20   # Should match top_logprobs from data generation[m
+   min_prob_mass: 0.8  # Probability mass threshold for logprobs conversion[m
+[32m+[m[32m  batch_size: 2[m
+ [m
+ # Weights & Biases logging (optional)[m
+ wandb:[m
+[1mdiff --git a/logs/bb.md b/logs/bb.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fd9ec28[m
+[1m--- /dev/null[m
+[1m+++ b/logs/bb.md[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32mpython src/memory/distillation/convert_to_cartridges.py --input stalaei/distillation-dataset-test --output ./data/processed_dataset.parquet --model meta-llama/Llama-3.1-8B-Instruct --input-type huggingface --split train[m
+[32m+[m
+[32m+[m[32mpython -m src.memory.distillation.distill_into_cartridge --config configs/distillation/cartridge_train_example.yaml[m
+[32m+[m
+[32m+[m[32mPYTORCH_CUDA_ALLOC_CONF=expandable_segments:True torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge --config configs/distillation/cartridge_train_example.yaml[m
+\ No newline at end of file[m
+[1mdiff --git a/scripts/test_gradient_checkpointing.py b/scripts/test_gradient_checkpointing.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2bc1071[m
+[1m--- /dev/null[m
+[1m+++ b/scripts/test_gradient_checkpointing.py[m
+[36m@@ -0,0 +1,99 @@[m
+[32m+[m[32mimport torch[m
+[32m+[m[32mimport torch.nn as nn[m
+[32m+[m[32mimport torch.nn.functional as F[m
+[32m+[m[32mfrom torch.utils.checkpoint import checkpoint[m
+[32m+[m[32mfrom functools import partial[m
+[32m+[m
+[32m+[m[32mtorch.manual_seed(0)[m
+[32m+[m
+[32m+[m[32m# ----------------------------[m
+[32m+[m[32m# Tiny Transformer-ish blocks[m
+[32m+[m[32m# ----------------------------[m
+[32m+[m[32mclass ToyBlock(nn.Module):[m
+[32m+[m[32m    def __init__(self, d_model: int, n_heads: int, idx: int):[m
+[32m+[m[32m        super().__init__()[m
+[32m+[m[32m        self.idx = idx[m
+[32m+[m[32m        self.ln1 = nn.LayerNorm(d_model)[m
+[32m+[m[32m        self.attn = nn.MultiheadAttention(d_model, n_heads, dropout=0.0, batch_first=True)[m
+[32m+[m[32m        self.ln2 = nn.LayerNorm(d_model)[m
+[32m+[m[32m        self.mlp = nn.Sequential([m
+[32m+[m[32m            nn.Linear(d_model, 4 * d_model),[m
+[32m+[m[32m            nn.GELU(),[m
+[32m+[m[32m            nn.Linear(4 * d_model, d_model),[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m    def forward(self, x):[m
+[32m+[m[32m        # Print so we can count how many times this block runs per training step[m
+[32m+[m[32m        print(f"[FWD] ToyBlock {self.idx}")[m
+[32m+[m
+[32m+[m[32m        # Self-attention[m
+[32m+[m[32m        h = self.ln1(x)[m
+[32m+[m[32m        attn_out, _ = self.attn(h, h, h, need_weights=False)[m
+[32m+[m[32m        x = x + attn_out[m
+[32m+[m
+[32m+[m[32m        # MLP[m
+[32m+[m[32m        h = self.ln2(x)[m
+[32m+[m[32m        x = x + self.mlp(h)[m
+[32m+[m[32m        return x[m
+[32m+[m
+[32m+[m
+[32m+[m[32mclass ToyTransformer(nn.Module):[m
+[32m+[m[32m    def __init__(self, vocab_size=128, d_model=64, n_heads=4, n_layers=2, use_checkpoint=True):[m
+[32m+[m[32m        super().__init__()[m
+[32m+[m[32m        self.use_checkpoint = use_checkpoint[m
+[32m+[m[32m        self.emb = nn.Embedding(vocab_size, d_model)[m
+[32m+[m[32m        self.pos = nn.Parameter(torch.zeros(1, 256, d_model))  # max seq len 256 (overkill for the demo)[m
+[32m+[m[32m        self.blocks = nn.ModuleList([ToyBlock(d_model, n_heads, idx=i) for i in range(n_layers)])[m
+[32m+[m[32m        self.ln_f = nn.LayerNorm(d_model)[m
+[32m+[m[32m        self.head = nn.Linear(d_model, vocab_size, bias=False)[m
+[32m+[m
+[32m+[m[32m    def _run_block(self, block, x):[m
+[32m+[m[32m        # Helper so we can pass a single-Tensor callable to checkpoint()[m
+[32m+[m[32m        return block(x)[m
+[32m+[m
+[32m+[m[32m    def forward(self, idx):  # idx: (B, T) int64[m
+[32m+[m[32m        x = self.emb(idx)[m
+[32m+[m[32m        x = x + self.pos[:, : x.size(1)][m
+[32m+[m[32m        for block in self.blocks:[m
+[32m+[m[32m            if self.use_checkpoint:[m
+[32m+[m[32m                # checkpoint() requires a function that takes only Tensor args[m
+[32m+[m[32m                x = checkpoint(partial(self._run_block, block), x)[m
+[32m+[m[32m            else:[m
+[32m+[m[32m                x = block(x)[m
+[32m+[m[32m        x = self.ln_f(x)[m
+[32m+[m[32m        logits = self.head(x)  # (B, T, vocab)[m
+[32m+[m[32m        return logits[m
+[32m+[m
+[32m+[m
+[32m+[m[32m# ----------------------------[m
+[32m+[m[32m# Tiny training loop[m
+[32m+[m[32m# ----------------------------[m
+[32m+[m[32mdef main():[m
+[32m+[m[32m    device = "cuda" if torch.cuda.is_available() else "cpu"[m
+[32m+[m[32m    print("Device:", device)[m
+[32m+[m
+[32m+[m[32m    # Toggle here to compare behavior[m
+[32m+[m[32m    USE_CHECKPOINT = True  # set False to see single forward per block per step[m
+[32m+[m
+[32m+[m[32m    model = ToyTransformer(use_checkpoint=USE_CHECKPOINT).to(device)[m
+[32m+[m[32m    opt = torch.optim.AdamW(model.parameters(), lr=3e-4)[m
+[32m+[m
+[32m+[m[32m    B, T, vocab = 4, 16, 128[m
+[32m+[m[32m    steps = 2[m
+[32m+[m
+[32m+[m[32m    for step in range(steps):[m
+[32m+[m[32m        print(f"\n===== TRAIN STEP {step} (checkpointing={USE_CHECKPOINT}) =====")[m
+[32m+[m[32m        # Dummy inputs/targets[m
+[32m+[m[32m        x = torch.randint(0, vocab, (B, T), device=device)[m
+[32m+[m[32m        y = torch.randint(0, vocab, (B, T), device=device)[m
+[32m+[m
+[32m+[m[32m        opt.zero_grad(set_to_none=True)[m
+[32m+[m[32m        logits = model(x)             # <-- prints from each block forward[m
+[32m+[m[32m        loss = F.cross_entropy(logits.view(-1, vocab), y.view(-1))[m
+[32m+[m[32m        loss.backward()               # <-- with checkpointing, block forwards run again here[m
+[32m+[m[32m        opt.step()[m
+[32m+[m
+[32m+[m[32m        print(f"loss: {loss.item():.4f}")[m
+[32m+[m
+[32m+[m[32mif __name__ == "__main__":[m
+[32m+[m[32m    main()[m
+[1mdiff --git a/src/memory/distillation/convert_to_cartridges.py b/src/memory/distillation/convert_to_cartridges.py[m
+[1mindex e5293c9..f69b8d2 100644[m
+[1m--- a/src/memory/distillation/convert_to_cartridges.py[m
+[1m+++ b/src/memory/distillation/convert_to_cartridges.py[m
+[36m@@ -116,10 +116,17 @@[m [mdef convert_row_to_conversation([m
+         Conversation object ready for cartridges training[m
+     """[m
+     messages = [][m
+[32m+[m[32m    breakpoint()[m
+     [m
+     for msg in row["messages"]:[m
+         # Tokenize the message content to get token_ids[m
+[31m-        token_ids = tokenizer.encode(msg["content"], add_special_tokens=False)[m
+[32m+[m[32m        token_ids = tokenizer.apply_chat_template([m
+[32m+[m[32m            [{[m
+[32m+[m[32m                "content": msg["content"],[m
+[32m+[m[32m                "role": msg["role"],[m
+[32m+[m[32m            }],[m
+[32m+[m[32m            add_system_message=False,[m
+[32m+[m[32m        )[m
+         [m
+         # Convert logprobs if this is an assistant message with logprobs[m
+         top_logprobs = None[m
+[36m@@ -133,9 +140,10 @@[m [mdef convert_row_to_conversation([m
+                     )[m
+                 if top_logprobs is not None:[m
+                     flat_logprobs = top_logprobs.flatten(threshold=min_prob_mass)[m
+[32m+[m[32m                breakpoint()[m
+             else:[m
+                 raise ValueError(f"[Converter] No logprobs for entry {msg}")[m
+[31m-        [m
+[32m+[m[41m    [m
+         messages.append([m
+             Conversation.Message([m
+                 role=msg["role"],[m
+[36m@@ -207,15 +215,15 @@[m [mdef convert_dataset([m
+     print(f"[Converter] Converting to cartridges format...")[m
+     conversations = [][m
+     for i, row in enumerate(rows):[m
+[31m-        try:[m
+[31m-            convo = convert_row_to_conversation(row, tokenizer, min_prob_mass)[m
+[31m-            conversations.append(convo)[m
+[31m-            [m
+[31m-            if (i + 1) % 100 == 0:[m
+[31m-                print(f"[Converter] Converted {i + 1}/{len(rows)} conversations...")[m
+[31m-        except Exception as e:[m
+[31m-            print(f"[Converter] WARNING: Failed to convert row {i}: {e}")[m
+[31m-            continue[m
+[32m+[m[32m        # try:[m
+[32m+[m[32m        convo = convert_row_to_conversation(row, tokenizer, min_prob_mass)[m
+[32m+[m[32m        conversations.append(convo)[m
+[32m+[m[41m        [m
+[32m+[m[32m        if (i + 1) % 100 == 0:[m
+[32m+[m[32m            print(f"[Converter] Converted {i + 1}/{len(rows)} conversations...")[m
+[32m+[m[32m        # except Exception as e:[m
+[32m+[m[32m        #     print(f"[Converter] WARNING: Failed to convert row {i}: {e}")[m
+[32m+[m[32m        #     continue[m
+     [m
+     print(f"[Converter] Successfully converted {len(conversations)} conversations")[m
+     [m
+[1mdiff --git a/src/memory/distillation/distill_into_cartridge.py b/src/memory/distillation/distill_into_cartridge.py[m
+[1mindex b7e08a6..6bc5e7c 100644[m
+[1m--- a/src/memory/distillation/distill_into_cartridge.py[m
+[1m+++ b/src/memory/distillation/distill_into_cartridge.py[m
+[36m@@ -40,7 +40,7 @@[m [mfrom huggingface_hub import HfApi, create_repo[m
+ [m
+ # Import cartridges components[m
+ from cartridges.train import TrainConfig, train[m
+[31m-from cartridges.datasets import TrainDataset, DataSource[m
+[32m+[m[32mfrom cartridges.datasets import TrainDataset, ShayanTrainDataset, DataSource[m
+ from cartridges.models.config import HFModelConfig[m
+ from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM[m
+ from cartridges.cache import KVCacheFactory[m
+[36m@@ -116,11 +116,12 @@[m [mclass TrainingConfig(BaseModel):[m
+ [m
+ class DatasetConfig(BaseModel):[m
+     """Configuration for dataset processing."""[m
+[31m-    packing_mode: Literal["pad", "truncate"] = Field(default="pad", description="Sequence packing mode")[m
+[32m+[m[32m    packing_mode: Literal["pad", "truncate", "fixed_batch_size_then_pad"] = Field(default="pad", description="Sequence packing mode")[m
+     packed_seq_length: int = Field(default=2048, description="Maximum sequence length")[m
+[31m-    targets: Literal["logits", "tokens"] = Field(default="logits", description="Training target type")[m
+[32m+[m[32m    targets: Literal["logits", "tokens", "fixed_batch_size_then_pad"] = Field(default="logits", description="Training target type")[m
+     top_k_logits: int = Field(default=20, description="Number of top-k logits to keep")[m
+     min_prob_mass: float = Field(default=0.99, description="Minimum probability mass for logprobs conversion")[m
+[32m+[m[32m    batch_size: Optional[int] = Field(default=1, description="Batch size")[m
+ [m
+ [m
+ class WandBConfigWrapper(BaseModel):[m
+[36m@@ -425,12 +426,13 @@[m [mdef run_distillation(config: DistillationConfig):[m
+             ),[m
+             [m
+             # Dataset[m
+[31m-            dataset=TrainDataset.Config([m
+[32m+[m[32m            dataset=ShayanTrainDataset.Config([m
+                 data_sources=[DataSource(path=dataset_path, type="local")],[m
+                 packing_mode=config.dataset.packing_mode,[m
+                 packed_seq_length=config.dataset.packed_seq_length,[m
+                 targets=config.dataset.targets,[m
+                 top_k_logits=config.dataset.top_k_logits,[m
+[32m+[m[32m                batch_size=config.dataset.batch_size,[m
+             ),[m
+             [m
+             # Training[m
+[1mdiff --git a/third_party/cartridges/cartridges/datasets.py b/third_party/cartridges/cartridges/datasets.py[m
+[1mindex e07735c..a18c918 100755[m
+[1m--- a/third_party/cartridges/cartridges/datasets.py[m
+[1m+++ b/third_party/cartridges/cartridges/datasets.py[m
+[36m@@ -6,6 +6,7 @@[m [mfrom collections import deque[m
+ import json[m
+ import pickle[m
+ from pathlib import Path[m
+[32m+[m[32mimport math[m
+ import random[m
+ from dataclasses import dataclass[m
+ [m
+[36m@@ -228,12 +229,26 @@[m [mMODEL_TO_MESSAGE_CONVERTER = {k.lower(): v for k, v in MODEL_TO_MESSAGE_CONVERTE[m
+ class DatasetElement:[m
+     input_ids: torch.Tensor[m
+ [m
+[32m+[m[32m    topk_logprobs: torch.Tensor[m
+[32m+[m[32m    topk_token_ids: torch.Tensor[m
+[32m+[m[32m    topk_token_idxs: torch.Tensor[m
+[32m+[m
+[32m+[m[32m    metadata: list[dict[str, Any]][m
+[32m+[m[32m    token_counts: TokenCounts[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@dataclass[m
+[32m+[m[32mclass SimpleDatasetBatch:[m
+[32m+[m[32m    input_ids: torch.Tensor[m
+[32m+[m[32m    position_ids: torch.Tensor[m
+[32m+[m
+[32m+[m[32m    topk_logprobs: torch.Tensor[m
+[32m+[m[32m    topk_token_ids: torch.Tensor[m
+[32m+[m[32m    topk_token_idxs: torch.Tensor[m
+[32m+[m
+     metadata: list[dict[str, Any]][m
+     token_counts: TokenCounts[m
+ [m
+[31m-    topk_logprobs: Optional[torch.Tensor] = None[m
+[31m-    topk_token_ids: Optional[torch.Tensor] = None[m
+[31m-    topk_token_idxs: Optional[torch.Tensor] = None[m
+ [m
+ @dataclass[m
+ class DatasetBatch:[m
+[36m@@ -243,7 +258,6 @@[m [mclass DatasetBatch:[m
+ [m
+     metadata: list[dict[str, Any]][m
+     token_counts: TokenCounts[m
+[31m-    loss_weight: Optional[torch.Tensor] = None[m
+ [m
+     topk_logprobs: Optional[torch.Tensor] = None[m
+     topk_token_ids: Optional[torch.Tensor] = None[m
+[36m@@ -300,20 +314,22 @@[m [mclass TrainDataset(Dataset):[m
+         top_k_logits: int = 20[m
+         targets: Literal["logits", "tokens"] = "logits"[m
+ [m
+[31m-        packing_mode: Literal["truncate", "pad"]="pad"[m
+[32m+[m[32m        packing_mode: Literal["truncate", "pad", "fixed_batch_size_then_pad"] = "pad"[m
+         packed_seq_length: int = 2048[m
+[32m+[m[32m        batch_size: Optional[int] = None[m
+ [m
+         user_prompt_prefix: list[str] | None = None[m
+ [m
+ [m
+     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):[m
+[32m+[m[32m        assert (config.packing_mode == "fixed_batch_size_then_pad") == (config.batch_size is not None), "batch_size must be specified when packing mode is fixed_batch_size_then_pad"[m
+ [m
+         self.config = config[m
+         self.tokenizer = tokenizer[m
+         [m
+         self.elements: List[DatasetElement] = self._prepare_elements()[m
+         # each batch is a list of element indices[m
+[31m-        self.batches: List[List[int]] = self._prepare_batches(seed=seed)  [m
+[32m+[m[32m        self.batches: List[List[int]] = self._prepare_batches(seed=seed)[m[41m [m
+ [m
+     def _prepare_elements(self) -> list[DatasetElement]:[m
+         data = [][m
+[36m@@ -339,7 +355,23 @@[m [mclass TrainDataset(Dataset):[m
+         Note that this function does not actually handle the truncation or padding, this is left to the collate function.[m
+         Which is applied the fly in the dataloader worker. [m
+         """[m
+[31m-        batches = [] [m
+[32m+[m[32m        batches = [][m
+[32m+[m
+[32m+[m[32m        if self.config.packing_mode == "fixed_batch_size_then_pad":[m
+[32m+[m[32m            assert self.config.batch_size is not None[m
+[32m+[m[32m            if len(self.elements) % self.config.batch_size != 0:[m
+[32m+[m[32m                print("WARNING: dataset size is not a multiple of batch size, some elements will be dropped")[m
+[32m+[m
+[32m+[m[32m            batches = [[batch_idx*self.config.batch_size + i for i in range(self.config.batch_size)] for batch_idx in range(len(self.elements) // self.config.batch_size)][m
+[32m+[m[41m            [m
+[32m+[m[32m            for batch in batches:[m
+[32m+[m[32m                batch_total_len = sum([[m
+[32m+[m[32m                    self._get_element(elem_idx).input_ids.shape[0] for elem_idx in batch[m
+[32m+[m[32m                ])[m
+[32m+[m[32m                assert batch_total_len <= self.config.packed_seq_length, f"batch total length {batch_total_len} exceeds sequence length {self.config.packed_seq_length}"[m
+[32m+[m[41m            [m
+[32m+[m[32m            return batches[m
+[32m+[m[41m        [m
+         elem_idxs = random.Random(seed).sample(range(len(self.elements)), len(self.elements))[m
+         queue = deque(elem_idxs)[m
+ [m
+[36m@@ -468,6 +500,43 @@[m [mclass TrainDataset(Dataset):[m
+             token_counts=token_counts,[m
+         )[m
+ [m
+[32m+[m
+[32m+[m[32mclass ShayanTrainDataset(TrainDataset):[m
+[32m+[m[32m    class Config(TrainDataset.Config):[m
+[32m+[m[32m        pass[m
+[32m+[m[41m        [m
+[32m+[m[32m    def _prepare_elements(self) -> list[DatasetElement]:[m
+[32m+[m[32m        data = [][m
+[32m+[m[32m        for source in self.config.data_sources:[m
+[32m+[m[32m            data.extend(_prepare_data_source(source))[m
+[32m+[m
+[32m+[m[32m        elements = [][m
+[32m+[m[32m        for row in data:[m
+[32m+[m[32m            ids = self.tokenizer.apply_chat_template([m
+[32m+[m[32m                row["input_messages"],[m
+[32m+[m[32m                add_generation_prompt=True,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            print(self.tokenizer.decode(ids))[m
+[32m+[m[32m            ids += row["answer_ids"][m
+[32m+[m
+[32m+[m[32m            num_answer_ids = len(row["answer_ids"])[m
+[32m+[m[32m            num_question_ids = len(ids) - num_answer_ids[m
+[32m+[m[32m            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long)[m
+[32m+[m
+[32m+[m[32m            assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"[m
+[32m+[m[32m            assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"[m
+[32m+[m[41m            [m
+[32m+[m[32m            elements.append(DatasetElement([m
+[32m+[m[32m                input_ids=torch.tensor(row["ids"], dtype=torch.long),[m
+[32m+[m[32m                topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),[m
+[32m+[m[32m                topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),[m
+[32m+[m[32m                topk_token_idxs=topk_token_idxs,[m
+[32m+[m[32m                metadata=[],[m
+[32m+[m[32m                token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)[m
+[32m+[m[32m            ))[m
+[32m+[m[32m        return elements[m
+[32m+[m
+[32m+[m
+ class LossEvalDataset(TrainDataset):[m
+     class Config(ObjectConfig):[m
+         _pass_as_config = True[m
+[1mdiff --git a/third_party/cartridges/cartridges/models/llama/modeling_llama.py b/third_party/cartridges/cartridges/models/llama/modeling_llama.py[m
+[1mindex d731bb7..66b4153 100644[m
+[1m--- a/third_party/cartridges/cartridges/models/llama/modeling_llama.py[m
+[1m+++ b/third_party/cartridges/cartridges/models/llama/modeling_llama.py[m
+[36m@@ -17,7 +17,7 @@[m
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.[m
+ # See the License for the specific language governing permissions and[m
+ # limitations under the License.[m
+[31m-from typing import Callable, Literal, Optional, Union[m
+[32m+[m[32mfrom typing import Callable, Literal, Optional, Union, Tuple[m
+ from dataclasses import dataclass[m
+ [m
+ import torch[m
+[36m@@ -54,7 +54,7 @@[m [mlogger = logging.get_logger(__name__)[m
+ # backward running on 1xA100.[m
+ def flex_attention_train(*args, **kwargs):[m
+     return flex_attention(*args, **kwargs)[m
+[31m-flex_attention_train = torch.compile(flex_attention_train, dynamic=False, mode="max-autotune-no-cudagraphs")[m
+[32m+[m[32mflex_attention_train = torch.compile(flex_attention_train, dynamic=False, mode="default") #mode="max-autotune-no-cudagraphs")[m
+ [m
+ # SE (07/25): When I set `dynamic=True` with "max-autotune-no-cudagraphs" for [m
+ # generation, I get " AttributeError: 'Symbol' object has no attribute 'get_device' "[m
+[36m@@ -67,7 +67,7 @@[m [mclass LlamaBatch:[m
+     input_ids: torch.LongTensor[m
+     seq_ids: torch.LongTensor[m
+     position_ids: torch.LongTensor[m
+[31m-    hidden_states: torch.Tensor[m
+[32m+[m[32m    # hidden_states: torch.Tensor[m
+     past_key_values: Optional[Cache] = None[m
+     position_embeddings: Optional[tuple[torch.Tensor, torch.Tensor]] = None[m
+     attention_mask: Optional[torch.Tensor] = None[m
+[36m@@ -284,8 +284,7 @@[m [mclass LlamaAttention(nn.Module):[m
+             config.num_attention_heads * self.head_dim, config.hidden_size, bias=config.attention_bias[m
+         )[m
+ [m
+[31m-    def forward(self, batch: LlamaBatch) -> torch.Tensor:[m
+[31m-        hidden_states = batch.hidden_states[m
+[32m+[m[32m    def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> torch.Tensor:[m
+         input_shape = hidden_states.shape[:-1][m
+         hidden_shape = (*input_shape, -1, self.head_dim)[m
+ [m
+[36m@@ -319,11 +318,12 @@[m [mclass LlamaAttention(nn.Module):[m
+         attn_output = attn_output.reshape(*input_shape, -1).contiguous()[m
+         attn_output = self.o_proj(attn_output)[m
+         [m
+[31m-        return batch.update(hidden_states=attn_output)[m
+[32m+[m[32m        return attn_output, batch[m
+ [m
+ class LlamaDecoderLayer(GradientCheckpointingLayer):[m
+     def __init__(self, config: LlamaConfig, layer_idx: int):[m
+         super().__init__()[m
+[32m+[m[32m        self.layer_idx = layer_idx[m
+         self.hidden_size = config.hidden_size[m
+ [m
+         self.self_attn = LlamaAttention(config=config, layer_idx=layer_idx)[m
+[36m@@ -332,14 +332,13 @@[m [mclass LlamaDecoderLayer(GradientCheckpointingLayer):[m
+         self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)[m
+         self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)[m
+ [m
+[31m-    def forward(self, batch: LlamaBatch) -> LlamaBatch:[m
+[31m-        residual = batch.hidden_states[m
+[31m-        hidden_states = self.input_layernorm(batch.hidden_states)[m
+[31m-        batch = batch.update(hidden_states=hidden_states)[m
+[32m+[m[32m    def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> Tuple[torch.Tensor, LlamaBatch]:[m
+[32m+[m[32m        residual = hidden_states[m
+[32m+[m[32m        hidden_states = self.input_layernorm(hidden_states)[m
+ [m
+         # Self Attention[m
+[31m-        batch = self.self_attn(batch)[m
+[31m-        hidden_states = residual + batch.hidden_states[m
+[32m+[m[32m        hidden_states, batch = self.self_attn(hidden_states=hidden_states, batch=batch)[m
+[32m+[m[32m        hidden_states = residual + hidden_states[m
+ [m
+         # Fully Connected[m
+         residual = hidden_states[m
+[36m@@ -347,7 +346,7 @@[m [mclass LlamaDecoderLayer(GradientCheckpointingLayer):[m
+         hidden_states = self.mlp(hidden_states)[m
+         hidden_states = residual + hidden_states[m
+ [m
+[31m-        return batch.update(hidden_states=hidden_states)[m
+[32m+[m[32m        return hidden_states, batch[m
+ [m
+ [m
+ @auto_docstring[m
+[36m@@ -459,7 +458,6 @@[m [mclass FlexLlamaModel(FlexLlamaPreTrainedModel):[m
+         position_embeddings = self.rotary_emb(hidden_states, position_ids)[m
+ [m
+         batch = LlamaBatch([m
+[31m-            hidden_states=hidden_states,[m
+             input_ids=input_ids,[m
+             seq_ids=seq_ids,[m
+             position_ids=position_ids,[m
+[36m@@ -468,12 +466,12 @@[m [mclass FlexLlamaModel(FlexLlamaPreTrainedModel):[m
+             attention_mask=block_mask,[m
+             mode=mode,[m
+         )[m
+[32m+[m[41m        [m
+[32m+[m[32m        hidden_states.requires_grad = True[m
+[32m+[m[32m        for decoder_layer in self.layers[: self.config.num_hidden_layers]:[m
+[32m+[m[32m            hidden_states, batch = decoder_layer(hidden_states, batch)[m
+ [m
+[31m-        for i, decoder_layer in enumerate(self.layers[: self.config.num_hidden_layers]):[m
+[31m-            print(f"At layer {i}")[m
+[31m-            batch = decoder_layer(batch)[m
+[31m-[m
+[31m-        hidden_states = self.norm(batch.hidden_states)[m
+[32m+[m[32m        hidden_states = self.norm(hidden_states)[m
+         return BaseModelOutputWithPast([m
+             last_hidden_state=hidden_states,[m
+             past_key_values=past_key_values if use_cache else None,[m
+[1mdiff --git a/third_party/cartridges/cartridges/structs.py b/third_party/cartridges/cartridges/structs.py[m
+[1mindex 81c7f30..4bfbb46 100644[m
+[1m--- a/third_party/cartridges/cartridges/structs.py[m
+[1m+++ b/third_party/cartridges/cartridges/structs.py[m
+[36m@@ -99,6 +99,8 @@[m [mdef read_conversations(path: str) -> list[Conversation]:[m
+         return _conversations_from_parquet(path)[m
+     elif path_str.endswith(".pkl"):[m
+         return _conversations_from_pkl(path)[m
+[32m+[m[32m    elif path_str.endswith(".jsonl"):[m
+[32m+[m[32m        return _conversations_from_jsonl(path)[m
+     else:[m
+         raise ValueError(f"Unsupported file extension: {path_str}")[m
+ [m
+[36m@@ -136,6 +138,13 @@[m [mdef _conversations_from_pkl(path: str) -> list[Conversation]:[m
+     else:[m
+         return data[m
+ [m
+[32m+[m[32mdef _conversations_from_jsonl(path: str) -> list[Conversation]:[m
+[32m+[m[32m    import json[m
+[32m+[m[32m    with open(path) as f:[m
+[32m+[m[32m        data = [json.loads(line) for line in f][m
+[32m+[m[32m    return data[m
+[32m+[m
+[32m+[m
+ class TrainingExample(Conversation):[m
+     # backwards compatibility[m
+     pass[m
+\ No newline at end of file[m
+[1mdiff --git a/third_party/cartridges/cartridges/train.py b/third_party/cartridges/cartridges/train.py[m
+[1mindex 5edf87d..48f3b0a 100644[m
+[1m--- a/third_party/cartridges/cartridges/train.py[m
+[1m+++ b/third_party/cartridges/cartridges/train.py[m
+[36m@@ -33,6 +33,7 @@[m [mfrom cartridges.datasets import ([m
+     LossEvalDataset,[m
+     TrainDataset,[m
+     DataSource,[m
+[32m+[m[32m    ShayanTrainDataset,[m
+ )[m
+ from cartridges.models.config import ModelConfig[m
+ from cartridges.utils import get_logger, seed_everything[m
+[36m@@ -173,6 +174,7 @@[m [mdef train(config: TrainConfig):[m
+     if config.gradient_checkpointing:[m
+         # Enable activation checkpointing. We assume model exposes this API.[m
+         model.gradient_checkpointing_enable()[m
+[32m+[m
+     attn_config=AttnConfig([m
+         n_layers=model.config.num_hidden_layers,[m
+         n_heads=model.config.num_key_value_heads,[m
+[36m@@ -371,25 +373,41 @@[m [mdef train(config: TrainConfig):[m
+                 if do_step or not is_ddp[m
+                 else wrapped_model.no_sync()[m
+             )[m
+[32m+[m
+[32m+[m[32m            # Needed for activation checkpointing to work[m
+[32m+[m[32m            if is_ddp:[m
+[32m+[m[32m                wrapped_model.module.model.train()[m
+[32m+[m[32m            else:[m
+[32m+[m[32m                wrapped_model.model.train()[m
+[32m+[m[41m            [m
+             with ddp_ctx_manager:[m
+                 with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):[m
+ [m
+[32m+[m[32m                    assert batch.topk_token_ids is not None[m
+[32m+[m[32m                    assert batch.topk_logprobs is not None[m
+[32m+[m[32m                    assert batch.topk_token_idxs is not None[m
+[32m+[m
+                     t0 = time.time()[m
+                     outputs = wrapped_model([m
+                         input_ids=batch.input_ids.to(local_rank),[m
+                         seq_ids=batch.element_ids.to(local_rank),[m
+                         position_ids=batch.position_ids.to(local_rank),[m
+[32m+[m[32m                        logits_to_keep=batch.topk_token_ids.to(local_rank),[m
+                     )[m
+[32m+[m[41m                    [m
+                     if config.log_time:[m
+                         torch.cuda.synchronize()[m
+                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")[m
+[32m+[m[41m                    [m
+[32m+[m[32m                    breakpoint()[m
+ [m
+[32m+[m[32m                    # TODO: fix this code -> we need to have many logprobs per token not one[m
+                     topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[[m
+                         0, [m
+[31m-                        batch.topk_token_idxs.to(local_rank) - 1, [m
+[32m+[m[32m                        torch.arange(loss_idxs.shape[0], device=local_rank),[m[41m [m
+                         batch.topk_token_ids.to(local_rank)[m
+[31m-                    ] [m
+[31m-[m
+[32m+[m[32m                    ][m
+[32m+[m[41m                    [m
+                     # ce is sum -p(x)logq(x), where p is the true distr and q is the model distr[m
+                     ce_by_token = ([m
+                         -batch.topk_logprobs.to(local_rank).exp()  # p(x), true distr[m
+[36m@@ -402,6 +420,7 @@[m [mdef train(config: TrainConfig):[m
+                 # see here for an example: https://pytorch.org/docs/stable/notes/amp_examples.html[m
+                 # but it should go inside the ddp context manager[m
+                 t0 = time.time()[m
+[32m+[m[41m                [m
+                 loss.backward()[m
+                 if config.log_time:[m
+                     torch.cuda.synchronize()[m
+[36m@@ -650,7 +669,6 @@[m [mdef evaluate_perplexity([m
+ [m
+ def evaluate_generations([m
+     config: GenerationEvalConfig,[m
+[31m-    [m
+     model: CacheAndModel,[m
+     tokenizer: AutoTokenizer,[m
+     dataset: GenerateEvalDataset,[m
+[36m@@ -919,6 +937,7 @@[m [mclass CacheAndModel(nn.Module):[m
+         input_ids: torch.Tensor, [m
+         seq_ids: torch.Tensor, [m
+         position_ids: torch.Tensor,[m
+[32m+[m[32m        logits_to_keep: torch.Tensor,[m
+     ):[m
+ [m
+         out = self.model([m
+[36m@@ -926,7 +945,8 @@[m [mclass CacheAndModel(nn.Module):[m
+             seq_ids=seq_ids,[m
+             position_ids=position_ids,[m
+             use_cache=True,[m
+[31m-            past_key_values=self.cache[m
+[32m+[m[32m            past_key_values=self.cache,[m
+[32m+[m[32m            logits_to_keep=logits_to_keep,[m
+         )[m
+ [m
+         return out[m

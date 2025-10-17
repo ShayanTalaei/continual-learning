@@ -13,6 +13,18 @@ def _normalize_text(s: str) -> str:
     return " ".join((s or "").strip().split())
 
 
+def is_correct_finer(prediction: str, target: str) -> bool:
+    # Reuse QAEnv's boxed extraction behavior
+    if "\\boxed{" in (prediction or ""):
+        try:
+            prediction = prediction.split("\\boxed{")[1].split("}")[0]
+        except Exception:
+            pass
+    pred_norm = _normalize_text(prediction)
+    tgt_norm = _normalize_text(target)
+    return pred_norm == tgt_norm
+
+
 class FinerEnv(QAEnv):
     """Single-turn QA environment for FinLoRA Finer task.
 
@@ -20,16 +32,7 @@ class FinerEnv(QAEnv):
     """
 
     def evaluate(self, action: str) -> Dict[str, Any]:
-        predicted_answer = action
-        # Reuse QAEnv's boxed extraction behavior
-        if "\\boxed{" in (predicted_answer or ""):
-            try:
-                predicted_answer = predicted_answer.split("\\boxed{")[1].split("}")[0]
-            except Exception:
-                pass
-        pred_norm = _normalize_text(predicted_answer)
-        tgt_norm = _normalize_text(self.answer)
-        correct = pred_norm == tgt_norm
+        correct = is_correct_finer(action, self.answer)
         message = "Correct!" if correct else f"Incorrect! The correct answer is \\boxed{{{self.answer}}}."
         return {"score": 1 if correct else 0, "target": self.answer, "message": message}
 
