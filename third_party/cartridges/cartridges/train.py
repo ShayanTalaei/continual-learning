@@ -405,7 +405,7 @@ def train(config: TrainConfig):
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
 
                     topk_pred_logprobs = torch.gather(
-                        F.log_softmax(outputs.logits / config.train_temperature, dim=-1)[0],
+                        F.log_softmax(outputs.logits, dim=-1)[0],
                         dim=-1,
                         index=batch.topk_token_ids.to(local_rank),
                     )

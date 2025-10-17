@@ -509,7 +509,11 @@ class ShayanTrainDataset(TrainDataset):
         data = []
         for source in self.config.data_sources:
             data.extend(_prepare_data_source(source))
-
+        
+        # breakpoint()
+        # all_probs = [torch.tensor(logprobs).exp() for seq in data for logprobs in seq["topk_logprobs"]]
+        # all_probs = [torch.tensor(logprobs).exp()[:1].sum() for seq in data for logprobs in seq["topk_logprobs"]]
+   
         elements = []
         for row in data:
             ids = self.tokenizer.apply_chat_template(
