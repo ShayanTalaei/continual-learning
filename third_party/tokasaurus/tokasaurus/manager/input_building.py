@@ -214,6 +214,9 @@ def seqs_to_input(
             sampling_builder.add_sequence(
                 temperature=sparams.temperature,
                 top_p=sparams.top_p,
+                ignore_temp_for_logprobs=getattr(
+                    sparams, "ignore_temperature_for_logprobs", False
+                ),
             )
 
     if use_hydragen:
@@ -275,6 +278,9 @@ def seqs_to_input(
         sampling_builder.add_sequence(
             temperature=sparams.temperature,
             top_p=sparams.top_p,
+            ignore_temp_for_logprobs=getattr(
+                sparams, "ignore_temperature_for_logprobs", False
+            ),
         )
 
     prefill_lengths = [slen for _, slen in prefill_seqs]

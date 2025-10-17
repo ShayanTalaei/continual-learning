@@ -171,6 +171,8 @@ class TokasaurusClient(LanguageModel):
         if top_logprobs is not None:
             payload["logprobs"] = True
             payload["top_logprobs"] = int(top_logprobs)
+            # Request logprobs computed without temperature normalization
+            payload["logprobs_ignore_temperature"] = True
 
         r = self._http.post(url, json=payload, headers=self._headers(), timeout=self.cfg.timeout_s)
         r.raise_for_status()
@@ -354,7 +356,7 @@ class TokasaurusClient(LanguageModel):
         *,
         cartridges: Optional[List[Dict[str, Any]]] = None,
         top_logprobs: Optional[int] = None,
-    ) -> "tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]], Optional[str]]":
+    ) -> "tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]], Dict[str, Any]]":
         """
         Execute chat request and return (text, metrics, logprobs, system_fingerprint).
         """
@@ -378,6 +380,7 @@ class TokasaurusClient(LanguageModel):
         if top_logprobs is not None:
             payload["logprobs"] = True
             payload["top_logprobs"] = int(top_logprobs)
+            payload["logprobs_ignore_temperature"] = True
 
         r = self._http.post(url, json=payload, headers=self._headers(), timeout=self.cfg.timeout_s)
         r.raise_for_status()
