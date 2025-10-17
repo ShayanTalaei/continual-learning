@@ -39,7 +39,7 @@ from transformers import AutoTokenizer
 from huggingface_hub import HfApi, create_repo
 
 # Import cartridges components
-from cartridges.train import TrainConfig, train
+from cartridges.train import TrainConfig, train, GenerationEvalConfig, LossEvalConfig
 from cartridges.datasets import TrainDataset, ShayanTrainDataset, DataSource
 from cartridges.models.config import HFModelConfig
 from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM
@@ -48,6 +48,7 @@ from cartridges.initialization.text import KVFromText
 from cartridges.initialization.random import KVFromRandomVectors
 from cartridges.structs import Conversation, write_conversations
 from cartridges.utils.wandb import WandBConfig
+from cartridges.data.finer.evals import FinerGenerateDataset
 
 # Note: Dataset conversion is now handled separately by convert_to_cartridges.py
 
@@ -137,6 +138,7 @@ class DistillationConfig(BaseModel):
     
     # Input/Output
     input_dataset: InputDatasetConfig
+    val_dataset: InputDatasetConfig
     output: OutputConfig
     
     # Model
@@ -165,7 +167,7 @@ class DistillationConfig(BaseModel):
 # ============================================================================
 
 
-def get_dataset_path(config: DistillationConfig) -> str:
+def get_dataset_path(dataset) -> str:
     """Get the path to the dataset for training.
     
     Args:
@@ -174,18 +176,18 @@ def get_dataset_path(config: DistillationConfig) -> str:
     Returns:
         Path to the cartridges-format dataset (parquet file)
     """
-    if config.input_dataset.local_path:
+    if dataset.local_path:
         # Use pre-processed local dataset
-        dataset_path = Path(config.input_dataset.local_path)
+        dataset_path = Path(dataset.local_path)
         if not dataset_path.exists():
             raise FileNotFoundError(f"Local dataset not found: {dataset_path}")
         print(f"[Distill] Using pre-processed dataset: {dataset_path}")
         return str(dataset_path)
     
-    elif config.input_dataset.repo_id:
+    elif dataset.repo_id:
         # Load from HuggingFace (assume already in cartridges format)
-        print(f"[Distill] Loading dataset from HuggingFace: {config.input_dataset.repo_id}")
-        ds = load_dataset(config.input_dataset.repo_id, split=config.input_dataset.split)
+        print(f"[Distill] Loading dataset from HuggingFace: {dataset.repo_id}")
+        ds = load_dataset(dataset.repo_id, split=dataset.split)
         print(f"[Distill] Loaded {len(ds)} samples")
         
         # Save to temp location for training
@@ -400,7 +402,8 @@ def run_distillation(config: DistillationConfig):
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     
     # Get dataset path
-    dataset_path = get_dataset_path(config)
+    train_dataset_path = get_dataset_path(config.input_dataset)
+    val_dataset_path = get_dataset_path(config.val_dataset)
     
     # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -427,13 +430,42 @@ def run_distillation(config: DistillationConfig):
             
             # Dataset
             dataset=ShayanTrainDataset.Config(
-                data_sources=[DataSource(path=dataset_path, type="local")],
+                data_sources=[DataSource(path=train_dataset_path, type="local")],
                 packing_mode=config.dataset.packing_mode,
                 packed_seq_length=config.dataset.packed_seq_length,
                 targets=config.dataset.targets,
                 top_k_logits=config.dataset.top_k_logits,
                 batch_size=config.dataset.batch_size,
             ),
+
+            # Loss evals
+            loss_eval_every_n_steps=100,
+            loss_evals=[
+                LossEvalConfig(
+                    dataset=ShayanTrainDataset.Config(
+                        data_sources=[DataSource(path=val_dataset_path, type="local")],
+                        packing_mode=config.dataset.packing_mode,
+                        packed_seq_length=config.dataset.packed_seq_length,
+                        targets=config.dataset.targets,
+                        top_k_logits=config.dataset.top_k_logits,
+                        batch_size=config.dataset.batch_size,
+                    ),
+                    name_for_wandb="finer_val_loss",
+                )
+            ],
+
+            # Generate evals
+            # generate_eval_every_n_steps=1,
+            # generate_evals=[
+            #     GenerationEvalConfig(
+            #         dataset=FinerGenerateDataset.Config(),
+            #         name_for_wandb="finer",
+            #         generate_max_new_tokens=128,
+            #         num_samples=1,
+            #         temperature=0.0,
+            #         batch_size=16,
+            #     )
+            # ],
             
             # Training
             global_batch_size=config.training.global_batch_size,

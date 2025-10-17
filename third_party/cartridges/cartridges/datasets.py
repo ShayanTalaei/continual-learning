@@ -516,18 +516,17 @@ class ShayanTrainDataset(TrainDataset):
                 row["input_messages"],
                 add_generation_prompt=True,
             )
-            print(self.tokenizer.decode(ids))
-            ids += row["answer_ids"]
+            ids += row["output_ids"]
 
-            num_answer_ids = len(row["answer_ids"])
+            num_answer_ids = len(row["output_ids"])
             num_question_ids = len(ids) - num_answer_ids
             topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long)
 
             assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
             assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
-            
+
             elements.append(DatasetElement(
-                input_ids=torch.tensor(row["ids"], dtype=torch.long),
+                input_ids=torch.tensor(ids, dtype=torch.long),
                 topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
                 topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
                 topk_token_idxs=topk_token_idxs,
