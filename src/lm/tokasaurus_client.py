@@ -55,12 +55,11 @@ class TokasaurusClient(LanguageModel):
 
     def call(
         self,
-        system_prompt: str,
-        user_prompt: str,
+        messages: List[Dict[str, str]],
         cartridges: Optional[List[Dict[str, Any]]] = None,
         top_logprobs: Optional[int] = None,
     ) -> Dict[str, Any]:
-        call_id = self._begin_call(system_prompt, user_prompt)
+        call_id = self._begin_call(messages)
         start_time = time.time()
         last_err: Optional[Exception] = None
 
@@ -77,8 +76,7 @@ class TokasaurusClient(LanguageModel):
         for attempt in range(1, self.config.max_retries + 2):
             try:
                 text, metrics, logprobs = self._chat_request(
-                    system_prompt,
-                    user_prompt,
+                    messages,
                     start_time,
                     cartridges=cartridges,
                     top_logprobs=top_logprobs,
@@ -99,16 +97,16 @@ class TokasaurusClient(LanguageModel):
                     "base_url": self.cfg.base_url,
                     "model": self.cfg.model,
                     "error_type": error_type,
-                    "system_prompt_len": len(system_prompt),
-                    "user_prompt_len": len(user_prompt),
+                    "messages_count": len(messages),
                     "timeout_s": self.cfg.timeout_s,
                 }
                 
                 # Add HTTP-specific details if available
-                if hasattr(e, 'response') and e.response is not None:
-                    error_context["status_code"] = e.response.status_code
+                if hasattr(e, 'response') and getattr(e, 'response', None) is not None:
+                    response = getattr(e, 'response')
+                    error_context["status_code"] = getattr(response, 'status_code', None)
                     try:
-                        error_context["response_text"] = e.response.text[:500]  # First 500 chars
+                        error_context["response_text"] = getattr(response, 'text', '')[:500]  # First 500 chars
                     except:
                         pass
                 
@@ -137,13 +135,12 @@ class TokasaurusClient(LanguageModel):
 
     def _chat_request(
         self,
-        system_prompt: str,
-        user_prompt: str,
+        messages: List[Dict[str, str]],
         start_time: float,
         *,
         cartridges: Optional[List[Dict[str, Any]]] = None,
         top_logprobs: Optional[int] = None,
-    ) -> tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    ) -> "tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]":
         """
         Execute chat request and return (text, metrics, logprobs).
         
@@ -160,10 +157,7 @@ class TokasaurusClient(LanguageModel):
 
         payload: Dict[str, Any] = {
             "model": self.cfg.model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
+            "messages": messages,
             "temperature": self.cfg.temperature,
             "max_tokens": self.cfg.max_output_tokens,
         }

@@ -1,6 +1,6 @@
 import os
 import time
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 from dotenv import load_dotenv
 from google import genai
@@ -15,7 +15,7 @@ load_dotenv(override=True)
 
 class GeminiConfig(LMConfig):
     thinking_budget: Optional[int] = None
-    stop_sequences: Optional[list[str]] = ["FEEDBACK", "OBSERVATION"]
+    stop_sequences: Optional[List[str]] = ["FEEDBACK", "OBSERVATION"]
 
 class GeminiClient(LanguageModel):
     """Synchronous Gemini client compatible with `LanguageModel` interface."""
@@ -24,27 +24,50 @@ class GeminiClient(LanguageModel):
         super().__init__(config=config, logger=logger)
         self._gemini_client: Optional[genai.Client] = None
 
+    @property
+    def cfg(self) -> GeminiConfig:  # typed helper
+        return self.config  # type: ignore[return-value]
+
     def call(
         self,
-        system_prompt: str,
-        user_prompt: str
+        messages: List[Dict[str, str]]
     ) -> Dict[str, Any]:
-        call_id = self._begin_call(system_prompt, user_prompt)
+        call_id = self._begin_call(messages)
         ctx = jsonlogger.json_get_context()
         response_schema = ctx.get("response_schema")
         use_json_mode = response_schema is not None
+        
+        # Separate system messages from conversation messages
+        system_instruction = None
+        conversation_messages = []
+        
+        for msg in messages:
+            if msg["role"] == "system":
+                if system_instruction is None:
+                    system_instruction = msg["content"]
+                else:
+                    # If multiple system messages, concatenate them
+                    system_instruction += "\n" + msg["content"]
+            else:
+                # Convert to Gemini format: {"role": "user"|"model", "parts": [{"text": content}]}
+                role = "user" if msg["role"] == "user" else "model"  # Gemini uses "model" instead of "assistant"
+                conversation_messages.append({
+                    "role": role,
+                    "parts": [{"text": msg["content"]}]
+                })
+        
         generate_content_config = GenerateContentConfig(
-            system_instruction=system_prompt,
+            system_instruction=system_instruction,
             temperature=self.config.temperature ,
             max_output_tokens=self.config.max_output_tokens,
             response_mime_type=("application/json" if use_json_mode else None),
             thinking_config=(
-                ThinkingConfig(thinking_budget=self.config.thinking_budget)
-                if self.config.thinking_budget is not None
+                ThinkingConfig(thinking_budget=self.cfg.thinking_budget)
+                if self.cfg.thinking_budget is not None
                 else None
             ),
             response_schema=response_schema if use_json_mode else None,
-            stop_sequences=self.config.stop_sequences,
+            stop_sequences=self.cfg.stop_sequences,
             # response_mime_type="application/json"
         )
 
@@ -54,7 +77,7 @@ class GeminiClient(LanguageModel):
             try:
                 response = self._client().models.generate_content(
                     model=self.config.model,
-                    contents=[{"role": "user", "parts": [{"text": user_prompt}]}],
+                    contents=conversation_messages,
                     config=generate_content_config,
                 )
                 duration = time.time() - start_time

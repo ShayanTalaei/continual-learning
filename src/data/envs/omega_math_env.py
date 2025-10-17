@@ -419,7 +419,11 @@ class OmegaMathEnv(QAEnv):
                             correct_text = fa
                     user_prompt = self._feedback_user_prompt(self.question, action, correct_text, error_type)
                     with jsonlogger.json_log_context(call_type="feedback"):
-                        feedback_text = self.feedback_lm.call(system_prompt, user_prompt)
+                        messages = [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt}
+                        ]
+                        feedback_text = self.feedback_lm.call(messages)
                     if isinstance(feedback_text, str) and feedback_text.strip():
                         result.setdefault("extra", {})
                         result["extra"]["template_message"] = template_message or result.get("message", "")

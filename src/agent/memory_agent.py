@@ -1,4 +1,4 @@
-from typing import List, Any
+from typing import List, Any, Union, Dict
 from abc import ABC, abstractmethod
 from src.agent.agent import Agent, AgentConfig
 from src.memory.memory_module import MemoryModule, MemoryModuleConfig
@@ -11,8 +11,8 @@ from src.utils import logger as jsonlogger
 
 class MemoryAgentConfig(AgentConfig):
     memory_config: MemoryModuleConfig
-    history_k: int | None = None
-    system_prompt: str | None = None
+    history_k: Union[int, None] = None
+    system_prompt: Union[str, None] = None
     verbose: bool = True
 
 class MemoryAgent(Agent[MemoryAgentConfig], ABC):
@@ -29,7 +29,7 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         return self.system_prompt
 
     @abstractmethod
-    def build_user_prompt(self, obs: str, history: List[Any], k: int | None) -> str:
+    def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
         pass
 
     @abstractmethod
@@ -60,7 +60,7 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("Act: obs_len=%d", len(obs))
         history = self.memory.recall()
         system_prompt = self.build_system_prompt()
-        user_prompt = self.build_user_prompt(obs, history, self.config.history_k)
+        user_messages = self.build_user_prompt(obs, history, self.config.history_k)
         history_len = len(history[-self.config.history_k:]) if self.config.history_k is not None else len(history)
         self.logger.info("Prompt built: history_items=%d", history_len)
 
@@ -71,7 +71,10 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("Logged Observation")
         
         with jsonlogger.json_log_context(call_type="action"):
-            resp = self.lm.call(system_prompt, user_prompt)
+            messages = [
+                {"role": "system", "content": system_prompt}
+            ] + user_messages
+            resp = self.lm.call(messages)
         action = (resp.get("text") or "").strip()
         if not action:
             self.logger.warning("No action returned from LM")

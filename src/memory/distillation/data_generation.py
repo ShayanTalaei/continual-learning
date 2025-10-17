@@ -182,9 +182,12 @@ def _process_single_sample(
         teacher_agent.config.history_k
     )
 
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ]
     lm_response = client.call(
-        system_prompt,
-        user_prompt,
+        messages,
         cartridges=None,
         top_logprobs=top_logprobs,
     )

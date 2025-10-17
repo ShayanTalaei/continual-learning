@@ -30,7 +30,7 @@ class FinerEnv(QAEnv):
         pred_norm = _normalize_text(predicted_answer)
         tgt_norm = _normalize_text(self.answer)
         correct = pred_norm == tgt_norm
-        message = "Correct!" if correct else f"Incorrect! The correct answer is {self.answer}."
+        message = "Correct!" if correct else f"Incorrect! The correct answer is \\boxed{{{self.answer}}}."
         return {"score": 1 if correct else 0, "target": self.answer, "message": message}
 
 

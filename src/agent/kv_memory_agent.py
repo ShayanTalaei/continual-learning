@@ -44,7 +44,11 @@ class KVMemoryAgent(MemoryAgent):
         user_prompt = self.build_user_prompt(obs, [], None)
         self.logger.info("KV prompt built; delegating to LM with cartridges=%s", str(cartridges))
 
-        resp = self.lm.call(system_prompt, user_prompt, cartridges=cartridges)  # type: ignore[arg-type]
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+        resp = self.lm.call(messages, cartridges=cartridges)  # type: ignore[arg-type]
         action = (resp.get("text") or "").strip()
         if not action:
             self.logger.warning("No action returned from LM")
