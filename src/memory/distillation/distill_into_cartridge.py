@@ -9,15 +9,15 @@ This script:
 4. Uploads the trained cartridge to HuggingFace
 
 Usage:
-    python -m src.memory.distillation.distill_into_cartridge --config configs/distillation/cartridge_train.yaml
+    python -m src.memory.distillation.distill_into_cartridge
+    python -m src.memory.distillation.distill_into_cartridge input_dataset.local_path=/path/to/dataset.jsonl
 """
 
 import sys
-import argparse
+import pydra
 import yaml
 from pathlib import Path
 from typing import Optional, Literal, Dict, Any
-from pydantic import BaseModel, Field
 import tempfile
 import os
 
@@ -50,116 +50,125 @@ from cartridges.structs import Conversation, write_conversations
 from cartridges.utils.wandb import WandBConfig
 from cartridges.data.finer.evals import FinerGenerateDataset
 
-# Note: Dataset conversion is now handled separately by convert_to_cartridges.py
-
 
 # ============================================================================
-# Configuration Schemas
+# Pydra Configuration Classes
 # ============================================================================
 
-class InputDatasetConfig(BaseModel):
+class InputDatasetConfig(pydra.Config):
     """Configuration for input dataset source."""
-    # Either use HuggingFace dataset or local pre-processed dataset
-    repo_id: Optional[str] = Field(None, description="HuggingFace dataset repo ID")
-    split: str = Field(default="train", description="Dataset split to use (for HF datasets)")
-    local_path: Optional[str] = Field(None, description="Path to local pre-processed parquet dataset")
+    def __init__(self):
+        super().__init__()
+        # Either use HuggingFace dataset or local pre-processed dataset
+        self.repo_id = None  # HuggingFace dataset repo ID
+        self.split = "train"  # Dataset split to use (for HF datasets)
+        self.local_path = "/mnt/data/shayan_memory/finer_data_gen_shuffled_16x100/dataset.jsonl"  # Path to pre-processed parquet file
     
-    def __post_init__(self):
+    def finalize(self):
         if not self.repo_id and not self.local_path:
             raise ValueError("Must provide either repo_id or local_path")
         if self.repo_id and self.local_path:
             raise ValueError("Cannot provide both repo_id and local_path")
 
 
-class OutputConfig(BaseModel):
+class OutputConfig(pydra.Config):
     """Configuration for output artifacts."""
-    local_dir: str = Field(..., description="Local directory to save training outputs")
-    hf_repo_id: Optional[str] = Field(None, description="HuggingFace model repo ID for uploading cartridge")
-    hf_private: bool = Field(default=True, description="Whether to create a private HF repo")
-    upload_to_hf: bool = Field(default=True, description="Whether to upload to HuggingFace after training")
+    def __init__(self):
+        super().__init__()
+        self.local_dir = "./outputs/cartridges/finer-cartridge-v1"  # Local directory to save training outputs
+        self.hf_repo_id = "stalaei/finer-cartridge-v1"  # HuggingFace model repo ID for uploading cartridge
+        self.hf_private = True  # Whether to create a private HF repo
+        self.upload_to_hf = True  # Whether to upload to HuggingFace after training
 
 
-class KVCacheInitConfig(BaseModel):
+class KVCacheInitConfig(pydra.Config):
     """Configuration for KV cache initialization."""
-    method: Literal["random", "text"] = Field(default="random", description="Initialization method")
-    num_tokens: int = Field(default=128, description="Number of tokens in the cartridge")
-    num_frozen_tokens: int = Field(default=1, description="Number of tokens to freeze (prevents forgetting)")
-    
-    # For text initialization
-    init_text: Optional[str] = Field(None, description="Text to initialize from (for method='text')")
-    init_text_file: Optional[str] = Field(None, description="File containing init text (overrides init_text)")
+    def __init__(self):
+        super().__init__()
+        self.method = "random"  # Initialization method: "random" or "text"
+        self.num_tokens = 2048  # Number of tokens in the cartridge
+        self.num_frozen_tokens = 4  # Number of tokens to freeze (prevents forgetting)
+        
+        # For text initialization
+        self.init_text = None  # Text to initialize from (for method='text')
+        self.init_text_file = None  # File containing init text (overrides init_text)
 
 
-class TrainingConfig(BaseModel):
+class TrainingConfig(pydra.Config):
     """Configuration for training hyperparameters."""
-    epochs: int = Field(default=5, description="Number of training epochs")
-    global_batch_size: int = Field(default=8, description="Total batch size across all devices")
-    lr: float = Field(default=1e-4, description="Learning rate")
-    weight_decay: float = Field(default=0.0, description="Weight decay")
-    optimizer: Literal["adam"] = Field(default="adam", description="Optimizer type")
-    gradient_checkpointing: bool = Field(default=False, description="Enable activation (gradient) checkpointing to reduce memory usage")
-    
-    # Checkpointing
-    save_every_n_steps: Optional[int] = Field(default=100, description="Save checkpoint every N steps")
-    save_after_training: bool = Field(default=True, description="Save final checkpoint after training")
-    keep_last_n_saved: int = Field(default=3, description="Number of checkpoints to keep")
-    
-    # Device
-    device: str = Field(default="cuda", description="Device to train on")
-    seed: int = Field(default=42, description="Random seed")
-    
-    # Distributed training
-    distributed_backend: Literal["nccl", "gloo"] = Field(
-        default="nccl", 
-        description="Distributed backend: 'nccl' for GPU (faster), 'gloo' for CPU/fallback"
-    )
+    def __init__(self):
+        super().__init__()
+        self.epochs = 100  # Number of training epochs
+        self.global_batch_size = 8  # Total batch size across all devices
+        self.lr = 1e-4  # Learning rate
+        self.weight_decay = 0.0  # Weight decay
+        self.optimizer = "adam"  # Optimizer type
+        self.gradient_checkpointing = True  # Enable activation (gradient) checkpointing to reduce memory usage
+
+        # Temperature
+        self.train_temperature = 0.3  # Temperature for training
+        self.val_temperature = 1.0  # Temperature for validation
+        
+        # Checkpointing
+        self.save_every_n_steps = 100  # Save checkpoint every N steps
+        self.save_after_training = True  # Save final checkpoint after training
+        self.keep_last_n_saved = 3  # Number of checkpoints to keep
+        
+        # Device
+        self.device = "cuda"  # Device to train on
+        self.seed = 42  # Random seed
+        
+        # Distributed training
+        self.distributed_backend = "nccl"  # Distributed backend: 'nccl' for GPU (faster), 'gloo' for CPU/fallback
 
 
-class DatasetConfig(BaseModel):
+class DatasetConfig(pydra.Config):
     """Configuration for dataset processing."""
-    packing_mode: Literal["pad", "truncate", "fixed_batch_size_then_pad"] = Field(default="pad", description="Sequence packing mode")
-    packed_seq_length: int = Field(default=2048, description="Maximum sequence length")
-    targets: Literal["logits", "tokens", "fixed_batch_size_then_pad"] = Field(default="logits", description="Training target type")
-    top_k_logits: int = Field(default=20, description="Number of top-k logits to keep")
-    min_prob_mass: float = Field(default=0.99, description="Minimum probability mass for logprobs conversion")
-    batch_size: Optional[int] = Field(default=1, description="Batch size")
+    def __init__(self):
+        super().__init__()
+        self.packing_mode = "fixed_batch_size_then_pad"  # Sequence packing mode
+        self.packed_seq_length = 32000  # Maximum sequence length
+        self.targets = "logits"  # Training target type
+        self.top_k_logits = 20  # Number of top-k logits to keep
+        self.min_prob_mass = 0.8  # Minimum probability mass for logprobs conversion
+        self.batch_size = 8  # Batch size
 
 
-class WandBConfigWrapper(BaseModel):
+class WandBConfigWrapper(pydra.Config):
     """Configuration for Weights & Biases logging."""
-    enabled: bool = Field(default=False, description="Enable WandB logging")
-    project: Optional[str] = Field(None, description="WandB project name")
-    entity: Optional[str] = Field(None, description="WandB entity")
-    name: Optional[str] = Field(None, description="WandB run name")
+    def __init__(self):
+        super().__init__()
+        self.enabled = True  # Enable WandB logging
+        self.project = "cartridge-distillation"  # WandB project name
+        self.entity = "stalaei-stanford-university"  # WandB entity
+        self.name = "finer-cartridge-v1"  # WandB run name
 
 
-class DistillationConfig(BaseModel):
+class DistillationConfig(pydra.Config):
     """Main configuration for cartridge distillation training."""
     
-    # Input/Output
-    input_dataset: InputDatasetConfig
-    val_dataset: InputDatasetConfig
-    output: OutputConfig
-    
-    # Model
-    model_name: str = Field(..., description="Model name (e.g., meta-llama/Llama-3.1-8B-Instruct)")
-    
-    # KV Cache
-    kv_cache: KVCacheInitConfig
-    
-    # Training
-    training: TrainingConfig
-    
-    # Dataset
-    dataset: DatasetConfig
-    
-    # WandB (optional)
-    wandb: WandBConfigWrapper = Field(default_factory=lambda: WandBConfigWrapper(
-        enabled=False,
-        project=None,
-        entity=None,
-        name=None
-    ))
+    def __init__(self):
+        super().__init__()
+        # Input/Output
+        self.input_dataset = InputDatasetConfig()
+        self.val_dataset = InputDatasetConfig()
+        self.val_dataset.local_path = "/mnt/data/shayan_memory/finer_val_data_gen_full_memory/dataset.jsonl"
+        self.output = OutputConfig()
+        
+        # Model
+        self.model_name = "meta-llama/Llama-3.1-8B-Instruct"  # Model name
+        
+        # KV Cache
+        self.kv_cache = KVCacheInitConfig()
+        
+        # Training
+        self.training = TrainingConfig()
+        
+        # Dataset
+        self.dataset = DatasetConfig()
+        
+        # WandB (optional)
+        self.wandb = WandBConfigWrapper()
 
 
 # ============================================================================
@@ -350,7 +359,7 @@ memory = KVCacheMemory(config)
 ## Training Configuration
 
 ```yaml
-{yaml.dump(config.model_dump() if config else {}, default_flow_style=False)}
+{yaml.dump(config.to_dict() if config else {}, default_flow_style=False)}
 ```
 """
     
@@ -394,7 +403,7 @@ def run_distillation(config: DistillationConfig):
     # Save config for reproducibility
     config_path = output_dir / "distillation_config.yaml"
     with open(config_path, "w") as f:
-        yaml.dump(config.model_dump(), f, default_flow_style=False)
+        yaml.dump(config.to_dict(), f, default_flow_style=False)
     print(f"[Distill] Config saved to: {config_path}")
     
     # Load tokenizer
@@ -416,11 +425,14 @@ def run_distillation(config: DistillationConfig):
         if config.input_dataset.local_path:
             run_name = f"distill_{Path(config.input_dataset.local_path).stem}"
         else:
-            run_name = f"distill_{Path(config.input_dataset.repo_id).name}"
+            run_name = f"distill_{Path(config.input_dataset.repo_id or 'unknown').name}"
         
         train_config = TrainConfig(
             name=run_name,
             output_dir=str(output_dir),
+            
+            train_temperature=config.training.train_temperature,
+            val_temperature=config.training.val_temperature,
             
             # Model
             model=HFModelConfig(
@@ -542,36 +554,9 @@ def run_distillation(config: DistillationConfig):
 # CLI Entry Point
 # ============================================================================
 
-def main():
+@pydra.main(DistillationConfig)
+def main(config: DistillationConfig):
     """CLI entry point for cartridge distillation."""
-    parser = argparse.ArgumentParser(
-        description="Train a cartridge from distillation dataset using knowledge distillation",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Example usage:
-  python -m src.memory.distillation.distill_into_cartridge --config configs/distillation/cartridge_train.yaml
-"""
-    )
-    parser.add_argument(
-        "--config",
-        type=str,
-        required=True,
-        help="Path to YAML config file with DistillationConfig parameters"
-    )
-    
-    args = parser.parse_args()
-    
-    # Load config
-    config_path = Path(args.config)
-    if not config_path.exists():
-        print(f"ERROR: Config file not found: {config_path}", file=sys.stderr)
-        sys.exit(1)
-    
-    with open(config_path, "r") as f:
-        config_dict = yaml.safe_load(f)
-    
-    config = DistillationConfig(**config_dict)
-    
     # Run distillation
     try:
         run_distillation(config)
