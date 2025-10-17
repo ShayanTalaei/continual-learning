@@ -1,0 +1,54 @@
+## TOY — MemorylessAgent with a tiny vLLM model for quick local sanity checks
+
+runtime:
+  max_envs_to_visit: 0
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 2
+
+train_dataset: null
+
+validation_dataset:
+  hf_dataset: "allenai/omega-explorative"
+  hf_subset: "numbertheory_ordered_lte"
+  split: "train"
+  input_field: "messages"
+  target_field: "ground_truth"
+  instruction_template: "Solve this math problem. Put your final answer in \\boxed{{}}.\n\nProblem: {question}"
+  max_samples: 5
+  shuffle: false
+  seed: 42
+  eval_mode: numeric_tol
+  eval_tolerance: 1e-6
+  expect_boxed: true
+
+agent:
+  type: memoryless_agent
+  lm_config:
+    # Small chat model to minimize VRAM; adjust if you prefer another tiny chat model
+    model: vllm:Qwen/Qwen3-1.7B
+    temperature: 0.0
+    max_output_tokens: 8092
+    log_calls: true
+    # Use the same cache directory pattern you configured earlier
+
+    use_server: true
+    base_url: http://localhost:8000
+    protocol: openai
+    api_key: null
+    timeout_s: 900.0
+
+    # Conservative vLLM settings for low memory usage
+    trust_remote_code: true
+    gpu_memory_utilization: 0.5
+    dtype: "float16"
+    max_model_len: 10000
+    tensor_parallel_size: 1
+  system_prompt: "You are a concise helper."
+
+output:
+  results_dir: outputs/toy/vllm_qwen3-1.7b
+  log_level: INFO
+
+
