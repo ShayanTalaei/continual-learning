@@ -448,7 +448,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         block_mask = create_block_mask(
             mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
             device=inputs_embeds.device,
-            _compile=True
+            _compile=mode == "train"
         )
         # --- end build block mask ---
 
