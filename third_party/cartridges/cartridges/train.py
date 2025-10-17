@@ -770,7 +770,7 @@ def evaluate_generations(
             for  (seq_id, curr_pred_ids) in pred_ids.items():
                 element = elements[seq_id]
                 pred = tokenizer.decode(curr_pred_ids, skip_special_tokens=True)
-                
+
                 if has_score:
                     metrics, extras = dataset.score(
                         pred=pred, answer=element.answer, convo_id=element.convo_id
@@ -855,7 +855,7 @@ def evaluate_generations(
                 log_dict,
                 step=optimizer_step,
             )
-
+    
     if is_ddp:
         dist.barrier()
     

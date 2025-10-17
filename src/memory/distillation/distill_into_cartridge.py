@@ -62,7 +62,7 @@ class InputDatasetConfig(pydra.Config):
         # Either use HuggingFace dataset or local pre-processed dataset
         self.repo_id = None  # HuggingFace dataset repo ID
         self.split = "train"  # Dataset split to use (for HF datasets)
-        self.local_path = "/mnt/data/shayan_memory/finer_data_gen_shuffled_16x100/dataset.jsonl"  # Path to pre-processed parquet file
+        self.local_path = "/mnt/data/shayan_memory/finer_data_gen_shuffled_256x100/dataset.jsonl"  # Path to pre-processed parquet file
     
     def finalize(self):
         if not self.repo_id and not self.local_path:
@@ -169,6 +169,15 @@ class DistillationConfig(pydra.Config):
         
         # WandB (optional)
         self.wandb = WandBConfigWrapper()
+
+        # Evaluation
+        self.do_loss_evals = True  # Whether to do loss evals
+        self.do_gen_evals = True  # Whether to do generation evals
+        self.generate_before_training = False
+    
+    def no_evals(self):
+        self.do_loss_evals = False
+        self.do_gen_evals = False
 
 
 # ============================================================================
@@ -413,7 +422,38 @@ def run_distillation(config: DistillationConfig):
     # Get dataset path
     train_dataset_path = get_dataset_path(config.input_dataset)
     val_dataset_path = get_dataset_path(config.val_dataset)
-    
+
+    if config.do_loss_evals:
+        loss_evals = [
+            LossEvalConfig(
+                dataset=ShayanTrainDataset.Config(
+                    data_sources=[DataSource(path=val_dataset_path, type="local")],
+                    packing_mode=config.dataset.packing_mode,
+                    packed_seq_length=config.dataset.packed_seq_length,
+                    targets=config.dataset.targets,
+                    top_k_logits=config.dataset.top_k_logits,
+                    batch_size=config.dataset.batch_size,
+                ),
+                name_for_wandb="finer_val_loss",
+            )
+        ]
+    else:
+        loss_evals = []
+
+    if config.do_gen_evals:
+        generate_evals = [
+            GenerationEvalConfig(
+                dataset=FinerGenerateDataset.Config(),
+                name_for_wandb="finer",
+                generate_max_new_tokens=1024,
+                num_samples=1,
+                temperature=0.0,
+                batch_size=32,
+            )
+        ]
+    else:
+        generate_evals = []
+
     # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_path = Path(temp_dir)
@@ -452,32 +492,12 @@ def run_distillation(config: DistillationConfig):
 
             # Loss evals
             loss_eval_every_n_steps=100,
-            loss_evals=[
-                LossEvalConfig(
-                    dataset=ShayanTrainDataset.Config(
-                        data_sources=[DataSource(path=val_dataset_path, type="local")],
-                        packing_mode=config.dataset.packing_mode,
-                        packed_seq_length=config.dataset.packed_seq_length,
-                        targets=config.dataset.targets,
-                        top_k_logits=config.dataset.top_k_logits,
-                        batch_size=config.dataset.batch_size,
-                    ),
-                    name_for_wandb="finer_val_loss",
-                )
-            ],
+            loss_evals=loss_evals,
 
             # Generate evals
-            # generate_eval_every_n_steps=1,
-            # generate_evals=[
-            #     GenerationEvalConfig(
-            #         dataset=FinerGenerateDataset.Config(),
-            #         name_for_wandb="finer",
-            #         generate_max_new_tokens=128,
-            #         num_samples=1,
-            #         temperature=0.0,
-            #         batch_size=16,
-            #     )
-            # ],
+            generate_before_training=config.generate_before_training,
+            generate_eval_every_n_steps=400,
+            generate_evals=generate_evals,
             
             # Training
             global_batch_size=config.training.global_batch_size,
