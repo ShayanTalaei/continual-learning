@@ -584,6 +584,9 @@ def process_request(
     sampling_params = SamplingParams(
         temperature=temp,
         top_p=top_p,
+        ignore_temperature_for_logprobs=(
+            getattr(request, "logprobs_ignore_temperature", False) or False
+        ),
     )
 
     match request:

@@ -379,6 +379,8 @@ def calc_tokens_and_logprobs(
     temperature: Tensor,
     greedy_mask: Tensor,
     config: ExtraModelConfig,
+    *,
+    ignore_temperature_for_logprobs: Tensor,
 ):
     augmented_logits = logits
 
@@ -397,18 +399,29 @@ def calc_tokens_and_logprobs(
     )
 
     if config.enable_chosen_logprobs:
-        # TODO: because this is all in fp32, I think the numerics are ok here.
-        chosen_probs = probs.gather(dim=-1, index=next_token_ids.unsqueeze(-1)).squeeze(
-            -1
-        )
-        chosen_logprobs = chosen_probs.log()
+        # Compute both base (unscaled) and scaled chosen logprobs; select via mask
+        base_probs = F.softmax(logits, dim=-1)
+        base_chosen = base_probs.gather(dim=-1, index=next_token_ids.unsqueeze(-1)).squeeze(-1)
+        base_logprobs = base_chosen.log()
+
+        scaled_chosen = probs.gather(dim=-1, index=next_token_ids.unsqueeze(-1)).squeeze(-1)
+        scaled_logprobs = scaled_chosen.log()
+
+        mask_f = ignore_temperature_for_logprobs.to(dtype=base_logprobs.dtype)
+        chosen_logprobs = mask_f * base_logprobs + (1 - mask_f) * scaled_logprobs
     else:
         chosen_logprobs = None
 
     topk = config.topk_logprobs
     if topk is not None:
         assert topk > 0
-        topk_probs, topk_indices = torch.topk(probs, k=topk, dim=-1)
+        # Compute base and scaled top-k; select via mask
+        base_topk_probs, base_topk_indices = torch.topk(F.softmax(logits, dim=-1), k=topk, dim=-1)
+        scaled_topk_probs, scaled_topk_indices = torch.topk(probs, k=topk, dim=-1)
+
+        use_base = ignore_temperature_for_logprobs.unsqueeze(-1)
+        topk_indices = torch.where(use_base, base_topk_indices, scaled_topk_indices)
+        topk_probs = torch.where(use_base, base_topk_probs, scaled_topk_probs)
         topk_tokens = topk_indices
         topk_logprobs = topk_probs.log()
     else:
@@ -475,6 +488,7 @@ class LlamaLMHead(nn.Module):
                 temperature=batch_state.sampling_params.temperature,
                 greedy_mask=batch_state.sampling_params.greedy_mask,
                 config=self.extra_config,
+                ignore_temperature_for_logprobs=batch_state.sampling_params.ignore_temperature_for_logprobs,
             )
 
             # TODO: fuse these small all_gathers into a single op

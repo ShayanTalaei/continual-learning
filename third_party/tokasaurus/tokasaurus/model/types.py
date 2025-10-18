@@ -262,6 +262,8 @@ class BatchSamplingParams:
     temperature: Tensor | None = None
     top_p: Tensor | None = None
     greedy_mask: Tensor | None = None
+    # if True per-lm-head token, compute returned logprobs without temperature scaling
+    ignore_temperature_for_logprobs: Tensor | None = None
 
     def to(self, device: DeviceType, non_blocking: bool = False):
         if (temperature := self.temperature) is not None:
@@ -273,10 +275,14 @@ class BatchSamplingParams:
         if (greedy_mask := self.greedy_mask) is not None:
             greedy_mask = greedy_mask.to(device, non_blocking=non_blocking)
 
+        if (ignore := self.ignore_temperature_for_logprobs) is not None:
+            ignore = ignore.to(device, non_blocking=non_blocking)
+
         return BatchSamplingParams(
             temperature=temperature,
             top_p=top_p,
             greedy_mask=greedy_mask,
+            ignore_temperature_for_logprobs=ignore,
         )
 
     def copy_(self, src: "BatchSamplingParams"):
@@ -292,17 +298,25 @@ class BatchSamplingParams:
             assert src.greedy_mask is not None
             self.greedy_mask.copy_(src.greedy_mask)
 
+        if self.ignore_temperature_for_logprobs is not None:
+            assert src.ignore_temperature_for_logprobs is not None
+            self.ignore_temperature_for_logprobs.copy_(
+                src.ignore_temperature_for_logprobs
+            )
+
 
 @dataclass
 class BatchSamplingParamsBuilder:
     temperature: list[float] = field(default_factory=list)
     top_p: list[float] = field(default_factory=list)
     greedy_mask: list[bool] = field(default_factory=list)
+    ignore_temperature_for_logprobs: list[bool] = field(default_factory=list)
 
-    def add_sequence(self, temperature: float, top_p: float):
+    def add_sequence(self, temperature: float, top_p: float, *, ignore_temp_for_logprobs: bool = False):
         greedy = temperature == 0.0
         self.top_p.append(top_p)
         self.greedy_mask.append(greedy)
+        self.ignore_temperature_for_logprobs.append(ignore_temp_for_logprobs)
 
         if greedy:
             # we don't want to scale by a zero temp since it
@@ -314,6 +328,7 @@ class BatchSamplingParamsBuilder:
     def build(self):
         temperature = torch.tensor(self.temperature, dtype=torch.float32)
         greedy_mask = torch.tensor(self.greedy_mask, dtype=torch.bool)
+        ignore = torch.tensor(self.ignore_temperature_for_logprobs, dtype=torch.bool)
 
         assert all([top_p == 1.0 for top_p in self.top_p])
         top_p = None
@@ -337,6 +352,7 @@ class BatchSamplingParamsBuilder:
             temperature=temperature,
             greedy_mask=greedy_mask,
             top_p=top_p,
+            ignore_temperature_for_logprobs=ignore,
         )
 
 

@@ -46,6 +46,10 @@ class CompletionsRequest(BaseModel):
     # pack the logprobs into the fingerprint in a more space-efficient way
     logprobs_in_fingerprint: bool = False
 
+    # if True, compute returned logprobs (chosen and top-k) without temperature scaling
+    # sampling still uses temperature; only reported logprobs ignore temperature
+    logprobs_ignore_temperature: Optional[bool] = False
+
     # extra fields to get sglang benchmarking script to work
     ignore_eos: bool = False
 
@@ -97,6 +101,10 @@ class ChatCompletionRequest(BaseModel):
     # pack the logprobs into the fingerprint in a more space-efficient way
     logprobs_in_fingerprint: bool = False
 
+    # if True, compute returned logprobs (chosen and top-k) without temperature scaling
+    # sampling still uses temperature; only reported logprobs ignore temperature
+    logprobs_ignore_temperature: Optional[bool] = False
+
     # extra chat template args, e.g. to pass enable_thinking for Qwen3 models: https://huggingface.co/Qwen/Qwen3-32B
     apply_chat_template_overrides: Optional[dict[str, object]] = None
 
@@ -137,6 +145,8 @@ class RequestOutput:
 class SamplingParams:
     temperature: float
     top_p: float
+    # if True, compute returned logprobs without temperature scaling
+    ignore_temperature_for_logprobs: bool = False
 
 
 @dataclass
