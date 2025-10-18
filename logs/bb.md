@@ -33,3 +33,5 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .i
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge run_name=init_from_random
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_icl_examples_256tokens kv_cache.num_tokens=256
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_icl_cartridge kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/third_party/cartridges/examples/arxiv/cartridges.tex
