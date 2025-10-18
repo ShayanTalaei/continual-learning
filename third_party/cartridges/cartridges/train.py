@@ -69,7 +69,7 @@ class TrainConfig(RunConfig):
     dataset: TrainDataset.Config
     gradient_checkpointing: bool = False
 
-    train_temperature: float = 0.3
+    train_temperature: float = 1.0
     val_temperature: float = 1.0
 
     # datasets for evaluating perplexity on other generations
@@ -406,7 +406,7 @@ def train(config: TrainConfig):
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
 
                     topk_pred_logprobs = torch.gather(
-                        F.log_softmax(outputs.logits, dim=-1)[0],
+                        F.log_softmax(outputs.logits / config.train_temperature, dim=-1)[0],
                         dim=-1,
                         index=batch.topk_token_ids.to(local_rank),
                     )
