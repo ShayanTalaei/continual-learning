@@ -175,6 +175,7 @@ class DistillationConfig(pydra.Config):
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = False
         self.num_generate_problems = 1000
+        self.generate_temperature = 0.0
         
         # Name
         self.run_name = None
@@ -463,7 +464,7 @@ def run_distillation(config: DistillationConfig):
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
                 num_samples=1,
-                temperature=0.0,
+                temperature=config.generate_temperature,
                 batch_size=32,
             )
         ]

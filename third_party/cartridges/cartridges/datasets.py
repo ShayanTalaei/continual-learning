@@ -15,6 +15,7 @@ import torch
 from transformers import PreTrainedTokenizerFast
 from pydrantic import ObjectConfig, BaseConfig
 import numpy as np
+from tqdm import tqdm
 
 from cartridges.structs import Conversation, MessageDict, read_conversations
 from cartridges.initialization.tokenization_utils import MODEL_TO_CHAT_TEMPLATE, MODELS_WITH_THINKING
@@ -507,15 +508,19 @@ class ShayanTrainDataset(TrainDataset):
         
     def _prepare_elements(self) -> list[DatasetElement]:
         data = []
+        print(f"Starting _prepare_elements")
+
         for source in self.config.data_sources:
             data.extend(_prepare_data_source(source))
+
+        print(f"Done loading {len(data)} elements")
         
         # breakpoint()
         # all_probs = [torch.tensor(logprobs).exp() for seq in data for logprobs in seq["topk_logprobs"]]
         # all_probs = [torch.tensor(logprobs).exp()[:1].sum() for seq in data for logprobs in seq["topk_logprobs"]]
    
         elements = []
-        for row in data:
+        for row in tqdm(data, "Preparing elements"):
             ids = self.tokenizer.apply_chat_template(
                 row["input_messages"],
                 add_generation_prompt=True,

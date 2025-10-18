@@ -35,3 +35,12 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge ru
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_icl_examples_256tokens kv_cache.num_tokens=256
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_icl_cartridge kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/third_party/cartridges/examples/arxiv/cartridges.tex
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_extraicl_examples input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_extraicl_examples_evaltemp0dot1 input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl generate_temperature=0.1
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_extraicl_examples_nosys input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=init_from_extraicl_examples_256tokens input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl run_name=init_from_icl_examples_256tokens kv_cache.num_tokens=256
