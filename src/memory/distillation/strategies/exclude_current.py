@@ -35,15 +35,15 @@ class ExcludeCurrentStrategy(MemoryFormationStrategy):
         
         for idx, e in enumerate(full_history):
             if e.type.lower() == "observation":
-                obs = e.content if isinstance(e.content, str) else str(e.content)
+                obs = e.content
                 obs_idx = idx
                 act, fb = None, None
                 act_idx, fb_idx = None, None
             elif e.type.lower() == "action":
-                act = e.content if isinstance(e.content, str) else str(e.content)
+                act = e.content
                 act_idx = idx
             elif e.type.lower() == "feedback":
-                fb = e.content if isinstance(e.content, dict) else {"message": e.content}
+                fb = e.content
                 fb_idx = idx
                 if obs is not None and act is not None:
                     # We have a complete triplet

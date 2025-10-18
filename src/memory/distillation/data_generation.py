@@ -10,6 +10,7 @@ from threading import Lock
 
 from src.memory.distillation.strategies.exclude_current import ExcludeCurrentStrategy
 from src.memory.distillation.strategies.full_memory import FullMemoryStrategy
+from src.memory.distillation.strategies.random_sampling import RandomSamplingStrategy
 from src.memory.distillation.strategies.base import MemoryFormationStrategy
 from src.agent.history_agent import HistoryAgent, HistoryAgentConfig
 from src.memory.history_list import HistoryList, HistoryListConfig
@@ -21,20 +22,23 @@ from src.lm.tokasaurus_client import TokasaurusConfig, TokasaurusClient
 # ============================================================================
 
 class StrategyConfig(BaseModel):
-    name: Literal["full_memory", "exclude_current", "rolling_window", "failure_focus"]
+    name: Literal["full_memory", "exclude_current", "random_sampling", "rolling_window", "failure_focus"]
     window_k: Optional[int] = None
     exclude_current: bool = False
     failure_focus: bool = False
-    # Shuffling parameters for exclude_current strategy
+    # Shuffling parameters for exclude_current and full_memory strategies
     do_shuffle: bool = False
     num_shufflings: int = 1
-    # Parameters for full_memory strategy
+    # Parameters for full_memory and random_sampling strategies
     memory_checkpoint_path: Optional[str] = None
     target_dataset_config: Optional[Dict[str, Any]] = None
     max_target_samples: Optional[int] = None
     # Optional slicing over target environments (applied before max_target_samples)
     start_idx: Optional[int] = None
     end_idx: Optional[int] = None
+    # Parameters for random_sampling strategy
+    subset_size: Optional[int] = None
+    num_subsets: int = 1
 
 
 class DataGenConfig(BaseModel):
@@ -107,6 +111,26 @@ def _make_strategy(cfg: DataGenConfig) -> MemoryFormationStrategy:
         return FullMemoryStrategy(
             memory_checkpoint_path=cfg.strategy.memory_checkpoint_path,
             target_dataset_config=cfg.strategy.target_dataset_config,
+            max_target_samples=cfg.strategy.max_target_samples,
+            start_idx=cfg.strategy.start_idx,
+            end_idx=cfg.strategy.end_idx,
+            do_shuffle=cfg.strategy.do_shuffle,
+            num_shufflings=cfg.strategy.num_shufflings,
+            logger=None  # Will be set by the calling context
+        )
+    elif cfg.strategy.name == "random_sampling":
+        if not cfg.strategy.memory_checkpoint_path:
+            raise ValueError("memory_checkpoint_path is required for random_sampling strategy")
+        if not cfg.strategy.target_dataset_config:
+            raise ValueError("target_dataset_config is required for random_sampling strategy")
+        if cfg.strategy.subset_size is None:
+            raise ValueError("subset_size is required for random_sampling strategy")
+        
+        return RandomSamplingStrategy(
+            memory_checkpoint_path=cfg.strategy.memory_checkpoint_path,
+            target_dataset_config=cfg.strategy.target_dataset_config,
+            subset_size=cfg.strategy.subset_size,
+            num_subsets=cfg.strategy.num_subsets,
             max_target_samples=cfg.strategy.max_target_samples,
             start_idx=cfg.strategy.start_idx,
             end_idx=cfg.strategy.end_idx,
@@ -256,10 +280,10 @@ def run_data_generation(cfg: DataGenConfig) -> str:
     strategy = _make_strategy(cfg)
     print(f"[DataGen] Using strategy: {cfg.strategy.name}")
     
-    # For full_memory strategy, the memory is loaded within the strategy itself
-    if cfg.strategy.name == "full_memory":
-        history_entries = []  # Not used for full_memory strategy
-        print(f"[DataGen] Full memory strategy - memory loaded within strategy")
+    # For full_memory and random_sampling strategies, the memory is loaded within the strategy itself
+    if cfg.strategy.name in ["full_memory", "random_sampling"]:
+        history_entries = []  # Not used for these strategies
+        print(f"[DataGen] {cfg.strategy.name} strategy - memory loaded within strategy")
     else:
         # For other strategies, load from checkpoint_dir
         snapshot = _find_latest_snapshot(cfg.checkpoint_dir)
@@ -293,10 +317,24 @@ def run_data_generation(cfg: DataGenConfig) -> str:
             print(f"[DataGen] Found {len(existing_sample_ids)} existing samples, will skip them")
     
     # Determine total samples for progress bar
-    if cfg.strategy.name == "full_memory":
-        # For full_memory strategy, samples are based on target dataset size
-        full_memory_strategy = cast(FullMemoryStrategy, strategy)
-        total_samples = cfg.max_samples if cfg.max_samples is not None else len(full_memory_strategy.target_environments)
+    if cfg.strategy.name in ["full_memory", "random_sampling"]:
+        # For full_memory and random_sampling strategies, samples are based on target dataset size
+        if cfg.strategy.name == "full_memory":
+            full_memory_strategy = cast(FullMemoryStrategy, strategy)
+            base_samples = len(full_memory_strategy.target_environments)
+            # Account for shuffling
+            if cfg.strategy.do_shuffle:
+                total_samples = base_samples * cfg.strategy.num_shufflings
+            else:
+                total_samples = base_samples
+        else:  # random_sampling
+            random_sampling_strategy = cast(RandomSamplingStrategy, strategy)
+            base_samples = len(random_sampling_strategy.target_environments)
+            # Account for multiple subsets
+            total_samples = base_samples * cfg.strategy.num_subsets
+        
+        if cfg.max_samples is not None:
+            total_samples = min(total_samples, cfg.max_samples)
     else:
         total_samples = cfg.max_samples if cfg.max_samples is not None else len(history_entries)
     print(f"[DataGen] Starting sample generation (max_samples={cfg.max_samples}, num_threads={cfg.num_threads})...")
