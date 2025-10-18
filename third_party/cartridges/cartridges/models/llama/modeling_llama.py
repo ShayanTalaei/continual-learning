@@ -306,15 +306,19 @@ class LlamaAttention(nn.Module):
                 key_states = F.dropout(key_states, p=self.config.attention_dropout, training=self.training)
                 value_states = F.dropout(value_states, p=self.config.attention_dropout, training=self.training)
 
-        attn_output = flex_attention_forward(
-            self,
-            query_states,
-            key_states,
-            value_states,
-            attention_mask=batch.attention_mask,
-            scaling=self.scaling,
-            mode=batch.mode,
-        )
+        try:
+            attn_output = flex_attention_forward(
+                self,
+                query_states,
+                key_states,
+                value_states,
+                attention_mask=batch.attention_mask,
+                scaling=self.scaling,
+                mode=batch.mode,
+            )
+        except Exception as e:
+            breakpoint()
+            raise e
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)
         

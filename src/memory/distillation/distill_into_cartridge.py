@@ -174,7 +174,8 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = False
-
+        self.num_generate_problems = 1000
+        
         # Name
         self.run_name = None
     
@@ -456,7 +457,9 @@ def run_distillation(config: DistillationConfig):
     if config.do_gen_evals:
         generate_evals = [
             GenerationEvalConfig(
-                dataset=FinerGenerateDataset.Config(),
+                dataset=FinerGenerateDataset.Config(
+                    num_problems=config.num_generate_problems,
+                ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
                 num_samples=1,
