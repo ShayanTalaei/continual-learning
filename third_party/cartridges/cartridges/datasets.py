@@ -524,7 +524,7 @@ class ShayanTrainDataset(TrainDataset):
 
             num_answer_ids = len(row["output_ids"])
             num_question_ids = len(ids) - num_answer_ids
-            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long)
+            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
 
             assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
             assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"

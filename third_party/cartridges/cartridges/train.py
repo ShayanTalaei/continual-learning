@@ -334,6 +334,7 @@ def train(config: TrainConfig):
         lr_scheduler: Scheduler = config.lr_scheduler.instantiate()
     else:
         lr_scheduler = None
+    
     for epoch_idx in range(1, config.epochs + 1):
 
         if is_ddp and train_sampler is not None:
