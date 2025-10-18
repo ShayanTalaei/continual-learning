@@ -62,7 +62,7 @@ class InputDatasetConfig(pydra.Config):
         # Either use HuggingFace dataset or local pre-processed dataset
         self.repo_id = None  # HuggingFace dataset repo ID
         self.split = "train"  # Dataset split to use (for HF datasets)
-        self.local_path = "/mnt/data/shayan_memory/finer_data_gen_shuffled_256x100/dataset.jsonl"  # Path to pre-processed parquet file
+        self.local_path = pydra.REQUIRED  # Path to pre-processed parquet file
     
     def finalize(self):
         if not self.repo_id and not self.local_path:
@@ -86,12 +86,12 @@ class KVCacheInitConfig(pydra.Config):
     def __init__(self):
         super().__init__()
         self.method = "random"  # Initialization method: "random" or "text"
-        self.num_tokens = 2048  # Number of tokens in the cartridge
+        self.num_tokens = pydra.REQUIRED  # Number of tokens in the cartridge
         self.num_frozen_tokens = 4  # Number of tokens to freeze (prevents forgetting)
         
         # For text initialization
         self.init_text = None  # Text to initialize from (for method='text')
-        self.init_text_file = None  # File containing init text (overrides init_text)
+        self.init_text_file = pydra.REQUIRED  # File containing init text (overrides init_text)
 
 
 class TrainingConfig(pydra.Config):
@@ -106,7 +106,7 @@ class TrainingConfig(pydra.Config):
         self.gradient_checkpointing = True  # Enable activation (gradient) checkpointing to reduce memory usage
 
         # Temperature
-        self.train_temperature = 0.3  # Temperature for training
+        self.train_temperature = 1.0  # Temperature for training
         self.val_temperature = 1.0  # Temperature for validation
         
         # Checkpointing
@@ -174,7 +174,9 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = False
-
+        self.num_generate_problems = 1000
+        self.generate_temperature = 0.0
+        
         # Name
         self.run_name = None
     
@@ -456,11 +458,13 @@ def run_distillation(config: DistillationConfig):
     if config.do_gen_evals:
         generate_evals = [
             GenerationEvalConfig(
-                dataset=FinerGenerateDataset.Config(),
+                dataset=FinerGenerateDataset.Config(
+                    num_problems=config.num_generate_problems,
+                ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
                 num_samples=1,
-                temperature=0.0,
+                temperature=config.generate_temperature,
                 batch_size=32,
             )
         ]
