@@ -9,43 +9,43 @@ from src.data.env import EnvDataset, Environment
 from .base import MemoryFormationStrategy, SampleSpec
 
 
-class FullMemoryStrategy(MemoryFormationStrategy):
-    """Strategy that uses full memory from a checkpoint with samples from a target dataset.
+class RandomSamplingStrategy(MemoryFormationStrategy):
+    """Strategy that randomly samples K trajectories from memory for each sample.
     
     This strategy loads a complete memory snapshot from a checkpoint and creates samples
-    using observations from a target dataset (e.g., validation set). Each sample uses
-    the full memory as context.
+    using observations from a target dataset. For each sample, it randomly selects K
+    trajectories (triplets) from the full memory to use as context.
     """
     
     def __init__(self, 
                  memory_checkpoint_path: str,
                  target_dataset_config: Dict[str, Any],
+                 subset_size: int,
+                 num_subsets: int = 1,
                  max_target_samples: Optional[int] = None,
                  start_idx: Optional[int] = None,
                  end_idx: Optional[int] = None,
-                 do_shuffle: bool = False,
-                 num_shufflings: int = 1,
                  logger=None,
                  **kwargs: Any):
-        """Initialize the FullMemoryStrategy.
+        """Initialize the RandomSamplingStrategy.
         
         Args:
             memory_checkpoint_path: Path to the memory checkpoint directory
             target_dataset_config: Configuration for the target dataset (e.g., validation set)
+            subset_size: Number of trajectories (triplets) to sample for each memory view
+            num_subsets: Number of different random subsets to create per environment
             max_target_samples: Maximum number of samples to use from target dataset
             start_idx: Optional start index for slicing target dataset
             end_idx: Optional end index for slicing target dataset
-            do_shuffle: Whether to shuffle memory entries for each sample
-            num_shufflings: Number of shuffled versions to create per sample (when shuffling is enabled)
             logger: Optional logger instance
         """
         self.memory_checkpoint_path = Path(memory_checkpoint_path)
         self.target_dataset_config = target_dataset_config
+        self.subset_size = subset_size
+        self.num_subsets = num_subsets
         self.max_target_samples = max_target_samples
         self.start_idx = start_idx
         self.end_idx = end_idx
-        self.do_shuffle = do_shuffle
-        self.num_shufflings = num_shufflings
         self.logger = logger
         
         # Load the memory snapshot
@@ -135,64 +135,59 @@ class FullMemoryStrategy(MemoryFormationStrategy):
             ))
         return memory_snapshot
     
+    def _sample_random_trajectories(self, all_triplets: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Randomly sample subset_size trajectories from all available triplets."""
+        if len(all_triplets) <= self.subset_size:
+            # If we have fewer triplets than subset_size, use all of them
+            return all_triplets.copy()
+        
+        # Randomly sample subset_size triplets
+        return random.sample(all_triplets, self.subset_size)
+    
     def iter_samples(self, full_history: List[Entry]) -> Iterable[SampleSpec]:
-        """Generate samples using the full memory with target dataset observations.
+        """Generate samples using randomly sampled trajectories from memory.
         
         Note: The full_history parameter is ignored since we use our own memory snapshot.
         """
-        # Convert memory entries to triplets for shuffling
-        memory_triplets = self._get_memory_triplets(self.memory_entries)
+        # Convert memory entries to triplets for sampling
+        all_memory_triplets = self._get_memory_triplets(self.memory_entries)
+        
+        if self.logger:
+            self.logger.info(f"Available memory triplets: {len(all_memory_triplets)}")
+            self.logger.info(f"Sampling {self.subset_size} triplets per subset, {self.num_subsets} subsets per environment")
         
         for env_idx, environment in enumerate(self.target_environments):
             # Reset the environment to get the initial observation
             obs = environment.reset()
             
-            if self.do_shuffle:
-                # Create multiple shuffled versions for this environment
-                for shuffle_idx in range(self.num_shufflings):
-                    # Create a shuffled copy of the triplets
-                    shuffled_triplets = memory_triplets.copy()
-                    random.shuffle(shuffled_triplets)
-                    
-                    # Convert back to memory entries
-                    shuffled_memory = self._get_memory_snapshot_from_triplets(shuffled_triplets)
-                    
-                    sample_id = f"full_memory_env_{env_idx}_shuffle_{shuffle_idx}"
-                    
-                    yield SampleSpec(
-                        observation=obs,
-                        target_action=None,  # No target action for this strategy
-                        feedback=None,  # No feedback for this strategy
-                        focus_key=(shuffle_idx, env_idx),  # shuffle_idx, env_idx
-                        memory_directives={"memory_snapshot": shuffled_memory},
-                        meta={
-                            "env_id": environment.env_id,
-                            "env_type": environment.env_type,
-                            "env_index": env_idx,
-                            "shuffle_index": shuffle_idx,
-                            "strategy": "full_memory"
-                        },
-                        sample_id=sample_id,
-                    )
-            else:
-                # Use original memory without shuffling
-                sample_id = f"full_memory_env_{env_idx}_shuffle_0"
+            # Create num_subsets different random samples for this environment
+            for subset_idx in range(self.num_subsets):
+                # Randomly sample trajectories for this subset
+                sampled_triplets = self._sample_random_trajectories(all_memory_triplets)
+                
+                # Convert back to memory entries
+                sampled_memory = self._get_memory_snapshot_from_triplets(sampled_triplets)
+                
+                sample_id = f"random_sampling_env_{env_idx}_subset_{subset_idx}"
                 
                 yield SampleSpec(
                     observation=obs,
                     target_action=None,  # No target action for this strategy
                     feedback=None,  # No feedback for this strategy
-                    focus_key=(0, env_idx),  # episode_id=0, step_id=env_idx
-                    memory_directives={"memory_snapshot": self.memory_entries},
+                    focus_key=(subset_idx, env_idx),  # subset_idx, env_idx
+                    memory_directives={"memory_snapshot": sampled_memory},
                     meta={
                         "env_id": environment.env_id,
                         "env_type": environment.env_type,
                         "env_index": env_idx,
-                        "strategy": "full_memory"
+                        "subset_index": subset_idx,
+                        "subset_size": len(sampled_triplets),
+                        "total_available_triplets": len(all_memory_triplets),
+                        "strategy": "random_sampling"
                     },
                     sample_id=sample_id,
                 )
     
     def build_memory_for_sample(self, full_history: List[Entry], spec: SampleSpec) -> List[Entry]:
-        """Return the full memory snapshot for each sample."""
+        """Return the sampled memory snapshot for each sample."""
         return spec.memory_directives["memory_snapshot"]

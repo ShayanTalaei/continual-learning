@@ -1,13 +1,13 @@
-## Test Config for Full Memory Strategy
-## This config uses the full_memory strategy to create samples with complete memory
-## and observations from a target dataset (validation set)
+## Test Config for Random Sampling Strategy
+## This config uses the random_sampling strategy to create samples with randomly
+## sampled K trajectories from memory and observations from a target dataset
 
 # Path to the HistoryAgent checkpoint directory containing memory snapshots
-# This is used as a fallback for non-full_memory strategies
+# This is used as a fallback for non-random_sampling strategies
 checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
 
 # Output directory for generated dataset
-output_dir: "/mnt/data/shayan_memory/finer_train_data_gen_full_memory_6x15000_2"
+output_dir: "/mnt/data/shayan_memory/finer_train_data_gen_random_20_sampling_8x15000"
 
 # Output format: "jsonl" or "parquet"
 output_format: "jsonl"
@@ -18,9 +18,9 @@ include_teacher_messages_texts: true
 # Individual file saving for resume functionality
 save_individual_files: true
 
-# Memory formation strategy - using full_memory
+# Memory formation strategy - using random_sampling
 strategy:
-  name: "full_memory"
+  name: "random_sampling"
   # Path to the memory checkpoint (can be different from checkpoint_dir)
   memory_checkpoint_path: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
   # Target dataset configuration (e.g., validation set)
@@ -38,6 +38,9 @@ strategy:
   # Optional slicing over the target environments
   start_idx: 100
   end_idx: 15100
+  # Random sampling configuration
+  subset_size: 20  # Number of trajectories (triplets) to sample for each memory view
+  num_subsets: 8   # Number of different random subsets to create per environment
 
 # Agent prompt rendering
 agent_type: "history_agent"
@@ -46,7 +49,7 @@ system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.t
 # Language model configuration (Tokasaurus server)
 lm_model: "meta-llama/Llama-3.1-8B-Instruct"
 lm_base_url: "http://localhost:8080"
-lm_temperature: 0.7
+lm_temperature: 0.0
 lm_max_output_tokens: 2048
 
 # Retry configuration for robust data generation
@@ -58,14 +61,14 @@ top_logprobs: 20
 # Enable full sequence tensor data for advanced distillation training
 include_full_sequence_data: true
 
-# Sampling parameters - limit to small number for testing
+# Sampling parameters - no repetition, random sampling provides the variation
 max_samples: null
-num_repeat_samples: 6 # -1 for 1 repeatition with no explicit repetition ID
+num_repeat_samples: -1 # -1 for 1 repetition with no explicit repetition ID
 
 # Parallelism: use single thread for testing
 num_threads: 64
 
 # Additional metadata to include in each sample
 metadata:
-  dataset_version: "full_memory_v1"
-  description: "Test dataset using full memory strategy with validation set observations"
+  dataset_version: "random_sampling_v1"
+  description: "Test dataset using random sampling strategy with 20 trajectories per subset, 8 subsets per environment"
