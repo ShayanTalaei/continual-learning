@@ -174,7 +174,7 @@ class DistillationConfig(pydra.Config):
         # Evaluation
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
-        self.generate_before_training = False
+        self.generate_before_training = True
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
