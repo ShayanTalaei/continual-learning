@@ -17,6 +17,8 @@ from pydrantic import ObjectConfig, BaseConfig
 import numpy as np
 from tqdm import tqdm
 
+from src.data.envs.finer_env import is_correct_finer
+
 from cartridges.structs import Conversation, MessageDict, read_conversations
 from cartridges.initialization.tokenization_utils import MODEL_TO_CHAT_TEMPLATE, MODELS_WITH_THINKING
 from cartridges.utils import get_logger
@@ -504,7 +506,8 @@ class TrainDataset(Dataset):
 
 class ShayanTrainDataset(TrainDataset):
     class Config(TrainDataset.Config):
-        pass
+        filter_incorrect: bool = False
+        ground_truth_target: bool = False
         
     def _prepare_elements(self) -> list[DatasetElement]:
         data = []
@@ -515,12 +518,23 @@ class ShayanTrainDataset(TrainDataset):
 
         print(f"Done loading {len(data)} elements")
         
-        # breakpoint()
-        # all_probs = [torch.tensor(logprobs).exp() for seq in data for logprobs in seq["topk_logprobs"]]
-        # all_probs = [torch.tensor(logprobs).exp()[:1].sum() for seq in data for logprobs in seq["topk_logprobs"]]
-   
         elements = []
         for row in tqdm(data, "Preparing elements"):
+            if self.config.filter_incorrect:
+                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+                if row["evaluation"]["score"] != 1:
+                    continue
+            
+            if self.config.ground_truth_target:
+                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+                row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
+                row["topk_token_ids"] = [
+                    [id] for id in row["output_ids"]
+                ]
+                row["topk_logprobs"] = [
+                    0.0 for _ in range(len(row["output_ids"]))
+                ]
+
             ids = self.tokenizer.apply_chat_template(
                 row["input_messages"],
                 add_generation_prompt=True,

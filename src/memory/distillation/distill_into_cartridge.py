@@ -63,6 +63,8 @@ class InputDatasetConfig(pydra.Config):
         self.repo_id = None  # HuggingFace dataset repo ID
         self.split = "train"  # Dataset split to use (for HF datasets)
         self.local_path = pydra.REQUIRED  # Path to pre-processed parquet file
+        self.filter_incorrect = False  # Whether to filter incorrect answers
+        self.ground_truth_target = False  # Whether to use the ground truth target for the output
     
     def finalize(self):
         if not self.repo_id and not self.local_path:
@@ -133,7 +135,6 @@ class DatasetConfig(pydra.Config):
         self.min_prob_mass = 0.8  # Minimum probability mass for logprobs conversion
         self.batch_size = 8  # Batch size
 
-
 class WandBConfigWrapper(pydra.Config):
     """Configuration for Weights & Biases logging."""
     def __init__(self):
@@ -176,6 +177,7 @@ class DistillationConfig(pydra.Config):
         self.generate_before_training = False
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
+        self.generate_batch_size = 32
         
         # Name
         self.run_name = None
@@ -447,7 +449,7 @@ def run_distillation(config: DistillationConfig):
                     packed_seq_length=config.dataset.packed_seq_length,
                     targets=config.dataset.targets,
                     top_k_logits=config.dataset.top_k_logits,
-                    batch_size=config.dataset.batch_size,
+                    batch_size=config.dataset.batch_size
                 ),
                 name_for_wandb="finer_val_loss",
             )
@@ -465,7 +467,7 @@ def run_distillation(config: DistillationConfig):
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,
-                batch_size=32,
+                batch_size=config.generate_batch_size,
             )
         ]
     else:
@@ -502,6 +504,8 @@ def run_distillation(config: DistillationConfig):
                 targets=config.dataset.targets,
                 top_k_logits=config.dataset.top_k_logits,
                 batch_size=config.dataset.batch_size,
+                filter_incorrect=config.input_dataset.filter_incorrect,
+                ground_truth_target=config.input_dataset.ground_truth_target
             ),
 
             # Loss evals
