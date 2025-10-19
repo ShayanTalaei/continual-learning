@@ -65,6 +65,9 @@ class TokasaurusClient(LanguageModel):
         call_id = self._begin_call(messages)
         start_time = time.time()
         last_err: Optional[Exception] = None
+        ctx: Dict[str, Any] = jsonlogger.json_get_context()
+        mode = ctx.get("mode")
+        should_retry_truncation = not (mode == "val" or mode == "validation")
 
         # Optional health check - disabled by default to reduce noise under high load
         if self.cfg.enable_health_check:
@@ -112,7 +115,13 @@ class TokasaurusClient(LanguageModel):
                         error_context["response_text"] = getattr(response, 'text', '')[:500]  # First 500 chars
                     except:
                         pass
-                
+                # Only retry on truncation during training
+                if not (should_retry_truncation and isinstance(e, GenerationTruncatedError)):
+                    self.logger.error(
+                        f"Tokasaurus call FAILED (no retry). URL: {self.cfg.base_url}, Model: {self.cfg.model}, Error: {error_type}: {e}",
+                        extra=error_context
+                    )
+                    break
                 if attempt > self.config.max_retries:
                     self.logger.error(
                         f"Tokasaurus call FAILED after {attempt} attempts. "
@@ -120,7 +129,6 @@ class TokasaurusClient(LanguageModel):
                         extra=error_context
                     )
                     break
-                
                 delay = min(
                     self.config.starting_delay * (self.config.backoff_factor ** attempt),
                     self.config.max_delay,
@@ -158,10 +166,14 @@ class TokasaurusClient(LanguageModel):
         else:
             url = f"{self.cfg.base_url}/v1/cartridge/chat/completions"
 
+        ctx: Dict[str, Any] = jsonlogger.json_get_context()
+        mode = ctx.get("mode")
+        temperature = self.cfg.val_temperature if (mode == "val" or mode == "validation") else self.cfg.train_temperature
+
         payload: Dict[str, Any] = {
             "model": self.cfg.model,
             "messages": messages,
-            "temperature": self.cfg.temperature,
+            "temperature": temperature,
             "max_tokens": self.cfg.max_output_tokens,
         }
         if cartridges is not None:
@@ -255,6 +267,10 @@ class TokasaurusClient(LanguageModel):
                     "Proceeding anyway to allow cold start."
                 )
 
+        ctx: Dict[str, Any] = jsonlogger.json_get_context()
+        mode = ctx.get("mode")
+        should_retry_truncation = not (mode == "val" or mode == "validation")
+
         for attempt in range(1, self.config.max_retries + 2):
             try:
                 
@@ -280,7 +296,7 @@ class TokasaurusClient(LanguageModel):
                     **tensor_data
                 }
                 return response
-                
+            
             except Exception as e:
                 last_err = e
                 error_type = type(e).__name__
@@ -303,6 +319,13 @@ class TokasaurusClient(LanguageModel):
                     except:
                         pass
                 
+                # Only retry on truncation during training
+                if not (should_retry_truncation and isinstance(e, GenerationTruncatedError)):
+                    self.logger.error(
+                        f"Tokasaurus call FAILED (no retry). URL: {self.cfg.base_url}, Model: {self.cfg.model}, Error: {error_type}: {e}",
+                        extra=error_context
+                    )
+                    break
                 if attempt > self.config.max_retries:
                     self.logger.error(
                         f"Tokasaurus call FAILED after {attempt} attempts. "
@@ -310,7 +333,6 @@ class TokasaurusClient(LanguageModel):
                         extra=error_context
                     )
                     break
-                
                 delay = min(
                     self.config.starting_delay * (self.config.backoff_factor ** attempt),
                     self.config.max_delay,
@@ -366,10 +388,14 @@ class TokasaurusClient(LanguageModel):
         else:
             url = f"{self.cfg.base_url}/v1/cartridge/chat/completions"
 
+        ctx: Dict[str, Any] = jsonlogger.json_get_context()
+        mode = ctx.get("mode")
+        temperature = self.cfg.val_temperature if (mode == "val" or mode == "validation") else self.cfg.train_temperature
+
         payload: Dict[str, Any] = {
             "model": self.cfg.model,
             "messages": messages,
-            "temperature": self.cfg.temperature,
+            "temperature": temperature,
             "max_tokens": self.cfg.max_output_tokens,
             "logprobs_in_fingerprint": True,  # Enable tensor data in fingerprint
         }

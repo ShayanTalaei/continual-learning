@@ -8,7 +8,8 @@ from logging import Logger, getLogger
 
 class LMConfig(BaseModel):
     model: str
-    temperature: float = 0.2
+    train_temperature: float = 0.2
+    val_temperature: float = 0.2
     max_output_tokens: int = 8192
     log_calls: bool = False
     # Retry/backoff
