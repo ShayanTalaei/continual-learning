@@ -55,13 +55,13 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .i
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_2048tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1
 
-torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_256tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=256 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_256tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=256 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1 generate_batch_size=16
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_4096tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=4096 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1
 
-torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_8192tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=8192 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_8192tokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=8192 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1 dataset.batch_size=4 dataset.packed_seq_length=16000 training.global_batch_size=16 generate_batch_size=8
 
-torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_16ktokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=16384 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_16ktokens_mem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=16384 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_nosystem.txt training.train_temperature=1 dataset.batch_size=4 dataset.packed_seq_length=16000 training.global_batch_size=16 generate_batch_size=8
 
 
 ## Ablating the KV cache init
@@ -69,3 +69,45 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .i
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_2048tokens_sysmem input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_2048tokens_cartridge input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=2048 training.train_temperature=1 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/third_party/cartridges/examples/arxiv/cartridges.tex
+
+
+python -m src.memory.distillation.distill_into_cartridge .no_evals .init_from_text input_dataset.local_path=/mnt/data/shayan_memory/finer_data_gen_shuffled_16x100/dataset.jsonl kv_cache.num_tokens=2048 training.train_temperature=1 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/third_party/cartridges/examples/arxiv/cartridges.tex input_dataset.filter_incorrect=T
+
+
+# Running and filtering out incorrect
+
+python -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect_5e4lr input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T training.lr=5e-4
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct17_2048tokens_memwithsystags input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1_mem_with_syschat_tags.txt training.train_temperature=1
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_gttargs input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.ground_truth_target=T
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_128tokens_sysmem_gttargs input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=128 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.ground_truth_target=T
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_16x100_2048tokens_sysmem_gttargs input_dataset.local_path=/mnt/data/shayan_memory/finer_data_gen_shuffled_16x100/dataset.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.ground_truth_target=T
+
+
+## Hyperparameter ablations
+
+
+## LRs
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect_1e3lr input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T training.lr=1e-3
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect_1e3lr input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T training.lr=5e-5
+
+
+## Weight decay
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_2048tokens_sysmem_filterincorrect_01wd input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=2048 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T training.weight_decay=0.1
+
+
+## KV cache size
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_128tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=128 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_256tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=256 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T

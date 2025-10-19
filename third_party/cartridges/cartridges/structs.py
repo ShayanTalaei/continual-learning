@@ -140,8 +140,10 @@ def _conversations_from_pkl(path: str) -> list[Conversation]:
 
 def _conversations_from_jsonl(path: str) -> list[Conversation]:
     import json
+    data = []
     with open(path) as f:
-        data = [json.loads(line) for line in f]
+        for idx, line in enumerate(f):
+            data.append(json.loads(line))
     return data
 
 
