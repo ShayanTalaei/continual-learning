@@ -240,6 +240,40 @@ def _process_single_sample(
         include_teacher_messages_texts
     )
     
+    # Optional evaluation against target environment when strategy provides a dataset
+    try:
+        env_idx = None
+        if isinstance(sample.meta, dict):
+            env_idx = sample.meta.get("env_index")
+        if env_idx is not None and hasattr(strategy, "target_environments"):
+            environments = getattr(strategy, "target_environments")
+            try:
+                idx_int = int(env_idx)
+            except Exception:
+                idx_int = None
+            if isinstance(environments, list) and idx_int is not None and 0 <= idx_int < len(environments):
+                environment = environments[idx_int]
+                eval_result = None
+                try:
+                    # Prefer direct evaluate() to avoid mutating env state
+                    if hasattr(environment, "evaluate"):
+                        eval_result = environment.evaluate(lm_response['text'])  # type: ignore[attr-defined]
+                    if not isinstance(eval_result, dict):
+                        # Fallback to reset/step if evaluate not available or returned unexpected type
+                        try:
+                            environment.reset()
+                            _, feedback, _, _ = environment.step(lm_response['text'])
+                            eval_result = feedback
+                        except Exception:
+                            eval_result = None
+                except Exception as e:
+                    print(f"[DataGen] WARNING: evaluation failed for sample {getattr(sample, 'sample_id', None)}: {e}")
+                    eval_result = None
+                if eval_result is not None:
+                    row["evaluation"] = eval_result
+    except Exception as e:
+        print(f"[DataGen] WARNING: evaluation logic error for sample {getattr(sample, 'sample_id', None)}: {e}")
+    
     # Add sample ID to the row
     if sample.sample_id:
         row["sample_id"] = sample.sample_id
@@ -298,7 +332,8 @@ def run_data_generation(cfg: DataGenConfig) -> str:
     lm_cfg = TokasaurusConfig(
         model=cfg.lm_model,
         base_url=cfg.lm_base_url,
-        temperature=cfg.lm_temperature,
+        train_temperature=cfg.lm_temperature,
+        val_temperature=cfg.lm_temperature,
         max_output_tokens=cfg.lm_max_output_tokens,
         max_retries=cfg.lm_max_retries,
         starting_delay=cfg.lm_starting_delay,

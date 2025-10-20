@@ -7,7 +7,7 @@
 checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
 
 # Output directory for generated dataset
-output_dir: "/mnt/data/shayan_memory/finer_train_data_gen_full_memory_6x15000_2"
+output_dir: "/mnt/data/shayan_memory/finer_v1_val_full_memory_32x1000"
 
 # Output format: "jsonl" or "parquet"
 output_format: "jsonl"
@@ -34,11 +34,11 @@ strategy:
     max_samples: null
     shuffle: false
   # Maximum number of samples to use from target dataset
-  max_target_samples: null
+  max_target_samples: 1000
 
 # Agent prompt rendering
 agent_type: "history_agent"
-system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
 
 # Language model configuration (Tokasaurus server)
 lm_model: "meta-llama/Llama-3.1-8B-Instruct"
@@ -60,7 +60,7 @@ max_samples: null
 num_repeat_samples: 32 # -1 for 1 repeatition with no explicit repetition ID
 
 # Parallelism: use single thread for testing
-num_threads: 64
+num_threads: 32
 
 # Additional metadata to include in each sample
 metadata:
