@@ -326,7 +326,6 @@ class TrainDataset(Dataset):
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         assert (config.packing_mode == "fixed_batch_size_then_pad") == (config.batch_size is not None), "batch_size must be specified when packing mode is fixed_batch_size_then_pad"
-
         self.config = config
         self.tokenizer = tokenizer
         
@@ -508,8 +507,80 @@ class ShayanTrainDataset(TrainDataset):
     class Config(TrainDataset.Config):
         filter_incorrect: bool = False
         ground_truth_target: bool = False
+        system_prompt_path: str
+    
+    def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
+        self.system_prompt = open(config.system_prompt_path, "r").read()
+        super().__init__(config, tokenizer, seed)
         
     def _prepare_elements(self) -> list[DatasetElement]:
+        data = []
+        print(f"Starting _prepare_elements")
+
+        for source in self.config.data_sources:
+            data.extend(_prepare_data_source(source))
+
+        print(f"Done loading {len(data)} elements")
+        
+        elements = []
+        for row in tqdm(data, "Preparing elements"):
+            if self.config.filter_incorrect:
+                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+                if row["evaluation"]["score"] != 1:
+                    continue
+            
+            if self.config.ground_truth_target:
+                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+                row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
+                row["topk_token_ids"] = [
+                    [id] for id in row["output_ids"]
+                ]
+                row["topk_logprobs"] = [
+                    0.0 for _ in range(len(row["output_ids"]))
+                ]
+
+            messages = [
+                {
+                    "role": "system",
+                    "content": self.system_prompt,
+                },
+                row['input_messages'][1]
+            ]
+            ids = self.tokenizer.apply_chat_template(
+                messages,
+                add_generation_prompt=True,
+            )
+            ids += row["output_ids"]
+
+            num_answer_ids = len(row["output_ids"])
+            num_question_ids = len(ids) - num_answer_ids
+            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
+
+            assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
+            assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
+        
+            elements.append(DatasetElement(
+                input_ids=torch.tensor(ids, dtype=torch.long),
+                topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
+                topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
+                topk_token_idxs=topk_token_idxs,
+                metadata=[],
+                token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
+            ))
+        return elements
+
+
+class ShayanStreamingTrainDataset(ShayanTrainDataset):
+    class Config(ShayanTrainDataset.Config):
+        pass
+
+    def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
+        super().__init__(config, tokenizer, seed)
+        
+        assert not config.filter_incorrect, "filter_incorrect is not supported for streaming datasets"
+        assert not config.ground_truth_target, "ground_truth_target is not supported for streaming datasets"
+
+    def _prepare_element(self, row: dict[str, Any]) -> DatasetElement:
         data = []
         print(f"Starting _prepare_elements")
 

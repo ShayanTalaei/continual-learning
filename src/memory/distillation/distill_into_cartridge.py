@@ -181,6 +181,8 @@ class DistillationConfig(pydra.Config):
         
         # Name
         self.run_name = None
+
+        self.system_prompt_path = pydra.REQUIRED
     
     def no_evals(self):
         self.do_loss_evals = False
@@ -196,6 +198,9 @@ class DistillationConfig(pydra.Config):
                 self.run_name = f"distill_{Path(self.input_dataset.local_path).stem}"
             else:
                 self.run_name = f"distill_{Path(self.input_dataset.repo_id or 'unknown').name}"
+        
+        self.run_dir = Path(self.output.local_dir) / self.run_name
+        self.run_dir.mkdir(parents=True, exist_ok=True)
 
 # ============================================================================
 # Helper Functions
@@ -449,7 +454,8 @@ def run_distillation(config: DistillationConfig):
                     packed_seq_length=config.dataset.packed_seq_length,
                     targets=config.dataset.targets,
                     top_k_logits=config.dataset.top_k_logits,
-                    batch_size=config.dataset.batch_size
+                    batch_size=config.dataset.batch_size,
+                    system_prompt_path=config.system_prompt_path,
                 ),
                 name_for_wandb="finer_val_loss",
             )
@@ -462,6 +468,7 @@ def run_distillation(config: DistillationConfig):
             GenerationEvalConfig(
                 dataset=FinerGenerateDataset.Config(
                     num_problems=config.num_generate_problems,
+                    system_prompt_path=config.system_prompt_path,
                 ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
@@ -485,7 +492,7 @@ def run_distillation(config: DistillationConfig):
         train_config = TrainConfig(
             name=config.run_name,
             output_dir=str(output_dir),
-            run_dir=str(output_dir / "run"),
+            run_dir=str(config.run_dir),
             
             train_temperature=config.training.train_temperature,
             val_temperature=config.training.val_temperature,
@@ -505,7 +512,8 @@ def run_distillation(config: DistillationConfig):
                 top_k_logits=config.dataset.top_k_logits,
                 batch_size=config.dataset.batch_size,
                 filter_incorrect=config.input_dataset.filter_incorrect,
-                ground_truth_target=config.input_dataset.ground_truth_target
+                ground_truth_target=config.input_dataset.ground_truth_target,
+                system_prompt_path=config.system_prompt_path,
             ),
 
             # Loss evals

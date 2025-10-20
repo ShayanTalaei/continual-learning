@@ -111,3 +111,21 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .i
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_128tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=128 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge .init_from_text run_name=oct18_256tokens_sysmem_filterincorrect input_dataset.local_path=/mnt/data/shayan_memory/finer_train_data_gen_combined_with_evaluation.jsonl kv_cache.num_tokens=256 kv_cache.init_text_file=/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt training.train_temperature=1 input_dataset.filter_incorrect=T
+
+
+# Back to Marlowe
+
+## Checking environment
+
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct20_100train_128tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=/scratch/m000122/bcabrown/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl \
+    val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
+    system_prompt_path=/scratch/m000122/bcabrown/continual-learning/src/data/prompts/finer/system_prompt_brad_magic.txt \
+    do_loss_evals=F

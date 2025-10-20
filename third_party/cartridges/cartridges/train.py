@@ -391,6 +391,8 @@ def train(config: TrainConfig):
                     assert batch.topk_logprobs is not None
                     assert batch.topk_token_idxs is not None
 
+                    breakpoint()
+
                     t0 = time.time()
                     outputs = wrapped_model(
                         input_ids=batch.input_ids.to(local_rank),
@@ -597,6 +599,11 @@ def evaluate_perplexity(
                 assert batch.topk_logprobs is not None
                 assert batch.topk_token_idxs is not None
 
+                # from transformers import AutoTokenizer
+                # tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+                # print(tokenizer.decode(batch.input_ids[0]))
+                # breakpoint()
+
                 outputs = model(
                     input_ids=batch.input_ids.to(local_rank),
                     seq_ids=batch.element_ids.to(local_rank),
@@ -737,15 +744,15 @@ def evaluate_generations(
             if len(elements) == 0:
                 continue
             
-            input_ids = torch.cat([elem.input_ids[0] for _, elem in elements]).to(local_rank)
+            input_ids = torch.cat([elem.input_ids for _, elem in elements]).to(local_rank)
             seq_ids = torch.cat(
                 [
-                    torch.full((elem.input_ids.shape[1],), idx, dtype=torch.long, device=local_rank)
+                    torch.full((elem.input_ids.shape[0],), idx, dtype=torch.long, device=local_rank)
                     for idx, elem in elements
                 ]
             )
             position_ids = torch.cat(
-                [torch.arange(elem.input_ids.shape[1], device=local_rank) for _, elem in elements]
+                [torch.arange(elem.input_ids.shape[0], device=local_rank) for _, elem in elements]
             )
             
             pred_ids: Dict[int, List[int]] = flex_generate(
@@ -794,7 +801,7 @@ def evaluate_generations(
                         "pred": pred,
                         "convo_id": element.convo_id,
                         "sample_idx": sample_idx,
-                        "num_system_and_user_tokens": element.input_ids.shape[1],
+                        "num_system_and_user_tokens": element.input_ids.shape[0],
                         "num_assistant_tokens": len(pred_ids),
                         **metrics,
                         **element.metadata,
@@ -859,7 +866,7 @@ def evaluate_generations(
     
     if is_ddp:
         dist.barrier()
-    
+        
     return results
 
 
