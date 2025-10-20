@@ -391,8 +391,6 @@ def train(config: TrainConfig):
                     assert batch.topk_logprobs is not None
                     assert batch.topk_token_idxs is not None
 
-                    breakpoint()
-
                     t0 = time.time()
                     outputs = wrapped_model(
                         input_ids=batch.input_ids.to(local_rank),
