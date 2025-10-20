@@ -32,6 +32,10 @@ class VLLMConfig(LMConfig):
     api_key: Optional[str] = None
     timeout_s: float = 900.0
 
+    # Post-processing options
+    strip_think_tags: bool = False  # Remove <think>...</think> from outputs
+    strip_code_fences: bool = True  # Remove ```...``` markdown fences and extract inner code
+
 
 class VLLMClient(LanguageModel):
     """Synchronous vLLM client compatible with `LanguageModel` interface."""
@@ -88,7 +92,6 @@ class VLLMClient(LanguageModel):
 
     def _build_prompt(self, system_prompt: str, user_prompt: str, response_schema: Optional[Dict[str, Any]]) -> str:
         """Build prompt with chat templates and schema-based instructions."""
-        
         # Try to use chat template if available and enabled
         if self.config.use_chat_template and self._tokenizer is not None:
             try:
@@ -172,6 +175,36 @@ class VLLMClient(LanguageModel):
         }
         return text, metrics
 
+    def _strip_think_blocks(self, text: str) -> str:
+        """Remove <think>...</think> blocks, tolerant of multiline content.
+        If tags are missing/misaligned, return original text.
+        """
+        try:
+            import re
+            pattern = re.compile(r"<think>[\s\S]*?</think>", re.IGNORECASE)
+            return re.sub(pattern, "", text)
+        except Exception:
+            return text
+
+    def _strip_code_fences(self, text: str) -> str:
+        """Extract inner code from triple-backtick blocks; if none, return original.
+        Handles optional language tag and multiline content.
+        """
+        try:
+            import re
+            pattern = re.compile(r"```[^\n]*\n([\s\S]*?)\n```", re.IGNORECASE)
+            m = pattern.search(text)
+            if m:
+                return m.group(1).strip()
+            # Also handle single-line fenced variants without trailing newline before ```
+            pattern2 = re.compile(r"```[^\n]*\n([\s\S]*?)```", re.IGNORECASE)
+            m2 = pattern2.search(text)
+            if m2:
+                return m2.group(1).strip()
+            return text
+        except Exception:
+            return text
+
     def _validate_json_response(self, text: str, response_schema: Optional[Dict[str, Any]]) -> str:
         """Clean JSON response by removing common formatting artifacts."""
         if not response_schema or not self.config.json_validation:
@@ -192,9 +225,15 @@ class VLLMClient(LanguageModel):
         call_id = self._begin_call(system_prompt, user_prompt)
         ctx = jsonlogger.json_get_context()
         response_schema = ctx.get("response_schema")
+        # Ensure tokenizer is ready in local mode so chat templates can be applied
+        if not self.config.use_server and self.config.use_chat_template and self._tokenizer is None:
+            try:
+                self._init_engine()
+            except Exception as e:
+                self.logger.warning(f"Engine init before prompt build failed: {e}")
 
         prompt = self._build_prompt(system_prompt, user_prompt, response_schema)
-
+        print(f"Prompt: {prompt}")
         # Sanitize and validate stop sequences
         stops_cfg = self.config.stop_sequences
         stops: Optional[List[str]] = None
@@ -231,47 +270,55 @@ class VLLMClient(LanguageModel):
         last_err: Optional[Exception] = None
 
         for attempt in range(1, self.config.max_retries + 2):
-            try:
+            # try:
                 # If server mode enabled, route to OpenAI-compatible server
-                self.logger.info(f"use_server: {self.config.use_server}, base_url: {self.config.base_url}")
-                if self.config.use_server and self.config.base_url:
-                    self.logger.info(f"Calling vLLM server at {self.config.base_url}")
-                    text, metrics = self._call_openai_server(system_prompt, user_prompt, start_time)
-                    if response_schema:
-                        text = self._validate_json_response(text, response_schema)
-                    self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                    return text
-
-                outputs = self._init_engine().generate([prompt], sampling)
-                duration = time.time() - start_time
-
-                if not outputs or len(outputs) == 0:
-                    raise ValueError("Empty vLLM outputs")
-
-                out0 = outputs[0]
-                # Prefer first candidate text
-                if not out0.outputs or len(out0.outputs) == 0:
-                    raise ValueError("vLLM returned no candidates")
-
-                text = out0.outputs[0].text or ""
-                
-                # Validate and clean JSON response if schema provided
+            self.logger.info(f"use_server: {self.config.use_server}, base_url: {self.config.base_url}")
+            if self.config.use_server and self.config.base_url:
+                self.logger.info(f"Calling vLLM server at {self.config.base_url}")
+                text, metrics = self._call_openai_server(system_prompt, user_prompt, start_time)
                 if response_schema:
                     text = self._validate_json_response(text, response_schema)
-                
-                metrics = self._extract_metrics(out0, duration)
-
+                if self.config.strip_code_fences:
+                    text = self._strip_code_fences(text)
+                if self.config.strip_think_tags:
+                    text = self._strip_think_blocks(text)
                 self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
                 return text
+
+            outputs = self._init_engine().generate([prompt], sampling, use_tqdm=False)
+            duration = time.time() - start_time
+
+            if not outputs or len(outputs) == 0:
+                raise ValueError("Empty vLLM outputs")
+
+            out0 = outputs[0]
+            # Prefer first candidate text
+            if not out0.outputs or len(out0.outputs) == 0:
+                raise ValueError("vLLM returned no candidates")
+
+            text = out0.outputs[0].text or ""
+            
+            # Validate and clean JSON response if schema provided
+            if response_schema:
+                text = self._validate_json_response(text, response_schema)
+            if self.config.strip_code_fences:
+                text = self._strip_code_fences(text)
+            if self.config.strip_think_tags:
+                text = self._strip_think_blocks(text)
+            
+            metrics = self._extract_metrics(out0, duration)
+
+            self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
+            return text
                 
-            except Exception as e:
-                last_err = e
-                if attempt > self.config.max_retries:
-                    self.logger.warning(f"Error at attempt {attempt}: Max retries reached, stopping retries")
-                    break
-                self.logger.warning(f"Warning at attempt {attempt}: Retrying vLLM call: {e}")
-                delay = min(self.config.starting_delay * (self.config.backoff_factor ** attempt), self.config.max_delay)
-                time.sleep(delay)
+            # except Exception as e:
+            #     last_err = e
+            #     if attempt > self.config.max_retries:
+            #         self.logger.warning(f"Error at attempt {attempt}: Max retries reached, stopping retries")
+            #         break
+            #     self.logger.warning(f"Warning at attempt {attempt}: Retrying vLLM call: {e}")
+            #     delay = min(self.config.starting_delay * (self.config.backoff_factor ** attempt), self.config.max_delay)
+            #     time.sleep(delay)
 
         # On failure, record error with consistent payload structure
         error_payload = {"error": str(last_err) if last_err else "Unknown error"}
