@@ -1,11 +1,11 @@
-## Test Config for Full Memory Strategy
-## This config uses the full_memory strategy to create samples with complete memory
-## and observations from a target dataset (validation set)
+## Test Config for Random Sampling Strategy
+## This config uses the random_sampling strategy to create samples with randomly
+## sampled K trajectories from memory and observations from a target dataset
 
 checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251019_234012/checkpoints/ep_000100"
 
 # Output directory for generated dataset
-output_dir: "/mnt/data/shayan_memory/finer_v1_val_full_memory_32x1000"
+output_dir: "/mnt/data/shayan_memory/finer_v1_large_train_random_50_subsampling_16x6400_temp_0.7"
 
 # Output format: "jsonl" or "parquet"
 output_format: "jsonl"
@@ -16,27 +16,31 @@ include_teacher_messages_texts: true
 # Individual file saving for resume functionality
 save_individual_files: true
 
-# Memory formation strategy - using full_memory
+# Memory formation strategy - using random_sampling
 strategy:
-  name: "full_memory"
+  name: "random_sampling"
   # Path to the memory checkpoint (can be different from checkpoint_dir)
   memory_checkpoint_path: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251019_234012/checkpoints/ep_000100"
   # Target dataset configuration (e.g., validation set)
   target_dataset_config:
     type: finer
     hf_dataset: "stalaei/finer_v1"
-    split: "val"
+    split: "train_large"
     input_field: "context"
     target_field: "target"
     instruction_template: null
     max_samples: null
     shuffle: false
   # Maximum number of samples to use from target dataset
-  max_target_samples: 1000
+  max_target_samples: 6400
+  # Random sampling configuration
+  subset_size: 50  # Number of trajectories (triplets) to sample for each memory view
+  num_subsets: 16   # Number of different random subsets to create per environment
+  shuffle_triplets: true  # Whether to shuffle the triplets before creating memory snapshot
 
 # Agent prompt rendering
 agent_type: "history_agent"
-system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
 
 # Language model configuration (Tokasaurus server)
 lm_model: "meta-llama/Llama-3.1-8B-Instruct"
@@ -53,14 +57,14 @@ top_logprobs: 20
 # Enable full sequence tensor data for advanced distillation training
 include_full_sequence_data: true
 
-# Sampling parameters - limit to small number for testing
+# Sampling parameters - no repetition, random sampling provides the variation
 max_samples: null
-num_repeat_samples: 32 # -1 for 1 repeatition with no explicit repetition ID
+num_repeat_samples: -1 # -1 for 1 repetition with no explicit repetition ID
 
 # Parallelism: use single thread for testing
-num_threads: 32
+num_threads: 64
 
 # Additional metadata to include in each sample
 metadata:
-  dataset_version: "full_memory_v1"
-  description: "Test dataset using full memory strategy with validation set observations"
+  dataset_version: "random_sampling_v1"
+  description: "Test dataset using random sampling strategy with 20 trajectories per subset, 8 subsets per environment"

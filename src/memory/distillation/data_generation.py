@@ -39,6 +39,7 @@ class StrategyConfig(BaseModel):
     # Parameters for random_sampling strategy
     subset_size: Optional[int] = None
     num_subsets: int = 1
+    shuffle_triplets: bool = False
 
 
 class DataGenConfig(BaseModel):
@@ -100,7 +101,14 @@ def _make_strategy(cfg: DataGenConfig) -> MemoryFormationStrategy:
     if cfg.strategy.name == "exclude_current":
         return ExcludeCurrentStrategy(
             do_shuffle=cfg.strategy.do_shuffle,
-            num_shufflings=cfg.strategy.num_shufflings
+            num_shufflings=cfg.strategy.num_shufflings,
+            subset_size=cfg.strategy.subset_size,
+            shuffle_triplets=cfg.strategy.shuffle_triplets,
+            target_dataset_config=cfg.strategy.target_dataset_config,
+            max_target_samples=cfg.strategy.max_target_samples,
+            start_idx=cfg.strategy.start_idx,
+            end_idx=cfg.strategy.end_idx,
+            logger=None,
         )
     elif cfg.strategy.name == "full_memory":
         if not cfg.strategy.memory_checkpoint_path:
@@ -134,6 +142,7 @@ def _make_strategy(cfg: DataGenConfig) -> MemoryFormationStrategy:
             max_target_samples=cfg.strategy.max_target_samples,
             start_idx=cfg.strategy.start_idx,
             end_idx=cfg.strategy.end_idx,
+            shuffle_triplets=cfg.strategy.shuffle_triplets,
             logger=None  # Will be set by the calling context
         )
     raise ValueError(f"Unsupported strategy: {cfg.strategy.name}")
@@ -271,6 +280,7 @@ def _process_single_sample(
                     eval_result = None
                 if eval_result is not None:
                     row["evaluation"] = eval_result
+            # If strategy does not expose environments or meta index invalid, no evaluation is attached
     except Exception as e:
         print(f"[DataGen] WARNING: evaluation logic error for sample {getattr(sample, 'sample_id', None)}: {e}")
     

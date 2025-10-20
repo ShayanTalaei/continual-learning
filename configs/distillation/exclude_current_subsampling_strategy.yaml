@@ -1,0 +1,81 @@
+## Config for Exclude-Current Strategy with Subsampling and Optional Shuffling
+## This config uses the exclude_current strategy to create samples where the
+## current triplet (observation→action→feedback) is the target, and the memory
+## snapshot is formed from the rest-of-history triplets, optionally subsampled
+## and shuffled. A target dataset is provided for evaluation via env_index.
+
+checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251019_234012/checkpoints/ep_000100"
+
+# Output directory for generated dataset
+output_dir: "/mnt/data/shayan_memory/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Teacher messages text storage
+include_teacher_messages_texts: true
+
+# Individual file saving for resume functionality
+save_individual_files: true
+
+# Memory formation strategy - using exclude_current
+strategy:
+  name: "exclude_current"
+
+  # Shuffle replication settings (emits multiple shuffled variants when true)
+  do_shuffle: true
+  num_shufflings: 1024
+
+  # Subsampling/shuffling of rest-of-history triplets for the memory snapshot
+  subset_size: 50            # Number of trajectories (triplets) to sample from the rest
+  shuffle_triplets: true     # Whether to shuffle the selected triplets before creating memory snapshot
+
+  # Target dataset configuration for evaluation mapping via env_index
+  target_dataset_config:
+    type: finer
+    hf_dataset: "stalaei/finer_v1"
+    split: "train_ICL"
+    input_field: "context"
+    target_field: "target"
+    instruction_template: null
+    max_samples: 100
+    shuffle: false
+
+  # Limit number of environments used for evaluation (after optional slicing)
+  max_target_samples: 100
+  # Optional slicing over target environments (applied before max_target_samples)
+  # start_idx: 0
+  # end_idx: null
+
+# Agent prompt rendering
+agent_type: "history_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8080"
+lm_temperature: 0.7
+lm_max_output_tokens: 2048
+
+# Retry configuration for robust data generation
+lm_max_retries: 2
+
+# Optional: capture top-k logprobs for distillation training
+top_logprobs: 20
+
+# Enable full sequence tensor data for advanced distillation training
+include_full_sequence_data: true
+
+# Sampling parameters
+max_samples: null
+num_repeat_samples: -1 # -1 for 1 repetition with no explicit repetition ID
+
+# Parallelism
+num_threads: 64
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "exclude_current_v1"
+  description: "Exclude-current with rest-of-history subsampling=50 and shuffle_triplets=true"
+
+

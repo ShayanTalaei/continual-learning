@@ -25,6 +25,7 @@ class RandomSamplingStrategy(MemoryFormationStrategy):
                  max_target_samples: Optional[int] = None,
                  start_idx: Optional[int] = None,
                  end_idx: Optional[int] = None,
+                 shuffle_triplets: bool = False,
                  logger=None,
                  **kwargs: Any):
         """Initialize the RandomSamplingStrategy.
@@ -37,6 +38,7 @@ class RandomSamplingStrategy(MemoryFormationStrategy):
             max_target_samples: Maximum number of samples to use from target dataset
             start_idx: Optional start index for slicing target dataset
             end_idx: Optional end index for slicing target dataset
+            shuffle_triplets: Whether to shuffle the triplets before creating memory snapshot
             logger: Optional logger instance
         """
         self.memory_checkpoint_path = Path(memory_checkpoint_path)
@@ -46,6 +48,7 @@ class RandomSamplingStrategy(MemoryFormationStrategy):
         self.max_target_samples = max_target_samples
         self.start_idx = start_idx
         self.end_idx = end_idx
+        self.shuffle_triplets = shuffle_triplets
         self.logger = logger
         
         # Load the memory snapshot
@@ -119,6 +122,11 @@ class RandomSamplingStrategy(MemoryFormationStrategy):
     
     def _get_memory_snapshot_from_triplets(self, triplets: List[Dict[str, Any]]) -> List[Entry]:
         """Convert triplets back to memory entries."""
+        # Optionally shuffle the triplets before converting to memory entries
+        if self.shuffle_triplets:
+            triplets = triplets.copy()  # Don't modify the original list
+            random.shuffle(triplets)
+        
         memory_snapshot = []
         for tri in triplets:
             memory_snapshot.append(Entry(
