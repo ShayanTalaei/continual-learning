@@ -16,8 +16,7 @@ runtime:
   checkpoint_strategy: last_n
   checkpoint_keep_last: 20
   checkpoint_on_start: false
-  # resume_from: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
-  start_episode_index: 0
+  # resume_from: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_fewshots/20251019_194436/checkpoints/ep_000100"
 
 train_dataset:
   type: finer
@@ -56,10 +55,10 @@ agent:
     _type: history_list
     max_length: 2000
   history_k: null
-  system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_fewshots.txt}"
+  system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
 
 output:
-  results_dir: outputs/finer/history_agent/brad_magic_with_fewshots
+  results_dir: outputs/finer/history_agent/brad_magic_with_progressive_fewshots
   log_level: INFO
 
 
