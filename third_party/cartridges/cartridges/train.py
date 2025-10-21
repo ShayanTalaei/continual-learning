@@ -7,6 +7,7 @@ from math import cos, pi
 import os
 from pathlib import Path
 import re
+from datetime import timedelta
 import time
 from typing import Dict, List, Literal, Optional
 
@@ -134,7 +135,7 @@ def train(config: TrainConfig):
         # if the process group is already initialized, in which case we can reuse it.
         if not dist.is_initialized():
             dist.init_process_group(
-                backend=config.distributed_backend, device_id=torch.device(local_rank)
+                backend=config.distributed_backend, device_id=torch.device(local_rank), timeout=timedelta(hours=10),
             )
         logger.info(f"[Rank {dist.get_rank()}] initialized.")
         is_rank_zero = dist.get_rank() == 0
