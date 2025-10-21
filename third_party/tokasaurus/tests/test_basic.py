@@ -17,7 +17,7 @@ from tokasaurus.common_types import ServerConfig
 from tokasaurus.entry import server_manager
 from tokasaurus.utils import find_free_port
 
-MODEL = os.environ.get("MODEL", "meta-llama/Llama-3.2-1B-Instruct")
+MODEL = os.environ.get("MODEL", "Qwen/Qwen3-0.6B")
 OVERRIDES = os.environ.get("OVERRIDES", None)
 MODE = os.environ.get("MODE", "simple")
 
@@ -81,6 +81,7 @@ def client(request):
     config: ServerConfig = request.param
     print(f"Launching server with config: {config.to_dict()}")
 
+    print(f"Launching server with config: {config.to_dict()}")
     with server_manager(config):
         client = OpenAI(
             api_key="beepboop", base_url=f"http://localhost:{config.port}/v1"

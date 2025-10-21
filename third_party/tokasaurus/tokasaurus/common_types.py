@@ -73,6 +73,12 @@ class ServerConfig(pydra.Config):
 
     stats_report_seconds: float = 5.0
     statsd_server_url: None | str = None
+    
+    # WandB configuration
+    wandb_enabled: bool = False
+    wandb_entity: str = "hazy-research"
+    wandb_project: str = "tokasaurus"
+    wandb_run_name: str | None = None
 
     page_size: int = 16
     kv_cache_num_tokens: int = 1024 * 128
@@ -123,6 +129,12 @@ class ServerConfig(pydra.Config):
     # for debugging only, will slow things down
     allocator_sanity_checks: bool = False
     bump_city_population_me: bool = False
+
+    # TODO(SE): This needs to be fixed, it's an uber hack. 
+    max_completion_tokens: int | None = None
+
+    # Cartridge configuration
+    cartridge_dir: str = "./cartridges"
 
     def uvsh(self):
         self.uvicorn_log_level = "warning"
