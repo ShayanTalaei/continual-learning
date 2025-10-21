@@ -97,7 +97,7 @@ class TrainConfig(RunConfig):
     distributed_backend: Literal["nccl", "gloo"] = "nccl"
 
     optimizer: Literal["adam"] = "adam"
-    lr: float = 1e-4
+    lr: float = 4e-4
     lr_scheduler: Optional[Scheduler.Config] = None
     weight_decay: float = 0.0
 
@@ -584,7 +584,7 @@ def evaluate_perplexity(
 
     results = []
     with torch.no_grad():
-        epoch_loss, epoch_denom = 0.0, torch.tensor(0, device="cuda")
+        epoch_loss, epoch_denom = 0.0, torch.tensor(0.0, device="cuda", dtype=torch.float64) # we were overflowing with torch.int64
         epoch_num_system_and_user_tokens = torch.tensor(0, device="cuda")
         epoch_num_assistant_tokens = torch.tensor(0, device="cuda")
         epoch_num_elements = torch.tensor(0, device="cuda")

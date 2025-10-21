@@ -102,7 +102,7 @@ class TrainingConfig(pydra.Config):
         super().__init__()
         self.epochs = 100  # Number of training epochs
         self.global_batch_size = 8  # Total batch size across all devices
-        self.lr = 1e-4  # Learning rate
+        self.lr = 5e-4  # Learning rate
         self.weight_decay = 0.0  # Weight decay
         self.optimizer = "adam"  # Optimizer type
         self.gradient_checkpointing = True  # Enable activation (gradient) checkpointing to reduce memory usage

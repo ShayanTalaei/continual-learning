@@ -124,7 +124,8 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     training.train_temperature=1 \
     input_dataset.filter_incorrect=T \
     .init_from_text \
-    kv_cache.init_text_file=/scratch/m000122/bcabrown/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
     input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7/dataset_filtered.jsonl \
     val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
-    system_prompt_path=/scratch/m000122/bcabrown/continual-learning/src/data/prompts/finer/system_prompt_brad_magic.txt
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4
