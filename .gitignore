@@ -7,7 +7,7 @@ notebooks/
 *.pyc
 
 outputs/
-data/
+_data/
 !src/data/
 
 wandb/

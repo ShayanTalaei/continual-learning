@@ -127,11 +127,27 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
     input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7/dataset_filtered.jsonl \
     val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
+    system_prompt_path=/scratch/m000122/bcabrown/continual-learning/src/data/prompts/finer/system_prompt_brad_magic.txt
+
+## Test streaming
+
+torchrun --nproc_per_node 8 
+
+## n31
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_6400train_128tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_large_train_random_50_subsampling_16x6400_temp_0.7/dataset_filtered.jsonl \
+    val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
     system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
     training.lr=5e-4 \
     generate_eval_every_n_steps=50
 
-
+## n06
 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     run_name=oct20_6400train_128tokens_sysmem_filterincorrect \
     kv_cache.num_tokens=128 \

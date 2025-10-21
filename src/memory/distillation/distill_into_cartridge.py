@@ -13,6 +13,11 @@ Usage:
     python -m src.memory.distillation.distill_into_cartridge input_dataset.local_path=/path/to/dataset.jsonl
 """
 
+# import torch
+# torch._inductor.config.max_autotune_gemm_backends = ["ATEN", "TRITON", "CPP"]
+# torch._inductor.config.max_autotune = True
+# torch._inductor.config.epilogue_fusion = True
+
 import sys
 import pydra
 import yaml
@@ -175,6 +180,7 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = True
+        self.generate_eval_every_n_steps = 400
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
@@ -201,6 +207,15 @@ class DistillationConfig(pydra.Config):
         
         self.run_dir = Path(self.output.local_dir) / self.run_name
         self.run_dir.mkdir(parents=True, exist_ok=True)
+    
+    def matx(self):
+        self.output.local_dir = "/matx/u/bcabrown/shayan_memory/outputs"
+        self.input_dataset.packed_seq_length = 16000  # Maximum sequence length
+        self.val_dataset.packed_seq_length = 16000  # Maximum sequence length
+        self.training.global_batch_size = 16  # Total batch size across all devices
+        self.input_dataset.batch_size = 4
+        self.val_dataset.batch_size = 4
+        self.generate_batch_size = 16
 
 # ============================================================================
 # Helper Functions
@@ -522,7 +537,7 @@ def run_distillation(config: DistillationConfig):
 
             # Generate evals
             generate_before_training=config.generate_before_training,
-            generate_eval_every_n_steps=400,
+            generate_eval_every_n_steps=config.generate_eval_every_n_steps,
             generate_evals=generate_evals,
             
             # Training
