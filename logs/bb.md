@@ -160,3 +160,62 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
     training.lr=5e-4 \
     generate_eval_every_n_steps=50
+
+
+# Overnight runs on October 20
+
+## n31
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_100train_128tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7/dataset_filtered.jsonl \
+    val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50
+
+## n06
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct20_6400train_128tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_large_train_random_50_subsampling_16x6400_temp_0.7/dataset_filtered.jsonl \
+    val_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_val_full_memory_1000/dataset.jsonl \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50
+
+## matx2
+TRANSFORMERS_NO_FLASH_ATTN=1 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_100train_2048tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=2048 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7.jsonl \
+    val_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_val_full_memory_1000.jsonl \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    .matx \
+    generate_eval_every_n_steps=50
+
+## matx3
+TRANSFORMERS_NO_FLASH_ATTN=1 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_6400train_2048tokens_sysmem_filterincorrect \
+    kv_cache.num_tokens=2048 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_large_train_random_50_subsampling_16x6400_temp_0.7.jsonl \
+    val_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_val_full_memory_1000.jsonl \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    .matx \
+    generate_eval_every_n_steps=50
