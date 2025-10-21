@@ -107,7 +107,7 @@ class TrainingConfig(pydra.Config):
         super().__init__()
         self.epochs = 100  # Number of training epochs
         self.global_batch_size = 8  # Total batch size across all devices
-        self.lr = 1e-4  # Learning rate
+        self.lr = 5e-4  # Learning rate
         self.weight_decay = 0.0  # Weight decay
         self.optimizer = "adam"  # Optimizer type
         self.gradient_checkpointing = True  # Enable activation (gradient) checkpointing to reduce memory usage
@@ -180,6 +180,7 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = True
+        self.generate_eval_every_n_steps = 400
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
@@ -536,7 +537,7 @@ def run_distillation(config: DistillationConfig):
 
             # Generate evals
             generate_before_training=config.generate_before_training,
-            generate_eval_every_n_steps=400,
+            generate_eval_every_n_steps=config.generate_eval_every_n_steps,
             generate_evals=generate_evals,
             
             # Training
