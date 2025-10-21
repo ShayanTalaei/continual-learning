@@ -20,6 +20,13 @@ class StreamOptions(BaseModel):
     include_usage: Optional[bool] = False
 
 
+class Cartridge(BaseModel):
+    """Model for specifying a cartridge to use in requests."""
+    id: str = Field(description="The cartridge ID to use")
+    source: Literal["wandb", "local", "huggingface"] = Field(default="wandb", description="The source to download from ('wandb', 'local', 'huggingface')")
+    force_redownload: bool = Field(default=False, description="Whether to force redownload even if cartridge exists locally")
+
+
 class CompletionsRequest(BaseModel):
     # Ordered by official OpenAI API documentation
     # https://platform.openai.com/docs/api-reference/completions/create
@@ -52,6 +59,10 @@ class CompletionsRequest(BaseModel):
     class Config:
         extra = "forbid"
 
+
+class CartridgeCompletionsRequest(CompletionsRequest):
+    # Tokasaurus-specific fields
+    cartridges: Optional[list[Cartridge]] = None
 
 class JsonSchemaResponseFormat(BaseModel):
     name: str
@@ -104,6 +115,13 @@ class ChatCompletionRequest(BaseModel):
         extra = "forbid"
 
 
+class CartridgeChatCompletionRequest(ChatCompletionRequest):
+
+    # Tokasaurus-specific fields
+    cartridges: Optional[list[Cartridge]] = None
+
+
+
 class BatchCreationRequest(BaseModel):
     """Request model for creating a batch"""
 
@@ -119,10 +137,22 @@ class BatchCreationRequest(BaseModel):
     metadata: Optional[dict[str, str]] = Field(default=None)
 
 
+class BatchCompletionsRequest(BaseModel):
+    requests: list[ChatCompletionRequest] = Field(
+        description="List of chat completion requests to process"
+    )
+
 class SynchronousBatchCompletionsRequest(BaseModel):
     """Request model for synchronous batch completions"""
 
     requests: list[ChatCompletionRequest] = Field(
+        description="List of chat completion requests to process"
+    )
+
+class SynchronousBatchCartridgeChatCompletionsRequest(BaseModel):
+    """Request model for synchronous batch completions"""
+
+    requests: list[CartridgeChatCompletionRequest] = Field(
         description="List of chat completion requests to process"
     )
 
@@ -131,6 +161,7 @@ class SynchronousBatchCompletionsRequest(BaseModel):
 class RequestOutput:
     id: str
     sequence_outputs: list["SequenceOutput"] = field(default_factory=list)
+    error_message: Optional[str] = None
 
 
 @dataclass
@@ -148,6 +179,7 @@ class TokasaurusRequest:
     stop: list[str]
     n: int
     ignore_eos: bool
+    cartridges: Optional[list[Cartridge]] = None
     topk_logprobs: int | None = None  # Number of top tokens to return log probs for
     created_timestamp: float = field(default_factory=time.time)
 
@@ -164,7 +196,7 @@ class SubmittedRequest:
 class BatchFileLine(BaseModel):
     custom_id: str
     method: Literal["POST"]
-    url: Literal["/v1/completions", "/v1/chat/completions"]
+    url: Literal["/v1/completions", "/v1/chat/completions", "/v1/cartridge/completions", "/v1/cartridge/chat/completions"]
     body: dict
 
 
@@ -177,7 +209,7 @@ class FileEntry:
 @dataclass
 class SubmittedBatchItem:
     line: BatchFileLine
-    user_req: CompletionsRequest | ChatCompletionRequest
+    user_req: CompletionsRequest | ChatCompletionRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest
     submitted_req: SubmittedRequest
 
 
