@@ -508,6 +508,7 @@ class ShayanTrainDataset(TrainDataset):
         filter_incorrect: bool = False
         ground_truth_target: bool = False
         system_prompt_path: str
+        train_without_logits: bool = False
     
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         self.system_prompt = open(config.system_prompt_path, "r").read()
@@ -532,6 +533,14 @@ class ShayanTrainDataset(TrainDataset):
             if self.config.ground_truth_target:
                 assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
                 row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
+                row["topk_token_ids"] = [
+                    [id] for id in row["output_ids"]
+                ]
+                row["topk_logprobs"] = [
+                    0.0 for _ in range(len(row["output_ids"]))
+                ]
+            
+            if self.config.train_without_logits:
                 row["topk_token_ids"] = [
                     [id] for id in row["output_ids"]
                 ]

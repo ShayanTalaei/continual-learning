@@ -128,6 +128,8 @@ class TrainingConfig(pydra.Config):
         # Distributed training
         self.distributed_backend = "nccl"  # Distributed backend: 'nccl' for GPU (faster), 'gloo' for CPU/fallback
 
+        self.train_without_logits = False  # Whether to train without logits
+
 
 class DatasetConfig(pydra.Config):
     """Configuration for dataset processing."""
@@ -180,7 +182,7 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = True
-        self.generate_eval_every_n_steps = 400
+        self.generate_eval_every_n_steps = 50
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
@@ -471,6 +473,7 @@ def run_distillation(config: DistillationConfig):
                     top_k_logits=config.dataset.top_k_logits,
                     batch_size=config.dataset.batch_size,
                     system_prompt_path=config.system_prompt_path,
+                    train_without_logits=config.training.train_without_logits,
                 ),
                 name_for_wandb="finer_val_loss",
             )
@@ -529,6 +532,7 @@ def run_distillation(config: DistillationConfig):
                 filter_incorrect=config.input_dataset.filter_incorrect,
                 ground_truth_target=config.input_dataset.ground_truth_target,
                 system_prompt_path=config.system_prompt_path,
+                train_without_logits=config.training.train_without_logits,
             ),
 
             # Loss evals
