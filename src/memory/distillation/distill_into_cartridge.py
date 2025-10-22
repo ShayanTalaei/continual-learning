@@ -82,7 +82,7 @@ class OutputConfig(pydra.Config):
     """Configuration for output artifacts."""
     def __init__(self):
         super().__init__()
-        self.local_dir = "./outputs/cartridges/finer-cartridge-v1"  # Local directory to save training outputs
+        self.local_dir = "/scratch/m000122/stalaei/continual-learning/cartridges"  # Local directory to save training outputs
         self.hf_repo_id = "stalaei/finer-cartridge-v1"  # HuggingFace model repo ID for uploading cartridge
         self.hf_private = True  # Whether to create a private HF repo
         self.upload_to_hf = True  # Whether to upload to HuggingFace after training
@@ -460,9 +460,9 @@ def run_distillation(config: DistillationConfig):
     
     # Get dataset path
     train_dataset_path = get_dataset_path(config.input_dataset)
-    val_dataset_path = get_dataset_path(config.val_dataset)
 
     if config.do_loss_evals:
+        val_dataset_path = get_dataset_path(config.val_dataset)
         loss_evals = [
             LossEvalConfig(
                 dataset=ShayanTrainDataset.Config(
