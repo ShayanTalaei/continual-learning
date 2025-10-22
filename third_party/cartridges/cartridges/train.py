@@ -728,6 +728,7 @@ def evaluate_generations(
         indexes = indexes[local_rank::world_size]
 
     results = []
+    start_generate_time = time.time()
     for batch_start in tqdm(
         range(0, len(indexes), batch_size),
         desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
@@ -809,7 +810,7 @@ def evaluate_generations(
                         **extras,
                     }
                 )
-    logger.info(f"Generated {len(results)} samples")
+    logger.info(f"Generated {len(results)} samples in {time.time() - start_generate_time:.2f}s")
 
     batch_score = None
     if has_batch_score:
