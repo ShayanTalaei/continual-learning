@@ -390,6 +390,38 @@ lm_config:
 
 ---
 
+### vLLM
+
+```yaml
+lm_config:
+  model: "vllm:Qwen/Qwen3-1.7B"   # Prefix with "vllm:"
+  temperature: 0.0
+  max_output_tokens: 1024
+  log_calls: true
+
+  # Mode: local (in-process) vs server (OpenAI-compatible)
+  use_server: false                  # false=in-process; true=HTTP server
+  base_url: "http://localhost:8000" # required when use_server: true
+  protocol: "openai"
+  api_key: null                      # optional if server enforces auth
+  timeout_s: 900.0
+
+  # Local vLLM settings (ignored in server mode)
+  tensor_parallel_size: 1
+  max_model_len: 2048                # keep modest for better concurrency/VRAM
+  dtype: "float16"                  # or "bfloat16" if supported
+  gpu_memory_utilization: 0.5
+  trust_remote_code: true            # needed by some models
+  stop_sequences:
+    - "FEEDBACK"
+    - "OBSERVATION"
+  cache_dir: "/path/to/hf-cache"   # optional HF cache root
+```
+
+Notes:
+- Local mode (use_server: false): runs the engine in-process; no base_url needed. Concurrency is limited by GPU KV cache; prefer batching multiple prompts per call for throughput.
+- Server mode (use_server: true): start the vLLM server separately, e.g.: `vllm serve Qwen/Qwen3-1.7B --dtype float16 --max-model-len 2048 --host 0.0.0.0 --port 8000`. The client sends OpenAI-style chat requests; the server safely queues and continuous-batches concurrent requests.
+
 ## Output Configuration
 
 ```yaml

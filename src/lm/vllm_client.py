@@ -1,6 +1,6 @@
 import time
 import json
-from typing import Optional, Dict, Any, List, Union
+from typing import Optional, Dict, Any, List, Union, Tuple
 from threading import Lock
 
 from logging import Logger
@@ -41,12 +41,12 @@ class VLLMClient(LanguageModel):
 
     def __init__(self, config: VLLMConfig, logger: Optional[Logger] = None):
         super().__init__(config=config, logger=logger)
-        logger.info(f"VLLMConfig: {config}")
-        logger.info(f"use_server: {config.use_server}")
-        logger.info(f"base_url: {config.base_url}")
-        logger.info(f"protocol: {config.protocol}")
-        logger.info(f"api_key: {config.api_key}")
-        logger.info(f"timeout_s: {config.timeout_s}")
+        self.logger.info(f"VLLMConfig: {config}")
+        self.logger.info(f"use_server: {config.use_server}")
+        self.logger.info(f"base_url: {config.base_url}")
+        self.logger.info(f"protocol: {config.protocol}")
+        self.logger.info(f"api_key: {config.api_key}")
+        self.logger.info(f"timeout_s: {config.timeout_s}")
         self._engine: Optional[LLM] = None
         self._engine_lock: Lock = Lock()  # Thread-safe engine initialization
         self._tokenizer = None  # Cache tokenizer for chat templates
@@ -89,42 +89,53 @@ class VLLMClient(LanguageModel):
             
             return self._engine
 
-    def _build_prompt(self, system_prompt: str, user_prompt: str, response_schema: Optional[Dict[str, Any]]) -> str:
-        """Build prompt with chat templates and schema-based instructions."""
+    def _build_prompt(self, messages: List[Dict[str, str]], response_schema: Optional[Dict[str, Any]]) -> str:
+        """Build prompt from chat messages, optionally injecting schema instructions.
+
+        Prefers tokenizer.apply_chat_template when available.
+        """
+        # Prepare messages, optionally appending schema instruction to the last user message
+        patched_messages: List[Dict[str, str]] = []
+        try:
+            if response_schema and self.config.json_validation:
+                # Copy messages and append schema instruction to the last user message
+                patched_messages = [
+                    {"role": m.get("role", ""), "content": str(m.get("content", ""))}
+                    for m in messages
+                ]
+                for i in range(len(patched_messages) - 1, -1, -1):
+                    if patched_messages[i].get("role") == "user":
+                        patched_messages[i]["content"] = (
+                            patched_messages[i].get("content", "")
+                            + "\n\nPlease respond with valid JSON matching this schema:\n"
+                            + json.dumps(response_schema, indent=2)
+                        )
+                        break
+            else:
+                patched_messages = messages
+        except Exception as e:
+            self.logger.warning(f"Failed to prepare schema-injected messages: {e}")
+            patched_messages = messages
+
         # Try to use chat template if available and enabled
         if self.config.use_chat_template and self._tokenizer is not None:
             try:
-                # Build messages for chat template
-                messages = []
-                if system_prompt:
-                    messages.append({"role": "system", "content": system_prompt})
-                
-                # Add schema information to user message if present
-                if response_schema and self.config.json_validation:
-                    schema_instruction = f"\n\nPlease respond with valid JSON matching this schema:\n{json.dumps(response_schema, indent=2)}"
-                    user_prompt_with_schema = user_prompt + schema_instruction
-                else:
-                    user_prompt_with_schema = user_prompt
-                
-                messages.append({"role": "user", "content": user_prompt_with_schema})
-                
-                # Apply chat template
                 prompt = self._tokenizer.apply_chat_template(
-                    messages, 
-                    tokenize=False, 
-                    add_generation_prompt=True
+                    patched_messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
                 )
-                
                 return prompt
             except Exception as e:
                 self.logger.warning(f"Failed to apply chat template, falling back to simple concatenation: {e}")
-        
-        # Fallback: simple concatenation with schema information
-        if response_schema and self.config.json_validation:
-            schema_instruction = f"\n\nPlease respond with valid JSON matching this schema:\n{json.dumps(response_schema, indent=2)}"
-            return f"{system_prompt}\n\n{user_prompt}{schema_instruction}"
-        
-        return f"{system_prompt}\n\n{user_prompt}"
+
+        # Fallback: simple concatenation — use last user content with any schema instruction
+        system_text = "\n".join([m["content"] for m in patched_messages if m.get("role") == "system"]).strip()
+        # Prefer the last user message as the prompt body
+        user_text = next((m["content"] for m in reversed(patched_messages) if m.get("role") == "user"), "")
+        if system_text:
+            return f"{system_text}\n\n{user_text}"
+        return user_text
 
     # -------------------------------
     # OpenAI-compatible server path
@@ -135,16 +146,13 @@ class VLLMClient(LanguageModel):
             headers["Authorization"] = f"Bearer {self.config.api_key}"
         return headers
 
-    def _call_openai_server(self, system_prompt: str, user_prompt: str, start_time: float) -> tuple[str, Optional[Dict[str, Any]]]:
+    def _call_openai_server(self, messages: List[Dict[str, str]], temperature: float, start_time: float) -> Tuple[str, Optional[Dict[str, Any]]]:
         assert self.config.base_url is not None
         url = f"{self.config.base_url}/v1/chat/completions"
         payload: Dict[str, Any] = {
             "model": self.config.model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            "temperature": self.config.temperature,
+            "messages": messages,
+            "temperature": temperature,
             "max_tokens": self.config.max_output_tokens,
         }
         if self.config.stop_sequences:
@@ -201,10 +209,19 @@ class VLLMClient(LanguageModel):
             self.logger.warning(f"JSON parsing failed: {e}")
             return text  # Return original if parsing fails
 
-    def call(self, system_prompt: str, user_prompt: str) -> str:
-        call_id = self._begin_call(system_prompt, user_prompt)
+    def call(self, messages: List[Dict[str, str]]) -> Dict[str, Any]:
+        call_id = self._begin_call(messages)
         ctx = jsonlogger.json_get_context()
         response_schema = ctx.get("response_schema")
+
+        # Select temperature based on mode
+        mode = ctx.get("mode")
+        temperature = (
+            self.config.val_temperature
+            if (mode == "val" or mode == "validation")
+            else self.config.train_temperature
+        )
+
         # Ensure tokenizer is ready in local mode so chat templates can be applied
         if not self.config.use_server and self.config.use_chat_template and self._tokenizer is None:
             try:
@@ -212,8 +229,9 @@ class VLLMClient(LanguageModel):
             except Exception as e:
                 self.logger.warning(f"Engine init before prompt build failed: {e}")
 
-        prompt = self._build_prompt(system_prompt, user_prompt, response_schema)
-        print(f"Prompt: {prompt}")
+        # Build prompt for local engine
+        prompt = self._build_prompt(messages, response_schema)
+
         # Sanitize and validate stop sequences
         stops_cfg = self.config.stop_sequences
         stops: Optional[List[str]] = None
@@ -237,11 +255,11 @@ class VLLMClient(LanguageModel):
         self.logger.debug(
             f"vLLM generate: prompt_chars={len(prompt)}, schema_bytes={schema_bytes}, "
             f"stops_count={(len(stops) if stops else 0)}, max_tokens={self.config.max_output_tokens}, "
-            f"temperature={self.config.temperature}"
+            f"temperature={temperature}"
         )
 
         sampling = SamplingParams(
-            temperature=self.config.temperature,
+            temperature=temperature,
             max_tokens=self.config.max_output_tokens,
             stop=stops,
         )
@@ -250,12 +268,10 @@ class VLLMClient(LanguageModel):
         last_err: Optional[Exception] = None
 
         for attempt in range(1, self.config.max_retries + 2):
-            # try:
-                # If server mode enabled, route to OpenAI-compatible server
-            self.logger.info(f"use_server: {self.config.use_server}, base_url: {self.config.base_url}")
+            # Server mode: route to OpenAI-compatible server
             if self.config.use_server and self.config.base_url:
                 self.logger.info(f"Calling vLLM server at {self.config.base_url}")
-                text, metrics = self._call_openai_server(system_prompt, user_prompt, start_time)
+                text, metrics = self._call_openai_server(messages, temperature, start_time)
                 # Preserve raw before cleaning
                 self._last_raw_output = text
                 if response_schema:
@@ -263,8 +279,9 @@ class VLLMClient(LanguageModel):
                 if self.config.strip_think_tags:
                     text = self._strip_think_blocks(text)
                 self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                return text
+                return {"text": text, "metrics": metrics}
 
+            # Local engine path
             outputs = self._init_engine().generate([prompt], sampling, use_tqdm=False)
             duration = time.time() - start_time
 
@@ -279,17 +296,17 @@ class VLLMClient(LanguageModel):
             text = out0.outputs[0].text or ""
             # Preserve raw before cleaning
             self._last_raw_output = text
-            
+
             # Validate and clean JSON response if schema provided
             if response_schema:
                 text = self._validate_json_response(text, response_schema)
             if self.config.strip_think_tags:
                 text = self._strip_think_blocks(text)
-            
+
             metrics = self._extract_metrics(out0, duration)
 
             self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-            return text
+            return {"text": text, "metrics": metrics}
                 
             # except Exception as e:
             #     last_err = e
@@ -303,7 +320,7 @@ class VLLMClient(LanguageModel):
         # On failure, record error with consistent payload structure
         error_payload = {"error": str(last_err) if last_err else "Unknown error"}
         self._end_call(call_id, "", extra=error_payload)
-        return ""
+        return {"text": "", "error": error_payload.get("error")}
 
     def _extract_metrics(self, request_output: Any, duration: float) -> Optional[Dict[str, Any]]:
         """Extract metrics matching GeminiClient's LLMResponseMetrics structure."""

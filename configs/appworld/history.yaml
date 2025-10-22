@@ -1,0 +1,61 @@
+runtime:
+  max_envs_to_visit: 2
+  max_steps_per_episode: 20
+  scores_path: scores.jsonl
+  verbose: true
+
+train_dataset:
+  type: appworld
+  root: third_party/appworld
+  dataset_name: "train"  # choose a valid dataset name under appworld data
+  num_episodes: 2
+  max_steps: 20
+  # prompts_path: "third_party/appworld/experiments/prompts/react_code_agent/instructions.txt"
+  prompts_path: "src/data/prompts/appworld/agent_prompt.txt"
+  experiment_name: continual_learning
+
+agent:
+  type: history_agent
+  lm_config:
+    # Small chat model to minimize VRAM; adjust if you prefer another tiny chat model
+    # model: vllm:Qwen/Qwen3-1.7B
+    model: vllm:mistralai/Mistral-7B-Instruct-v0.3
+    temperature: 0.0
+    max_output_tokens: 8092
+    log_calls: true
+
+    use_server: false
+    base_url: http://localhost:8000
+    protocol: openai
+    api_key: null
+    timeout_s: 900.0
+
+    # Conservative vLLM settings for low memory usage
+    trust_remote_code: true
+    gpu_memory_utilization: 0.5
+    dtype: "bfloat16"
+    max_model_len: 15000
+    strip_think_tags: true
+    tensor_parallel_size: 1
+  memory_config:
+    _type: history_list
+    max_length: 5
+  system_prompt: |
+    You are an AppWorld coding agent operating in a Python REPL.
+    - Reason with python comments, if you do not, the code will NOT be executed.
+    - Only output valid Python code (no markdown fences).
+    - Do NOT include ``` or ```python fences; send raw Python only.
+    - Use '#' comments for all reasoning within code.
+    - To think without executing any code, send a single line starting with 'think:'.
+    - Do not output markdown or prose; reply with Python or a 'think:' line only.
+    - Use apis.api_docs.show_app_descriptions(), show_api_descriptions(app_name=...), and show_api_doc(app_name=..., api_name=...) to discover capabilities.
+    - Call app APIs via apis.<app>.<api>(...) exactly per documented schema.
+    - Take small steps; one code block per turn; reuse variables between steps.
+    - Do not import non-standard libraries; OS/filesystem calls refer to the file_system app only via APIs.
+    - Handle pagination where documented.
+    - Wait for the output of the previous code block to be generated in a multi-turn setting before writing the next code block.
+    - When you finish, call apis.supervisor.complete_task(answer=<answer>) if there is a concrete answer; otherwise call complete_task() or pass status="fail" if unsolvable.
+
+output:
+  results_dir: outputs/appworld_memoryless
+  log_level: INFO
