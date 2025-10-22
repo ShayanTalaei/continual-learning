@@ -10,6 +10,7 @@ import re
 from datetime import timedelta
 import time
 from typing import Dict, List, Literal, Optional
+import yaml
 
 import pandas as pd
 from pydantic import Field
@@ -486,6 +487,7 @@ def train(config: TrainConfig):
                     },
                     step=optimizer_step,
                 )
+
 
             if (
                 config.save_every_n_steps is not None
@@ -984,16 +986,30 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     run_dir = Path(config.run_dir)
     run_dir.mkdir(exist_ok=True, parents=True)
 
-    filename = f"cache-step{optimizer_step}.pt"
-    save_path = Path(config.run_dir) / filename
+    filename = f"cache-step{optimizer_step}"
+    save_dir = Path(config.run_dir) / filename
+    save_dir.mkdir(exist_ok=True, parents=True)
 
-    cache.save(save_path)
+    cache.save(save_dir / "cartridge.pt")
+
+    yaml_info = {
+        "kv_cache_initializer": {
+            "max_tokens": config.kv_cache_initializer.max_tokens
+        },
+        "model": {
+            "pretrained_model_name_or_path": config.model.pretrained_model_name_or_path,
+        }
+    }
+    # Save yaml config
+    yaml_path = save_dir / "config.yaml"
+    with open(yaml_path, "w") as f:
+        yaml.dump(yaml_info, f)
 
     # Create/update symlink to latest checkpoint
     symlink_path = os.path.join(config.run_dir, "cache_last.pt")
     if os.path.exists(symlink_path) or os.path.islink(symlink_path):
         os.remove(symlink_path)
-    os.symlink(save_path, symlink_path)
+    os.symlink(save_dir / "cartridge.pt", symlink_path)
 
     # Save to wandb if configured
 
@@ -1001,7 +1017,7 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
         logger.info(f"Saving cache to wandb: {filename}")
         # by passing base_path, we save the files to the root of the wandb run
         # instead of duplicating the full path including the run directory
-        wandb.save(save_path, base_path=config.run_dir, policy="now")
+        wandb.save(save_dir / "cartridge.pt", base_path=config.run_dir, policy="now")
 
     # Remove older saves if we exceed keep_last_n_saved
     pattern = r"^cache-epoch(\d+)\.pt$"

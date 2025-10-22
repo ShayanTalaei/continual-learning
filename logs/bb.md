@@ -325,4 +325,27 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     generate_eval_every_n_steps=50 \
     training.train_without_logits=T
 
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=test_saving \
+    kv_cache.num_tokens=2048 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_large_train_random_50_subsampling_16x6400_temp_0.7_small.jsonl \
+    val_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_val_full_memory_1000.jsonl \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    .matx \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    training.train_without_logits=T \
+    wandb.enabled=F \
+    training.save_every_n_steps=1 \
+    training.global_batch_size=1 \
+    do_loss_evals=F
+
+
+
+
     
