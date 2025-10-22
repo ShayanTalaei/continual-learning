@@ -389,6 +389,31 @@ python -m src.memory.distillation.distill_into_cartridge \
     training.train_without_logits=T
 
 
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_rag1ktrain_2048tokens_sysmem \
+    kv_cache.num_tokens=2048 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=F \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_train_ICL_rag_vector_db_ep_001000_top20_temp_0.7.jsonl \
+    do_loss_evals=F \
+    .matx \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50
 
-
-    
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct21_rag1ktrain_2048tokens_sysmem \
+    kv_cache.num_tokens=2048 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/finer_v1_train_ICL_rag_vector_db_ep_001000_top20_temp_0.7.jsonl \
+    do_loss_evals=F \
+    .matx \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    training.train_without_logits=T

@@ -987,7 +987,7 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     run_dir.mkdir(exist_ok=True, parents=True)
 
     filename = f"cache-step{optimizer_step}"
-    save_dir = Path(config.run_dir) / filename
+    save_dir = Path(config.run_dir + "-" + filename)
     save_dir.mkdir(exist_ok=True, parents=True)
 
     cache.save(save_dir / "cartridge.pt")
