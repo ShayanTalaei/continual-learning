@@ -599,8 +599,8 @@ class LlamaModel(nn.Module):
 
         for layer_idx, layer in enumerate(self.layers):
             out = layer(out)
-            if not torch.cuda.is_current_stream_capturing() and layer_idx == 0:
-                torch.save(out.hidden_states, "/tmp/tokasaurus_layer_0_hidden_states.pt")
+            # if not torch.cuda.is_current_stream_capturing() and layer_idx == 0:
+            #     torch.save(out.hidden_states, "/tmp/tokasaurus_layer_0_hidden_states.pt")
         return out
 
 
