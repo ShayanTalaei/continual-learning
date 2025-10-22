@@ -403,8 +403,10 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     training.lr=5e-4 \
     generate_eval_every_n_steps=50
 
+
+## matx2
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct21_rag1ktrain_2048tokens_sysmem \
+    run_name=oct21_rag1ktrain_2048tokens_sysmem_tokensupervison \
     kv_cache.num_tokens=2048 \
     training.train_temperature=1 \
     input_dataset.filter_incorrect=T \
