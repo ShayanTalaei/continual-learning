@@ -13,6 +13,11 @@ Usage:
     python -m src.memory.distillation.distill_into_cartridge input_dataset.local_path=/path/to/dataset.jsonl
 """
 
+# import torch
+# torch._inductor.config.max_autotune_gemm_backends = ["ATEN", "TRITON", "CPP"]
+# torch._inductor.config.max_autotune = True
+# torch._inductor.config.epilogue_fusion = True
+
 import sys
 import pydra
 import yaml
@@ -24,6 +29,7 @@ import os
 # Set up cartridges environment variables BEFORE importing
 REPO_ROOT = Path(__file__).parent.parent.parent.parent
 CARTRIDGES_DIR = REPO_ROOT / "third_party" / "cartridges"
+TOKASAURUS_DIR = REPO_ROOT / "third_party" / "tokasaurus"
 
 # Cartridges requires these environment variables
 os.environ["CARTRIDGES_DIR"] = str(CARTRIDGES_DIR)
@@ -33,6 +39,7 @@ if "CARTRIDGES_OUTPUT_DIR" not in os.environ:
 
 # Add third_party/cartridges to path
 sys.path.insert(0, str(CARTRIDGES_DIR))
+sys.path.insert(0, str(TOKASAURUS_DIR))
 
 from datasets import load_dataset
 from transformers import AutoTokenizer
@@ -77,7 +84,7 @@ class OutputConfig(pydra.Config):
     """Configuration for output artifacts."""
     def __init__(self):
         super().__init__()
-        self.local_dir = "./outputs/cartridges/finer-cartridge-v1"  # Local directory to save training outputs
+        self.local_dir = "/scratch/m000122/stalaei/continual-learning/cartridges"  # Local directory to save training outputs
         self.hf_repo_id = "stalaei/finer-cartridge-v1"  # HuggingFace model repo ID for uploading cartridge
         self.hf_private = True  # Whether to create a private HF repo
         self.upload_to_hf = True  # Whether to upload to HuggingFace after training
@@ -102,7 +109,7 @@ class TrainingConfig(pydra.Config):
         super().__init__()
         self.epochs = 100  # Number of training epochs
         self.global_batch_size = 8  # Total batch size across all devices
-        self.lr = 1e-4  # Learning rate
+        self.lr = 5e-4  # Learning rate
         self.weight_decay = 0.0  # Weight decay
         self.optimizer = "adam"  # Optimizer type
         self.gradient_checkpointing = True  # Enable activation (gradient) checkpointing to reduce memory usage
@@ -122,6 +129,8 @@ class TrainingConfig(pydra.Config):
         
         # Distributed training
         self.distributed_backend = "nccl"  # Distributed backend: 'nccl' for GPU (faster), 'gloo' for CPU/fallback
+
+        self.train_without_logits = False  # Whether to train without logits
 
 
 class DatasetConfig(pydra.Config):
@@ -175,12 +184,15 @@ class DistillationConfig(pydra.Config):
         self.do_loss_evals = True  # Whether to do loss evals
         self.do_gen_evals = True  # Whether to do generation evals
         self.generate_before_training = True
+        self.generate_eval_every_n_steps = 50
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
         
         # Name
         self.run_name = None
+
+        self.system_prompt_path = pydra.REQUIRED
     
     def no_evals(self):
         self.do_loss_evals = False
@@ -196,6 +208,18 @@ class DistillationConfig(pydra.Config):
                 self.run_name = f"distill_{Path(self.input_dataset.local_path).stem}"
             else:
                 self.run_name = f"distill_{Path(self.input_dataset.repo_id or 'unknown').name}"
+        
+        self.run_dir = Path(self.output.local_dir) / self.run_name
+        self.run_dir.mkdir(parents=True, exist_ok=True)
+    
+    def matx(self):
+        self.output.local_dir = "/matx/u/bcabrown/shayan_memory/outputs"
+        self.input_dataset.packed_seq_length = 8000  # Maximum sequence length
+        self.val_dataset.packed_seq_length = 8000  # Maximum sequence length
+        self.training.global_batch_size = 32  # Total batch size across all devices
+        self.input_dataset.batch_size = 2
+        self.val_dataset.batch_size = 2
+        self.generate_batch_size = 2
 
 # ============================================================================
 # Helper Functions
@@ -438,9 +462,9 @@ def run_distillation(config: DistillationConfig):
     
     # Get dataset path
     train_dataset_path = get_dataset_path(config.input_dataset)
-    val_dataset_path = get_dataset_path(config.val_dataset)
 
     if config.do_loss_evals:
+        val_dataset_path = get_dataset_path(config.val_dataset)
         loss_evals = [
             LossEvalConfig(
                 dataset=ShayanTrainDataset.Config(
@@ -449,7 +473,9 @@ def run_distillation(config: DistillationConfig):
                     packed_seq_length=config.dataset.packed_seq_length,
                     targets=config.dataset.targets,
                     top_k_logits=config.dataset.top_k_logits,
-                    batch_size=config.dataset.batch_size
+                    batch_size=config.dataset.batch_size,
+                    system_prompt_path=config.system_prompt_path,
+                    train_without_logits=config.training.train_without_logits,
                 ),
                 name_for_wandb="finer_val_loss",
             )
@@ -462,6 +488,7 @@ def run_distillation(config: DistillationConfig):
             GenerationEvalConfig(
                 dataset=FinerGenerateDataset.Config(
                     num_problems=config.num_generate_problems,
+                    system_prompt_path=config.system_prompt_path,
                 ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
@@ -485,7 +512,7 @@ def run_distillation(config: DistillationConfig):
         train_config = TrainConfig(
             name=config.run_name,
             output_dir=str(output_dir),
-            run_dir=str(output_dir / "run"),
+            run_dir=str(config.run_dir),
             
             train_temperature=config.training.train_temperature,
             val_temperature=config.training.val_temperature,
@@ -505,7 +532,9 @@ def run_distillation(config: DistillationConfig):
                 top_k_logits=config.dataset.top_k_logits,
                 batch_size=config.dataset.batch_size,
                 filter_incorrect=config.input_dataset.filter_incorrect,
-                ground_truth_target=config.input_dataset.ground_truth_target
+                ground_truth_target=config.input_dataset.ground_truth_target,
+                system_prompt_path=config.system_prompt_path,
+                train_without_logits=config.training.train_without_logits,
             ),
 
             # Loss evals
@@ -514,7 +543,7 @@ def run_distillation(config: DistillationConfig):
 
             # Generate evals
             generate_before_training=config.generate_before_training,
-            generate_eval_every_n_steps=400,
+            generate_eval_every_n_steps=config.generate_eval_every_n_steps,
             generate_evals=generate_evals,
             
             # Training
