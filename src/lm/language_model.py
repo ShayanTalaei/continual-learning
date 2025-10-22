@@ -32,6 +32,12 @@ class LanguageModel:
         # Track call_id to path via the generic logger return
         self._call_paths: Dict[str, Path] = {}
         self.logger = logger or getLogger("language_model")
+        # Preserve last raw (unprocessed) model output for downstream logging/storage
+        self._last_raw_output: Optional[str] = None
+
+    @property
+    def last_raw_output(self) -> Optional[str]:
+        return self._last_raw_output
         
     def call(self, system_prompt: str, user_prompt: str) -> str:
         raise NotImplementedError
