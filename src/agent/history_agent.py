@@ -1,0 +1,56 @@
+from typing import List, Any, Union, Dict
+
+from src.agent.memory_agent import MemoryAgent, MemoryAgentConfig
+from src.memory.history_list import HistoryListConfig, Entry
+
+
+class HistoryAgentConfig(MemoryAgentConfig):
+    memory_config: HistoryListConfig  # type: ignore[assignment]
+    history_k: Union[int, None] = None
+
+
+class HistoryAgent(MemoryAgent):
+    def __init__(self, config: HistoryAgentConfig, logger=None):
+        super().__init__(config, logger=logger)
+
+    def build_system_prompt(self) -> str:
+        history_list_instructions = ("You will be given the previous experiences you've had and their feedback. "
+            "You should use this feedback to improve your performance in the subsequent actions.")
+        
+        return self.system_prompt #+ "\n\n" + history_list_instructions
+
+    def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
+        messages: List[dict] = []
+        recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
+        
+        # messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
+        # Add previous experiences as alternating user/assistant messages
+        for entry in recent:
+            if entry.type.lower() == "observation":
+                messages.append({"role": "user", "content": str(entry.content)})
+            elif entry.type.lower() == "action":
+                messages.append({"role": "assistant", "content": str(entry.content)})
+            elif entry.type.lower() == "feedback":
+                # Add feedback as a user message
+                messages.append({"role": "user", "content": f"{entry.content}"}) #Feedback: 
+        # if len(recent) == 0:
+        #     messages.append({"role": "user", "content": "No previous experiences."})
+        
+        # Add current observation as the final user message
+        messages.append({"role": "user", "content": f"{obs}"}) #Here is the current observation: 
+        
+        return messages
+
+    def create_observation_event(self, obs: str) -> Any:
+        return Entry(type="Observation", content=obs)
+
+    def create_action_event(self, action: str, include_raw: bool = False) -> Any:
+        if include_raw:
+            raw = getattr(self.lm, "last_raw_output", None)
+            if isinstance(raw, str) and raw:
+                return Entry(type="Action", content={"raw": raw, "clean": action})
+        return Entry(type="Action", content=action)
+
+    def create_feedback_event(self, feedback: dict) -> Any:
+        return Entry(type="Feedback", content=feedback.get("message", ""))
+

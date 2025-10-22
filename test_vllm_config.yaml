@@ -1,0 +1,56 @@
+# Test configuration for vLLM integration
+# This config can be used with main.py to test the full pipeline
+
+runtime:
+  max_envs_to_visit: 2
+  max_steps_per_episode: 1
+  verbose: true
+  scores_path: scores
+  validation_freq: 1
+  run_validation_at_start: true
+
+agent:
+  type: memoryless_agent
+  verbose: true
+  system_prompt: "You are a helpful QA model. Answer succinctly."
+  lm_config:
+    model: "vllm:microsoft/DialoGPT-small"  # Small model for testing
+    temperature: 0.2
+    max_output_tokens: 50
+    log_calls: true
+    max_retries: 1
+    starting_delay: 1.0
+    backoff_factor: 2.0
+    max_delay: 5.0
+    # vLLM-specific config
+    tensor_parallel_size: 1
+    max_model_len: 512
+    dtype: "float16"
+    gpu_memory_utilization: 0.8
+    trust_remote_code: false
+    stop_sequences:
+      - "FEEDBACK"
+      - "OBSERVATION"
+    # Enhanced features for parity with Gemini
+    use_chat_template: true
+    json_validation: true
+    rate_limit_delay: 0.1
+
+train_dataset:
+  items:
+    - question: "What is 2+2?"
+      answer: "4"
+    - question: "Capital of France?"
+      answer: "Paris"
+  task_type: "exact"
+  verbose: true
+
+validation_dataset:
+  items:
+    - question: "What is 3+5?"
+      answer: "8"
+  task_type: "exact"
+  verbose: true
+
+output:
+  results_dir: "./test_outputs"

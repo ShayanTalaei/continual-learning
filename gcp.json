@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "hailongli-playground2",
+  "private_key_id": "8232c7bb96049e9614ed1968bfdd12ac3193b8a0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCSJ6cSWK20zKgO\nwQJvLqTV9GFe2f1zPs+ttC/eyxndMRzusM3OV835nEYI7J4ABUktmfs48UAbWAv9\nYW04S+MKIbSAk0jhRza/GbvenQunLSjOhE/d16H18cG5hwhMSHwlTYWbXnmOrY2d\nhtish6WLAz7NnTKV+ounotYfwXcUIlJ82ua/h+Tes81dijC8IKxur9CmXcvUepKO\nnozcSk2ZUrLY965JIV4Pz3Ug2Gz8EFpiwr7+CCfXr1ZJkQxUoGN4qvl0ePPA01kd\nsZ5Uuv7SP++PqlOS7x8/TDj7MfbTX/ED1be6I7oht+6FesOdbfDSOk36k1h2FSCW\njkmYO8czAgMBAAECggEACMHJqV6l12AU+7LsNeqTo5W9lcs2FXpTqck5JKS2DoI7\nhQ1HFenXfgqzSYqZc7ZDxBczR1FxJJJG2aFfEJ3yljzrWnIFgY+P3Xn2jAG/dn6A\nSoUAxT5++XdiqTHIuTIooHi/thqLHWJ5sNDcP6FUm/rCsw6MC6w6dn3AgNOWXzh3\nplPainpeRfb9KqZNzcbVIN/r0pMZJzWTvK//Z6gt/smP7jft7xJFIk+w3OB2HXao\nFVh8CH+AlyOkdqN3LS48yfnmthH8RJ84eGmO+YCbFHIJYSRsJaaGlzd2YU1aFlMQ\nRhDpk2kIfcb8r67mYQ7v6ojOfjRg9H1jtiozq7kqXQKBgQC8mSAsCSAf6qZGpe4S\nylgt4S567qDqi1s43+JrjfjwePqOlGrC7tUP3w6cHbK4vn7zhX9xGOOTEbcqWRwu\nb38AYkjmkAM5pevYt9bX5dcT75n5FrhGAJZRgsnQ40/KvtLvui1bTjkKrgHfYPjB\nOlSG6glHSeV0zDD/U7xEuMPmjwKBgQDGY2MNEic60rv6iiNx00G0OHZHKqK1hRsr\nFxil/JI6paM7VBHFCao+fiacnjfByvh4uJLMK/zW1sLtTSys+6QoFC4e9+UGXON6\nw02DGkZ/5BgzqmHthGdM3qlT+6ibIMB+9IBSfazZHFhdHGKvjAOvm8Z7scATIkov\ng/tKnddHHQKBgQCRfhehoRCVTrIjglJdUJgiHLt8vqaJCiS/hYforUfES7APWlPa\nOeFIMy3UJd0ARIUvXGdqWmcFx/7jvobNE9qH80qGA8dZK7T8JSaqu3bmvEquLGbQ\nKhfMnfcPHK0rnXag1aGz9G5w3Lg5GVgNyO/4fIfX5RwMtJGAB5sP8PG/5QKBgQCP\nXs/8aDwVlKno29/VqLh5B7zinXtM9061C1Hy0t7Sp1WZ0J2u6dcwpnY9BVKCKK78\nf1cHWlq04Cuq1vUMZicyF7NlCf1nZcW3uGDR+DEux6Z94Ao5XlBRCzEP0nT89uRm\nW0hJVS2PEZ8CWzsuZl9bj5YXWlPXABbg097NA9jKOQKBgQCSrelNNp1dlJXlDIzs\nMrmon9X27Ts4XqQPZi6p3z+r+/4EdfR6FxnNHypmD6SIsRGKbGJXoR4RRk5DMf33\nT25xBqbMDKNbqmQhj8eQu5vJGaddP+QFPK6aiFl6LWtBMHkbYlfQbETJImUjIhcP\nCAiWDWc+fM/KdBMaJpI1g1rK/g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "bird-tester@hailongli-playground2.iam.gserviceaccount.com",
+  "client_id": "105377467546769797102",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bird-tester%40hailongli-playground2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

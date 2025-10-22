@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+from typing import Optional, Dict, Any, List
 from pydantic import BaseModel, ConfigDict
 from typing import Optional, Dict, Any
 from pathlib import Path
@@ -8,7 +10,8 @@ from logging import Logger, getLogger
 
 class LMConfig(BaseModel):
     model: str
-    temperature: float = 0.2
+    train_temperature: float = 0.2
+    val_temperature: float = 0.2
     max_output_tokens: int = 8192
     log_calls: bool = False
     # Retry/backoff
@@ -39,10 +42,20 @@ class LanguageModel:
     def last_raw_output(self) -> Optional[str]:
         return self._last_raw_output
         
-    def call(self, system_prompt: str, user_prompt: str) -> str:
+    def call(self, messages: List[Dict[str, str]]) -> Dict[str, Any]:
+        """
+        Call the language model with a list of messages.
+        
+        Args:
+            messages: List of message dictionaries with 'role' and 'content' keys.
+                     Common roles: 'system', 'user', 'assistant'
+        
+        Returns:
+            Dictionary containing 'text' and optionally 'metrics' and 'logprobs'
+        """
         raise NotImplementedError
 
-    def _begin_call(self, system_prompt: str, user_prompt: str) -> Optional[str]:
+    def _begin_call(self, messages: List[Dict[str, str]]) -> Optional[str]:
         if not self.config.log_calls:
             return None
         ctx: Dict[str, Any] = jsonlogger.json_get_context()
@@ -78,8 +91,7 @@ class LanguageModel:
         payload = {
             "timestamp": datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ"),
             "model": getattr(self.config, "model", None),
-            "system_prompt": system_prompt,
-            "user_prompt": user_prompt,
+            "messages": messages,
             "context": ctx,
         }
         call_id = jsonlogger.json_next_id()

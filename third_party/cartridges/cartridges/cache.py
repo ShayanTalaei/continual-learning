@@ -170,8 +170,9 @@ class TrainableCache(nn.Module):
             keys = [self.frozen_keys[layer_idx]] + keys
             values = [self.frozen_values[layer_idx]] + values
         
-        if self._num_trainable_tokens == 0 and self._num_frozen_tokens == 0:
-            return self._keys[layer_idx], self._values[layer_idx]
+        # BB: TODO: why is this here?
+        # if self._num_trainable_tokens == 0 and self._num_frozen_tokens == 0:
+        #     return self._keys[layer_idx], self._values[layer_idx]
 
         return torch.cat(keys, dim=2), torch.cat(values, dim=2)
     

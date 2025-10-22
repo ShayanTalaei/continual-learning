@@ -7,9 +7,12 @@ from math import cos, pi
 import os
 from pathlib import Path
 import re
+from datetime import timedelta
 import time
 from typing import Dict, List, Literal, Optional
+import yaml
 
+from functools import partial
 import pandas as pd
 from pydantic import Field
 from pydrantic import BaseConfig, ObjectConfig, RunConfig
@@ -26,6 +29,8 @@ from tqdm.auto import tqdm
 from transformers import AutoTokenizer
 import wandb
 
+from tokasaurus.common_types import ServerConfig as TokaServerConfig
+from tokasaurus.entry import server_manager as toka_server_manager
 from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache
 from cartridges.datasets import (
     DatasetBatch,
@@ -33,6 +38,7 @@ from cartridges.datasets import (
     LossEvalDataset,
     TrainDataset,
     DataSource,
+    ShayanTrainDataset,
 )
 from cartridges.models.config import ModelConfig
 from cartridges.utils import get_logger, seed_everything
@@ -60,12 +66,16 @@ class GenerationEvalConfig(BaseConfig):
 
 
 class TrainConfig(RunConfig):
-    name: str = "default"  # A name for the run for wandb
+    name: str = "default"   # A name for the run for wandb
     output_dir: str = os.environ.get("CARTRIDGES_OUTPUT_DIR", ".")
 
     model: ModelConfig
     wandb: Optional[WandBConfig] = Field(default_factory=WandBConfig)
     dataset: TrainDataset.Config
+    gradient_checkpointing: bool = False
+
+    train_temperature: float = 1.0
+    val_temperature: float = 1.0
 
     # datasets for evaluating perplexity on other generations
     # NOTE: steps here is the number of **optimizer steps**, which we keep track of
@@ -81,6 +91,8 @@ class TrainConfig(RunConfig):
     generate_eval_every_n_steps: Optional[int] = None
     generate_before_training: bool = True
     generate_evals: list[GenerationEvalConfig] = field(default_factory=list)
+    generation_server_type: Literal["toka", "hf"] = "hf"
+    toka_server_config: Optional[str] = None # TODO fix type
 
     # the `global_batch_size` is the total batch size across all devices and gradient
     # accumulation steps. We will infer the number of gradient accumulation steps from the
@@ -92,7 +104,7 @@ class TrainConfig(RunConfig):
     distributed_backend: Literal["nccl", "gloo"] = "nccl"
 
     optimizer: Literal["adam"] = "adam"
-    lr: float = 1e-4
+    lr: float = 4e-4
     lr_scheduler: Optional[Scheduler.Config] = None
     weight_decay: float = 0.0
 
@@ -129,7 +141,7 @@ def train(config: TrainConfig):
         # if the process group is already initialized, in which case we can reuse it.
         if not dist.is_initialized():
             dist.init_process_group(
-                backend=config.distributed_backend, device_id=torch.device(local_rank)
+                backend=config.distributed_backend, device_id=torch.device(local_rank), timeout=timedelta(hours=10),
             )
         logger.info(f"[Rank {dist.get_rank()}] initialized.")
         is_rank_zero = dist.get_rank() == 0
@@ -146,7 +158,7 @@ def train(config: TrainConfig):
     )
     logger.info(f"Global batch size: {config.global_batch_size}")
     logger.info(f"Num devices: {num_devices}")
-
+    
     logger.info(f"Train outputs will be saved to {config.run_dir}")
     tokenizer = AutoTokenizer.from_pretrained(config.model.pretrained_model_name_or_path)    
 
@@ -169,6 +181,10 @@ def train(config: TrainConfig):
     )
 
     model = config.model.instantiate().to(local_rank).to(torch.bfloat16)
+    if config.gradient_checkpointing:
+        # Enable activation checkpointing. We assume model exposes this API.
+        model.gradient_checkpointing_enable()
+
     attn_config=AttnConfig(
         n_layers=model.config.num_hidden_layers,
         n_heads=model.config.num_key_value_heads,
@@ -308,23 +324,41 @@ def train(config: TrainConfig):
             )
 
     def do_evaluate_generations(step: int = None, final: bool = False):
-        for eval_config, generate_dataset in generate_evals:
-            evaluate_generations(
-                config=eval_config,
-                model=wrapped_model,
-                tokenizer=tokenizer,
-                dataset=generate_dataset,
-                optimizer_step=optimizer_step,
-                local_rank=local_rank,
-                step=step,
-                final=final,
-                log_to_wandb=config.wandb is not None,
-            )
+        server_wrapper = contextlib.nullcontext()
+        if config.generation_server_type == "toka":
+            wrapped_model.to("cpu")
+            if is_ddp or torch.distributed.get_rank() == 0:
+                server_wrapper = partial(toka_server_manager, config=config.toka_server_config)
+                save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
+        
+        if is_ddp:
+            torch.distributed.barrier()
+        
+        with server_wrapper:
+            for eval_config, generate_dataset in generate_evals:
+                evaluate_generations(
+                    config=eval_config,
+                    model=wrapped_model,
+                    tokenizer=tokenizer,
+                    dataset=generate_dataset,
+                    optimizer_step=optimizer_step,
+                    local_rank=local_rank,
+                    step=step,
+                    final=final,
+                    log_to_wandb=config.wandb is not None,
+                )
+            
+        if is_ddp:
+            torch.distributed.barrier()
+        
+        if config.generation_server_type == "toka":
+            wrapped_model.to(local_rank)
 
     if config.lr_scheduler is not None:
         lr_scheduler: Scheduler = config.lr_scheduler.instantiate()
     else:
         lr_scheduler = None
+    
     for epoch_idx in range(1, config.epochs + 1):
 
         if is_ddp and train_sampler is not None:
@@ -367,30 +401,45 @@ def train(config: TrainConfig):
                 if do_step or not is_ddp
                 else wrapped_model.no_sync()
             )
+
+            # Needed for activation checkpointing to work
+            if is_ddp:
+                wrapped_model.module.model.train()
+            else:
+                wrapped_model.model.train()
+            
             with ddp_ctx_manager:
                 with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+
+                    assert batch.topk_token_ids is not None
+                    assert batch.topk_logprobs is not None
+                    assert batch.topk_token_idxs is not None
 
                     t0 = time.time()
                     outputs = wrapped_model(
                         input_ids=batch.input_ids.to(local_rank),
                         seq_ids=batch.element_ids.to(local_rank),
                         position_ids=batch.position_ids.to(local_rank),
+                        logits_to_keep=batch.topk_token_idxs.to(local_rank),
                     )
+
+                    assert outputs.logits.shape[1] == batch.topk_token_idxs.shape[0]
+                    
                     if config.log_time:
                         torch.cuda.synchronize()
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
 
-                    topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[
-                        0, 
-                        batch.topk_token_idxs.to(local_rank) - 1, 
-                        batch.topk_token_ids.to(local_rank)
-                    ] 
-
+                    topk_pred_logprobs = torch.gather(
+                        F.log_softmax(outputs.logits / config.train_temperature, dim=-1)[0],
+                        dim=-1,
+                        index=batch.topk_token_ids.to(local_rank),
+                    )
+                    
                     # ce is sum -p(x)logq(x), where p is the true distr and q is the model distr
                     ce_by_token = (
                         -batch.topk_logprobs.to(local_rank).exp()  # p(x), true distr
                         * topk_pred_logprobs  # q(x), model distr
-                    )
+                    ).sum(1)
 
                     loss = (ce_by_token.mean() / accumulate_grad_steps)
 
@@ -398,6 +447,7 @@ def train(config: TrainConfig):
                 # see here for an example: https://pytorch.org/docs/stable/notes/amp_examples.html
                 # but it should go inside the ddp context manager
                 t0 = time.time()
+                
                 loss.backward()
                 if config.log_time:
                     torch.cuda.synchronize()
@@ -434,7 +484,7 @@ def train(config: TrainConfig):
                     {
                         "loss": f"{accum_loss.item():.4f}",
                         "ppl": f"{torch.exp(accum_loss).item():.2f}",
-                        "optimizer_step": f"{optimizer_step}",
+                        "optimizer_step": f"{optimizer_step+1}",
                     }
                 )
 
@@ -459,6 +509,7 @@ def train(config: TrainConfig):
                     },
                     step=optimizer_step,
                 )
+
 
             if (
                 config.save_every_n_steps is not None
@@ -558,7 +609,7 @@ def evaluate_perplexity(
 
     results = []
     with torch.no_grad():
-        epoch_loss, epoch_denom = 0.0, torch.tensor(0, device="cuda")
+        epoch_loss, epoch_denom = 0.0, torch.tensor(0.0, device="cuda", dtype=torch.float64) # we were overflowing with torch.int64
         epoch_num_system_and_user_tokens = torch.tensor(0, device="cuda")
         epoch_num_assistant_tokens = torch.tensor(0, device="cuda")
         epoch_num_elements = torch.tensor(0, device="cuda")
@@ -566,23 +617,34 @@ def evaluate_perplexity(
         for batch in dataloader_pbar:
             batch: DatasetBatch
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+
+                assert batch.topk_token_ids is not None
+                assert batch.topk_logprobs is not None
+                assert batch.topk_token_idxs is not None
+
+                # from transformers import AutoTokenizer
+                # tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+                # print(tokenizer.decode(batch.input_ids[0]))
+                # breakpoint()
+
                 outputs = model(
                     input_ids=batch.input_ids.to(local_rank),
                     seq_ids=batch.element_ids.to(local_rank),
                     position_ids=batch.position_ids.to(local_rank),
+                    logits_to_keep=batch.topk_token_idxs.to(local_rank),
                 )
 
-                topk_pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[
-                    0, 
-                    batch.topk_token_idxs.to(local_rank) - 1, 
-                    batch.topk_token_ids.to(local_rank)
-                ] 
-
+                topk_pred_logprobs = torch.gather(
+                    F.log_softmax(outputs.logits / config.val_temperature, dim=-1)[0],
+                    dim=-1,
+                    index=batch.topk_token_ids.to(local_rank),
+                )
+                
                 # ce is sum -p(x)logq(x), where p is the true distr and q is the model distr
                 ce_by_token = (
                     -batch.topk_logprobs.to(local_rank).exp()  # p(x), true distr
                     * topk_pred_logprobs  # q(x), model distr
-                )
+                ).sum(1)
 
                 epoch_loss += (ce_by_token.sum())
                 epoch_denom += ce_by_token.shape[0]
@@ -646,7 +708,6 @@ def evaluate_perplexity(
 
 def evaluate_generations(
     config: GenerationEvalConfig,
-    
     model: CacheAndModel,
     tokenizer: AutoTokenizer,
     dataset: GenerateEvalDataset,
@@ -689,6 +750,7 @@ def evaluate_generations(
         indexes = indexes[local_rank::world_size]
 
     results = []
+    start_generate_time = time.time()
     for batch_start in tqdm(
         range(0, len(indexes), batch_size),
         desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
@@ -705,16 +767,18 @@ def evaluate_generations(
             ]
             if len(elements) == 0:
                 continue
-            input_ids = torch.cat([elem.input_ids[0] for _, elem in elements]).to(local_rank)
+            
+            input_ids = torch.cat([elem.input_ids for _, elem in elements]).to(local_rank)
             seq_ids = torch.cat(
                 [
-                    torch.full((elem.input_ids.shape[1],), idx, dtype=torch.long, device=local_rank)
+                    torch.full((elem.input_ids.shape[0],), idx, dtype=torch.long, device=local_rank)
                     for idx, elem in elements
                 ]
             )
             position_ids = torch.cat(
-                [torch.arange(elem.input_ids.shape[1], device=local_rank) for _, elem in elements]
+                [torch.arange(elem.input_ids.shape[0], device=local_rank) for _, elem in elements]
             )
+            
             pred_ids: Dict[int, List[int]] = flex_generate(
                 input_ids=input_ids,
                 seq_ids=seq_ids,
@@ -738,7 +802,7 @@ def evaluate_generations(
             for  (seq_id, curr_pred_ids) in pred_ids.items():
                 element = elements[seq_id]
                 pred = tokenizer.decode(curr_pred_ids, skip_special_tokens=True)
-                
+
                 if has_score:
                     metrics, extras = dataset.score(
                         pred=pred, answer=element.answer, convo_id=element.convo_id
@@ -761,14 +825,15 @@ def evaluate_generations(
                         "pred": pred,
                         "convo_id": element.convo_id,
                         "sample_idx": sample_idx,
-                        "num_system_and_user_tokens": element.input_ids.shape[1],
+                        "num_system_and_user_tokens": element.input_ids.shape[0],
                         "num_assistant_tokens": len(pred_ids),
                         **metrics,
                         **element.metadata,
                         **extras,
                     }
                 )
-    logger.info(f"Generated {len(results)} samples")
+    generation_time = time.time() - start_generate_time
+    logger.info(f"Generated {len(results)} samples in {generation_time:.2f}s")
 
     batch_score = None
     if has_batch_score:
@@ -813,6 +878,7 @@ def evaluate_generations(
                 ].mean(),
                 "train/optimizer_step": optimizer_step,
                 f"{prefix}/num_assistant_tokens": df["num_assistant_tokens"].mean(),
+                f"{prefix}/generation_time": generation_time,
             }
             logger.info(avg_scores)
 
@@ -823,10 +889,10 @@ def evaluate_generations(
                 log_dict,
                 step=optimizer_step,
             )
-
+    
     if is_ddp:
         dist.barrier()
-    
+        
     return results
 
 
@@ -915,6 +981,7 @@ class CacheAndModel(nn.Module):
         input_ids: torch.Tensor, 
         seq_ids: torch.Tensor, 
         position_ids: torch.Tensor,
+        logits_to_keep: torch.Tensor,
     ):
 
         out = self.model(
@@ -922,10 +989,31 @@ class CacheAndModel(nn.Module):
             seq_ids=seq_ids,
             position_ids=position_ids,
             use_cache=True,
-            past_key_values=self.cache
+            past_key_values=self.cache,
+            logits_to_keep=logits_to_keep,
         )
 
         return out
+
+
+def save_cache_to_toka_format(config: TrainConfig, cache: TrainableCache, save_dir: Path):
+    save_dir.mkdir(exist_ok=True, parents=True)
+
+    cache.save(save_dir / "cartridge.pt")
+
+    yaml_info = {
+        "kv_cache_initializer": {
+            "max_tokens": config.kv_cache_initializer.max_tokens
+        },
+        "model": {
+            "pretrained_model_name_or_path": config.model.pretrained_model_name_or_path,
+        }
+    }
+    # Save yaml config
+    yaml_path = save_dir / "config.yaml"
+    with open(yaml_path, "w") as f:
+        yaml.dump(yaml_info, f)
+
 
 def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     """
@@ -943,16 +1031,16 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     run_dir = Path(config.run_dir)
     run_dir.mkdir(exist_ok=True, parents=True)
 
-    filename = f"cache-step{optimizer_step}.pt"
-    save_path = Path(config.run_dir) / filename
+    filename = f"cache-step{optimizer_step}"
+    save_dir = Path(config.run_dir + "-" + filename)
 
-    cache.save(save_path)
+    save_cache_to_toka_format(cache, save_dir)
 
     # Create/update symlink to latest checkpoint
     symlink_path = os.path.join(config.run_dir, "cache_last.pt")
     if os.path.exists(symlink_path) or os.path.islink(symlink_path):
         os.remove(symlink_path)
-    os.symlink(save_path, symlink_path)
+    os.symlink(save_dir / "cartridge.pt", symlink_path)
 
     # Save to wandb if configured
 
@@ -960,7 +1048,7 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
         logger.info(f"Saving cache to wandb: {filename}")
         # by passing base_path, we save the files to the root of the wandb run
         # instead of duplicating the full path including the run directory
-        wandb.save(save_path, base_path=config.run_dir, policy="now")
+        wandb.save(save_dir / "cartridge.pt", base_path=config.run_dir, policy="now")
 
     # Remove older saves if we exceed keep_last_n_saved
     pattern = r"^cache-epoch(\d+)\.pt$"

@@ -34,7 +34,6 @@ class VLLMConfig(LMConfig):
 
     # Post-processing options
     strip_think_tags: bool = False  # Remove <think>...</think> from outputs
-    strip_code_fences: bool = True  # Remove ```...``` markdown fences and extract inner code
 
 
 class VLLMClient(LanguageModel):
@@ -186,25 +185,6 @@ class VLLMClient(LanguageModel):
         except Exception:
             return text
 
-    def _strip_code_fences(self, text: str) -> str:
-        """Extract inner code from triple-backtick blocks; if none, return original.
-        Handles optional language tag and multiline content.
-        """
-        try:
-            import re
-            pattern = re.compile(r"```[^\n]*\n([\s\S]*?)\n```", re.IGNORECASE)
-            m = pattern.search(text)
-            if m:
-                return m.group(1).strip()
-            # Also handle single-line fenced variants without trailing newline before ```
-            pattern2 = re.compile(r"```[^\n]*\n([\s\S]*?)```", re.IGNORECASE)
-            m2 = pattern2.search(text)
-            if m2:
-                return m2.group(1).strip()
-            return text
-        except Exception:
-            return text
-
     def _validate_json_response(self, text: str, response_schema: Optional[Dict[str, Any]]) -> str:
         """Clean JSON response by removing common formatting artifacts."""
         if not response_schema or not self.config.json_validation:
@@ -276,10 +256,10 @@ class VLLMClient(LanguageModel):
             if self.config.use_server and self.config.base_url:
                 self.logger.info(f"Calling vLLM server at {self.config.base_url}")
                 text, metrics = self._call_openai_server(system_prompt, user_prompt, start_time)
+                # Preserve raw before cleaning
+                self._last_raw_output = text
                 if response_schema:
                     text = self._validate_json_response(text, response_schema)
-                if self.config.strip_code_fences:
-                    text = self._strip_code_fences(text)
                 if self.config.strip_think_tags:
                     text = self._strip_think_blocks(text)
                 self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
@@ -297,12 +277,12 @@ class VLLMClient(LanguageModel):
                 raise ValueError("vLLM returned no candidates")
 
             text = out0.outputs[0].text or ""
+            # Preserve raw before cleaning
+            self._last_raw_output = text
             
             # Validate and clean JSON response if schema provided
             if response_schema:
                 text = self._validate_json_response(text, response_schema)
-            if self.config.strip_code_fences:
-                text = self._strip_code_fences(text)
             if self.config.strip_think_tags:
                 text = self._strip_think_blocks(text)
             

@@ -1,0 +1,59 @@
+## Test Config for Full Sequence Data Generation with Shuffling
+## This config tests the new shuffling feature with 2 shufflings
+
+# Path to the HistoryAgent checkpoint directory containing memory snapshots
+checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
+
+# Output directory for generated dataset
+output_dir: "/mnt/data/shayan_memory/finer_data_gen_shuffled_256x100"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Teacher messages text storage
+include_teacher_messages_texts: false
+
+# Individual file saving for resume functionality
+save_individual_files: true
+
+# Memory formation strategy with shuffling enabled
+strategy:
+  name: "exclude_current"
+  do_shuffle: true
+  num_shufflings: 256
+
+# Agent prompt rendering
+agent_type: "history_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8080"
+lm_temperature: 0.3
+lm_max_output_tokens: 2048
+
+# Retry configuration for robust data generation
+# lm_max_retries: Number of retry attempts before giving up (default: 5)
+lm_max_retries: 2
+
+# Optional: capture top-k logprobs for distillation training
+top_logprobs: 20
+
+# Enable full sequence tensor data for advanced distillation training
+include_full_sequence_data: true
+
+# Sampling parameters - limit to small number for testing
+max_samples: 25600
+num_repeat_samples: -1 # -1 for 1 repeatition with no explicit repetition ID
+
+# Parallelism: use single thread for testing
+num_threads: 64
+
+# # Optional: upload to Hugging Face Hub after generation
+# hf_repo_id: "stalaei/distillation-dataset-full-sequence-shuffled-test"
+# hf_private: false
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "test_shuffled_v1"
+  description: "Test dataset with full sequence tensor data and 2x shuffling"
