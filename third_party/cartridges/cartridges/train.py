@@ -12,6 +12,7 @@ import time
 from typing import Dict, List, Literal, Optional
 import yaml
 
+from functools import partial
 import pandas as pd
 from pydantic import Field
 from pydrantic import BaseConfig, ObjectConfig, RunConfig
@@ -28,6 +29,8 @@ from tqdm.auto import tqdm
 from transformers import AutoTokenizer
 import wandb
 
+from tokasaurus.common_types import ServerConfig as TokaServerConfig
+from tokasaurus.entry import server_manager as toka_server_manager
 from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache
 from cartridges.datasets import (
     DatasetBatch,
@@ -88,6 +91,8 @@ class TrainConfig(RunConfig):
     generate_eval_every_n_steps: Optional[int] = None
     generate_before_training: bool = True
     generate_evals: list[GenerationEvalConfig] = field(default_factory=list)
+    generation_server_type: Literal["toka", "hf"] = "hf"
+    toka_server_config: Optional[str] = None # TODO fix type
 
     # the `global_batch_size` is the total batch size across all devices and gradient
     # accumulation steps. We will infer the number of gradient accumulation steps from the
@@ -319,18 +324,35 @@ def train(config: TrainConfig):
             )
 
     def do_evaluate_generations(step: int = None, final: bool = False):
-        for eval_config, generate_dataset in generate_evals:
-            evaluate_generations(
-                config=eval_config,
-                model=wrapped_model,
-                tokenizer=tokenizer,
-                dataset=generate_dataset,
-                optimizer_step=optimizer_step,
-                local_rank=local_rank,
-                step=step,
-                final=final,
-                log_to_wandb=config.wandb is not None,
-            )
+        server_wrapper = contextlib.nullcontext()
+        if config.generation_server_type == "toka":
+            wrapped_model.to("cpu")
+            if is_ddp or torch.distributed.get_rank() == 0:
+                server_wrapper = partial(toka_server_manager, config=config.toka_server_config)
+                save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
+        
+        if is_ddp:
+            torch.distributed.barrier()
+        
+        with server_wrapper:
+            for eval_config, generate_dataset in generate_evals:
+                evaluate_generations(
+                    config=eval_config,
+                    model=wrapped_model,
+                    tokenizer=tokenizer,
+                    dataset=generate_dataset,
+                    optimizer_step=optimizer_step,
+                    local_rank=local_rank,
+                    step=step,
+                    final=final,
+                    log_to_wandb=config.wandb is not None,
+                )
+            
+        if is_ddp:
+            torch.distributed.barrier()
+        
+        if config.generation_server_type == "toka":
+            wrapped_model.to(local_rank)
 
     if config.lr_scheduler is not None:
         lr_scheduler: Scheduler = config.lr_scheduler.instantiate()
@@ -810,7 +832,8 @@ def evaluate_generations(
                         **extras,
                     }
                 )
-    logger.info(f"Generated {len(results)} samples in {time.time() - start_generate_time:.2f}s")
+    generation_time = time.time() - start_generate_time
+    logger.info(f"Generated {len(results)} samples in {generation_time:.2f}s")
 
     batch_score = None
     if has_batch_score:
@@ -855,6 +878,7 @@ def evaluate_generations(
                 ].mean(),
                 "train/optimizer_step": optimizer_step,
                 f"{prefix}/num_assistant_tokens": df["num_assistant_tokens"].mean(),
+                f"{prefix}/generation_time": generation_time,
             }
             logger.info(avg_scores)
 
@@ -971,6 +995,26 @@ class CacheAndModel(nn.Module):
 
         return out
 
+
+def save_cache_to_toka_format(config: TrainConfig, cache: TrainableCache, save_dir: Path):
+    save_dir.mkdir(exist_ok=True, parents=True)
+
+    cache.save(save_dir / "cartridge.pt")
+
+    yaml_info = {
+        "kv_cache_initializer": {
+            "max_tokens": config.kv_cache_initializer.max_tokens
+        },
+        "model": {
+            "pretrained_model_name_or_path": config.model.pretrained_model_name_or_path,
+        }
+    }
+    # Save yaml config
+    yaml_path = save_dir / "config.yaml"
+    with open(yaml_path, "w") as f:
+        yaml.dump(yaml_info, f)
+
+
 def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     """
     Saves the trainable cache to a file and manages saved checkpoints.
@@ -989,22 +1033,8 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
 
     filename = f"cache-step{optimizer_step}"
     save_dir = Path(config.run_dir + "-" + filename)
-    save_dir.mkdir(exist_ok=True, parents=True)
 
-    cache.save(save_dir / "cartridge.pt")
-
-    yaml_info = {
-        "kv_cache_initializer": {
-            "max_tokens": config.kv_cache_initializer.max_tokens
-        },
-        "model": {
-            "pretrained_model_name_or_path": config.model.pretrained_model_name_or_path,
-        }
-    }
-    # Save yaml config
-    yaml_path = save_dir / "config.yaml"
-    with open(yaml_path, "w") as f:
-        yaml.dump(yaml_info, f)
+    save_cache_to_toka_format(cache, save_dir)
 
     # Create/update symlink to latest checkpoint
     symlink_path = os.path.join(config.run_dir, "cache_last.pt")

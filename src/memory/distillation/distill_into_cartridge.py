@@ -29,6 +29,7 @@ import os
 # Set up cartridges environment variables BEFORE importing
 REPO_ROOT = Path(__file__).parent.parent.parent.parent
 CARTRIDGES_DIR = REPO_ROOT / "third_party" / "cartridges"
+TOKASAURUS_DIR = REPO_ROOT / "third_party" / "tokasaurus"
 
 # Cartridges requires these environment variables
 os.environ["CARTRIDGES_DIR"] = str(CARTRIDGES_DIR)
@@ -38,6 +39,7 @@ if "CARTRIDGES_OUTPUT_DIR" not in os.environ:
 
 # Add third_party/cartridges to path
 sys.path.insert(0, str(CARTRIDGES_DIR))
+sys.path.insert(0, str(TOKASAURUS_DIR))
 
 from datasets import load_dataset
 from transformers import AutoTokenizer
