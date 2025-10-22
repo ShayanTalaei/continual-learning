@@ -147,6 +147,25 @@ def _conversations_from_jsonl(path: str) -> list[Conversation]:
     return data
 
 
+def _jsonl_length(path: str) -> int:
+    with open(path, "rb") as f:  # binary is a tad faster and avoids encoding issues
+        return sum(1 for _ in f)
+
+
+def get_jsonl_record(filepath, i):
+    import json
+    if i < 0:
+        raise IndexError("Index must be non-negative")
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line_num, line in enumerate(f):
+            if line_num == i:
+                return json.loads(line.strip())
+        
+        # If we get here, i was beyond the file length
+        raise IndexError(f"Index {i} is out of range (file has {line_num + 1} lines)")
+
+
 class TrainingExample(Conversation):
     # backwards compatibility
     pass

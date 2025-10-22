@@ -45,9 +45,12 @@ from datasets import load_dataset
 from transformers import AutoTokenizer
 from huggingface_hub import HfApi, create_repo
 
+# Import tokasaurus components
+from tokasaurus.common_types import ServerConfig as TokaServerConfig
+
 # Import cartridges components
 from cartridges.train import TrainConfig, train, GenerationEvalConfig, LossEvalConfig
-from cartridges.datasets import TrainDataset, ShayanTrainDataset, DataSource
+from cartridges.datasets import TrainDataset, ShayanTrainDataset, ShayanStreamingTrainDataset, DataSource
 from cartridges.models.config import HFModelConfig
 from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM
 from cartridges.cache import KVCacheFactory
@@ -193,6 +196,13 @@ class DistillationConfig(pydra.Config):
         self.run_name = None
 
         self.system_prompt_path = pydra.REQUIRED
+
+        self.streaming_dataset = False
+        self.generation_server_type = "hf"
+        self.toka_server_config = None
+        self.toka_kv_cache_num_tokens = 200_000
+
+        self.dataloader_num_workers = 1
     
     def no_evals(self):
         self.do_loss_evals = False
@@ -220,6 +230,19 @@ class DistillationConfig(pydra.Config):
         self.input_dataset.batch_size = 2
         self.val_dataset.batch_size = 2
         self.generate_batch_size = 2
+        self.toka_kv_cache_num_tokens = 100_000
+
+    def toka(self):
+        self.generation_server_type = "toka"
+        self.toka_server_config = TokaServerConfig()
+        toka_server_overrides = [
+            f"model={self.model_name}",
+            f"tokenizer={self.model_name}",
+            f"trust_remote_code=True",
+            f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
+            f"torch_compile=False",
+        ]
+        pydra.apply_overrides(self.toka_server_config, toka_server_overrides)
 
 # ============================================================================
 # Helper Functions
@@ -463,11 +486,13 @@ def run_distillation(config: DistillationConfig):
     # Get dataset path
     train_dataset_path = get_dataset_path(config.input_dataset)
 
+    dataset_cls = ShayanStreamingTrainDataset if config.streaming_dataset else ShayanTrainDataset
+
     if config.do_loss_evals:
         val_dataset_path = get_dataset_path(config.val_dataset)
         loss_evals = [
             LossEvalConfig(
-                dataset=ShayanTrainDataset.Config(
+                dataset=dataset_cls.Config(
                     data_sources=[DataSource(path=val_dataset_path, type="local")],
                     packing_mode=config.dataset.packing_mode,
                     packed_seq_length=config.dataset.packed_seq_length,
@@ -524,7 +549,7 @@ def run_distillation(config: DistillationConfig):
             ),
             
             # Dataset
-            dataset=ShayanTrainDataset.Config(
+            dataset=dataset_cls.Config(
                 data_sources=[DataSource(path=train_dataset_path, type="local")],
                 packing_mode=config.dataset.packing_mode,
                 packed_seq_length=config.dataset.packed_seq_length,
@@ -542,6 +567,8 @@ def run_distillation(config: DistillationConfig):
             loss_evals=loss_evals,
 
             # Generate evals
+            generation_server_type=config.generation_server_type,
+            toka_server_config=config.toka_server_config,
             generate_before_training=config.generate_before_training,
             generate_eval_every_n_steps=config.generate_eval_every_n_steps,
             generate_evals=generate_evals,
@@ -574,6 +601,8 @@ def run_distillation(config: DistillationConfig):
             
             # Misc
             seed=config.training.seed,
+
+            dataloader_num_workers=config.dataloader_num_workers,
         )
         
         print("[Distill] Starting training...")

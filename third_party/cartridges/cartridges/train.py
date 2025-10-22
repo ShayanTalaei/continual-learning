@@ -18,6 +18,7 @@ from pydantic import Field
 from pydrantic import BaseConfig, ObjectConfig, RunConfig
 import torch
 import torch.amp
+from pydantic import ConfigDict
 import torch.distributed as dist
 import torch.nn as nn
 import torch.nn.functional as F
@@ -66,6 +67,8 @@ class GenerationEvalConfig(BaseConfig):
 
 
 class TrainConfig(RunConfig):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     name: str = "default"   # A name for the run for wandb
     output_dir: str = os.environ.get("CARTRIDGES_OUTPUT_DIR", ".")
 
@@ -92,7 +95,7 @@ class TrainConfig(RunConfig):
     generate_before_training: bool = True
     generate_evals: list[GenerationEvalConfig] = field(default_factory=list)
     generation_server_type: Literal["toka", "hf"] = "hf"
-    toka_server_config: Optional[str] = None # TODO fix type
+    toka_server_config: Optional[TokaServerConfig] = None # TODO fix type
 
     # the `global_batch_size` is the total batch size across all devices and gradient
     # accumulation steps. We will infer the number of gradient accumulation steps from the
@@ -125,6 +128,8 @@ class TrainConfig(RunConfig):
     seed: int = 42
 
     log_logprob_viz: bool = False
+
+    dataloader_num_workers: int = 1
 
     def run(self):
         return train(self)
@@ -259,7 +264,7 @@ def train(config: TrainConfig):
         # a single worker to avoid blocking the main process
         batch_size=1, 
         collate_fn=lambda x: x[0], 
-        num_workers=1, 
+        num_workers=config.dataloader_num_workers, 
     )
 
     optimizer = optim.Adam(
@@ -324,20 +329,23 @@ def train(config: TrainConfig):
             )
 
     def do_evaluate_generations(step: int = None, final: bool = False):
-        server_wrapper = contextlib.nullcontext()
+        server_wrapper = contextlib.nullcontext
         if config.generation_server_type == "toka":
             wrapped_model.to("cpu")
-            if is_ddp or torch.distributed.get_rank() == 0:
+            # TODO: be able to configure TP/DP
+            config.toka_server_config.dp_size = torch.distributed.get_world_size() if is_ddp else 1
+            if not is_ddp or torch.distributed.get_rank() == 0:
                 server_wrapper = partial(toka_server_manager, config=config.toka_server_config)
                 save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
         
         if is_ddp:
             torch.distributed.barrier()
         
-        with server_wrapper:
+        with server_wrapper():
             for eval_config, generate_dataset in generate_evals:
                 evaluate_generations(
-                    config=eval_config,
+                    eval_config=eval_config,
+                    config=config,
                     model=wrapped_model,
                     tokenizer=tokenizer,
                     dataset=generate_dataset,
@@ -346,6 +354,7 @@ def train(config: TrainConfig):
                     step=step,
                     final=final,
                     log_to_wandb=config.wandb is not None,
+                    generation_server_type=config.generation_server_type,
                 )
             
         if is_ddp:
@@ -594,7 +603,7 @@ def evaluate_perplexity(
         # a single worker to avoid blocking the main process
         batch_size=1, 
         collate_fn=lambda x: x[0], 
-        num_workers=1, 
+        num_workers=config.dataloader_num_workers, 
     )
 
     dataloader_pbar = tqdm(
@@ -705,52 +714,23 @@ def evaluate_perplexity(
         dist.barrier()
 
 
-
-def evaluate_generations(
+def generate_with_hf(
     config: GenerationEvalConfig,
-    model: CacheAndModel,
+    model: nn.Module,
+    cache: TrainableCache,
     tokenizer: AutoTokenizer,
     dataset: GenerateEvalDataset,
     optimizer_step: int,
-    local_rank,
-    step: int = None,
-    final: bool = False,
-    log_to_wandb: bool = True,
+    local_rank: int,
+    is_rank_zero: bool,
+    batch_size: int,
+    num_samples: int,
+    indexes: List[int],
 ):
     from cartridges.generation import flex_generate
 
-    is_ddp = "LOCAL_RANK" in os.environ
-    is_rank_zero = (not is_ddp) or (dist.get_rank() == 0)
-    world_size = dist.get_world_size() if is_ddp else 1
-
-    
-    if is_ddp:
-        cache = model.module.cache
-        model = model.module.model
-    else:
-        cache = model.cache
-        model = model.model
-
-    logger.info(
-        f"Generating `{config.name_for_wandb}` (n={len(dataset)}, {len(dataset) // world_size} per device)"
-    )
-
     has_score = hasattr(dataset, "score")
-    has_batch_score = hasattr(dataset, "batch_score")
-    prefix = f"generate_{config.name_for_wandb}"
-
-    if config.num_samples_final is not None and final:
-        num_samples = config.num_samples_final
-    else:
-        num_samples = config.num_samples
-
-    batch_size = config.batch_size
-    indexes = list(range(len(dataset)))
-    if is_ddp:
-        indexes = indexes[local_rank::world_size]
-
     results = []
-    start_generate_time = time.time()
     for batch_start in tqdm(
         range(0, len(indexes), batch_size),
         desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
@@ -832,7 +812,192 @@ def evaluate_generations(
                         **extras,
                     }
                 )
+    return results
+
+
+def generate_with_toka(
+    config: TrainConfig,
+    eval_config: GenerationEvalConfig,
+    tokenizer: AutoTokenizer,
+    dataset: GenerateEvalDataset,
+    optimizer_step: int,
+    local_rank: int,
+    batch_size: int,
+    num_samples: int,
+    indexes: List[int],
+):
+    from cartridges.generation import flex_generate
+
+    url = f"http://localhost:{config.toka_server_config.port}/v1/cartridge/chat/completions"
+    cartridge_path = str(Path(config.run_dir) / "cache_for_generation")
+
+    has_score = hasattr(dataset, "score")
+    results = []
+    for batch_start in tqdm(
+        range(0, len(indexes), batch_size),
+        desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
+        leave=False,
+        disable=local_rank == 0,
+    ):
+        for sample_idx in range(num_samples):
+            logger.info(f"Generating sample {sample_idx} of {num_samples}")
+
+            elements = [
+                (i, dataset[indexes[i]])
+                for i in range(batch_start, batch_start + batch_size)
+                if i < len(indexes)
+            ]
+            if len(elements) == 0:
+                continue
+            
+            breakpoint()
+            requests = []
+            for element in elements:
+                request = {
+                    "messages": [
+                        {"role": "system", "content": element.prompt},
+                        {"role": "user", "content": element.prompt},
+                    ],
+                    "model": config.model.name,
+                    "max_tokens": config.generate_max_new_tokens,
+                }
+                requests.append(request)
+                
+            input_ids = torch.cat([elem.input_ids for _, elem in elements]).to(local_rank)
+            seq_ids = torch.cat(
+                [
+                    torch.full((elem.input_ids.shape[0],), idx, dtype=torch.long, device=local_rank)
+                    for idx, elem in elements
+                ]
+            )
+            position_ids = torch.cat(
+                [torch.arange(elem.input_ids.shape[0], device=local_rank) for _, elem in elements]
+            )
+            
+            pred_ids: Dict[int, List[int]] = flex_generate(
+                input_ids=input_ids,
+                seq_ids=seq_ids,
+                position_ids=position_ids,
+                cache=cache,
+                model=model,
+                tokenizer=tokenizer,
+                max_new_tokens=(
+                    config.generate_max_new_tokens
+                    if config.override_max_tokens is None
+                    else config.override_max_tokens
+                ),
+                temperature=config.temperature,
+                show_progress=is_rank_zero
+            )
+            
+            pred = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
+
+            elements = {seq_id: elem for seq_id, elem in elements}
+
+            for  (seq_id, curr_pred_ids) in pred_ids.items():
+                element = elements[seq_id]
+                pred = tokenizer.decode(curr_pred_ids, skip_special_tokens=True)
+
+                if has_score:
+                    metrics, extras = dataset.score(
+                        pred=pred, answer=element.answer, convo_id=element.convo_id
+                    )
+                else:
+                    metrics, extras = None, {}
+
+                if not isinstance(metrics, dict):
+                    # Support for older datasets that return a single bool or float as metrics
+                    metrics = {"score": metrics}
+                else:
+                    metrics = {f"{k}_score": v for k, v in metrics.items()}
+                
+                results.append(
+                    {
+                        "index": indexes[seq_id],
+                        "optimizer_step": optimizer_step,
+                        "prompt": element.prompt,
+                        "answer": element.answer,
+                        "pred": pred,
+                        "convo_id": element.convo_id,
+                        "sample_idx": sample_idx,
+                        "num_system_and_user_tokens": element.input_ids.shape[0],
+                        "num_assistant_tokens": len(pred_ids),
+                        **metrics,
+                        **element.metadata,
+                        **extras,
+                    }
+                )
+    return results
+
+
+def evaluate_generations(
+    eval_config: GenerationEvalConfig,
+    config: TrainConfig,
+    toka_server_config: TokaServerConfig | None,
+    model: CacheAndModel,
+    tokenizer: AutoTokenizer,
+    dataset: GenerateEvalDataset,
+    optimizer_step: int,
+    local_rank,
+    step: int = None,
+    final: bool = False,
+    log_to_wandb: bool = True,
+    generation_server_type: Literal["toka", "hf"] = "hf",
+):
+    is_ddp = "LOCAL_RANK" in os.environ
+    is_rank_zero = (not is_ddp) or (dist.get_rank() == 0)
+    world_size = dist.get_world_size() if is_ddp else 1
+
+    
+    if is_ddp:
+        cache = model.module.cache
+        model = model.module.model
+    else:
+        cache = model.cache
+        model = model.model
+
+    logger.info(
+        f"Generating `{eval_config.name_for_wandb}` (n={len(dataset)}, {len(dataset) // world_size} per device)"
+    )
+
+    has_batch_score = hasattr(dataset, "batch_score")
+    prefix = f"generate_{eval_config.name_for_wandb}"
+
+    if eval_config.num_samples_final is not None and final:
+        num_samples = eval_config.num_samples_final
+    else:
+        num_samples = eval_config.num_samples
+
+    batch_size = eval_config.batch_size
+    indexes = list(range(len(dataset)))
+    if is_ddp:
+        indexes = indexes[local_rank::world_size]
+
+    results = []
+    if is_ddp:
+        torch.distributed.barrier()
+    start_generate_time = time.time()
+    if generation_server_type == "toka":
+        results = generate_with_toka(
+            config, eval_config, tokenizer, dataset, optimizer_step, local_rank, batch_size, num_samples, indexes
+        )
+    else:
+        results = generate_with_hf(
+            config=eval_config,
+            model=model,
+            cache=cache,
+            tokenizer=tokenizer,
+            dataset=dataset,
+            optimizer_step=optimizer_step,
+            local_rank=local_rank,
+            is_rank_zero=is_rank_zero,
+            batch_size=batch_size,
+            num_samples=num_samples,
+            indexes=indexes
+        )
     generation_time = time.time() - start_generate_time
+    if is_ddp:
+        torch.distributed.barrier()
     logger.info(f"Generated {len(results)} samples in {generation_time:.2f}s")
 
     batch_score = None
@@ -1034,7 +1199,7 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     filename = f"cache-step{optimizer_step}"
     save_dir = Path(config.run_dir + "-" + filename)
 
-    save_cache_to_toka_format(cache, save_dir)
+    save_cache_to_toka_format(config, cache, save_dir)
 
     # Create/update symlink to latest checkpoint
     symlink_path = os.path.join(config.run_dir, "cache_last.pt")

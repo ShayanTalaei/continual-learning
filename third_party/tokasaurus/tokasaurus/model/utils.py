@@ -893,17 +893,17 @@ def setup_and_run_loop(
     if state.config.use_cudagraphs:
         model_runner.record_graphs(state.process_name)
 
-    run_warmup_batches(
-        config=state.config,
-        input_q=state.input_q,
-        process_name=state.process_name,
-        preprocess=preprocess,
-        run_model=run_model,
-        synchronize=synchronize,
-        postprocess=lambda _: None,
-        device=model_runner.model.device,
-        dtype=model_runner.model.dtype,
-    )
+    # run_warmup_batches(
+    #     config=state.config,
+    #     input_q=state.input_q,
+    #     process_name=state.process_name,
+    #     preprocess=preprocess,
+    #     run_model=run_model,
+    #     synchronize=synchronize,
+    #     postprocess=lambda _: None,
+    #     device=model_runner.model.device,
+    #     dtype=model_runner.model.dtype,
+    # )
 
     state.barrier.wait()
 

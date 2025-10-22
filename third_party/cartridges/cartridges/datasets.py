@@ -15,11 +15,12 @@ import torch
 from transformers import PreTrainedTokenizerFast
 from pydrantic import ObjectConfig, BaseConfig
 import numpy as np
+import time
 from tqdm import tqdm
 
 from src.data.envs.finer_env import is_correct_finer
 
-from cartridges.structs import Conversation, MessageDict, read_conversations
+from cartridges.structs import Conversation, MessageDict, read_conversations, _jsonl_length, get_jsonl_record
 from cartridges.initialization.tokenization_utils import MODEL_TO_CHAT_TEMPLATE, MODELS_WITH_THINKING
 from cartridges.utils import get_logger
 from cartridges.utils.hf import read_conversations_from_hf
@@ -416,7 +417,11 @@ class TrainDataset(Dataset):
     
     def _get_batch(self, batch_idx: int):
         elem_idxs = self.batches[batch_idx]
-        elements = [self._get_element(elem_idx) for elem_idx in elem_idxs]
+        elements = []
+        for idx, elem_idx in enumerate(elem_idxs):
+            element = self._get_element(elem_idx)
+            elements.append(element)
+            print("Got element", idx)
         return self.collate(elements)
 
     def __getitem__(self, index: int) -> DatasetBatch:
@@ -513,6 +518,59 @@ class ShayanTrainDataset(TrainDataset):
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         self.system_prompt = open(config.system_prompt_path, "r").read()
         super().__init__(config, tokenizer, seed)
+    
+    def _prepare_element(self, row: Conversation) -> DatasetElement:
+        if self.config.filter_incorrect:
+            assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+            if row["evaluation"]["score"] != 1:
+                return None
+        
+        if self.config.ground_truth_target:
+            assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+            row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
+            row["topk_token_ids"] = [
+                [id] for id in row["output_ids"]
+            ]
+            row["topk_logprobs"] = [
+                0.0 for _ in range(len(row["output_ids"]))
+            ]
+        
+        if self.config.train_without_logits:
+            row["topk_token_ids"] = [
+                [id] for id in row["output_ids"]
+            ]
+            row["topk_logprobs"] = [
+                0.0 for _ in range(len(row["output_ids"]))
+            ]
+
+        messages = [
+            {
+                "role": "system",
+                "content": self.system_prompt,
+            },
+            row['input_messages'][1]
+        ]
+        ids = self.tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+        )
+        ids += row["output_ids"]
+
+        num_answer_ids = len(row["output_ids"])
+        num_question_ids = len(ids) - num_answer_ids
+        topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
+
+        assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
+        assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
+    
+        return DatasetElement(
+            input_ids=torch.tensor(ids, dtype=torch.long),
+            topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
+            topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
+            topk_token_idxs=topk_token_idxs,
+            metadata=[],
+            token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
+        )
         
     def _prepare_elements(self) -> list[DatasetElement]:
         data = []
@@ -525,57 +583,11 @@ class ShayanTrainDataset(TrainDataset):
         
         elements = []
         for row in tqdm(data, "Preparing elements"):
-            if self.config.filter_incorrect:
-                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
-                if row["evaluation"]["score"] != 1:
-                    continue
-            
-            if self.config.ground_truth_target:
-                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
-                row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
-                row["topk_token_ids"] = [
-                    [id] for id in row["output_ids"]
-                ]
-                row["topk_logprobs"] = [
-                    0.0 for _ in range(len(row["output_ids"]))
-                ]
-            
-            if self.config.train_without_logits:
-                row["topk_token_ids"] = [
-                    [id] for id in row["output_ids"]
-                ]
-                row["topk_logprobs"] = [
-                    0.0 for _ in range(len(row["output_ids"]))
-                ]
-
-            messages = [
-                {
-                    "role": "system",
-                    "content": self.system_prompt,
-                },
-                row['input_messages'][1]
-            ]
-            ids = self.tokenizer.apply_chat_template(
-                messages,
-                add_generation_prompt=True,
-            )
-            ids += row["output_ids"]
-
-            num_answer_ids = len(row["output_ids"])
-            num_question_ids = len(ids) - num_answer_ids
-            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
-
-            assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
-            assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
-        
-            elements.append(DatasetElement(
-                input_ids=torch.tensor(ids, dtype=torch.long),
-                topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
-                topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
-                topk_token_idxs=topk_token_idxs,
-                metadata=[],
-                token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
-            ))
+            element = self._prepare_element(row)
+            if element is not None:
+                elements.append(
+                    element
+                )
         return elements
 
 
@@ -587,56 +599,47 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
         super().__init__(config, tokenizer, seed)
         
         assert not config.filter_incorrect, "filter_incorrect is not supported for streaming datasets"
-        assert not config.ground_truth_target, "ground_truth_target is not supported for streaming datasets"
-
-    def _prepare_element(self, row: dict[str, Any]) -> DatasetElement:
-        data = []
+    
+    def _prepare_elements(self) -> list[DatasetElement]:
         print(f"Starting _prepare_elements")
-
-        for source in self.config.data_sources:
-            data.extend(_prepare_data_source(source))
-
-        print(f"Done loading {len(data)} elements")
-        
-        elements = []
-        for row in tqdm(data, "Preparing elements"):
-            if self.config.filter_incorrect:
-                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
-                if row["evaluation"]["score"] != 1:
-                    continue
-            
-            if self.config.ground_truth_target:
-                assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
-                row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
-                row["topk_token_ids"] = [
-                    [id] for id in row["output_ids"]
-                ]
-                row["topk_logprobs"] = [
-                    0.0 for _ in range(len(row["output_ids"]))
-                ]
-
-            ids = self.tokenizer.apply_chat_template(
-                row["input_messages"],
-                add_generation_prompt=True,
-            )
-            ids += row["output_ids"]
-
-            num_answer_ids = len(row["output_ids"])
-            num_question_ids = len(ids) - num_answer_ids
-            topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
-
-            assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
-            assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
-
-            elements.append(DatasetElement(
-                input_ids=torch.tensor(ids, dtype=torch.long),
-                topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
-                topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
-                topk_token_idxs=topk_token_idxs,
+        assert len(self.config.data_sources) == 1, "streaming datasets must have exactly one data source"
+        self.data_file = self.config.data_sources[0].path
+        num_items = _jsonl_length(self.data_file)
+        print(f"Done _prepare_elements, num_items: {num_items}")
+        return [
+            DatasetElement(
+                input_ids=torch.tensor([], dtype=torch.long),
+                topk_token_ids=torch.tensor([], dtype=torch.long),
+                topk_logprobs=torch.tensor([], dtype=torch.float),
+                topk_token_idxs=torch.tensor([], dtype=torch.long),
                 metadata=[],
-                token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
-            ))
-        return elements
+                token_counts=TokenCounts(),
+            )
+            for i in range(num_items)
+        ]
+    
+    def _get_element(self, elem_idx: int) -> DatasetElement:
+        print("Getting element", elem_idx)
+        start = time.time()
+        row = get_jsonl_record(self.data_file, elem_idx)
+        get_record_time = time.time() - start
+        element = self._prepare_element(row)
+        prepare_element_time = time.time() - get_record_time - start
+        print("Done getting element", elem_idx, round(get_record_time, 2), round(prepare_element_time, 2))
+        return element
+    
+    def _prepare_batches(self, seed: int) -> List[List[int]]:
+        assert self.config.batch_size is not None
+        if len(self.elements) % self.config.batch_size != 0:
+            print("WARNING: dataset size is not a multiple of batch size, some elements will be dropped")
+
+        return [[batch_idx*self.config.batch_size + i for i in range(self.config.batch_size)] for batch_idx in range(len(self.elements) // self.config.batch_size)]
+    
+    def __getitem__(self, index: int) -> DatasetBatch:
+        batch = self._get_batch(index)
+        assert batch.input_ids.shape[0] <= self.config.packed_seq_length, f"batch size {batch.input_ids.shape[0]} is greater than packed seq length {self.config.packed_seq_length}"
+        print("Assembled the batch!")
+        return batch
 
 
 class LossEvalDataset(TrainDataset):
