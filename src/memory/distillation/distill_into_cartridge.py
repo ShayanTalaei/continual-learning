@@ -207,6 +207,11 @@ class DistillationConfig(pydra.Config):
         self.toka_kv_cache_num_tokens = 200_000
 
         self.dataloader_num_workers = 1
+
+        self.load_cache_path = None
+    
+    def quick_data(self):
+        self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl"
     
     def no_evals(self):
         self.do_loss_evals = False
@@ -623,6 +628,7 @@ def run_distillation(config: DistillationConfig):
             
             # KV Cache
             kv_cache_initializer=kv_cache_factory_config,
+            load_cache_path=config.load_cache_path,
             
             # Checkpointing
             save_every_n_steps=config.training.save_every_n_steps,

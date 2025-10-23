@@ -134,6 +134,8 @@ class TrainConfig(RunConfig):
 
     dataloader_num_workers: int = 1
 
+    load_cache_path: Optional[str] = None
+
     def run(self):
         return train(self)
 
@@ -222,7 +224,9 @@ def train(config: TrainConfig):
     else:
         cache_tuning = False
 
-
+    if config.load_cache_path is not None:
+        cache = TrainableCache.from_pretrained(config.load_cache_path)
+        logger.info(f"Loaded cache from {config.load_cache_path}")
     # Different model wrapping logic based on tuning method
     if use_peft:
         # When using PEFT, we want to train only the PEFT parameters
@@ -344,6 +348,7 @@ def train(config: TrainConfig):
             if not is_ddp or torch.distributed.get_rank() == 0:
                 server_wrapper = partial(toka_server_manager, config=config.toka_server_config)
                 save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
+        # save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
         
         if is_ddp:
             torch.distributed.barrier()
@@ -1037,7 +1042,7 @@ def evaluate_generations(
         if log_to_wandb:
             log_dict = {
                 **avg_scores,
-                f"{prefix}/table": wandb.Table(df),
+                f"{prefix}/table": df,
                 f"{prefix}/num_system_and_user_tokens": df[
                     "num_system_and_user_tokens"
                 ].mean(),
@@ -1054,6 +1059,8 @@ def evaluate_generations(
                 log_dict,
                 step=optimizer_step,
             )
+    
+        print(f"Avg scores: {avg_scores}")
     
     if is_ddp:
         dist.barrier()

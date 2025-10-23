@@ -119,9 +119,12 @@ class LlamaRotaryEmbedding(nn.Module):
         inv_freq, self.attention_scaling = self.rope_init_fn(self.config, device)
         self.register_buffer("inv_freq", inv_freq, persistent=False)
         self.original_inv_freq = self.inv_freq
+    
+    # def _apply(self, *args, **kwargs): # want to keep frequencies in fp32
+    #     pass
 
     @torch.no_grad()
-    @dynamic_rope_update  # power user: used with advanced RoPE types (e.g. dynamic rope)
+    # @dynamic_rope_update  # power user: used with advanced RoPE types (e.g. dynamic rope)
     def forward(self, x, position_ids):
         inv_freq_expanded = self.inv_freq[None, :, None].float().expand(position_ids.shape[0], -1, 1).to(x.device)
         position_ids_expanded = position_ids[:, None, :].float()
@@ -132,7 +135,6 @@ class LlamaRotaryEmbedding(nn.Module):
             emb = torch.cat((freqs, freqs), dim=-1)
             cos = emb.cos() * self.attention_scaling
             sin = emb.sin() * self.attention_scaling
-
         return cos.to(dtype=x.dtype), sin.to(dtype=x.dtype)
 
 
@@ -317,7 +319,7 @@ class LlamaAttention(nn.Module):
         )
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)
-        
+
         return attn_output, batch
 
 class LlamaDecoderLayer(GradientCheckpointingLayer):
@@ -339,12 +341,20 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
         # Self Attention
         hidden_states, batch = self.self_attn(hidden_states=hidden_states, batch=batch)
         hidden_states = residual + hidden_states
+        # def rabs(a,b): return 2 * (a - b).abs() / (a.abs() + b.abs() + 1e-8)
+        # if hidden_states.shape[1] > 1000:
+        #     ohidden_states = torch.load(f"/scratch/m000122/bcabrown/debug/attn_tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        #     print("After attention rabs mean: ", rabs(hidden_states[0], ohidden_states).mean())
 
         # Fully Connected
         residual = hidden_states
         hidden_states = self.post_attention_layernorm(hidden_states)
         hidden_states = self.mlp(hidden_states)
         hidden_states = residual + hidden_states
+        # if hidden_states.shape[1] > 1000:
+        #     ohidden_states_mlp = torch.load(f"/scratch/m000122/bcabrown/debug/tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        #     print("After MLP rabs mean: ", rabs(hidden_states[0], ohidden_states_mlp).mean())
+        #     breakpoint()
 
         return hidden_states, batch
 
@@ -470,6 +480,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         hidden_states.requires_grad = True
         for decoder_layer in self.layers[: self.config.num_hidden_layers]:
             hidden_states, batch = decoder_layer(hidden_states, batch)
+            # print(f"Layer {decoder_layer.layer_idx} hidden states: {hidden_states.sum()}, shape: {hidden_states.shape}")
 
         hidden_states = self.norm(hidden_states)
         return BaseModelOutputWithPast(
@@ -568,6 +579,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
         # Only compute necessary logits, and do not upcast them to float if we are not computing the loss
         slice_indices = slice(-logits_to_keep, None) if isinstance(logits_to_keep, int) else logits_to_keep
         logits = self.lm_head(hidden_states[:, slice_indices, :])
+        # breakpoint()
 
         loss = None
         if labels is not None:

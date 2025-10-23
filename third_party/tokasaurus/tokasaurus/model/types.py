@@ -533,7 +533,7 @@ class CartridgeManager:
             layer_values = torch.cat([fixed_values[layer_idx], trainable_values[layer_idx]], dim=2)
             concatenated_keys.append(layer_keys)
             concatenated_values.append(layer_values)
-        
+            
         # Write to KV cache
         self._write_to_kv_cache(concatenated_keys, concatenated_values, block_indices, total_tokens)
         self.loaded_cartridges.add(cartridge_id)

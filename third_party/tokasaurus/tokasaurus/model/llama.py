@@ -254,7 +254,6 @@ class LlamaAttention(nn.Module):
 
         query_states = query_states.to(dtype)
         key_states = key_states.to(dtype)
-
         raw_attn_output = self.attn_fn(
             ragged_q=query_states,
             ragged_k=key_states,
@@ -355,7 +354,12 @@ class LlamaBlock(nn.Module):
 
     def forward(self, batch_state: BatchState):
         out = self.self_attn(batch_state)
+        # torch.save(out.hidden_states, f"/scratch/m000122/bcabrown/debug/attn_tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        # print("After attention", self.layer_idx, out.hidden_states.sum(), out.hidden_states.shape)
         out = self.mlp(out)
+        # torch.save(out.hidden_states, f"/scratch/m000122/bcabrown/debug/tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        # print("After MLP", self.layer_idx, out.hidden_states.sum(), out.hidden_states.shape)
+
         return out
 
 
@@ -673,7 +677,6 @@ class LlamaForCausalLM(nn.Module):
         # making a copy of the input state - needed when combining cudagraphs + pp,
         # where we need to keep track of references to both the input
         # and output hidden states.
-
         out = BatchState(
             input_ids=batch_state.input_ids,
             attention_info=batch_state.attention_info,
@@ -685,6 +688,7 @@ class LlamaForCausalLM(nn.Module):
 
         out = self.model(out)
         out = self.lm_head(out)
+        # breakpoint()
 
         return out
 
