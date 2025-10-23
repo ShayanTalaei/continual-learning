@@ -84,7 +84,8 @@ class ResponseFormat(BaseModel):
 class ChatCompletionRequest(BaseModel):
     # Ordered by official OpenAI API documentation
     # https://platform.openai.com/docs/api-reference/chat/create
-    messages: list[ChatCompletionMessageParam]
+    messages: list[ChatCompletionMessageParam] | None = None
+    ids: list[int] | None = None
     model: str
     frequency_penalty: Optional[float] = 0.0
     logit_bias: Optional[dict[str, float]] = None

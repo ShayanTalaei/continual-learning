@@ -421,7 +421,6 @@ class TrainDataset(Dataset):
         for idx, elem_idx in enumerate(elem_idxs):
             element = self._get_element(elem_idx)
             elements.append(element)
-            print("Got element", idx)
         return self.collate(elements)
 
     def __getitem__(self, index: int) -> DatasetBatch:
@@ -596,15 +595,22 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
         pass
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
-        super().__init__(config, tokenizer, seed)
-        
+        assert len(config.data_sources) == 1, "streaming datasets must have exactly one data source"
         assert not config.filter_incorrect, "filter_incorrect is not supported for streaming datasets"
+
+        self.data_file = config.data_sources[0].path
+        start_loading_lines = time.time()
+        self.jsonl_lines = [
+            line.strip() for line in tqdm(open(self.data_file, "r", encoding="utf-8"), desc="Loading jsonl lines")
+        ]
+        loading_lines_time = time.time() - start_loading_lines
+        print(f"Done loading {len(self.jsonl_lines)} lines in {round(loading_lines_time, 2)} seconds")
+
+        super().__init__(config, tokenizer, seed)
     
     def _prepare_elements(self) -> list[DatasetElement]:
         print(f"Starting _prepare_elements")
-        assert len(self.config.data_sources) == 1, "streaming datasets must have exactly one data source"
-        self.data_file = self.config.data_sources[0].path
-        num_items = _jsonl_length(self.data_file)
+        num_items = len(self.jsonl_lines)
         print(f"Done _prepare_elements, num_items: {num_items}")
         return [
             DatasetElement(
@@ -619,13 +625,13 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
         ]
     
     def _get_element(self, elem_idx: int) -> DatasetElement:
-        print("Getting element", elem_idx)
-        start = time.time()
-        row = get_jsonl_record(self.data_file, elem_idx)
-        get_record_time = time.time() - start
+        # print("Getting element", elem_idx)
+        # start = time.time()
+        row = json.loads(self.jsonl_lines[elem_idx])
+        # get_record_time = time.time() - start
         element = self._prepare_element(row)
-        prepare_element_time = time.time() - get_record_time - start
-        print("Done getting element", elem_idx, round(get_record_time, 2), round(prepare_element_time, 2))
+        # prepare_element_time = time.time() - get_record_time - start
+        # print("Done getting element", elem_idx, round(get_record_time, 2), round(prepare_element_time, 2))
         return element
     
     def _prepare_batches(self, seed: int) -> List[List[int]]:
@@ -638,7 +644,7 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
     def __getitem__(self, index: int) -> DatasetBatch:
         batch = self._get_batch(index)
         assert batch.input_ids.shape[0] <= self.config.packed_seq_length, f"batch size {batch.input_ids.shape[0]} is greater than packed seq length {self.config.packed_seq_length}"
-        print("Assembled the batch!")
+        # print("Assembled the batch!")
         return batch
 
 

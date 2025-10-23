@@ -15,13 +15,14 @@ class FinerGenerateDataset(GenerateEvalDataset):
     class Config(GenerateEvalDataset.Config):
         num_problems: int = 1000
         system_prompt_path: str = "/scratch/m000122/bcabrown/continual-learning/src/memory/distillation/prompts/system_prompt.txt"
+        dataset_split: str = "val"
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         self.config = config
         self.tokenizer = tokenizer
         
         self.dataset = [
-            instance for instance in load_dataset("stalaei/finer_v1")["val"]
+            instance for instance in load_dataset("stalaei/finer_v1")[self.config.dataset_split]
         ][:self.config.num_problems]
 
         self.system_prompt = open(self.config.system_prompt_path).read()

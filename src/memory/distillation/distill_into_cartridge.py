@@ -185,7 +185,11 @@ class DistillationConfig(pydra.Config):
 
         # Evaluation
         self.do_loss_evals = True  # Whether to do loss evals
-        self.do_gen_evals = True  # Whether to do generation evals
+        self.do_train_gen_eval = False  # Whether to do generation evals
+        self.do_val_gen_eval = True  # Whether to do generation evals
+        self.num_train_generate_problems = 250
+        self.train_gen_split = "train_ICL"
+        self.val_gen_split = "val"
         self.generate_before_training = True
         self.generate_eval_every_n_steps = 50
         self.num_generate_problems = 1000
@@ -206,7 +210,13 @@ class DistillationConfig(pydra.Config):
     
     def no_evals(self):
         self.do_loss_evals = False
-        self.do_gen_evals = False
+        self.do_train_gen_eval = False
+        self.do_val_gen_eval = False
+    
+    def train_gen_eval(self):
+        self.do_train_gen_eval = True
+        self.num_train_eval_problems = 250
+        self.train_gen_split = "train_ICL"
     
     def init_from_text(self):
         self.kv_cache.method = "text"
@@ -221,6 +231,12 @@ class DistillationConfig(pydra.Config):
         
         self.run_dir = Path(self.output.local_dir) / self.run_name
         self.run_dir.mkdir(parents=True, exist_ok=True)
+
+        if self.toka_server_config is not None:
+            self.toka_server_overrides += [
+                f"cartridge_dir={self.run_dir}",
+            ]
+            pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
     
     def matx(self):
         self.output.local_dir = "/matx/u/bcabrown/shayan_memory/outputs"
@@ -235,14 +251,16 @@ class DistillationConfig(pydra.Config):
     def toka(self):
         self.generation_server_type = "toka"
         self.toka_server_config = TokaServerConfig()
-        toka_server_overrides = [
+        self.toka_server_overrides = [
             f"model={self.model_name}",
             f"tokenizer={self.model_name}",
             f"trust_remote_code=True",
             f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
             f"torch_compile=False",
         ]
-        pydra.apply_overrides(self.toka_server_config, toka_server_overrides)
+        pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
+        self.generate_batch_size = 200
+
 
 # ============================================================================
 # Helper Functions
@@ -508,12 +526,15 @@ def run_distillation(config: DistillationConfig):
     else:
         loss_evals = []
 
-    if config.do_gen_evals:
-        generate_evals = [
+    generate_evals = []
+    # TODO: generalize beyond finer
+    if config.do_val_gen_eval:
+        generate_evals.append(
             GenerationEvalConfig(
                 dataset=FinerGenerateDataset.Config(
                     num_problems=config.num_generate_problems,
                     system_prompt_path=config.system_prompt_path,
+                    dataset_split=config.val_gen_split,
                 ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
@@ -521,9 +542,22 @@ def run_distillation(config: DistillationConfig):
                 temperature=config.generate_temperature,
                 batch_size=config.generate_batch_size,
             )
-        ]
-    else:
-        generate_evals = []
+        )
+    if config.do_train_gen_eval:
+        generate_evals.append(
+            GenerationEvalConfig(
+                dataset=FinerGenerateDataset.Config(
+                    num_problems=config.num_train_generate_problems,
+                    system_prompt_path=config.system_prompt_path,
+                    dataset_split=config.train_gen_split,
+                ),
+                name_for_wandb="finer",
+                generate_max_new_tokens=1024,
+                num_samples=1,
+                temperature=config.generate_temperature,
+                batch_size=config.generate_batch_size,
+            )
+        )
 
     # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:

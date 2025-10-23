@@ -11,6 +11,7 @@ from datetime import timedelta
 import time
 from typing import Dict, List, Literal, Optional
 import yaml
+import httpx
 
 from functools import partial
 import pandas as pd
@@ -29,9 +30,11 @@ from torch.utils.data.distributed import DistributedSampler
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer
 import wandb
+from concurrent.futures import ThreadPoolExecutor
 
 from tokasaurus.common_types import ServerConfig as TokaServerConfig
 from tokasaurus.entry import server_manager as toka_server_manager
+from tokasaurus.server.types import Cartridge, CartridgeChatCompletionRequest
 from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache
 from cartridges.datasets import (
     DatasetBatch,
@@ -329,6 +332,9 @@ def train(config: TrainConfig):
             )
 
     def do_evaluate_generations(step: int = None, final: bool = False):
+        if len(generate_evals) == 0:
+            return
+
         server_wrapper = contextlib.nullcontext
         if config.generation_server_type == "toka":
             wrapped_model.to("cpu")
@@ -357,8 +363,8 @@ def train(config: TrainConfig):
                     generation_server_type=config.generation_server_type,
                 )
             
-        if is_ddp:
-            torch.distributed.barrier()
+            if is_ddp:
+                torch.distributed.barrier()
         
         if config.generation_server_type == "toka":
             wrapped_model.to(local_rank)
@@ -828,14 +834,13 @@ def generate_with_toka(
 ):
     from cartridges.generation import flex_generate
 
-    url = f"http://localhost:{config.toka_server_config.port}/v1/cartridge/chat/completions"
-    cartridge_path = str(Path(config.run_dir) / "cache_for_generation")
+    url = f"http://localhost:{config.toka_server_config.port}/custom/cartridge/chat/completions"
 
     has_score = hasattr(dataset, "score")
     results = []
     for batch_start in tqdm(
         range(0, len(indexes), batch_size),
-        desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
+        desc=f"Generating [step={optimizer_step}] ({eval_config.name_for_wandb})",
         leave=False,
         disable=local_rank == 0,
     ):
@@ -850,53 +855,41 @@ def generate_with_toka(
             if len(elements) == 0:
                 continue
             
-            breakpoint()
+            # Build list of requests
             requests = []
-            for element in elements:
-                request = {
-                    "messages": [
-                        {"role": "system", "content": element.prompt},
-                        {"role": "user", "content": element.prompt},
-                    ],
-                    "model": config.model.name,
-                    "max_tokens": config.generate_max_new_tokens,
-                }
-                requests.append(request)
-                
-            input_ids = torch.cat([elem.input_ids for _, elem in elements]).to(local_rank)
-            seq_ids = torch.cat(
-                [
-                    torch.full((elem.input_ids.shape[0],), idx, dtype=torch.long, device=local_rank)
-                    for idx, elem in elements
-                ]
-            )
-            position_ids = torch.cat(
-                [torch.arange(elem.input_ids.shape[0], device=local_rank) for _, elem in elements]
-            )
-            
-            pred_ids: Dict[int, List[int]] = flex_generate(
-                input_ids=input_ids,
-                seq_ids=seq_ids,
-                position_ids=position_ids,
-                cache=cache,
-                model=model,
-                tokenizer=tokenizer,
-                max_new_tokens=(
-                    config.generate_max_new_tokens
-                    if config.override_max_tokens is None
-                    else config.override_max_tokens
-                ),
-                temperature=config.temperature,
-                show_progress=is_rank_zero
-            )
-            
-            pred = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
+            for idx_and_element in elements:
+                idx, element = idx_and_element
+                request = CartridgeChatCompletionRequest(
+                    ids=element.input_ids.tolist(),
+                    model=config.toka_server_config.model,
+                    max_tokens=eval_config.generate_max_new_tokens,
+                    cartridges=[
+                        Cartridge(id="cache_for_generation", source="local")
+                    ]
+                )
+                requests.append((idx,request.model_dump(exclude_none=True)))
 
+            # Helper function for making a single request
+            def make_request(args):
+                req_idx, request = args
+                with httpx.Client() as client:
+                    response = client.post(url, json=request, timeout=60*10)
+                return req_idx, response.json()["choices"][0]["message"]["content"]
+
+            # Make requests in parallel using ThreadPoolExecutor
+            preds = {}
+            with ThreadPoolExecutor(max_workers=batch_size) as executor:
+                # Submit all requests and maintain index mapping
+                futures = list(executor.map(make_request, requests))
+                
+                # Collect results in order
+                for req_idx, pred in futures:
+                    preds[req_idx] = pred
+                    
             elements = {seq_id: elem for seq_id, elem in elements}
 
-            for  (seq_id, curr_pred_ids) in pred_ids.items():
+            for (seq_id, pred) in preds.items():
                 element = elements[seq_id]
-                pred = tokenizer.decode(curr_pred_ids, skip_special_tokens=True)
 
                 if has_score:
                     metrics, extras = dataset.score(
@@ -921,7 +914,7 @@ def generate_with_toka(
                         "convo_id": element.convo_id,
                         "sample_idx": sample_idx,
                         "num_system_and_user_tokens": element.input_ids.shape[0],
-                        "num_assistant_tokens": len(pred_ids),
+                        "num_assistant_tokens": 0, # TODO
                         **metrics,
                         **element.metadata,
                         **extras,
@@ -933,7 +926,6 @@ def generate_with_toka(
 def evaluate_generations(
     eval_config: GenerationEvalConfig,
     config: TrainConfig,
-    toka_server_config: TokaServerConfig | None,
     model: CacheAndModel,
     tokenizer: AutoTokenizer,
     dataset: GenerateEvalDataset,
@@ -995,9 +987,9 @@ def evaluate_generations(
             num_samples=num_samples,
             indexes=indexes
         )
-    generation_time = time.time() - start_generate_time
     if is_ddp:
         torch.distributed.barrier()
+    generation_time = time.time() - start_generate_time
     logger.info(f"Generated {len(results)} samples in {generation_time:.2f}s")
 
     batch_score = None
