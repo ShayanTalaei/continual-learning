@@ -247,6 +247,10 @@ class DistillationConfig(pydra.Config):
         self.val_dataset.batch_size = 2
         self.generate_batch_size = 2
         self.toka_kv_cache_num_tokens = 100_000
+    
+    def streaming_dataset(self):
+        self.streaming_dataset = True
+        self.dataloader_num_workers = 8
 
     def toka(self):
         self.generation_server_type = "toka"
@@ -551,7 +555,7 @@ def run_distillation(config: DistillationConfig):
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.train_gen_split,
                 ),
-                name_for_wandb="finer",
+                name_for_wandb="finer_train",
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,

@@ -572,3 +572,21 @@ python -m src.memory.distillation.distill_into_cartridge \
     .no_evals \
     training.global_batch_size=1
 
+### back to real runs
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct22_250train_128tokens_sysmem_tokensupervision \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    input_dataset.filter_incorrect=T \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    training.train_without_logits=T \
+    .streaming_dataset \
+    .toka \
+    .train_gen_eval

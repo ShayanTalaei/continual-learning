@@ -832,6 +832,7 @@ def generate_with_toka(
     num_samples: int,
     indexes: List[int],
 ):
+    # TODO: merge shared code with hf generation
     from cartridges.generation import flex_generate
 
     url = f"http://localhost:{config.toka_server_config.port}/custom/cartridge/chat/completions"
