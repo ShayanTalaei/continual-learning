@@ -678,10 +678,9 @@ Avg scores: {'generate_finer/score': np.float64(0.608)}
 python third_party/tokasaurus/tokasaurus/entry.py torch_compile=F use_cudagraphs=F local_proc_name=model_worker model=meta-llama/Llama-3.1-8B-Instruct cartridge_dir=/scratch/m000122/stalaei/continual-learning/cartridges/test_imnpls
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct23_250train_128tokens_sysmem_hf \
+    run_name=oct23_250train_128tokens_sysmem_cartridgetemplate_hf \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
-    input_dataset.filter_incorrect=F \
     .init_from_text \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
     input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl \
@@ -693,15 +692,14 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     dataloader_num_workers=8 \
     .streaming \
     .train_gen_eval
-    
+
 
 ## n09
 
 torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct23_250train_128tokens_sysmem_toka \
+    run_name=oct23_250train_128tokens_sysmem_cartridgetemplate_toka \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
-    input_dataset.filter_incorrect=F \
     .init_from_text \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
     input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl \

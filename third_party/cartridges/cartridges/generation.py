@@ -79,15 +79,15 @@ def flex_generate(
         logits = outputs.logits  # (1, seq_len, vocab_size)
         last_logits = logits[0, -len(current_input_ids):, :]  # Get logits for current tokens
 
-        seq_idx = 0
-        first_seq = current_input_ids[current_seq_ids == seq_idx]
-        first_seq_last_idx = torch.where(current_seq_ids == seq_idx)[0].max().item()
-        import torch.nn.functional as F
-        first_seq_last_token_probs = F.softmax(last_logits[first_seq_last_idx], dim=-1)
-        topk_probs, topk_tokens = torch.topk(first_seq_last_token_probs, 5)
-        print(f"Sequence {seq_idx}:\n{tokenizer.decode(first_seq)}")
-        print([(p.item(), tokenizer.decode(t.item())) for p, t in zip(topk_probs, topk_tokens)])
-        breakpoint()
+        # seq_idx = 0
+        # first_seq = current_input_ids[current_seq_ids == seq_idx]
+        # first_seq_last_idx = torch.where(current_seq_ids == seq_idx)[0].max().item()
+        # import torch.nn.functional as F
+        # first_seq_last_token_probs = F.softmax(last_logits[first_seq_last_idx], dim=-1)
+        # topk_probs, topk_tokens = torch.topk(first_seq_last_token_probs, 5)
+        # print(f"Sequence {seq_idx}:\n{tokenizer.decode(first_seq)}")
+        # print([(p.item(), tokenizer.decode(t.item())) for p, t in zip(topk_probs, topk_tokens)])
+        # breakpoint()
         
         # Sample next tokens for each sequence
         next_tokens = []
