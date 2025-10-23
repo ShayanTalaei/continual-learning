@@ -338,6 +338,7 @@ def train(config: TrainConfig):
         server_wrapper = contextlib.nullcontext
         if config.generation_server_type == "toka":
             wrapped_model.to("cpu")
+            torch.cuda.empty_cache()
             # TODO: be able to configure TP/DP
             config.toka_server_config.dp_size = torch.distributed.get_world_size() if is_ddp else 1
             if not is_ddp or torch.distributed.get_rank() == 0:
@@ -367,6 +368,7 @@ def train(config: TrainConfig):
                 torch.distributed.barrier()
         
         if config.generation_server_type == "toka":
+            torch.cuda.empty_cache()
             wrapped_model.to(local_rank)
 
     if config.lr_scheduler is not None:
@@ -833,7 +835,7 @@ def generate_with_toka(
     indexes: List[int],
 ):
     # TODO: merge shared code with hf generation
-    from cartridges.generation import flex_generate
+    from tenacity import retry, stop_after_attempt, wait_exponential
 
     url = f"http://localhost:{config.toka_server_config.port}/custom/cartridge/chat/completions"
 
@@ -873,8 +875,13 @@ def generate_with_toka(
             # Helper function for making a single request
             def make_request(args):
                 req_idx, request = args
+                
+                @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+                def make_post_request(client, url, request):
+                    return client.post(url, json=request, timeout=60*10)
+                
                 with httpx.Client() as client:
-                    response = client.post(url, json=request, timeout=60*10)
+                    response = make_post_request(client, url, request)
                 return req_idx, response.json()["choices"][0]["message"]["content"]
 
             # Make requests in parallel using ThreadPoolExecutor
@@ -1030,7 +1037,7 @@ def evaluate_generations(
         if log_to_wandb:
             log_dict = {
                 **avg_scores,
-                f"{prefix}/table": df,
+                f"{prefix}/table": wandb.Table(df),
                 f"{prefix}/num_system_and_user_tokens": df[
                     "num_system_and_user_tokens"
                 ].mean(),

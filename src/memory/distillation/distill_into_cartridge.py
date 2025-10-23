@@ -248,7 +248,7 @@ class DistillationConfig(pydra.Config):
         self.generate_batch_size = 2
         self.toka_kv_cache_num_tokens = 100_000
     
-    def streaming_dataset(self):
+    def streaming(self):
         self.streaming_dataset = True
         self.dataloader_num_workers = 8
 
