@@ -12,7 +12,7 @@ import time
 from typing import Dict, List, Literal, Optional
 import yaml
 import httpx
-
+def mean(x): return sum(x) / len(x)
 from functools import partial
 import pandas as pd
 from pydantic import Field
@@ -223,7 +223,7 @@ def train(config: TrainConfig):
         cache_tuning = True
     else:
         cache_tuning = False
-
+        
     if config.load_cache_path is not None:
         cache = TrainableCache.from_pretrained(config.load_cache_path)
         logger.info(f"Loaded cache from {config.load_cache_path}")
@@ -513,6 +513,10 @@ def train(config: TrainConfig):
             if config.wandb is not None and is_rank_zero and do_step:
                 total_num_input_tokens += accum_num_input_tokens.item()
                 total_num_target_tokens += accum_num_target_tokens.item()
+                key_norms = [cache.trainable_key_offsets[layer_idx].norm() for layer_idx in range(cache.config.n_layers)]
+                value_norms = [cache.trainable_value_offsets[layer_idx].norm() for layer_idx in range(cache.config.n_layers)]
+                reference_key_norms = [cache.reference_keys[layer_idx].norm() for layer_idx in range(cache.config.n_layers)]
+                reference_value_norms = [cache.reference_values[layer_idx].norm() for layer_idx in range(cache.config.n_layers)]
                 wandb.log(
                     {
                         "train/loss": accum_loss,
@@ -524,6 +528,10 @@ def train(config: TrainConfig):
                         "train/step_num_target_tokens": accum_num_target_tokens,
                         "train/num_input_tokens": total_num_input_tokens,
                         "train/num_target_tokens": total_num_target_tokens,
+                        "train/mean_key_offset_norm": mean(key_norms),
+                        "train/mean_value_offset_norm": mean(value_norms),
+                        "train/mean_reference_key_norm": mean(reference_key_norms),
+                        "train/mean_reference_value_norm": mean(reference_value_norms),
                         **{
                             f"optimizer/lr_group{i}": param_group["lr"]
                             for i, param_group in enumerate(optimizer.param_groups)
