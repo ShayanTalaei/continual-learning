@@ -1,0 +1,77 @@
+## FinLoRA Finer — ReflexionAgent on local JSONL test set
+## Demonstrates self-reflection on financial tagging tasks
+
+runtime:
+  max_envs_to_visit: 10000
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 200
+  validation_freq: 50
+  # Checkpointing
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 100
+  checkpoint_keep_last: 1
+  checkpoint_on_start: false
+  resume_from: null
+  start_episode_index: 0
+
+train_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "train"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 2000
+  shuffle: false
+
+validation_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_test_balanced"
+  split: "val"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 1000
+  shuffle: false
+
+agent:
+  type: reflexion_agent
+
+  # LM configuration
+  lm_config:
+    model: "gemini-2.0-flash" # "gemini-2.5-flash"
+    temperature: 0.0
+    max_output_tokens: 8192
+    log_calls: true
+
+  # Memory configuration
+  memory_config:
+    _type: history_list
+    max_length: 2000
+
+  # History configuration
+  history_k: null  # null = use all history items
+
+  # Reflexion-specific configuration
+  enable_reflection: true
+  reflect_on_failure_only: true  # Only reflect on incorrect answers
+  failure_threshold: 1.0  # Score < 1.0 means incorrect
+  max_reflections_in_prompt: null
+
+  # Custom system prompt for financial tagging
+  system_prompt: "{file:src/data/prompts/finer/system_prompt.txt}"
+
+  # Use default reflection prompts (task-agnostic)
+  reflection_system_prompt: null
+  reflection_few_shot_examples: null
+
+  # Base agent settings
+  verbose: true
+
+output:
+  results_dir: outputs/finer/reflexion_agent/2000_steps_gemini_2.0_flash
+  log_level: INFO
+
+

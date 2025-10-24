@@ -1,0 +1,9 @@
+include = ["src"]
+exclude = ["**/__pycache__"]
+executionEnvironments = [
+    { 
+        root = ".",
+        extraPaths = ["third_party/cartridges"]
+    }
+]
+stubPath = ""

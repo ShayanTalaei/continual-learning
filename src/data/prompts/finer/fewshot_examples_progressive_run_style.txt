@@ -1,0 +1,53 @@
+Example 1:
+
+Input: What is the appropriate XBRL US GAAP tag for [46.18] in the given sentence? 
+"( 2 ) Included in the consolidated balance sheets within additional paid - in capital , net of $ 3 million in equity issuance costs . As of December 28 , 2019 , the remaining life of the 2.125 % Notes was approximately 81 months . Based on the closing price of the Company ' s common stock of $ [46.18] on December 27 , 2019 , the last trading day of 2019 , the if - converted value of the 2.125 % Notes exceeded its principal amount by approximately $ 1.2 billion ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[46.18]" in the given sentence, we need to identify the concept being described. In this case, the concept is the market price per share of the Company's common stock on a specific date.
+
+\boxed{SharePrice}
+
+Example 2:
+
+Input: What is the appropriate XBRL US GAAP tag for [1.4] in the given sentence? 
+"These costs are expected to be recognized over a weighted average remaining vesting period of [1.4] years ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[1.4]" in the given sentence, we need to identify the concept being described. In this case, the concept is the weighted-average remaining period over which unrecognized share-based compensation cost will be recognized.
+
+\boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1}
+
+Example 3:
+
+Input: What is the appropriate XBRL US GAAP tag for [167.5] in the given sentence? 
+"The gross amount of the senior and class B bonds at December 31 , 2018 were $ [167.5] million and $ 15.9 million , however , only $ 159.2 million and $ 5.9 million are reflected in Secured borrowings as the remainder is owned by the Company , respectively ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[167.5]" in the given sentence, we need to identify the concept being described. In this case, the concept is the gross principal (face) amount of bonds outstanding.
+
+\boxed{DebtInstrumentFaceAmount}
+
+Example 4:
+
+Input: What is the appropriate XBRL US GAAP tag for [0.1125] in the given sentence? 
+"On February 23 , 2019 , the Company announced an increase to the regular quarterly dividend from $ [0.1125] per share to $ 0.12 per share , which was effective in the fourth quarter of fiscal 2019 ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[0.1125]" in the given sentence, we need to identify the concept being described. In this case, the concept is the regular dividend amount per common share.
+
+\boxed{CommonStockDividendsPerShareDeclared}
+
+Example 5:
+
+Input: What is the appropriate XBRL US GAAP tag for [1.1] in the given sentence? 
+"As of September 30 , 2018 , the Company could have borrowed up to an additional $ [1.1] billion under the Revolving Loan ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[1.1]" in the given sentence, we need to identify the concept being described. In this case, the concept is the additional amount available to borrow under a revolving credit facility.
+
+\boxed{LineOfCreditFacilityRemainingBorrowingCapacity}
+
+Example 6:
+
+Input: What is the appropriate XBRL US GAAP tag for [207.8] in the given sentence? 
+"As of June 30 , 2019 , the estimated range of anticipated costs discussed above for the Sacramento , California site was $ [207.8] million to $ 313.9 million and the accrued amount was $ 207.8 million included as a component of the Company ' s environmental reserves ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[207.8]" in the given sentence, we need to identify the concept being described. In this case, the concept is the accrued amount recognized for environmental obligations.
+
+\boxed{AccrualForEnvironmentalLossContingencies}
