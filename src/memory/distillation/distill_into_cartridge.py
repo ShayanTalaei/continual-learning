@@ -141,7 +141,7 @@ class DatasetConfig(pydra.Config):
     def __init__(self):
         super().__init__()
         self.packing_mode = "fixed_batch_size_then_pad"  # Sequence packing mode
-        self.packed_seq_length = 32000  # Maximum sequence length
+        self.packed_seq_length = 16000  # Maximum sequence length
         self.targets = "logits"  # Training target type
         self.top_k_logits = 20  # Number of top-k logits to keep
         self.min_prob_mass = 0.8  # Minimum probability mass for logprobs conversion
