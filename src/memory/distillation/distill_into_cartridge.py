@@ -245,12 +245,12 @@ class DistillationConfig(pydra.Config):
     
     def matx(self):
         self.output.local_dir = "/matx/u/bcabrown/shayan_memory/outputs"
-        self.input_dataset.packed_seq_length = 8000  # Maximum sequence length
-        self.val_dataset.packed_seq_length = 8000  # Maximum sequence length
-        self.training.global_batch_size = 32  # Total batch size across all devices
-        self.input_dataset.batch_size = 2
-        self.val_dataset.batch_size = 2
-        self.generate_batch_size = 2
+        # self.input_dataset.packed_seq_length = 8000  # Maximum sequence length
+        # self.val_dataset.packed_seq_length = 8000  # Maximum sequence length
+        # self.training.global_batch_size = 32  # Total batch size across all devices
+        # self.input_dataset.batch_size = 2
+        # self.val_dataset.batch_size = 2
+        # self.generate_batch_size = 2
         self.toka_kv_cache_num_tokens = 100_000
     
     def streaming(self):
