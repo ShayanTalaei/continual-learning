@@ -879,6 +879,7 @@ def generate_with_toka(
                     ids=element.input_ids.tolist(),
                     model=config.toka_server_config.model,
                     max_tokens=eval_config.generate_max_new_tokens,
+                    temperature=eval_config.temperature,
                     cartridges=[
                         Cartridge(id="cache_for_generation", source="local")
                     ]
