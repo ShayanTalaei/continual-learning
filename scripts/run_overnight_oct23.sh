@@ -15,7 +15,7 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval \
     training.weight_decay=0.1 \
-    config.epochs=1
+    training.epochs=1
 
 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     run_name=oct23_250train_128tokens_sysmem_wd1e3 \
@@ -34,7 +34,7 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval \
     training.weight_decay=1e-3 \
-    config.epochs=1
+    training.epochs=1
 
 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     run_name=oct23_250train_128tokens_sysmem_wd1 \
@@ -53,4 +53,4 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval \
     training.weight_decay=1 \
-    config.epochs=1
+    training.epochs=1
