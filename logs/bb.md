@@ -651,7 +651,6 @@ python -m src.memory.distillation.distill_into_cartridge \
     load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct22_250train_128tokens_sysmem-cache-step400/cartridge.pt \
     .quick_data \
     generate_batch_size=1
-
 Avg scores: {'generate_finer/score': np.float64(0.625)}
 
 CUDA_VISIBLE_DEVICES=1 python -m src.memory.distillation.distill_into_cartridge \
@@ -669,11 +668,10 @@ CUDA_VISIBLE_DEVICES=1 python -m src.memory.distillation.distill_into_cartridge 
     training.train_without_logits=T \
     streaming_dataset=T \
     wandb.enabled=F \
-    load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct22_250train_128tokens_sysmem-cache-step700/cartridge.pt \
+    load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct22_250train_128tokens_sysmem-cache-step400/cartridge.pt \
     .quick_data \
-    .toka \
-    generate_batch_size=1
-Avg scores: {'generate_finer/score': np.float64(0.608)}
+    .toka
+Avg scores: {'generate_finer/score': np.float64(0.622)}
 
 python third_party/tokasaurus/tokasaurus/entry.py torch_compile=F use_cudagraphs=F local_proc_name=model_worker model=meta-llama/Llama-3.1-8B-Instruct cartridge_dir=/scratch/m000122/stalaei/continual-learning/cartridges/test_imnpls
 
@@ -713,3 +711,39 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval
 
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct23_250train_128tokens_sysmem_cartridgetemplate_toka \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    wandb.enabled=F \
+    .quick_data \
+    generate_batch_size=1
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct23_250train_128tokens_sysmem_cartridgetemplate_hf_redo \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    training.seed=9

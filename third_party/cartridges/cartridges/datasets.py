@@ -323,6 +323,7 @@ class TrainDataset(Dataset):
         batch_size: Optional[int] = None
 
         user_prompt_prefix: list[str] | None = None
+        shuffle: bool = True
 
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
@@ -331,6 +332,8 @@ class TrainDataset(Dataset):
         self.tokenizer = tokenizer
         
         self.elements: List[DatasetElement] = self._prepare_elements()
+        if self.config.shuffle:
+            random.shuffle(self.elements)
         # each batch is a list of element indices
         self.batches: List[List[int]] = self._prepare_batches(seed=seed) 
 
