@@ -99,6 +99,8 @@ def read_conversations(path: str) -> list[Conversation]:
         return _conversations_from_parquet(path)
     elif path_str.endswith(".pkl"):
         return _conversations_from_pkl(path)
+    elif path_str.endswith(".jsonl"):
+        return _conversations_from_jsonl(path)
     else:
         raise ValueError(f"Unsupported file extension: {path_str}")
 
@@ -135,6 +137,34 @@ def _conversations_from_pkl(path: str) -> list[Conversation]:
         return data["rows"]
     else:
         return data
+
+def _conversations_from_jsonl(path: str) -> list[Conversation]:
+    import json
+    data = []
+    with open(path) as f:
+        for idx, line in enumerate(f):
+            data.append(json.loads(line))
+    return data
+
+
+def _jsonl_length(path: str) -> int:
+    with open(path, "rb") as f:  # binary is a tad faster and avoids encoding issues
+        return sum(1 for _ in f)
+
+
+def get_jsonl_record(filepath, i):
+    import json
+    if i < 0:
+        raise IndexError("Index must be non-negative")
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line_num, line in enumerate(f):
+            if line_num == i:
+                return json.loads(line.strip())
+        
+        # If we get here, i was beyond the file length
+        raise IndexError(f"Index {i} is out of range (file has {line_num + 1} lines)")
+
 
 class TrainingExample(Conversation):
     # backwards compatibility

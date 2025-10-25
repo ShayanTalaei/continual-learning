@@ -1,0 +1,63 @@
+You will be solving a series of financial tagging tasks. At every step, you will be given a sentence and asked to identify the appropriate XBRL US GAAP tag for a term in the sentence. After this, you will receive feedback on if your tag was correct or incorrect. For every task, use your previous attempts and corresponding feedback when solving problems to continuously improve.
+
+Here is a list of US GAAP tags options: OperatingLeasesRentExpenseNet,MinorityInterestOwnershipPercentageByParent,ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriodWeightedAverageGrantDateFairValue,DerivativeNotionalAmount,PreferredStockDividendRatePercentage,GuaranteeObligationsMaximumExposure,LossContingencyEstimateOfPossibleLoss,OperatingLeaseRightOfUseAsset,NumberOfOperatingSegments,PaymentsToAcquireBusinessesNetOfCashAcquired,DebtInstrumentBasisSpreadOnVariableRate1,InterestExpense,ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber,CommonStockSharesOutstanding,StockRepurchaseProgramRemainingAuthorizedRepurchaseAmount1,LineOfCreditFacilityInterestRateAtPeriodEnd,ContractWithCustomerLiabilityRevenueRecognized,AmortizationOfIntangibleAssets,ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1,DebtInstrumentRedemptionPricePercentage,RepaymentsOfDebt,DisposalGroupIncludingDiscontinuedOperationConsideration,LineOfCreditFacilityRemainingBorrowingCapacity,BusinessCombinationAcquisitionRelatedCosts,LesseeOperatingLeaseRenewalTerm,TreasuryStockValueAcquiredCostMethod,PreferredStockSharesAuthorized,RelatedPartyTransactionExpensesFromTransactionsWithRelatedParty,ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsVestedInPeriodTotalFairValue,UnrecognizedTaxBenefitsThatWouldImpactEffectiveTaxRate,SaleOfStockNumberOfSharesIssuedInTransaction,OperatingLeaseWeightedAverageRemainingLeaseTerm1,StockRepurchaseProgramAuthorizedAmount1,SupplementalInformationForPropertyCasualtyInsuranceUnderwritersPriorYearClaimsAndClaimsAdjustmentExpense,RelatedPartyTransactionAmountsOfTransaction,CommonStockDividendsPerShareDeclared,IncomeLossFromEquityMethodInvestments,DebtInstrumentMaturityDate,LettersOfCreditOutstandingAmount,AllocatedShareBasedCompensationExpense,EffectiveIncomeTaxRateContinuingOperations,ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAuthorized,ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAvailableForGrant,ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodGross,ConcentrationRiskPercentage1,OperatingLeasePayments,LongTermDebt,RestructuringCharges,CommonStockParOrStatedValuePerShare,DebtInstrumentConvertibleConversionPrice1,Revenues,DeferredFinanceCostsGross,EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate,DefinedBenefitPlanContributionsByEmployer,GoodwillImpairmentLoss,LossContingencyPendingClaimsNumber,OperatingLeaseLiability,LineOfCreditFacilityMaximumBorrowingCapacity,OperatingLeaseExpense,DerivativeFixedInterestRate,LineOfCreditFacilityCommitmentFeePercentage,CumulativeEffectOfNewAccountingPrincipleInPeriodOfAdoption,SharebasedCompensationArrangementBySharebasedPaymentAwardAwardVestingRightsPercentage,DebtWeightedAverageInterestRate,PaymentsToAcquireBusinessesGross,DebtInstrumentCarryingAmount,BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedIntangibles,RevenueFromContractWithCustomerExcludingAssessedTax,PublicUtilitiesRequestedRateIncreaseDecreaseAmount,ContractWithCustomerLiability,DebtInstrumentTerm,DebtInstrumentFairValue,RevenueFromContractWithCustomerIncludingAssessedTax,RevenueFromRelatedParties,DebtInstrumentInterestRateEffectivePercentage,GainsLossesOnExtinguishmentOfDebt,EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedShareBasedAwardsOtherThanOptions,DebtInstrumentUnamortizedDiscount,LineOfCreditFacilityCurrentBorrowingCapacity,CashAndCashEquivalentsFairValueDisclosure,LesseeOperatingLeaseTermOfContract,RestructuringAndRelatedCostExpectedCost1,DefinedContributionPlanCostRecognized,OperatingLeaseCost,LossContingencyDamagesSoughtValue,ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodWeightedAverageGrantDateFairValue,ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod,EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1,EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized,FiniteLivedIntangibleAssetUsefulLife,Depreciation,AcquiredFiniteLivedIntangibleAssetsWeightedAverageUsefulLife,DeferredFinanceCostsNet,DebtInstrumentInterestRateStatedPercentage,Goodwill,CommonStockCapitalSharesReservedForFutureIssuance,LongTermDebtFairValue,OperatingLossCarryforwards,InterestExpenseDebt,UnrecognizedTaxBenefits,BusinessCombinationContingentConsiderationLiability,TreasuryStockAcquiredAverageCostPerShare,ClassOfWarrantOrRightExercisePriceOfWarrantsOrRights1,SharebasedCompensationArrangementBySharebasedPaymentAwardExpirationPeriod,NumberOfRealEstateProperties,TreasuryStockSharesAcquired,AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount,CommonStockSharesAuthorized,SharePrice,DebtInstrumentFaceAmount,AmortizationOfFinancingCosts,BusinessCombinationConsiderationTransferred1,LineOfCreditFacilityUnusedCapacityCommitmentFeePercentage,StockRepurchasedDuringPeriodShares,ProceedsFromIssuanceOfCommonStock,StockIssuedDuringPeriodSharesNewIssues,AccrualForEnvironmentalLossContingencies,BusinessAcquisitionPercentageOfVotingInterestsAcquired,LossContingencyAccrualAtCarryingValue,OperatingLeaseWeightedAverageDiscountRatePercent,ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsExercisesInPeriodTotalIntrinsicValue,BusinessAcquisitionEquityInterestsIssuedOrIssuableNumberOfSharesIssued,CapitalizedContractCostAmortization,NumberOfReportableSegments,AssetImpairmentCharges,RevenueRemainingPerformanceObligation,EquityMethodInvestmentOwnershipPercentage,MinorityInterestOwnershipPercentageByNoncontrollingOwners,AreaOfRealEstateProperty,StockRepurchasedAndRetiredDuringPeriodShares,LineOfCredit,BusinessCombinationRecognizedIdentifiableAssetsAcquiredAndLiabilitiesAssumedIntangibleAssetsOtherThanGoodwill,IncomeTaxExpenseBenefit,PropertyPlantAndEquipmentUsefulLife,LeaseAndRentalExpense,ShareBasedCompensation,EquityMethodInvestments,SaleOfStockPricePerShare,EmployeeServiceShareBasedCompensationTaxBenefitFromCompensationExpense
+
+Here are some fewshot examples:
+
+
+Example 1:
+
+Input: What is the appropriate XBRL US GAAP tag for [46.18] in the given sentence? 
+"( 2 ) Included in the consolidated balance sheets within additional paid - in capital , net of $ 3 million in equity issuance costs . As of December 28 , 2019 , the remaining life of the 2.125 % Notes was approximately 81 months . Based on the closing price of the Company ' s common stock of $ [46.18] on December 27 , 2019 , the last trading day of 2019 , the if - converted value of the 2.125 % Notes exceeded its principal amount by approximately $ 1.2 billion ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[46.18]" in the given sentence, we need to identify the concept being described. In this case, the concept is the market price per share of the Company's common stock on a specific date.
+
+\boxed{SharePrice}
+
+Example 2:
+
+Input: What is the appropriate XBRL US GAAP tag for [1.4] in the given sentence? 
+"These costs are expected to be recognized over a weighted average remaining vesting period of [1.4] years ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[1.4]" in the given sentence, we need to identify the concept being described. In this case, the concept is the weighted-average remaining period over which unrecognized share-based compensation cost will be recognized.
+
+\boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1}
+
+Example 3:
+
+Input: What is the appropriate XBRL US GAAP tag for [167.5] in the given sentence? 
+"The gross amount of the senior and class B bonds at December 31 , 2018 were $ [167.5] million and $ 15.9 million , however , only $ 159.2 million and $ 5.9 million are reflected in Secured borrowings as the remainder is owned by the Company , respectively ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[167.5]" in the given sentence, we need to identify the concept being described. In this case, the concept is the gross principal (face) amount of bonds outstanding.
+
+\boxed{DebtInstrumentFaceAmount}
+
+Example 4:
+
+Input: What is the appropriate XBRL US GAAP tag for [0.1125] in the given sentence? 
+"On February 23 , 2019 , the Company announced an increase to the regular quarterly dividend from $ [0.1125] per share to $ 0.12 per share , which was effective in the fourth quarter of fiscal 2019 ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[0.1125]" in the given sentence, we need to identify the concept being described. In this case, the concept is the regular dividend amount per common share.
+
+\boxed{CommonStockDividendsPerShareDeclared}
+
+Example 5:
+
+Input: What is the appropriate XBRL US GAAP tag for [1.1] in the given sentence? 
+"As of September 30 , 2018 , the Company could have borrowed up to an additional $ [1.1] billion under the Revolving Loan ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[1.1]" in the given sentence, we need to identify the concept being described. In this case, the concept is the additional amount available to borrow under a revolving credit facility.
+
+\boxed{LineOfCreditFacilityRemainingBorrowingCapacity}
+
+Example 6:
+
+Input: What is the appropriate XBRL US GAAP tag for [207.8] in the given sentence? 
+"As of June 30 , 2019 , the estimated range of anticipated costs discussed above for the Sacramento , California site was $ [207.8] million to $ 313.9 million and the accrued amount was $ 207.8 million included as a component of the Company ' s environmental reserves ."
+
+Output: To determine the appropriate XBRL US GAAP tag for "[207.8]" in the given sentence, we need to identify the concept being described. In this case, the concept is the accrued amount recognized for environmental obligations.
+
+\boxed{AccrualForEnvironmentalLossContingencies}
+
+
+When solving tasks, think by step then output the US GAAP tag in \\\\boxed{}.

@@ -17,7 +17,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Callable, Literal, Optional, Union
+from typing import Callable, Literal, Optional, Union, Tuple
 from dataclasses import dataclass
 
 import torch
@@ -54,7 +54,7 @@ logger = logging.get_logger(__name__)
 # backward running on 1xA100.
 def flex_attention_train(*args, **kwargs):
     return flex_attention(*args, **kwargs)
-flex_attention_train = torch.compile(flex_attention_train, dynamic=False, mode="max-autotune-no-cudagraphs")
+flex_attention_train = torch.compile(flex_attention_train, dynamic=False, mode="default") #mode="max-autotune-no-cudagraphs")
 
 # SE (07/25): When I set `dynamic=True` with "max-autotune-no-cudagraphs" for 
 # generation, I get " AttributeError: 'Symbol' object has no attribute 'get_device' "
@@ -67,7 +67,7 @@ class LlamaBatch:
     input_ids: torch.LongTensor
     seq_ids: torch.LongTensor
     position_ids: torch.LongTensor
-    hidden_states: torch.Tensor
+    # hidden_states: torch.Tensor
     past_key_values: Optional[Cache] = None
     position_embeddings: Optional[tuple[torch.Tensor, torch.Tensor]] = None
     attention_mask: Optional[torch.Tensor] = None
@@ -119,9 +119,12 @@ class LlamaRotaryEmbedding(nn.Module):
         inv_freq, self.attention_scaling = self.rope_init_fn(self.config, device)
         self.register_buffer("inv_freq", inv_freq, persistent=False)
         self.original_inv_freq = self.inv_freq
+    
+    # def _apply(self, *args, **kwargs): # want to keep frequencies in fp32
+    #     pass
 
     @torch.no_grad()
-    @dynamic_rope_update  # power user: used with advanced RoPE types (e.g. dynamic rope)
+    # @dynamic_rope_update  # power user: used with advanced RoPE types (e.g. dynamic rope)
     def forward(self, x, position_ids):
         inv_freq_expanded = self.inv_freq[None, :, None].float().expand(position_ids.shape[0], -1, 1).to(x.device)
         position_ids_expanded = position_ids[:, None, :].float()
@@ -132,7 +135,6 @@ class LlamaRotaryEmbedding(nn.Module):
             emb = torch.cat((freqs, freqs), dim=-1)
             cos = emb.cos() * self.attention_scaling
             sin = emb.sin() * self.attention_scaling
-
         return cos.to(dtype=x.dtype), sin.to(dtype=x.dtype)
 
 
@@ -284,8 +286,7 @@ class LlamaAttention(nn.Module):
             config.num_attention_heads * self.head_dim, config.hidden_size, bias=config.attention_bias
         )
 
-    def forward(self, batch: LlamaBatch) -> torch.Tensor:
-        hidden_states = batch.hidden_states
+    def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> torch.Tensor:
         input_shape = hidden_states.shape[:-1]
         hidden_shape = (*input_shape, -1, self.head_dim)
 
@@ -318,12 +319,13 @@ class LlamaAttention(nn.Module):
         )
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)
-        
-        return batch.update(hidden_states=attn_output)
+
+        return attn_output, batch
 
 class LlamaDecoderLayer(GradientCheckpointingLayer):
     def __init__(self, config: LlamaConfig, layer_idx: int):
         super().__init__()
+        self.layer_idx = layer_idx
         self.hidden_size = config.hidden_size
 
         self.self_attn = LlamaAttention(config=config, layer_idx=layer_idx)
@@ -332,22 +334,29 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
         self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
-    def forward(self, batch: LlamaBatch) -> LlamaBatch:
-        residual = batch.hidden_states
-        hidden_states = self.input_layernorm(batch.hidden_states)
-        batch = batch.update(hidden_states=hidden_states)
+    def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> Tuple[torch.Tensor, LlamaBatch]:
+        residual = hidden_states
+        hidden_states = self.input_layernorm(hidden_states)
 
         # Self Attention
-        batch = self.self_attn(batch)
-        hidden_states = residual + batch.hidden_states
+        hidden_states, batch = self.self_attn(hidden_states=hidden_states, batch=batch)
+        hidden_states = residual + hidden_states
+        # def rabs(a,b): return 2 * (a - b).abs() / (a.abs() + b.abs() + 1e-8)
+        # if hidden_states.shape[1] > 1000:
+        #     ohidden_states = torch.load(f"/scratch/m000122/bcabrown/debug/attn_tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        #     print("After attention rabs mean: ", rabs(hidden_states[0], ohidden_states).mean())
 
         # Fully Connected
         residual = hidden_states
         hidden_states = self.post_attention_layernorm(hidden_states)
         hidden_states = self.mlp(hidden_states)
         hidden_states = residual + hidden_states
+        # if hidden_states.shape[1] > 1000:
+        #     ohidden_states_mlp = torch.load(f"/scratch/m000122/bcabrown/debug/tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        #     print("After MLP rabs mean: ", rabs(hidden_states[0], ohidden_states_mlp).mean())
+        #     breakpoint()
 
-        return batch.update(hidden_states=hidden_states)
+        return hidden_states, batch
 
 
 @auto_docstring
@@ -449,7 +458,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         block_mask = create_block_mask(
             mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
             device=inputs_embeds.device,
-            # _compile=True
+            _compile=mode == "train"
         )
         # --- end build block mask ---
 
@@ -459,7 +468,6 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         position_embeddings = self.rotary_emb(hidden_states, position_ids)
 
         batch = LlamaBatch(
-            hidden_states=hidden_states,
             input_ids=input_ids,
             seq_ids=seq_ids,
             position_ids=position_ids,
@@ -468,11 +476,13 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             attention_mask=block_mask,
             mode=mode,
         )
-
+        
+        hidden_states.requires_grad = True
         for decoder_layer in self.layers[: self.config.num_hidden_layers]:
-            batch = decoder_layer(batch)
+            hidden_states, batch = decoder_layer(hidden_states, batch)
+            # print(f"Layer {decoder_layer.layer_idx} hidden states: {hidden_states.sum()}, shape: {hidden_states.shape}")
 
-        hidden_states = self.norm(batch.hidden_states)
+        hidden_states = self.norm(hidden_states)
         return BaseModelOutputWithPast(
             last_hidden_state=hidden_states,
             past_key_values=past_key_values if use_cache else None,
@@ -569,6 +579,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
         # Only compute necessary logits, and do not upcast them to float if we are not computing the loss
         slice_indices = slice(-logits_to_keep, None) if isinstance(logits_to_keep, int) else logits_to_keep
         logits = self.lm_head(hidden_states[:, slice_indices, :])
+        # breakpoint()
 
         loss = None
         if labels is not None:

@@ -1,0 +1,74 @@
+## Test Config for Random Sampling Strategy
+## This config uses the random_sampling strategy to create samples with randomly
+## sampled K trajectories from memory and observations from a target dataset
+
+# Path to the HistoryAgent checkpoint directory containing memory snapshots
+# This is used as a fallback for non-random_sampling strategies
+checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
+
+# Output directory for generated dataset
+output_dir: "/mnt/data/shayan_memory/finer_train_data_gen_random_20_sampling_8x15000"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Teacher messages text storage
+include_teacher_messages_texts: true
+
+# Individual file saving for resume functionality
+save_individual_files: true
+
+# Memory formation strategy - using random_sampling
+strategy:
+  name: "random_sampling"
+  # Path to the memory checkpoint (can be different from checkpoint_dir)
+  memory_checkpoint_path: "/mnt/data/stalaei/logs/outputs/finer/history_agent/2000_steps_toka_llama3.1_8b_instruct/20251016_070912/checkpoints/ep_000100"
+  # Target dataset configuration (e.g., validation set)
+  target_dataset_config:
+    type: finer
+    hf_dataset: "stalaei/finer_test_balanced"
+    split: "train"
+    input_field: "context"
+    target_field: "target"
+    instruction_template: null
+    max_samples: null
+    shuffle: false
+  # Maximum number of samples to use from target dataset
+  max_target_samples: null
+  # Optional slicing over the target environments
+  start_idx: 100
+  end_idx: 15100
+  # Random sampling configuration
+  subset_size: 20  # Number of trajectories (triplets) to sample for each memory view
+  num_subsets: 8   # Number of different random subsets to create per environment
+
+# Agent prompt rendering
+agent_type: "history_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8080"
+lm_temperature: 0.0
+lm_max_output_tokens: 2048
+
+# Retry configuration for robust data generation
+lm_max_retries: 2
+
+# Optional: capture top-k logprobs for distillation training
+top_logprobs: 20
+
+# Enable full sequence tensor data for advanced distillation training
+include_full_sequence_data: true
+
+# Sampling parameters - no repetition, random sampling provides the variation
+max_samples: null
+num_repeat_samples: -1 # -1 for 1 repetition with no explicit repetition ID
+
+# Parallelism: use single thread for testing
+num_threads: 64
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "random_sampling_v1"
+  description: "Test dataset using random sampling strategy with 20 trajectories per subset, 8 subsets per environment"

@@ -1,0 +1,94 @@
+# ============================================================================
+# Cartridge Distillation Training Configuration
+# ============================================================================
+#
+# This config trains a cartridge (compressed KV cache) from a distillation dataset
+# using knowledge distillation from teacher model logprobs.
+#
+# Usage:
+#   python -m src.memory.distillation.distill_into_cartridge \
+#     --config configs/distillation/cartridge_train_example.yaml
+
+# Input dataset (pre-processed locally)
+input_dataset:
+  local_path: "/mnt/data/shayan_memory/finer_data_gen_shuffled_16x100/dataset.jsonl"  # Path to pre-processed parquet file
+  # Alternative: use HuggingFace dataset (must be in cartridges format)
+  # repo_id: "stalaei/distillation-dataset-test"
+  # split: "train"
+
+val_dataset:
+  local_path: "/mnt/data/shayan_memory/finer_val_data_gen_full_memory/dataset.jsonl"
+
+# Output configuration
+output:
+  local_dir: "./outputs/cartridges/finer-cartridge-v1"
+  hf_repo_id: "stalaei/finer-cartridge-v1"  # HuggingFace model repo
+  hf_private: true
+  upload_to_hf: true
+
+# Model to use (must match the model used for data generation)
+model_name: "meta-llama/Llama-3.1-8B-Instruct"
+
+# KV Cache initialization
+kv_cache:
+  method: "random"  # Options: "random" or "text"
+  num_tokens: 2048   # Size of the cartridge (number of KV tokens)
+  num_frozen_tokens: 4  # First N tokens frozen to prevent forgetting
+  
+  # For text initialization (if method: "text"):
+  # init_text: "You are a helpful assistant..."
+  # init_text_file: "path/to/init_prompt.txt"
+
+# Training hyperparameters
+training:
+  epochs: 100
+  global_batch_size: 8  # Total batch size across ALL GPUs
+  lr: 1e-4
+  weight_decay: 0.0
+  optimizer: "adam"
+  gradient_checkpointing: true
+  
+  # Checkpointing
+  save_every_n_steps: 100
+  save_after_training: true
+  keep_last_n_saved: 3
+  
+  # Device and seed
+  device: "cuda"
+  seed: 42
+  
+  # Multi-GPU settings
+  # distributed_backend: "nccl"  # "nccl" (GPU, default) or "gloo" (CPU/fallback)
+  # Note: Multi-GPU is auto-detected via torchrun. No config changes needed!
+  # Launch with: torchrun --nproc_per_node=4 -m src.memory.distillation.distill_into_cartridge ...
+
+# Dataset processing
+dataset:
+  packing_mode: "fixed_batch_size_then_pad"  # Options: "pad" or "truncate"
+  packed_seq_length: 32000
+  targets: "logits"  # Use logits for knowledge distillation
+  top_k_logits: 20   # Should match top_logprobs from data generation
+  min_prob_mass: 0.8  # Probability mass threshold for logprobs conversion
+  batch_size: 8
+
+# Weights & Biases logging (optional)
+wandb:
+  enabled: true
+  project: "cartridge-distillation"
+  entity: "stalaei-stanford-university"  # Your wandb username/team
+  name: "finer-cartridge-v1"
+
+# ============================================================================
+# Notes:
+# ============================================================================
+#
+# 1. First, convert your dataset using convert_to_cartridges.py:
+#    python src/memory/distillation/convert_to_cartridges.py \
+#      --input /path/to/intermediate_dataset.jsonl \
+#      --output ./data/processed_dataset.parquet \
+#      --model meta-llama/Llama-3.1-8B-Instruct
+# 2. Then run training with this config pointing to the processed dataset
+# 3. top_k_logits should match top_logprobs from data generation config
+# 4. num_tokens determines cartridge size (memory vs accuracy tradeoff)
+# 5. Trained cartridge will be uploaded to HF and can be used with KVMemoryAgent
+

@@ -1,0 +1,13 @@
+.env
+.vscode/
+
+notebooks/
+
+*pyc
+*.pyc
+
+outputs/
+_data/
+!src/data/
+
+wandb/

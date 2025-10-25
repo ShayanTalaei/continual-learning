@@ -1,0 +1,1472 @@
+<|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.2" in the given sentence?  
+ "Note 8 - Income Tax The Company ’ s effective tax rate was ( 0.2 ) % and 7.9 % for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.2" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the effective tax rate of the company for the three months ended March 31, 2020 and 2019. The term "effective tax rate" is related to income tax expense.
+
+The XBRL US GAAP tag for "effective tax rate" is not directly available in the given list. However, the tag for "EffectiveIncomeTaxRateContinuingOperations" seems to be related to income tax expense. 
+
+Since the given tag is for the overall effective tax rate, I will choose the tag for the effective tax rate for the current period, which is "EffectiveIncomeTaxRateContinuingOperations". 
+
+\\boxed{EffectiveIncomeTaxRateContinuingOperations}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "11.50" in the given sentence?  
+ "The initial conversion rates of the 5.25 % Convertible Notes issued on July 3, 2018, 5.25 % Convertible Notes issued on July 20, 2018 and 5.375 % Convertible Notes were 86.9943 shares, 77.8331 shares and 107.7122 shares, respectively, of common stock per $ 1,000 of principal, which represented a conversion price of $ 11.50 per share, $ 12.85 per share and $ 9.28 per share of common stock, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "11.50" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the conversion price of the convertible notes, which is the price at which the notes can be converted into common stock.
+
+The term "conversion price" is related to debt instruments. 
+
+The XBRL US GAAP tag for "conversion price" is not directly available in the given list. However, the tag for "DebtInstrumentConversionPrice1" seems to be related to debt instruments and conversion price.
+
+\\boxed{DebtInstrumentConversionPrice1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentConvertibleConversionPrice1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "5,500,000" in the given sentence?  
+ "A maximum of 5,500,000 shares of the Company ’ s common stock has been reserved for issuance under the ESPP."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "5,500,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shares of common stock reserved for issuance under the Employee Stock Purchase Plan (ESPP).
+
+The term "reserved for issuance" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "reserved for issuance" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAuthorized" seems to be related to share-based compensation arrangements and the number of shares authorized.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAuthorized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "327,475" in the given sentence?  
+ "21 The following table reconciles net ( loss ) income attributable to common stockholders to basic and diluted earnings per share ( in thousands, except share and per share data ) : ( 1 ) During the three months ended March 31, 2020, the Company excluded 327,475 anti - dilutive shares from its calculation of diluted earnings per share. 11."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "327,475" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the reconciliation of net income attributable to common stockholders to basic and diluted earnings per share, and specifically mentions the exclusion of anti-dilutive shares from the calculation of diluted earnings per share.
+
+The term "anti-dilutive shares" is related to share-based compensation arrangements and the calculation of diluted earnings per share.
+
+The XBRL US GAAP tag for "anti-dilutive shares" is not directly available in the given list. However, the tag for "AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount" seems to be related to the exclusion of anti-dilutive securities from the computation of earnings per share.
+
+\\boxed{AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "8,937" in the given sentence?  
+ "FINANCIAL STATEMENTS HST GLOBAL, INC. Condensed Balance Sheets March 31, 2020 December 31, 2019 ( Unaudited ) ASSETS Current Assets Cash and cash equivalents $ 1,955 Prepaid Expenses  Total Current Assets 1,955 Total Assets $ $ 1,955 LIABILITIES AND STOCKHOLDERS'DEFICIT Current Liabilities Bank overdraft payable $ 2,113 $ Accounts payable and accrued expenses 1,571 3,910 Accounts payable and accrued expenses - related parties 1,490 1,475 Accrued officer compensation 30,000 Notes payable - related party 3,090 Total Current Liabilities 38,264 5,385 Total Liabilities 38,264 5,385 Stockholders'Deficit Preferred stock ; 10,000,000 shares authorized, respectively, at $ 0.001 par value, - 0 - shares issued and outstanding at March 31, 2020 and December 31, 2019 respectively  Common stock ; 200,000,000 shares authorized, respectively, at $ 0.001 par value, 4,247,993 and 4,247,993 shares issued and outstanding at March 31, 2020 and December 31, 2019, respectively 4,248 4,248 Additional paid - in capital 5,358,236 5,358,236 Accumulated deficit ( 5,400,748 ) ( 5,365,914 ) Total Stockholders'Deficit ( 38,264 ) ( 3,430 ) Total Liabilities and Stockholders'Deficit $ $ 1,955 The accompanying notes are an integral part of these unaudited condensed financial statements HST GLOBAL, INC. Condensed Statements of Operations ( Unaudited ) For the Three Months Ended March 31, 2020 For the Three Months Ended March 31, 2019 REVENUES $ $ OPERATING EXPENSES Consulting 30,000 30,000 General and administrative 4,818 6,308 Total Operating Expenses 34,818 36,308 Loss from Operations ( 34,818 ) ( 36,308 ) OTHER INCOME ( EXPENSE ) Interest expense ( 15 ) ( 8,937 ) Total Other Income ( Expense ) ( 15 ) ( 8,937 ) Loss Before Income Taxes ( 34,833 ) ( 45,245 ) Provision for Income Taxes  NET LOSS $ ( 34,833 ) $ ( 45,245 ) Basic and Diluted Loss Per Share $ ( 0.01 ) $ ( 0.00 ) Basic and Diluted Weighted Average Number of Common Shares Outstanding 3,268,814 2,447,991 The accompanying notes are an integral part of these unaudited condensed financial statements HST Global, Inc. Condensed Statements of Stockholders ’ Deficit ( Unaudited ) The accompanying notes are an integral part of these unaudited condensed financial statements HST GLOBAL, INC. Condensed Statements of Cash Flows ( Unaudited ) For the Three Months Ended March 31,20 20 For the Three Months Ended March 31, 2019 Operating Activities Net loss $ ( 34,833 ) $ ( 45,245 ) Adjustments to reconcile net loss to net cash used in operating activities : Gain on extinguishment of debt  Changes in operating assets and liabilities : Prepaid Expense  Bank overdraft payable 2,113 126 Notes payable related party 3,090 Accounts payable and accrued expenses ( 2,340 ) 6,182 Accrued officer compensation 30,000 30,000 Accrued related party interest 15 8,937 Net Cash Used in Operating Activities ( 1,955 )  Investing Activities Net Cash Used in Investing Activities  Financing Activities Proceeds from sale of common stock  Proceeds from notes payable - related party  Net Cash Provided by Financing Activities  Net Change in Cash and Cash Equivalents ( 1,955 )  Cash and Cash Equivalents at Beginning of Period 1,955 Cash and Cash Equivalents at End of Period $ $ Supplemental Disclosures of Cash Flow Information : Cash paid for interest $ $ Cash paid for taxes $ $ The accompanying notes are an integral part of these unaudited condensed financial statements HST GLOBAL, INC. Notes to Condensed Financial Statements ( Unaudited ) September 30, 2019 NOTE 1  ORGANIZATION AND PRINCIPAL ACTIVITIES HST Global, Inc. ( the Company ) was incorporated on April 11, 1984 under the laws of the State of Delaware under the name of NT Holding Corporation."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "8,937" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest expense for the three months ended March 31, 2019.
+
+The term "interest expense" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest expense" is not directly available in the given list. However, the tag for "InterestExpense" seems to be related to interest expense.
+
+\\boxed{InterestExpense}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "years" in the given sentence?  
+ "The acquired capitalized software has an estimated amortization period of six years. Acquisition - related costs for these businesses amounted to approximately $ 1,299 and were expensed as incurred. Certain provisions in the purchase agreements provide for additional consideration of up to $ 34,900, in the aggregate, to be paid based upon the achievement of specified financial performance targets, as defined in the 22 i3 VERTICALS, Inc. NOTES TO THE INTERIM CONDENSED CONSOLIDATED FINANCIAL STATEMENTS ( UNAUDITED ) ( in thousands, except unit, share and per share amounts ) purchase agreements, through no later than September 2021."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "years" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the estimated amortization period of the acquired capitalized software.
+
+The term "amortization period" is related to the useful life of an intangible asset.
+
+The XBRL US GAAP tag for "amortization period" is not directly available in the given list. However, the tag for "FiniteLivedIntangibleAssetUsefulLife" seems to be related to the useful life of an intangible asset.
+
+\\boxed{FiniteLivedIntangibleAssetUsefulLife}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{AcquiredFiniteLivedIntangibleAssetsWeightedAverageUsefulLife}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.00001" in the given sentence?  
+ "46 Table of Contents The Blackstone Group Inc. Notes to Condensed Consolidated Financial Statements ( Unaudited ) - Continued ( All Dollars Are in Thousands, Except Share and Per Share Data, Except Where Noted ) The following table summarizes the anti - dilutive securities for the three months ended March 31, 2020 and 2019 : Stockholder ’ s Equity In connection with the Conversion, effective July 1, 2019, each common unit of the Partnership outstanding immediately prior to the Conversion converted into one issued and outstanding, fully paid and nonassessable share of Class A common stock, $ 0.00001 par value per share, of the Company."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.00001" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the par value of the Class A common stock of the Company.
+
+The term "par value" is related to the stock.
+
+The XBRL US GAAP tag for "par value" is not directly available in the given list. However, the tag for "CommonStockParOrStatedValuePerShare" seems to be related to the par value of the stock.
+
+\\boxed{CommonStockParOrStatedValuePerShare}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "5.7" in the given sentence?  
+ "On July 11, 2019, in conjunction with the acquisition of the Riggs Road Property, the Riggs Road Property was mortgaged pursuant to the terms of the loan agreement ( the “ Secured Loan Agreement ” ), and an additional approximate $ 5.7 million was drawn."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "5.7" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount drawn under the Secured Loan Agreement.
+
+The term "amount drawn" is related to debt instruments.
+
+The XBRL US GAAP tag for "amount drawn" is not directly available in the given list. However, the tag for "DebtInstrumentBasisSpreadOnVariableRate1" seems to be related to debt instruments, but it is not the correct tag for the amount drawn. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of the debt instrument, which in this case is the amount drawn.
+
+\\boxed{DebtInstrumentFaceAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LettersOfCreditOutstandingAmount}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.9" in the given sentence?  
+ "Financial Statement Components Cash and cash equivalents consisted of the following ( in thousands ) : Accounts receivable, net consisted of the following ( in thousands ) : Prepaid expenses and other current assets consisted of the following ( in thousands ) : Property and equipment, net consisted of the following ( in thousands ) : Total depreciation and amortization expense related to property and equipment was $ 7.9 million and $ 5.8 million for the three months ended March 31, 2020 and 2019, respectively. The carrying value of goodwill is as follows ( in thousands ) : 12 Table of Contents RING CENTRAL, INC. Notes to Condensed Consolidated Financial Statements ( Unaudited ) The carrying values of intangible assets are as follows ( in thousands ) : Amortization expense from acquired intangible assets for the three months ended March 31, 2020 and 2019 was $ 8.6 million and $ 1.9 million, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.9" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amortization expense from acquired intangible assets for the three months ended March 31, 2019.
+
+The term "amortization expense" is related to the depreciation and amortization of intangible assets.
+
+The XBRL US GAAP tag for "amortization expense" is not directly available in the given list. However, the tag for "AmortizationOfIntangibleAssets" seems to be related to the amortization of intangible assets.
+
+\\boxed{AmortizationOfIntangibleAssets}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.1" in the given sentence?  
+ "Item 1. Consolidated Financial Statements ( Unaudited ) SPIRIT OF TEXAS BANCSHARES, INC. AND SUBSIDIARY CONSOLIDATED BALANCE SHEETS ( Unaudited ) ( Dollars in thousands, except per share data ) The accompanying notes are an integral part of these unaudited, consolidated financial statements SPIRIT OF TEXAS BANCSHARES, INC. AND SUBSIDIARY CONSOLIDATED STATEMENTS OF INCOME ( Unaudited ) ( Dollars in thousands, except per share data ) The accompanying notes are an integral part of these unaudited, consolidated financial statements SPIRIT OF TEXAS BANCSHARES, INC. AND SUBSIDIARY CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME ( Unaudited ) ( Dollars in thousands ) The accompanying notes are an integral part of these unaudited, consolidated financial statements SPIRIT OF TEXAS BANCSHARES, INC. AND SUBSIDIARY CONSOLIDATED STATEMENTS OF CHANGES IN STOCKHOLDERS'EQUITY ( Unaudited ) ( Dollars in thousands ) The accompanying notes are an integral part of these unaudited, consolidated financial statements SPIRIT OF TEXAS BANCSHARES, INC. AND SUBSIDIARY CONSOLIDATED STATEMENTS OF CASH FLOWS ( Unaudited ) ( Dollars in thousands ) ( 1 ) - Total cash paid was $ 131.6 million ; however, $ 2.1 million was accrued and paid subsequent to March 31, 2020."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{PaymentsToAcquireBusinessesNetOfCashAcquired}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.50" in the given sentence?  
+ "The applicable margin for the Term Loan is 2.75 % in the case of a ABR loan and 3.75 % in the case of a Eurocurrency loan, and the applicable margin for the revolving loan ranges from 0.75 % to 1.50 % in the case of a ABR loan and 1.75 to 2.50 % in the case of a Eurocurrency loan, and is based on the Company ’ s leverage ratio."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.50" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the applicable margin for the revolving loan, which is based on the Company's leverage ratio.
+
+The term "applicable margin" is related to debt instruments.
+
+The XBRL US GAAP tag for "applicable margin" is not directly available in the given list. However, the tag for "DebtInstrumentBasisSpreadOnVariableRate1" seems to be related to debt instruments, but it is not the correct tag for the applicable margin. However, the tag for "DebtInstrumentBasisSpreadOnVariableRate1" is related to the spread on variable rate debt instruments, which in this case is the applicable margin.
+
+\\boxed{DebtInstrumentBasisSpreadOnVariableRate1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "643.4" in the given sentence?  
+ "Revenue recognized during the three months ended April 30, 2020 and 2019, that was included in the deferred revenue balances at January 31, 2020 and 2019, was $ 787.2 million and $ 643.4 million, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "643.4" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the revenue recognized during the three months ended April 30, 2020 and 2019, which was included in the deferred revenue balances at January 31, 2020 and 2019.
+
+The term "deferred revenue" is related to revenue recognition.
+
+The XBRL US GAAP tag for "deferred revenue" is not directly available in the given list. However, the tag for "ContractWithCustomerLiability" seems to be related to the liability for revenue recognized, which in this case is the deferred revenue.
+
+\\boxed{ContractWithCustomerLiability}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{ContractWithCustomerLiabilityRevenueRecognized}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "56" in the given sentence?  
+ "For the years ended March 31, 2020, 2019, and 2018, total revenue within the Company's four largest states ( Texas, Georgia, Tennessee, and South Carolina ) accounted for approximately 56 %, 57 % and 53 %, respectively, of the Company's total revenues."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "56" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the percentage of total revenue generated within the Company's four largest states.
+
+The term "percentage" is related to the revenue from contracts with customers.
+
+The XBRL US GAAP tag for "percentage" is not directly available in the given list. However, the tag for "ConcentrationRiskPercentage1" seems to be related to the percentage of revenue from a specific customer or group of customers, which in this case is the percentage of revenue from the Company's four largest states.
+
+\\boxed{ConcentrationRiskPercentage1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.375" in the given sentence?  
+ "The 2027 Notes are senior unsecured obligations of the Company, bear regular interest of 0.375 %, payable semi - annually in arrears on March 1 and September 1 of each year and mature on September 1, 2027, unless repurchased or converted in accordance with their terms prior to maturity."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.375" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate of the 2027 Notes.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate of the 2027 Notes.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "60.3" in the given sentence?  
+ "Fair Value Measurement As of March 31, 2020 and December 31, 2019, we held approximately $ 60.3 million and $ 63.0 million of money market funds measured at fair value on a recurring basis and categorized as Level 1 securities using the fair value hierarchy."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "60.3" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the fair value of money market funds.
+
+The term "fair value" is related to the valuation of financial instruments.
+
+The XBRL US GAAP tag for "fair value" is not directly available in the given list. However, the tag for "DebtInstrumentFairValue" seems to be related to the fair value of debt instruments, but it is not the correct tag for the fair value of money market funds. However, the tag for "DebtInstrumentFairValue" is related to the fair value of financial instruments, which in this case is the fair value of the money market funds.
+
+However, the tag for "CashAndCashEquivalentsFairValueDisclosure" seems to be related to the fair value of cash and cash equivalents, which in this case is the fair value of the money market funds.
+
+\\boxed{CashAndCashEquivalentsFairValueDisclosure}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "34.9" in the given sentence?  
+ "The carrying amount and the estimated fair value of the Company ’ s outstanding interest - bearing obligations at March 31, 2020 are $ 34.9 million and $ 36.4 million, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "34.9" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the carrying amount of the Company's outstanding interest-bearing obligations.
+
+The term "carrying amount" is related to the financial instruments.
+
+The XBRL US GAAP tag for "carrying amount" is not directly available in the given list. However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of debt instruments, which in this case is the carrying amount of the Company's outstanding interest-bearing obligations.
+
+\\boxed{DebtInstrumentCarryingAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentFairValue}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "5.7" in the given sentence?  
+ "33 Americold Realty Trust and Subsidiaries Notes to Condensed Consolidated Financial Statements - ( Unaudited, Continued ) Aggregate share - based compensation charges were $ 4.3 million and $ 5.7 million during the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "5.7" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the aggregate share-based compensation charges for the three months ended March 31, 2020 and 2019.
+
+The term "share-based compensation charges" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "share-based compensation charges" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" seems to be related to the share-based compensation charges, which in this case is the aggregate share-based compensation charges.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriodWeightedAverageGrantDateFairValue" seems to be related to the weighted average grant date fair value of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" is related to the share-based compensation charges, which in this case is the aggregate share-based compensation charges.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{AllocatedShareBasedCompensationExpense}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "75" in the given sentence?  
+ "( 5 ) The Company owns a 75 % interest in Five Point Office Venture Holdings I, LLC, a Delaware limited liability company ( the “ Gateway Commercial Venture ” )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "75" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the percentage of ownership interest in Five Point Office Venture Holdings I, LLC.
+
+The term "percentage of ownership interest" is related to the ownership percentage of a subsidiary.
+
+The XBRL US GAAP tag for "percentage of ownership interest" is not directly available in the given list. However, the tag for "MinorityInterestOwnershipPercentageByParent" seems to be related to the ownership percentage of a subsidiary, but it is not the correct tag for the parent's ownership percentage. However, the tag for "MinorityInterestOwnershipPercentageByParent" is related to the ownership percentage of a subsidiary, which in this case is the ownership percentage of the parent.
+
+However, the tag for "MinorityInterestOwnershipPercentageByNoncontrollingOwners" seems to be related to the ownership percentage of a subsidiary, which in this case is the ownership percentage of the parent.
+
+However, the tag for "MinorityInterestOwnershipPercentageByNoncontrollingOwners" is related to the ownership percentage of a subsidiary, which in this case is the ownership percentage of the parent.
+
+\\boxed{MinorityInterestOwnershipPercentageByNoncontrollingOwners}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{EquityMethodInvestmentOwnershipPercentage}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.7" in the given sentence?  
+ "A summary of share - based awards activity during the three months ended March 31, 2020 is as follows : 9 TABLE OF CONTENTS Stock Options A summary of stock options activity during the three months ended March 31, 2020 is as follows : Share - Based Compensation Expense Share - based compensation expense was $ 1.7 million and $ 1.6 million for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.7" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the share-based compensation expense for the three months ended March 31, 2020 and 2019.
+
+The term "share-based compensation expense" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "share-based compensation expense" is not directly available in the given list. However, the tag for "ShareBasedCompensation" seems to be related to share-based compensation arrangements, but it is not the correct tag for the share-based compensation expense.
+
+However, the tag for "AllocatedShareBasedCompensationExpense" seems to be related to the share-based compensation expense, which in this case is the share-based compensation expense for the three months ended March 31, 2020 and 2019.
+
+\\boxed{AllocatedShareBasedCompensationExpense}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.5" in the given sentence?  
+ "In connection with this transaction, the Company recognized a loss on extinguishment of the debt of approximately $ 0.5 million."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.5" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the loss on extinguishment of debt.
+
+The term "loss on extinguishment of debt" is related to the loss from the extinguishment of debt.
+
+The XBRL US GAAP tag for "loss on extinguishment of debt" is not directly available in the given list. However, the tag for "GainsLossesOnExtinguishmentOfDebt" seems to be related to the gains or losses from the extinguishment of debt, which in this case is the loss on extinguishment of debt.
+
+\\boxed{GainsLossesOnExtinguishmentOfDebt}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "100" in the given sentence?  
+ "( 2 ) Acquisition of Shore Community Bank On November 8, 2019, the Company completed its acquisition of 100 percent of the shares of common stock of Shore Community Bank ( " Shore " ), which merged with and into the Bank ( the “ Shore Merger ” )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "100" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the acquisition of Shore Community Bank, where the Company acquired 100% of the shares of common stock.
+
+The term "100% of the shares" is related to the percentage of ownership interest in a subsidiary.
+
+The XBRL US GAAP tag for "100% of the shares" is not directly available in the given list. However, the tag for "BusinessAcquisitionPercentageOfVotingInterestsAcquired" seems to be related to the percentage of voting interests acquired in a business combination, which in this case is the acquisition of Shore Community Bank.
+
+\\boxed{BusinessAcquisitionPercentageOfVotingInterestsAcquired}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "30.0" in the given sentence?  
+ "At March 31, 2020, the Company had $ 19.9 million available under the Revolving Credit Facility, after giving effect to $ 30.0 million borrowing outstanding, $ 4.5 million utilized to secure letters of credit and a $ 26.6 million reduction to borrowing ability as a result of decrease in net collateral."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "30.0" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the borrowing outstanding under the Revolving Credit Facility.
+
+The term "borrowing outstanding" is related to debt instruments.
+
+The XBRL US GAAP tag for "borrowing outstanding" is not directly available in the given list. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is the borrowing outstanding under the Revolving Credit Facility.
+
+However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is the borrowing outstanding under the Revolving Credit Facility.
+
+However, the tag for "DebtInstrumentCarryingAmount" is related to the carrying amount of a debt instrument, which in this case is the borrowing outstanding under the Revolving Credit Facility.
+
+\\boxed{DebtInstrumentCarryingAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LineOfCredit}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.5" in the given sentence?  
+ "Operating lease costs were approximately $ 2.5 million and $ 2.3 million for the three months ended March 31, 2020 and 2019, respectively, and were primarily comprised of long - term operating lease costs."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.5" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the operating lease costs for the three months ended March 31, 2020 and 2019.
+
+The term "operating lease costs" is related to operating leases.
+
+The XBRL US GAAP tag for "operating lease costs" is not directly available in the given list. However, the tag for "OperatingLeaseCost" seems to be related to the operating lease costs, which in this case is the operating lease costs for the three months ended March 31, 2020 and 2019.
+
+\\boxed{OperatingLeaseCost}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{OperatingLeaseExpense}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "60.7" in the given sentence?  
+ "( 1 ) Includes Bishop ’ s Square debt of $ 60.7 million that was paid off in April 2020 using proceeds from the sale of Bishop ’ s Square which occurred in April 2020."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "60.7" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the debt of Bishop's Square that was paid off in April 2020.
+
+The term "debt" is related to debt instruments.
+
+The XBRL US GAAP tag for "debt" is not directly available in the given list. However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is the debt of Bishop's Square.
+
+However, the tag for "DebtInstrumentCarryingAmount" is related to the carrying amount of a debt instrument, which in this case is the debt of Bishop's Square.
+
+\\boxed{DebtInstrumentCarryingAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentFaceAmount}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "15" in the given sentence?  
+ "North Carolina Integrity Management Rider Filing In April 2020, Piedmont filed a petition with the NCUC under the IMR mechanism to collect an additional $ 15 million in annual revenues, effective June 2020, based on the eligible capital investments closed to integrity and safety projects over the six - month period ending March 31, 2020."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "15" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the additional revenue collected by Piedmont.
+
+The term "additional revenue" is related to revenue recognition.
+
+The XBRL US GAAP tag for "additional revenue" is not directly available in the given list. However, the tag for "RevenueFromContractWithCustomerIncludingAssessedTax" seems to be related to the revenue from contracts with customers, which in this case is the additional revenue collected by Piedmont.
+
+However, the tag for "RevenueFromContractWithCustomerExcludingAssessedTax" seems to be related to the revenue from contracts with customers, excluding assessed tax, which in this case is not the correct tag.
+
+However, the tag for "RevenueFromContractWithCustomerIncludingAssessedTax" is related to the revenue from contracts with customers, including assessed tax, which in this case is the additional revenue collected by Piedmont.
+
+\\boxed{RevenueFromContractWithCustomerIncludingAssessedTax}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{PublicUtilitiesRequestedRateIncreaseDecreaseAmount}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.4" in the given sentence?  
+ "72COLUMBUS McKINNON CORPORATION NOTES TO CONSOLIDATED FINANCIAL STATEMENTS - ( Continued ) ( tabular amounts in thousands, except share data ) A summary of the restricted stock unit awards granted under the Company ’ s LTIP plan as of March 31, 2020 is as follows : Total unrecognized compensation cost related to unvested restricted stock units as of March 31, 2020 is $ 4,954,000 and is expected to be recognized over a weighted average period of 2.4 years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.4" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the weighted average period over which the unrecognized compensation cost related to unvested restricted stock units is expected to be recognized.
+
+The term "weighted average period" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "weighted average period" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" seems to be related to the vesting period of share-based compensation awards, which in this case is the weighted average period over which the unrecognized compensation cost is expected to be recognized.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" is related to the vesting period of share-based compensation awards, which in this case is the weighted average period over which the unrecognized compensation cost is expected to be recognized.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "5.0" in the given sentence?  
+ "Accrued interest is payable quarterly at 5.0 % per annum, and the accrued interest attributable to the applicable margin is capitalized as payment - in - kind ( " PIK " ) interest each quarter."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "5.0" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate at which accrued interest is payable.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateEffectivePercentage" seems to be related to the effective interest rate of a debt instrument, which in this case is the interest rate at which accrued interest is payable.
+
+However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate at which accrued interest is payable.
+
+However, the tag for "DebtInstrumentInterestRateStatedPercentage" is related to the stated interest rate of a debt instrument, which in this case is the interest rate at which accrued interest is payable.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentBasisSpreadOnVariableRate1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3.59" in the given sentence?  
+ "The Credit Facility Term Loan interest rate was 3.59 % as of March 31, 2020, pursuant to the terms of the related swap agreements discussed in Note 7 - Derivatives and Hedging Activities. In the event of default, at the election of a majority of the lenders ( or automatically upon a bankruptcy event of default with respect to the OP or the General Partner ), the commitments of the lenders under the Credit Facility will terminate, and payment of any unpaid amounts in respect of the Credit Facility will be accelerated."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3.59" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate of the Credit Facility Term Loan.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate of the Credit Facility Term Loan.
+
+However, the tag for "DebtInstrumentInterestRateEffectivePercentage" seems to be related to the effective interest rate of a debt instrument, which in this case is not the correct tag.
+
+However, the tag for "DebtInstrumentInterestRateStatedPercentage" is related to the stated interest rate of a debt instrument, which in this case is the interest rate of the Credit Facility Term Loan.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentInterestRateEffectivePercentage}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "22.6" in the given sentence?  
+ "Bank 6 Facility 1 consists of $ 22.6 million financed with a fixed rate of 4.50 % and $ 63.4 million financed with a weighted average interest rate of LIBOR plus 1.77 %."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "22.6" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount financed under the Bank 6 Facility 1.
+
+The term "amount financed" is related to debt instruments.
+
+The XBRL US GAAP tag for "amount financed" is not directly available in the given list. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is the amount financed under the Bank 6 Facility 1.
+
+However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is not the correct tag.
+
+However, the tag for "DebtInstrumentFaceAmount" is related to the face amount of a debt instrument, which in this case is the amount financed under the Bank 6 Facility 1.
+
+\\boxed{DebtInstrumentFaceAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "10,000,000" in the given sentence?  
+ "The lawsuit on its face seeks damages of $ 10,000,000."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "10,000,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount of damages sought in a lawsuit.
+
+The term "damages" is related to loss contingencies.
+
+The XBRL US GAAP tag for "damages" is not directly available in the given list. However, the tag for "LossContingencyEstimateOfPossibleLoss" seems to be related to the estimate of possible loss from a loss contingency, which in this case is the amount of damages sought in the lawsuit.
+
+However, the tag for "LossContingencyPendingClaimsNumber" seems to be related to the number of pending claims, which in this case is not the correct tag.
+
+However, the tag for "LossContingencyEstimateOfPossibleLoss" is related to the estimate of possible loss from a loss contingency, which in this case is the amount of damages sought in the lawsuit.
+
+\\boxed{LossContingencyEstimateOfPossibleLoss}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LossContingencyDamagesSoughtValue}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "250" in the given sentence?  
+ "Further, subsequent to the first quarter of 2020, we repaid the entire $ 596 million balance that was outstanding on the Revolving Corporate Credit Facility as of March 31, 2020. Prior to 2020, we entered into $ 250 million of interest rate swaps under which we pay a fixed rate of 2.9625 percent and receive a floating interest rate through September 2023 and $ 200 million of interest rate swaps under which we pay a fixed rate of 2.2480 percent and receive a floating interest rate through April 2024, in each case to hedge a portion of our interest rate risk on the Term Loan."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "250" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount of interest rate swaps entered into by the company.
+
+The term "interest rate swaps" is related to derivatives.
+
+The XBRL US GAAP tag for "interest rate swaps" is not directly available in the given list. However, the tag for "DerivativeNotionalAmount" seems to be related to the notional amount of a derivative, which in this case is the amount of interest rate swaps entered into by the company.
+
+However, the tag for "DerivativeFixedInterestRate" seems to be related to the fixed interest rate of a derivative, which in this case is not the correct tag.
+
+However, the tag for "DerivativeNotionalAmount" is related to the notional amount of a derivative, which in this case is the amount of interest rate swaps entered into by the company.
+
+\\boxed{DerivativeNotionalAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.1" in the given sentence?  
+ "Additionally, at March 31, 2020, unrecognized share - based compensation expense related to unvested RSUs was $ 0.1 million, which is expected to be recognized over a remaining weighted - average period of 0.2 years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the unrecognized share-based compensation expense related to unvested RSUs.
+
+The term "unrecognized share-based compensation expense" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "unrecognized share-based compensation expense" is not directly available in the given list. However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized" seems to be related to the total compensation cost not yet recognized for non-vested share-based awards, which in this case is the unrecognized share-based compensation expense related to unvested RSUs.
+
+However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1" seems to be related to the period for recognition of the total compensation cost not yet recognized for non-vested share-based awards, which in this case is not the correct tag.
+
+However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized" is related to the total compensation cost not yet recognized for non-vested share-based awards, which in this case is the unrecognized share-based compensation expense related to unvested RSUs.
+
+\\boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedShareBasedAwardsOtherThanOptions}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,430" in the given sentence?  
+ "Such term loans would be secured by cash and qualifying investment grade securities. As of March 31, 2020, EQM had approximately $ 1,430 million of borrowings and $ 235 million of letters of credit outstanding under the Amended EQM Credit Facility."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,430" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount of borrowings outstanding under the Amended EQM Credit Facility.
+
+The term "borrowings" is related to debt instruments.
+
+The XBRL US GAAP tag for "borrowings" is not directly available in the given list. However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is the amount of borrowings outstanding under the Amended EQM Credit Facility.
+
+However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is not the correct tag.
+
+However, the tag for "DebtInstrumentCarryingAmount" is related to the carrying amount of a debt instrument, which in this case is the amount of borrowings outstanding under the Amended EQM Credit Facility.
+
+\\boxed{DebtInstrumentCarryingAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "years" in the given sentence?  
+ "In the case of regional developer rights, the Company generally amortizes the re - acquired regional developer rights over seven years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "years" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amortization period of re-acquired regional developer rights.
+
+The term "amortization period" is related to the useful life of an intangible asset.
+
+The XBRL US GAAP tag for "amortization period" is not directly available in the given list. However, the tag for "FiniteLivedIntangibleAssetUsefulLife" seems to be related to the useful life of a finite-lived intangible asset, which in this case is the amortization period of the re-acquired regional developer rights.
+
+\\boxed{FiniteLivedIntangibleAssetUsefulLife}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,753" in the given sentence?  
+ "These charges include $ 1,753 and $ 2,632 of stock - based compensation related to modifications of existing unvested awards granted to certain employees impacted by the restructuring plan for the years ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,753" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the stock-based compensation related to modifications of existing unvested awards.
+
+The term "stock-based compensation" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "stock-based compensation" is not directly available in the given list. However, the tag for "ShareBasedCompensation" seems to be related to share-based compensation arrangements, which in this case is the stock-based compensation related to modifications of existing unvested awards.
+
+However, the tag for "AllocatedShareBasedCompensationExpense" seems to be related to the allocated share-based compensation expense, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensation" is related to share-based compensation arrangements, which in this case is the stock-based compensation related to modifications of existing unvested awards.
+
+\\boxed{ShareBasedCompensation}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{RestructuringCharges}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.4" in the given sentence?  
+ "We also have Ireland and Singapore based subsidiaries which provide management services to our non - U.S. subsidiaries and are subject to tax in those respective jurisdictions. The consolidated income tax expense for the three months ended March 31, 2020 and 2019 was determined based upon estimates of the Company ’ s consolidated effective income tax rates for the years ending December 31, 2020 and 2019, respectively. The Company ’ s effective tax rate ( “ ETR ” ) for the three months ended March 31, 2020 was ( 0.4 ) %, compared to 8.1 %, for the three months ended March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.4" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the effective tax rate for the three months ended March 31, 2020.
+
+The term "effective tax rate" is related to income tax expense.
+
+The XBRL US GAAP tag for "effective tax rate" is not directly available in the given list. However, the tag for "EffectiveIncomeTaxRateContinuingOperations" seems to be related to the effective income tax rate for continuing operations, which in this case is the effective tax rate for the three months ended March 31, 2020.
+
+However, the tag for "EffectiveIncomeTaxRateReconciliationAtFederalStatutoryIncomeTaxRate" seems to be related to the reconciliation of the effective income tax rate to the federal statutory income tax rate, which in this case is not the correct tag.
+
+However, the tag for "EffectiveIncomeTaxRateContinuingOperations" is related to the effective income tax rate for continuing operations, which in this case is the effective tax rate for the three months ended March 31, 2020.
+
+\\boxed{EffectiveIncomeTaxRateContinuingOperations}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.4" in the given sentence?  
+ "The Company recorded federal and state income tax expense of $ 0.8 million and $ 0.4 million for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.4" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the state income tax expense for the three months ended March 31, 2019.
+
+The term "state income tax expense" is related to income tax expense.
+
+The XBRL US GAAP tag for "state income tax expense" is not directly available in the given list. However, the tag for "IncomeTaxExpenseBenefit" seems to be related to the income tax expense or benefit, which in this case is the state income tax expense for the three months ended March 31, 2019.
+
+However, the tag for "UnrecognizedTaxBenefits" seems to be related to the unrecognized tax benefits, which in this case is not the correct tag.
+
+However, the tag for "IncomeTaxExpenseBenefit" is related to the income tax expense or benefit, which in this case is the state income tax expense for the three months ended March 31, 2019.
+
+\\boxed{IncomeTaxExpenseBenefit}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "82.5" in the given sentence?  
+ "Facility being increased from $ 313.5 million to approximately $ 483.7 million and ( y ) the ABL Canadian Facility being increased from $ 82.5 million to approximately $ 127.3 million."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "82.5" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the increase in the ABL Canadian Facility.
+
+The term "ABL Canadian Facility" is related to debt instruments.
+
+The XBRL US GAAP tag for "ABL Canadian Facility" is not directly available in the given list. However, the tag for "LineOfCreditFacilityMaximumBorrowingCapacity" seems to be related to the maximum borrowing capacity of a line of credit facility, which in this case is the increase in the ABL Canadian Facility.
+
+However, the tag for "LineOfCreditFacilityRemainingBorrowingCapacity" seems to be related to the remaining borrowing capacity of a line of credit facility, which in this case is not the correct tag.
+
+However, the tag for "LineOfCreditFacilityMaximumBorrowingCapacity" is related to the maximum borrowing capacity of a line of credit facility, which in this case is the increase in the ABL Canadian Facility.
+
+\\boxed{LineOfCreditFacilityMaximumBorrowingCapacity}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.8" in the given sentence?  
+ "As of March 31, 2020, there was a total of $ 2.8 million of unrecognized compensation expense related to these shares / units which is expected to be recognized over the next two years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.8" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the unrecognized compensation expense related to shares/units.
+
+The term "unrecognized compensation expense" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "unrecognized compensation expense" is not directly available in the given list. However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized" seems to be related to the total compensation cost not yet recognized for non-vested share-based awards, which in this case is the unrecognized compensation expense related to shares/units.
+
+However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1" seems to be related to the period for recognition of the total compensation cost not yet recognized for non-vested share-based awards, which in this case is not the correct tag.
+
+However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized" is related to the total compensation cost not yet recognized for non-vested share-based awards, which in this case is the unrecognized compensation expense related to shares/units.
+
+\\boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.5" in the given sentence?  
+ "Operating lease payments, which reduced operating cash flows, amounted to $ 2.0 million and $ 1.5 million for the three months ended March 31, 2020 and March 31, 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.5" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the operating lease payments for the three months ended March 31, 2019.
+
+The term "operating lease payments" is related to operating leases.
+
+The XBRL US GAAP tag for "operating lease payments" is not directly available in the given list. However, the tag for "OperatingLeasePayments" seems to be related to the operating lease payments, which in this case is the operating lease payments for the three months ended March 31, 2019.
+
+\\boxed{OperatingLeasePayments}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "10" in the given sentence?  
+ "Receivables from customers representing 10 % or more of the Company ’ s gross trade accounts receivable reflected three customers at December 31, 2019, equal to 39 %, 25 %, and 25 %, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "10" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the percentage of gross trade accounts receivable represented by certain customers.
+
+The term "percentage" is related to the concentration risk.
+
+The XBRL US GAAP tag for "percentage" is not directly available in the given list. However, the tag for "ConcentrationRiskPercentage1" seems to be related to the percentage of revenue or receivables from a specific customer or group of customers, which in this case is the percentage of gross trade accounts receivable represented by certain customers.
+
+However, the tag for "ConcentrationRiskPercentage1" is related to the percentage of revenue or receivables from a specific customer or group of customers, which in this case is the percentage of gross trade accounts receivable represented by certain customers.
+
+\\boxed{ConcentrationRiskPercentage1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.65" in the given sentence?  
+ "The senior loan matures on April 1, 2025 and bears interest at a floating basis of the greater of LIBOR plus 1.65 % or 2.65 %, with interest - only payments during the term of the senior loan."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.65" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate of the senior loan.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateEffectivePercentage" seems to be related to the effective interest rate of a debt instrument, which in this case is the interest rate of the senior loan.
+
+However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate of the senior loan.
+
+However, the tag for "DebtInstrumentInterestRateEffectivePercentage" is related to the effective interest rate of a debt instrument, which in this case is the interest rate of the senior loan.
+
+\\boxed{DebtInstrumentInterestRateEffectivePercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentBasisSpreadOnVariableRate1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "241,000" in the given sentence?  
+ "During the three months ended March 31, 2019, 241,000 performance shares ( at target performance ) were excluded from the computation of Diluted EPS since the Company had not achieved the minimum target thresholds as of March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "241,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of performance shares excluded from the computation of Diluted EPS.
+
+The term "performance shares" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "performance shares" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsVestedInPeriodTotalFairValue" seems to be related to the total fair value of share-based compensation awards vested in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" seems to be related to the share-based compensation awards granted in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAuthorized" seems to be related to the number of shares authorized for share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAvailableForGrant" seems to be related to the number of shares available for grant for share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodGross" seems to be related to the gross number of options granted in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsExercisesInPeriodTotalIntrinsicValue" seems to be related to the total intrinsic value of options exercised in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber" seems to be related to the number of non-vested equity instruments other than options, which in this case is the number of performance shares excluded from the computation of Diluted EPS.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "204,334" in the given sentence?  
+ "The Company expects all RSAs to vest. Performance - Based Restricted Stock Awards At March 31, 2020 and December 31, 2019, the target number of PSUs that were unvested was 204,334 and 204,068, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "204,334" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the target number of PSUs that were unvested.
+
+The term "target number of PSUs" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "target number of PSUs" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsVestedInPeriodTotalFairValue" seems to be related to the total fair value of share-based compensation awards vested in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" seems to be related to the share-based compensation awards granted in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAuthorized" seems to be related to the number of shares authorized for share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAvailableForGrant" seems to be related to the number of shares available for grant for share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsGrantsInPeriodGross" seems to be related to the gross number of options granted in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardOptionsExercisesInPeriodTotalIntrinsicValue" seems to be related to the total intrinsic value of options exercised in a period, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber" seems to be related to the number of non-vested equity instruments other than options, which in this case is the target number of PSUs that were unvested.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "eight" in the given sentence?  
+ "The Company amortizes the fair value of re - acquired franchise rights over the remaining contractual terms of the re - acquired franchise rights at the time of the acquisition, which generally range from three to eight years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "eight" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the remaining contractual terms of the re-acquired franchise rights.
+
+The term "remaining contractual terms" is related to the useful life of an intangible asset.
+
+The XBRL US GAAP tag for "remaining contractual terms" is not directly available in the given list. However, the tag for "FiniteLivedIntangibleAssetUsefulLife" seems to be related to the useful life of a finite-lived intangible asset, which in this case is the remaining contractual terms of the re-acquired franchise rights.
+
+However, the tag for "FiniteLivedIntangibleAssetUsefulLife" is related to the useful life of a finite-lived intangible asset, which in this case is the remaining contractual terms of the re-acquired franchise rights.
+
+\\boxed{FiniteLivedIntangibleAssetUsefulLife}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "560.1" in the given sentence?  
+ "Accordingly, in accordance with the terms of the Finisar Indenture, each holder of Finisar Notes had the right to ( i ) convert its Finisar Notes into cash and/or shares of Company Common Stock, at Finisar ’ s option, or ( ii ) require that Finisar repurchase such holder ’ s Finisar Notes for an amount in cash equal to one hundred percent ( 100 ) % of the principal amount of such Finisar Notes plus accrued and unpaid interest. Holders of approximately $ 560.1 million in aggregate principal amount of Finisar Notes exercised the repurchase right."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "560.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the aggregate principal amount of Finisar Notes that were repurchased.
+
+The term "aggregate principal amount" is related to debt instruments.
+
+The XBRL US GAAP tag for "aggregate principal amount" is not directly available in the given list. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is the aggregate principal amount of Finisar Notes that were repurchased.
+
+However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is not the correct tag.
+
+However, the tag for "DebtInstrumentFaceAmount" is related to the face amount of a debt instrument, which in this case is the aggregate principal amount of Finisar Notes that were repurchased.
+
+\\boxed{DebtInstrumentFaceAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "years" in the given sentence?  
+ "Options granted under the 2018 Plan generally vest over four years, the first tranche at the end of 12 months and the remaining shares underlying the option vesting monthly over the remaining three years."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "years" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the vesting period of options granted under the 2018 Plan.
+
+The term "vesting period" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "vesting period" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" seems to be related to the vesting period of share-based compensation awards, which in this case is the vesting period of options granted under the 2018 Plan.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" is related to the vesting period of share-based compensation awards, which in this case is the vesting period of options granted under the 2018 Plan.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3.09" in the given sentence?  
+ "At March 31, 2020, the applicable interest rate on the unhedged portion of the Term Loan was one - month LIBOR plus 2.10 % or 3.09 %."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3.09" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate on the unhedged portion of the Term Loan.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate on the unhedged portion of the Term Loan.
+
+However, the tag for "DebtInstrumentInterestRateEffectivePercentage" seems to be related to the effective interest rate of a debt instrument, which in this case is not the correct tag.
+
+However, the tag for "DebtInstrumentInterestRateStatedPercentage" is related to the stated interest rate of a debt instrument, which in this case is the interest rate on the unhedged portion of the Term Loan.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentInterestRateEffectivePercentage}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "5.8" in the given sentence?  
+ "Intangible Assets, Net Intangible assets, net, consisted of the following ( in thousands ) :  Amortization of intangible assets was $ 1.9 million and $ 5.8 million for the three and nine months ended March 31, 2020 and $ 1.6 million and $ 3.8 million for the three and nine months ended March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "5.8" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amortization of intangible assets.
+
+The term "amortization of intangible assets" is related to the amortization of intangible assets.
+
+The XBRL US GAAP tag for "amortization of intangible assets" is not directly available in the given list. However, the tag for "AmortizationOfIntangibleAssets" seems to be related to the amortization of intangible assets, which in this case is the amortization of intangible assets for the three and nine months ended March 31, 2020.
+
+\\boxed{AmortizationOfIntangibleAssets}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,610" in the given sentence?  
+ "During fiscal 2017, the Company recorded restructuring charges of $ 3,104 and an additional $ 1,610 during fiscal 2018."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,610" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the restructuring charges recorded by the Company.
+
+The term "restructuring charges" is related to restructuring charges.
+
+The XBRL US GAAP tag for "restructuring charges" is not directly available in the given list. However, the tag for "RestructuringCharges" seems to be related to the restructuring charges, which in this case is the restructuring charges recorded by the Company.
+
+\\boxed{RestructuringCharges}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "4.75" in the given sentence?  
+ "Convertible Senior Unsecured Notes In 2019, we issued $ 264.0 million in aggregate principal amount of 4.75 % convertible senior notes ( the “ 4.75 % Convertible Notes ” ) through a private placement offering, which includes the exercised purchaser ’ s total over - allotment option of $ 34.0 million."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "4.75" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate of the 4.75% Convertible Notes.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate of the 4.75% Convertible Notes.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.3" in the given sentence?  
+ "Total unamortized debt issuance costs were $ 0.4 million and $ 0.3 million as of March 28, 2020 and March 30, 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.3" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the unamortized debt issuance costs.
+
+The term "unamortized debt issuance costs" is related to debt instruments.
+
+The XBRL US GAAP tag for "unamortized debt issuance costs" is not directly available in the given list. However, the tag for "DebtInstrumentUnamortizedDiscount" seems to be related to the unamortized discount of a debt instrument, which in this case is the unamortized debt issuance costs.
+
+\\boxed{DebtInstrumentUnamortizedDiscount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DeferredFinanceCostsGross}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "12.5" in the given sentence?  
+ "Sales to customers in the United States represented $ 12.5 million or 42 % of total revenues for the three months ended March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "12.5" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the sales to customers in the United States.
+
+The term "sales to customers in the United States" is related to revenue from contracts with customers.
+
+The XBRL US GAAP tag for "sales to customers in the United States" is not directly available in the given list. However, the tag for "RevenueFromContractWithCustomerExcludingAssessedTax" seems to be related to the revenue from contracts with customers, excluding assessed tax, which in this case is the sales to customers in the United States.
+
+However, the tag for "RevenueFromContractWithCustomerIncludingAssessedTax" seems to be related to the revenue from contracts with customers, including assessed tax, which in this case is not the correct tag.
+
+However, the tag for "RevenueFromContractWithCustomerExcludingAssessedTax" is related to the revenue from contracts with customers, excluding assessed tax, which in this case is the sales to customers in the United States.
+
+\\boxed{RevenueFromContractWithCustomerExcludingAssessedTax}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "8.25" in the given sentence?  
+ "( B ) Underwritten Public Equity Offerings of Common Shares On June 4, 2019, the Company completed an underwritten public equity offering of 17,424,243 of its common shares ( including 2,272,727 common shares sold pursuant to the underwriters ’ exercise in full of their option to purchase additional common shares ) at a public offering price of $ 8.25 per common share."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "8.25" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the public offering price of the common shares.
+
+The term "public offering price" is related to the sale of common shares.
+
+The XBRL US GAAP tag for "public offering price" is not directly available in the given list. However, the tag for "CommonStockDividendsPerShareDeclared" seems to be related to the dividend per share declared, which in this case is not the correct tag.
+
+However, the tag for "CommonStockSharesOutstanding" seems to be related to the number of shares outstanding, which in this case is not the correct tag.
+
+However, the tag for "CommonStockPricePerShare" seems to be related to the price per share of common stock, which in this case is the public offering price of the common shares.
+
+\\boxed{CommonStockPricePerShare}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{SaleOfStockPricePerShare}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.1" in the given sentence?  
+ "10 Quaker Chemical Corporation Notes to Condensed Consolidated Financial Statements - Continued ( Dollars in thousands, except per share amounts, unless otherwise stated ) ( Unaudited ) The following table presents information about the performance of the Company ’ s reportable operating segments for the three months ended March 31, 2020 and 2019 : Inter - segment revenues for the three months ended March 31, 2020 and 2019 were $ 2.9 million and $ 1.4 million for Americas, $ 5.5 million and $ 5.3 million for EMEA, $ 0.1 million and less than $ 0.1 million for Asia / Pacific and $ 1.3 million and $ 1.5 million for Global Specialty Businesses, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{RevenueFromContractWithCustomerExcludingAssessedTax}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "100,000,000" in the given sentence?  
+ "Of the total shares of stock authorized, 2,100,000,000 shares are classified as common stock with a par value of $ 0.01 per share, 500,000,000 of which are classified as Class T shares, 500,000,000 of which are classified as Class S shares, 500,000,000 of which are classified as Class D shares, 500,000,000 of which are classified as Class I shares, 100,000,000 of which are classified as Class N shares, and 100,000,000 are classified as Series A Preferred Stock ( defined below ). In addition, the Company ’ s board of directors may amend the charter from time to time, without stockholder approval, to increase or decrease the aggregate number of shares of stock or the number of shares of stock of any class or series that the Company has authority to issue, or to issue additional classes of stock which may be subject to various class - specific fees. Preferred Stock On January 2, 2019, the Company filed Articles Supplementary to the charter, which set forth the rights, preferences and privileges of the Company ’ s 12.0 % Series A cumulative non - voting preferred stock ( “ Series A Preferred Stock ” )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "100,000,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shares of Series A Preferred Stock authorized.
+
+The term "Series A Preferred Stock" is related to preferred stock.
+
+The XBRL US GAAP tag for "Series A Preferred Stock" is not directly available in the given list. However, the tag for "PreferredStockSharesAuthorized" seems to be related to the number of shares of preferred stock authorized, which in this case is the number of shares of Series A Preferred Stock authorized.
+
+\\boxed{PreferredStockSharesAuthorized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2024" in the given sentence?  
+ "Index Credit Facilities $ 850 Million Credit Facility The Company utilizes an unsecured “ $ 850 million credit facility ” comprised of ( i ) a $ 425 million revolving credit facility with an initial maturity date of July 27, 2022 and ( ii ) a $ 425 million term loan facility consisting of two term loans : a $ 200 million term loan with a maturity date of July 27, 2023, and a $ 225 million term loan with a maturity date of January 31, 2024 ( the “ $ 425 million term loan facility ” )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2024" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the maturity date of the $425 million term loan facility.
+
+The term "maturity date" is related to debt instruments.
+
+The XBRL US GAAP tag for "maturity date" is not directly available in the given list. However, the tag for "DebtInstrumentMaturityDate" seems to be related to the maturity date of a debt instrument, which in this case is the maturity date of the $425 million term loan facility.
+
+\\boxed{DebtInstrumentMaturityDate}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,370" in the given sentence?  
+ "As of March 31, 2020 and March 31 2019, operating lease right - of - use assets and operating lease liabilities were both $ 1,388 and $ 1,370, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,370" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the operating lease liabilities.
+
+The term "operating lease liabilities" is related to operating leases.
+
+The XBRL US GAAP tag for "operating lease liabilities" is not directly available in the given list. However, the tag for "OperatingLeaseLiability" seems to be related to the operating lease liability, which in this case is the operating lease liabilities as of March 31, 2019.
+
+\\boxed{OperatingLeaseLiability}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "299,870" in the given sentence?  
+ "As of March 31, 2020, performance stock units covering a total of 299,870 common shares are unvested."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "299,870" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of unvested performance stock units.
+
+The term "unvested performance stock units" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "unvested performance stock units" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber" seems to be related to the number of non-vested equity instruments other than options, which in this case is the number of unvested performance stock units.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "," in the given sentence?  
+ "The Loan has a two - year term and matures on May 5, 2022."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "," in the given sentence, I will analyze the context of the sentence. The sentence is discussing the term and maturity date of the Loan.
+
+The term "term" is related to debt instruments.
+
+The XBRL US GAAP tag for "term" is not directly available in the given list. However, the tag for "DebtInstrumentTerm" seems to be related to the term of a debt instrument, which in this case is the term of the Loan.
+
+\\boxed{DebtInstrumentTerm}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentMaturityDate}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "20.1" in the given sentence?  
+ "( 2 ) The weighted average amortization period for acquired above - market leases is 20.1 years for 2020 Acquisitions. As of March 31, 2020, the Company invested $ 19.3 million, including $ 0.3 million of external acquisition - related expenses and interest that were capitalized, in one build - to - suit development project."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "20.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the weighted average amortization period for acquired above-market leases.
+
+The term "weighted average amortization period" is related to the useful life of an intangible asset.
+
+The XBRL US GAAP tag for "weighted average amortization period" is not directly available in the given list. However, the tag for "FiniteLivedIntangibleAssetUsefulLife" seems to be related to the useful life of a finite-lived intangible asset, which in this case is the weighted average amortization period for acquired above-market leases.
+
+\\boxed{FiniteLivedIntangibleAssetUsefulLife}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{AcquiredFiniteLivedIntangibleAssetsWeightedAverageUsefulLife}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "7.14" in the given sentence?  
+ "The weighted - average discount rate was 7.14 % at March 31, 2020."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "7.14" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the weighted-average discount rate.
+
+The term "weighted-average discount rate" is related to operating leases.
+
+The XBRL US GAAP tag for "weighted-average discount rate" is not directly available in the given list. However, the tag for "OperatingLeaseWeightedAverageDiscountRatePercent" seems to be related to the weighted-average discount rate of an operating lease, which in this case is the weighted-average discount rate at March 31, 2020.
+
+\\boxed{OperatingLeaseWeightedAverageDiscountRatePercent}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "693,640" in the given sentence?  
+ "Available Lines of Credit As of March 31, 2020 and 2019, the Company had available and undrawn, under all its lines of credit, $ 693,640 and $ 546,960, respectively, including $ 105,946 and $ 87,685, respectively, of uncommitted lines of credit as of March 31, 2020 and March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "693,640" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the available and undrawn amount under the lines of credit.
+
+The term "available and undrawn amount" is related to lines of credit.
+
+The XBRL US GAAP tag for "available and undrawn amount" is not directly available in the given list. However, the tag for "LineOfCreditFacilityRemainingBorrowingCapacity" seems to be related to the remaining borrowing capacity of a line of credit, which in this case is the available and undrawn amount under the lines of credit.
+
+\\boxed{LineOfCreditFacilityRemainingBorrowingCapacity}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "34" in the given sentence?  
+ "In connection with the transaction, we received $ 44 million ( £ 34 million ) of total consideration for the value of our development costs incurred to date and related fees and for GIG ’ s right to invest 40 % in the project ( 50 % investment in Covanta Green )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "34" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the consideration received in pounds.
+
+The term "consideration" is related to the consideration received in a business combination.
+
+The XBRL US GAAP tag for "consideration" is not directly available in the given list. However, the tag for "BusinessCombinationConsiderationTransferred1" seems to be related to the consideration transferred in a business combination, which in this case is the consideration received in pounds.
+
+However, the tag for "BusinessCombinationConsiderationTransferred1" is related to the consideration transferred in a business combination, which in this case is the consideration received in pounds.
+
+\\boxed{BusinessCombinationConsiderationTransferred1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{EquityMethodInvestments}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "31.7" in the given sentence?  
+ "It is anticipated that the amount of the unrecognized income tax benefits will change within the next 12 months ; however, these changes are not expected to have a significant impact on the results of operations, cash flows or the financial position of the Company. As of March 31, 2020 and December 31, 2019, $ 32.3 and $ 31.7, respectively, are the approximate amounts of gross unrecognized income tax benefits that, if recognized, would favorably affect the effective income tax rate in future periods."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "31.7" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the gross unrecognized income tax benefits.
+
+The term "gross unrecognized income tax benefits" is related to income tax expense.
+
+The XBRL US GAAP tag for "gross unrecognized income tax benefits" is not directly available in the given list. However, the tag for "UnrecognizedTaxBenefits" seems to be related to the unrecognized tax benefits, which in this case is the gross unrecognized income tax benefits.
+
+However, the tag for "UnrecognizedTaxBenefitsThatWouldImpactEffectiveTaxRate" seems to be related to the unrecognized tax benefits that would impact the effective tax rate, which in this case is not the correct tag.
+
+However, the tag for "UnrecognizedTaxBenefits" is related to the unrecognized tax benefits, which in this case is the gross unrecognized income tax benefits.
+
+\\boxed{UnrecognizedTaxBenefits}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "no" in the given sentence?  
+ "There were no borrowings outstanding as of February 1, 2020, or May 4, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LineOfCredit}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3.8" in the given sentence?  
+ "Note 12 : Investment in Affiliate During fiscal 2020, the Company completed the sale of its 50 percent ownership interest in Nikkei Heat Exchanger Company, Ltd. ( “ NEX ” ) for a selling price of $ 3.8 million."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3.8" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the selling price of the Company's ownership interest in Nikkei Heat Exchanger Company, Ltd.
+
+The term "selling price" is related to the consideration received in a business combination.
+
+The XBRL US GAAP tag for "selling price" is not directly available in the given list. However, the tag for "BusinessCombinationConsiderationTransferred1" seems to be related to the consideration transferred in a business combination, which in this case is the selling price of the Company's ownership interest in Nikkei Heat Exchanger Company, Ltd.
+
+However, the tag for "BusinessCombinationConsiderationTransferred1" is related to the consideration transferred in a business combination, which in this case is the selling price of the Company's ownership interest in Nikkei Heat Exchanger Company, Ltd.
+
+\\boxed{BusinessCombinationConsiderationTransferred1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DisposalGroupIncludingDiscontinuedOperationConsideration}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "425.0" in the given sentence?  
+ "Tranche A-1 is comprised of a $ 425.0 million USD term loan and Tranche A-2 is comprised of a CAD $ 250.0 million term loan, both are five - year loans maturing in 2025."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "425.0" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount of the term loan.
+
+The term "term loan" is related to debt instruments.
+
+The XBRL US GAAP tag for "term loan" is not directly available in the given list. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is the amount of the term loan.
+
+\\boxed{DebtInstrumentFaceAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "four" in the given sentence?  
+ "The Company has four reporting units as of March 31, 2020, which correspond to its four reportable operating segments : HRS, IEI, CEC and CTG."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "four" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of reporting units.
+
+The term "number of reporting units" is related to the number of reportable operating segments.
+
+The XBRL US GAAP tag for "number of reporting units" is not directly available in the given list. However, the tag for "NumberOfOperatingSegments" seems to be related to the number of reportable operating segments, which in this case is the number of reporting units.
+
+\\boxed{NumberOfOperatingSegments}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.75" in the given sentence?  
+ "Borrowings under the revolving credit facility bear interest at a rate per annum ranging from 0.50 % to 0.75 % over the base rate, or 1.50 % to 1.75 % over the eurocurrency rate."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.75" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate on the eurocurrency rate.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate on the eurocurrency rate.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentBasisSpreadOnVariableRate1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "137" in the given sentence?  
+ "GUARANTY BANCSHARES, INC. NOTES TO CONSOLIDATED FINANCIAL STATEMENTS ( Dollars in thousands, except per share data ) The information pertaining to outstanding interest rate swap agreements used to hedge floating rate debentures and FHLB advances was as follows as of :  Interest expense recorded on these swap transactions totaled $ 137 and $ 169 during the three months ended March 31, 2020 and 2019, respectively, and $ 648 for the year ended December 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "137" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest expense recorded on the swap transactions.
+
+The term "interest expense" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest expense" is not directly available in the given list. However, the tag for "InterestExpense" seems to be related to the interest expense, which in this case is the interest expense recorded on the swap transactions.
+
+However, the tag for "InterestExpenseDebt" seems to be related to the interest expense on debt, which in this case is the interest expense recorded on the swap transactions.
+
+\\boxed{InterestExpenseDebt}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{InterestExpense}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.00" in the given sentence?  
+ "Borrowings under this term loan bear interest at EURIBOR plus the applicable margin ranging between 0.80 % and 2.00 %, based on the Company ’ s credit ratings."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.00" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the applicable margin for the term loan.
+
+The term "applicable margin" is related to debt instruments.
+
+The XBRL US GAAP tag for "applicable margin" is not directly available in the given list. However, the tag for "DebtInstrumentBasisSpreadOnVariableRate1" seems to be related to the basis spread on a variable rate debt instrument, which in this case is the applicable margin for the term loan.
+
+\\boxed{DebtInstrumentBasisSpreadOnVariableRate1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "no" in the given sentence?  
+ "Additionally, there were no anti - dilutive shares for the three months ended March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "no" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the absence of anti-dilutive shares.
+
+The term "anti-dilutive shares" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "anti-dilutive shares" is not directly available in the given list. However, the tag for "AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount" seems to be related to the antidilutive securities excluded from the computation of earnings per share, which in this case is the absence of anti-dilutive shares.
+
+However, the tag for "AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount" is related to the antidilutive securities excluded from the computation of earnings per share, which in this case is the absence of anti-dilutive shares.
+
+\\boxed{AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "6.25" in the given sentence?  
+ "The amended and restated Share Repurchase Program became effective October 29, 2018. For the three months ended March 31, 2020, the Company repurchased 0.3 million shares of common stock for $ 2.0 million at an average price of $ 6.25 per share."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "6.25" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the average price per share of the common stock repurchased.
+
+The term "average price per share" is related to the share price.
+
+The XBRL US GAAP tag for "average price per share" is not directly available in the given list. However, the tag for "SharePrice" seems to be related to the share price, which in this case is the average price per share of the common stock repurchased.
+
+\\boxed{SharePrice}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{TreasuryStockAcquiredAverageCostPerShare}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.0" in the given sentence?  
+ "In addition, the Company received 2.5 million shares representing the initial number of shares due in March 2018 and an additional 1.0 million shares in the first quarter of 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.0" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the additional shares received in the first quarter of 2019.
+
+The term "additional shares" is related to the number of shares issued.
+
+The XBRL US GAAP tag for "additional shares" is not directly available in the given list. However, the tag for "StockIssuedDuringPeriodSharesNewIssues" seems to be related to the number of shares issued during the period, which in this case is the additional shares received in the first quarter of 2019.
+
+However, the tag for "StockIssuedDuringPeriodSharesNewIssues" is related to the number of shares issued during the period, which in this case is the additional shares received in the first quarter of 2019.
+
+\\boxed{StockIssuedDuringPeriodSharesNewIssues}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{TreasuryStockSharesAcquired}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2,836" in the given sentence?  
+ "The Company ’ s pension expense for this Plan for first quarter 2020 and 2019 was $ 685 and $ 574, respectively ( $ 2,961 and $ 2,836 for twelve months 2019 and 2018, respectively )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2,836" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the pension expense for the Plan.
+
+The term "pension expense" is related to pension plans.
+
+The XBRL US GAAP tag for "pension expense" is not directly available in the given list. However, the tag for "DefinedBenefitPlanContributionsByEmployer" seems to be related to the contributions made by the employer to a defined benefit plan, which in this case is not the correct tag.
+
+However, the tag for "DefinedContributionPlanCostRecognized" seems to be related to the cost recognized for a defined contribution plan, which in this case is not the correct tag.
+
+However, the tag for "DefinedBenefitPlanCostRecognized" seems to be related to the cost recognized for a defined benefit plan, which in this case is the pension expense for the Plan.
+
+However, the tag for "DefinedBenefitPlanCostRecognized" is related to the cost recognized for a defined benefit plan, which in this case is the pension expense for the Plan.
+
+\\boxed{DefinedBenefitPlanCostRecognized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DefinedContributionPlanCostRecognized}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3.8" in the given sentence?  
+ "This discrete tax adjustment was a detriment of $ 1,631,000 for the three months ended March 31, 2020 and a detriment of $ 510,000 for the three months ended March 31, 2019. As of March 31, 2020, total unrecognized compensation cost related to non - vested restricted shares was $ 47,529,000, which is expected to be recognized over a weighted - average period of 3.8 years. 7."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3.8" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the weighted-average period over which the unrecognized compensation cost related to non-vested restricted shares is expected to be recognized.
+
+The term "weighted-average period" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "weighted-average period" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" seems to be related to the vesting period of share-based compensation awards, which in this case is the weighted-average period over which the unrecognized compensation cost related to non-vested restricted shares is expected to be recognized.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" is related to the vesting period of share-based compensation awards, which in this case is the weighted-average period over which the unrecognized compensation cost related to non-vested restricted shares is expected to be recognized.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognizedPeriodForRecognition1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "35" in the given sentence?  
+ "Financial results for the third quarter of 2019 include asset impairment charges of $ 35 million ( pre - tax and after - tax ) for the Company ’ s Rexall Health retail business."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "35" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the asset impairment charges.
+
+The term "asset impairment charges" is related to asset impairment.
+
+The XBRL US GAAP tag for "asset impairment charges" is not directly available in the given list. However, the tag for "AssetImpairmentCharges" seems to be related to the asset impairment charges, which in this case is the asset impairment charges for the Company's Rexall Health retail business.
+
+\\boxed{AssetImpairmentCharges}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "101" in the given sentence?  
+ "WPG Inc. is the sole general partner of WPG L.P. As of March 31, 2020, our assets consisted of material interests in 101 shopping centers in the United States, consisting of open air properties and enclosed retail properties, comprised of approximately 54 million square feet of managed gross leasable area. Unless the context otherwise requires, references to " WPG, " the " Company, " " we, " " us " or " our " refer to WPG Inc., WPG L.P. and entities in which WPG Inc. or WPG L.P. ( or any affiliate ) has a material ownership or financial interest, on a consolidated basis. We derive our revenues primarily from retail tenant leases, including fixed minimum rent leases, overage and percentage rent leases based on tenants ’ sales volumes, rent payments pursuant to the terms of offering property operating services to our tenants and others, including energy, waste handling and facility services, and reimbursements from tenants for certain recoverable costs such as property operating, real estate taxes, repair and maintenance, and advertising and promotional expenses. We seek to enhance the performance of our properties and increase our revenues by, among other things, securing leases of anchor and inline tenant spaces, re - developing or renovating existing properties to increase the leasable square footage, and increasing the productivity of occupied locations through aesthetic upgrades, re - merchandising and/or changes to the retail use of the space. Severance During the three months ended March 31, 2020, and in response to the COVID-19 pandemic ( as discussed in Note 2 - " Basis of Presentation and Principles of Consolidation " ), the Company recorded aggregate severance costs of $ 0.1 million related to workforce reductions, which costs are included in general and administrative expenses in the accompanying consolidated statements of operations and comprehensive loss for period then ended. On February 5, 2019, the Company's then Executive Vice President, Head of Open Air Centers was terminated without cause from his position and received severance payments and other benefits pursuant to the terms and conditions of his employment agreement."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "101" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shopping centers in which the Company has a material interest.
+
+The term "number of shopping centers" is related to the number of properties.
+
+The XBRL US GAAP tag for "number of shopping centers" is not directly available in the given list. However, the tag for "NumberOfRealEstateProperties" seems to be related to the number of real estate properties, which in this case is the number of shopping centers in which the Company has a material interest.
+
+\\boxed{NumberOfRealEstateProperties}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "one" in the given sentence?  
+ "The restricted stock vested one year from the date it was granted with a compensation expense of $ 208,000 over such period. The Company recognized share - based compensation expense on its restricted stock of $ 54,000 and $ 55,000 for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "one" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the vesting period of the restricted stock.
+
+The term "vesting period" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "vesting period" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" seems to be related to the vesting period of share-based compensation awards, which in this case is the vesting period of the restricted stock.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" is related to the vesting period of share-based compensation awards, which in this case is the vesting period of the restricted stock.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "20.1" in the given sentence?  
+ "In the 2020 first quarter, we sold 2.6 million shares of common stock under our at - the - market equity offering program, resulting in net proceeds of approximately $ 62 million ; while, in the 2019 first quarter, we sold 20.1 million shares of common stock under our at - the - market equity offering program, resulting in net proceeds of approximately $ 354 million."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "20.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shares of common stock sold under the at-the-market equity offering program.
+
+The term "number of shares" is related to the number of shares issued.
+
+The XBRL US GAAP tag for "number of shares" is not directly available in the given list. However, the tag for "StockIssuedDuringPeriodSharesNewIssues" seems to be related to the number of shares issued during the period, which in this case is the number of shares of common stock sold under the at-the-market equity offering program.
+
+However, the tag for "StockRepurchasedDuringPeriodShares" seems to be related to the number of shares repurchased during the period, which in this case is not the correct tag.
+
+However, the tag for "StockIssuedDuringPeriodSharesNewIssues" is related to the number of shares issued during the period, which in this case is the number of shares of common stock sold under the at-the-market equity offering program.
+
+\\boxed{StockIssuedDuringPeriodSharesNewIssues}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "no" in the given sentence?  
+ "As of February 29, 2020 and February 23, 2019, there were no outstanding borrowings and the ABL LOC sub - facility had $ 454.5 million and $ 520.8 million letters of credit outstanding, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "no" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the absence of outstanding borrowings.
+
+The term "outstanding borrowings" is related to debt instruments.
+
+The XBRL US GAAP tag for "outstanding borrowings" is not directly available in the given list. However, the tag for "LineOfCreditFacilityUnusedCapacity" seems to be related to the unused capacity of a line of credit, which in this case is the absence of outstanding borrowings.
+
+However, the tag for "LineOfCreditFacilityUnusedCapacity" is related to the unused capacity of a line of credit, which in this case is the absence of outstanding borrowings.
+
+\\boxed{LineOfCreditFacilityUnusedCapacity}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LineOfCredit}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "100" in the given sentence?  
+ "In January 2020, the Company granted 238,478 performance - based RSUs to certain employees that cliff vest 100 % on January 31, 2023."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "100" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the vesting percentage of the performance-based RSUs.
+
+The term "vesting percentage" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "vesting percentage" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is the vesting percentage of the performance-based RSUs.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{SharebasedCompensationArrangementBySharebasedPaymentAwardAwardVestingRightsPercentage}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.00" in the given sentence?  
+ "Through March 28, 2020, the Company has used $ 662.6 million of the $ 1.00 billion authorized under the 2019 Repurchase Program, leaving $ 337.4 million available for future repurchases."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.00" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the authorized amount under the 2019 Repurchase Program.
+
+The term "authorized amount" is related to the share repurchase program.
+
+The XBRL US GAAP tag for "authorized amount" is not directly available in the given list. However, the tag for "StockRepurchaseProgramAuthorizedAmount1" seems to be related to the authorized amount of a stock repurchase program, which in this case is the authorized amount under the 2019 Repurchase Program.
+
+However, the tag for "StockRepurchaseProgramAuthorizedAmount1" is related to the authorized amount of a stock repurchase program, which in this case is the authorized amount under the 2019 Repurchase Program.
+
+\\boxed{StockRepurchaseProgramAuthorizedAmount1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "18.4" in the given sentence?  
+ "Anantapur Credit Facility In March 2018, Anantapur Solar Parks Private Limited, our indirect wholly - owned subsidiary and project company, entered into a term loan facility ( the “ Anantapur Credit Facility ” ) with J.P. Morgan Securities India Private Limited for borrowings up to INR 1.2 billion ( $ 18.4 million ) for costs related to a 20 MWAC PV solar power plant located in Karnataka, India."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "18.4" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the amount borrowed under the Anantapur Credit Facility.
+
+The term "amount borrowed" is related to debt instruments.
+
+The XBRL US GAAP tag for "amount borrowed" is not directly available in the given list. However, the tag for "DebtInstrumentFaceAmount" seems to be related to the face amount of a debt instrument, which in this case is the amount borrowed under the Anantapur Credit Facility.
+
+\\boxed{DebtInstrumentFaceAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{LineOfCreditFacilityCurrentBorrowingCapacity}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "66,321" in the given sentence?  
+ "Unvested restricted stock outstanding as of March 31, 2020 and 2019 were 42,690 and 66,321 shares, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "66,321" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of unvested restricted stock shares outstanding.
+
+The term "unvested restricted stock shares" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "unvested restricted stock shares" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber" seems to be related to the number of non-vested equity instruments other than options, which in this case is the number of unvested restricted stock shares outstanding.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "years" in the given sentence?  
+ "These restricted shares have both cliff and graded vesting terms with vesting periods of 18 months, three years or five years ( with a weighted average service period of 3.7 years )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "years" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the vesting periods of the restricted shares.
+
+The term "vesting periods" is related to the share-based compensation arrangements.
+
+The XBRL US GAAP tag for "vesting periods" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" seems to be related to the vesting period of share-based compensation awards, which in this case is the vesting periods of the restricted shares.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingRightsPercentage" seems to be related to the vesting rights percentage of share-based compensation awards, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1" is related to the vesting period of share-based compensation awards, which in this case is the vesting periods of the restricted shares.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardAwardVestingPeriod1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3.500" in the given sentence?  
+ "The notes bear interest at 3.500 % per annum."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3.500" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the interest rate of the notes.
+
+The term "interest rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "interest rate" is not directly available in the given list. However, the tag for "DebtInstrumentInterestRateStatedPercentage" seems to be related to the stated interest rate of a debt instrument, which in this case is the interest rate of the notes.
+
+\\boxed{DebtInstrumentInterestRateStatedPercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "3,716,000" in the given sentence?  
+ "As of March 31, 2020, there were 3,716,000 shares available for grant. Stock - based employee compensation expense was as follows for the periods indicated : Restricted Stock The following is a summary of the changes in non - vested restricted shares for the three months ended March 31, 2020 : The total fair value of shares vested was $ 2,461,000 during the three months ended March 31, 2020 and $ 6,934,000 during the three months ended March 31, 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "3,716,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shares available for grant.
+
+The term "shares available for grant" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "shares available for grant" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAvailableForGrant" seems to be related to the number of shares available for grant under a share-based compensation arrangement, which in this case is the number of shares available for grant as of March 31, 2020.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardNumberOfSharesAvailableForGrant}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.1" in the given sentence?  
+ "For the three months ended March 31, 2020, the Company incurred transaction costs of less than $ 0.1 million in connection with the Connexient acquisition, which were expensed as incurred and included in general and administrative expenses."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the transaction costs incurred by the Company.
+
+The term "transaction costs" is related to the costs associated with a business combination.
+
+The XBRL US GAAP tag for "transaction costs" is not directly available in the given list. However, the tag for "BusinessCombinationAcquisitionRelatedCosts" seems to be related to the acquisition-related costs of a business combination, which in this case is the transaction costs incurred by the Company.
+
+\\boxed{BusinessCombinationAcquisitionRelatedCosts}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,925" in the given sentence?  
+ "As of March 31, 2020, $ 1,925 million was outstanding under the First Lien Term Loan Facility."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,925" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the outstanding amount under the First Lien Term Loan Facility.
+
+The term "outstanding amount" is related to debt instruments.
+
+The XBRL US GAAP tag for "outstanding amount" is not directly available in the given list. However, the tag for "DebtInstrumentCarryingAmount" seems to be related to the carrying amount of a debt instrument, which in this case is the outstanding amount under the First Lien Term Loan Facility.
+
+\\boxed{DebtInstrumentCarryingAmount}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "136,000" in the given sentence?  
+ "Compensation expense related to stock options was $ 198,000 for the three months ended March 31, 2020 compared to $ 136,000 for the same period of 2019."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "136,000" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the compensation expense related to stock options.
+
+The term "compensation expense" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "compensation expense" is not directly available in the given list. However, the tag for "ShareBasedCompensation" seems to be related to share-based compensation arrangements, which in this case is the compensation expense related to stock options.
+
+However, the tag for "AllocatedShareBasedCompensationExpense" seems to be related to the allocated share-based compensation expense, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensation" is related to share-based compensation arrangements, which in this case is the compensation expense related to stock options.
+
+\\boxed{ShareBasedCompensation}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{AllocatedShareBasedCompensationExpense}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2.1" in the given sentence?  
+ "As of April 30, 2020, the Company had a remaining authorization of $ 2.1 billion for future share repurchases."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2.1" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the remaining authorization for future share repurchases.
+
+The term "remaining authorization" is related to the share repurchase program.
+
+The XBRL US GAAP tag for "remaining authorization" is not directly available in the given list. However, the tag for "StockRepurchaseProgramRemainingAuthorizedRepurchaseAmount1" seems to be related to the remaining authorized amount for a stock repurchase program, which in this case is the remaining authorization for future share repurchases.
+
+\\boxed{StockRepurchaseProgramRemainingAuthorizedRepurchaseAmount1}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.6" in the given sentence?  
+ "The weighted average discount rate for leases was 3.26 % as of March 31, 2020. Total operating lease expense was $ 0.7 million and $ 0.6 million for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.6" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the total operating lease expense for the three months ended March 31, 2019.
+
+The term "operating lease expense" is related to operating leases.
+
+The XBRL US GAAP tag for "operating lease expense" is not directly available in the given list. However, the tag for "OperatingLeaseExpense" seems to be related to the operating lease expense, which in this case is the total operating lease expense for the three months ended March 31, 2019.
+
+\\boxed{OperatingLeaseExpense}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,369" in the given sentence?  
+ "As of December 31, 2019, unamortized expense related to unvested Profits Interests totaled $ 70 and is expected to be recognized over a weighted average period of approximately 1 year. Restricted Shares ( “ RSs ” ) In connection with the Company ’ s acquisition of Form Factory ( refer to Note 3 ), 1,369 restricted shares with a grant date fair value of $ 20.45 were issued to former employees of Form Factory subject to future service conditions, which fully vest 24 months from the acquisition date."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,369" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of restricted shares issued to former employees of Form Factory.
+
+The term "number of restricted shares" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "number of restricted shares" is not directly available in the given list. However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" seems to be related to the share-based compensation awards granted in a period, which in this case is the number of restricted shares issued to former employees of Form Factory.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber" seems to be related to the number of non-vested equity instruments other than options, which in this case is not the correct tag.
+
+However, the tag for "ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod" is related to the share-based compensation awards granted in a period, which in this case is the number of restricted shares issued to former employees of Form Factory.
+
+\\boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsGrantsInPeriod}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{ShareBasedCompensationArrangementByShareBasedPaymentAwardEquityInstrumentsOtherThanOptionsNonvestedNumber}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "16,833" in the given sentence?  
+ "As part of these transactions, $ 16,833 and $ 23,143 was included in ( Gain ) Loss on Debt Extinguishment on the Consolidated Statements of Income for the three months ended March 31, 2020 and 2019, respectively."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "16,833" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the gain or loss on debt extinguishment.
+
+The term "gain or loss on debt extinguishment" is related to the extinguishment of debt.
+
+The XBRL US GAAP tag for "gain or loss on debt extinguishment" is not directly available in the given list. However, the tag for "GainsLossesOnExtinguishmentOfDebt" seems to be related to the gains or losses from the extinguishment of debt, which in this case is the gain or loss on debt extinguishment.
+
+\\boxed{GainsLossesOnExtinguishmentOfDebt}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1.55" in the given sentence?  
+ "The most significant properties subject to these obligations are the Gold Bar and Tonkin properties in Nevada, the Timmins properties in Canada and the El Gallo Project in Mexico. A reconciliation of the Company ’ s asset retirement obligations for the three months ended March 31, 2020 and for the year ended December 31, 2019 are as follows : The Company ’ s reclamation expenses consisted of the following : NOTE 12 SHAREHOLDERS ’ EQUITY Equity Issuances March 2019 Registered Offering On March 29, 2019, the Company issued 14,193,548 Units at $ 1.55 per Unit, for net proceeds of $ 20.3 million ( net of issuance costs of $ 1.7 million )."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1.55" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the price per unit of the equity issuance.
+
+The term "price per unit" is related to the share price.
+
+The XBRL US GAAP tag for "price per unit" is not directly available in the given list. However, the tag for "CommonStockPricePerShare" seems to be related to the price per share of common stock, which in this case is the price per unit of the equity issuance.
+
+However, the tag for "CommonStockPricePerShare" is related to the price per share of common stock, which in this case is the price per unit of the equity issuance.
+
+\\boxed{CommonStockPricePerShare}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{SharePrice}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "0.75" in the given sentence?  
+ "Such security interest consists of ( 1 ) a first - priority lien, subject to certain permitted liens, with respect to certain assets of the Company and its domestic subsidiaries ( the “ ABL Collateral ” ) pledged as collateral in favor of lenders under the ABL Agreement and a second - priority lien in the ABL Collateral in favor of the lenders under the Term Loan and ( 2 ) a first - priority lien, subject to certain permitted liens, with respect to certain assets of the Company and its domestic subsidiaries ( the “ Term Loan Collateral ” ) pledged as collateral in favor of lenders under the Term Loan and a second - priority lien in the Term Loan Collateral in favor of the lenders under the ABL Agreement. Borrowings under the ABL agreement bear interest, at the Company ’ s option, at one of the following rates : ( i ) alternate base rate, defined, for any day, as the greater of the prime rate, a federal funds and overnight bank funding based rate plus 0.5 % or one - month LIBOR plus 1.0 %, plus a margin of 0.25 % to 0.75 %, or ( ii ) LIBOR plus a margin of 1.25 % to 1.75 %."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "0.75" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the margin rate for borrowings under the ABL agreement.
+
+The term "margin rate" is related to debt instruments.
+
+The XBRL US GAAP tag for "margin rate" is not directly available in the given list. However, the tag for "LineOfCreditFacilityCommitmentFeePercentage" seems to be related to the commitment fee percentage of a line of credit, which in this case is the margin rate for borrowings under the ABL agreement.
+
+However, the tag for "LineOfCreditFacilityCommitmentFeePercentage" is related to the commitment fee percentage of a line of credit, which in this case is the margin rate for borrowings under the ABL agreement.
+
+\\boxed{LineOfCreditFacilityCommitmentFeePercentage}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Incorrect! The correct answer is \boxed{DebtInstrumentBasisSpreadOnVariableRate1}.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "2,250" in the given sentence?  
+ "The Company incurred $ 181,695 in issuance costs from the offering and issued warrants to purchase 2,250 shares of common stock to the underwriter."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "2,250" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the number of shares of common stock issued as warrants.
+
+The term "number of shares" is related to the number of shares issued.
+
+The XBRL US GAAP tag for "number of shares" is not directly available in the given list. However, the tag for "StockIssuedDuringPeriodSharesNewIssues" seems to be related to the number of shares issued during the period, which in this case is the number of shares of common stock issued as warrants.
+
+However, the tag for "StockRepurchasedDuringPeriodShares" seems to be related to the number of shares repurchased during the period, which in this case is not the correct tag.
+
+However, the tag for "StockIssuedDuringPeriodSharesNewIssues" is related to the number of shares issued during the period, which in this case is the number of shares of common stock issued as warrants.
+
+\\boxed{StockIssuedDuringPeriodSharesNewIssues}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "1,556,698" in the given sentence?  
+ "As of March 31, 2020, 54,162 shares have vested and 145,838 remain unvested. During the three months ended March 31, 2020 and 2019, the Company recorded $ 126,219 and $ 264,453, respectively, in stock - based compensation for the restricted shares previously issued. As of March 31, 2020, there was $ 1,556,698 of unrecognized compensation expense related to restricted shares."<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+To determine the appropriate XBRL US GAAP tag for "1,556,698" in the given sentence, I will analyze the context of the sentence. The sentence is discussing the unrecognized compensation expense related to restricted shares.
+
+The term "unrecognized compensation expense" is related to share-based compensation arrangements.
+
+The XBRL US GAAP tag for "unrecognized compensation expense" is not directly available in the given list. However, the tag for "EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized" seems to be related to the total compensation cost not yet recognized for non-vested share-based awards, which in this case is the unrecognized compensation expense related to restricted shares.
+
+\\boxed{EmployeeServiceShareBasedCompensationNonvestedAwardsTotalCompensationCostNotYetRecognized}<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Correct!<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+What is the appropriate XBRL US GAAP tag for "19.66" in the given sentence?  
+ "The performance share units cliff - vest in full over a three - year vesting period. The Company granted 125,000 and 226,000 shares underlying performance share units during the three months ended March 31, 2020 and 2019, respectively, at a weighted average grant - date fair value of $ 19.66 and $ 15.17 per share, respectively."<|eot_id|>
