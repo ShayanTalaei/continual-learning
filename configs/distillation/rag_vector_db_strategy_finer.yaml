@@ -1,0 +1,87 @@
+## Config for RAG VectorDB Strategy on Finer dataset
+## Uses a VectorDB checkpoint to retrieve past experiences via RAGAgent
+
+checkpoint_dir: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/rag_agent/brad_magic_with_progressive_fewshots/20251020_172227_top20_1_cont1/checkpoints/ep_001000"
+
+# Output directory for generated dataset
+output_dir: "/scratch/m000122/stalaei/logs/continual_learning/datafiner_train_ICL_rag_vector_db_ep_001000_top20"
+
+# Output format: "jsonl" or "parquet"
+output_format: "jsonl"
+
+# Teacher messages text storage
+include_teacher_messages_texts: true
+
+# Individual file saving for resume functionality
+save_individual_files: true
+
+# Memory formation strategy - using rag_vector_db
+strategy:
+  name: "rag_vector_db"
+  # Path to the VectorDB checkpoint directory (strategy will auto-pick latest vector_db_*.jsonl)
+  vector_db_checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/rag_agent/brad_magic_with_progressive_fewshots/20251020_172227_top20_1_cont1/checkpoints/ep_001000"
+
+  # Embedding and similarity settings to align with the vector DB
+  embedding_config:
+    model: text-embedding-004
+  distance: cosine
+  normalize: true
+
+  # RAG retrieval/prompt knobs
+  top_k: 21
+  include_actions: true
+  include_feedback: true
+  flipping_examples: false
+
+  # Filter exact same task (after normalization) from retrieved neighbors
+  filter_exact_task: true
+  filter_normalizer: lower_ws_collapse
+
+  # Target dataset configuration for generating tasks
+  target_dataset_config:
+    type: finer
+    hf_dataset: "stalaei/finer_v1"
+    split: "train_ICL"
+    input_field: "context"
+    target_field: "target"
+    instruction_template: null
+    shuffle: false
+
+  # Limit number of environments used (applied after optional slicing)
+  max_target_samples: 1000
+  # Optional slicing over target environments (applied before max_target_samples)
+  # start_idx: 0
+  # end_idx: null
+
+# Agent prompt rendering
+agent_type: "rag_agent"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
+
+# Language model configuration (Tokasaurus server)
+lm_model: "meta-llama/Llama-3.1-8B-Instruct"
+lm_base_url: "http://localhost:8096"
+lm_temperature: 0.7
+lm_max_output_tokens: 2048
+
+# Retry configuration for robust data generation
+lm_max_retries: 3
+
+# Optional: capture top-k logprobs for distillation training
+top_logprobs: 20
+
+# Enable full sequence tensor data for advanced distillation training
+include_full_sequence_data: true
+
+# Sampling parameters
+max_samples: null
+num_repeat_samples: 64 # -1 for 1 repetition with no explicit repetition ID
+
+# Parallelism
+num_threads: 64
+
+# Additional metadata to include in each sample
+metadata:
+  dataset_version: "rag_vector_db_v1"
+  description: "RAG VectorDB strategy with top_k=20 and exact-task filtering"
+
+

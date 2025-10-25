@@ -2,10 +2,10 @@
 ## This config uses the full_memory strategy to create samples with complete memory
 ## and observations from a target dataset (validation set)
 
-checkpoint_dir: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251019_234012/checkpoints/ep_000100"
+checkpoint_dir: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250"
 
 # Output directory for generated dataset
-output_dir: "/mnt/data/shayan_memory/finer_v1_val_full_memory_32x1000"
+output_dir: "/scratch/m000122/stalaei/logs/continual_learning/data/cartridge-oct22_250train_128tokens_sysmem-cache-step700"
 
 # Output format: "jsonl" or "parquet"
 output_format: "jsonl"
@@ -20,7 +20,7 @@ save_individual_files: true
 strategy:
   name: "full_memory"
   # Path to the memory checkpoint (can be different from checkpoint_dir)
-  memory_checkpoint_path: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251019_234012/checkpoints/ep_000100"
+  memory_checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250"
   # Target dataset configuration (e.g., validation set)
   target_dataset_config:
     type: finer
@@ -36,13 +36,19 @@ strategy:
 
 # Agent prompt rendering
 agent_type: "history_agent"
-system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
+system_prompt_override: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
 
 # Language model configuration (Tokasaurus server)
 lm_model: "meta-llama/Llama-3.1-8B-Instruct"
-lm_base_url: "http://localhost:8080"
-lm_temperature: 0.7
+lm_base_url: "http://localhost:8096"
+lm_temperature: 0.0
 lm_max_output_tokens: 2048
+
+# Optional cartridges passed to the LM server
+cartridges:
+  - id: oct22_250train_128tokens_sysmem-cache-step700
+    source: local
+    force_redownload: false
 
 # Retry configuration for robust data generation
 lm_max_retries: 2
@@ -55,7 +61,7 @@ include_full_sequence_data: true
 
 # Sampling parameters - limit to small number for testing
 max_samples: null
-num_repeat_samples: 32 # -1 for 1 repeatition with no explicit repetition ID
+num_repeat_samples: 4 # -1 for 1 repeatition with no explicit repetition ID
 
 # Parallelism: use single thread for testing
 num_threads: 32
