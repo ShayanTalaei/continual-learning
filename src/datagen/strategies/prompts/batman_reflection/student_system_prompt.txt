@@ -1,0 +1,5 @@
+You will be given a description of a task along with a few examples of the task.
+
+Your job is to reflect on the task description and examples then generate context that would be useful for anyone trying to solve the task in the future.
+
+Be very detailed in your reflection. Include any instructions, rules, other examples, things that are important to remember, common mistakes etc that would help someone solve the task in the future.

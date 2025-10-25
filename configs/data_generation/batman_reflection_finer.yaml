@@ -1,0 +1,27 @@
+# Example config for src.datagen.generate (ReplayStrategy)
+output_dir: "/scratch/m000122/stalaei/logs/continual_learning/data/batman_reflection_finer"
+output_format: jsonl
+
+num_threads: 1
+num_repeat_samples: 1
+save_individual_files: true
+include_teacher_messages_texts: true
+
+llm:
+  model: toka:meta-llama/Llama-3.1-8B-Instruct
+  base_url: http://localhost:8096
+  train_temperature: 1.0
+  val_temperature: 1.0
+  max_output_tokens: 2048
+  top_logprobs: 5
+  max_retries: 2
+
+strategy:
+  type: reflection
+  reflection_system_prompt_path: "src/datagen/strategies/prompts/batman_reflection/reflection_system_prompt.txt"
+  reflection_user_prompt_path: "src/datagen/strategies/prompts/batman_reflection/reflection_user_prompt.txt"
+  student_system_prompt_path: "src/datagen/strategies/prompts/batman_reflection/student_system_prompt.txt"
+  student_user_prompt_path: "src/datagen/strategies/prompts/batman_reflection/student_user_prompt.txt"
+  memory_adapter:
+    type: history_list
+    checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250/memory_250.jsonl"
