@@ -19,8 +19,8 @@
     }
   ],
   "pythonVersion": "3.8",
-  // "typeCheckingMode": "basic",
+  "typeCheckingMode": "basic",
   "useLibraryCodeForTypes": true,
-  "reportMissingImports": "warning",
+  "reportMissingImports": "none",
   "reportMissingTypeStubs": "none"
 }

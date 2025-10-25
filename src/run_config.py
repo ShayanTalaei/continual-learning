@@ -11,8 +11,8 @@ class OutputConfig(BaseModel):
 
 class RunConfig(BaseModel):
     runtime: RunTimeConfig
-    train_dataset: Dict[str, Any] | None = None
-    validation_dataset: Dict[str, Any] | None = None
+    train_dataset: Optional[Dict[str, Any]] = None
+    validation_dataset: Optional[Dict[str, Any]] = None
     agent: Dict[str, Any]
     output: Optional[OutputConfig] = None
     seed: Optional[int] = None
