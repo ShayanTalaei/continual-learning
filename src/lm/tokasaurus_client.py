@@ -22,6 +22,8 @@ class TokasaurusConfig(LMConfig):
     stop_sequences: Optional[List[str]] = ["FEEDBACK", "OBSERVATION"]
     timeout_s: float = 900.0
     enable_health_check: bool = False  # Ping check before each call (can be noisy under load)
+    # When set, request top-k logprobs and include full sequence tensor data in responses
+    top_logprobs: Optional[int] = None
 
 
 class TokasaurusClient(LanguageModel):
@@ -29,7 +31,7 @@ class TokasaurusClient(LanguageModel):
 
     Expects an OpenAI-compatible API:
     - Chat completions at {base_url}/v1/chat/completions
-    - Cartridge chat completions at {base_url}/v1/cartridge/chat/completions
+    - Cartridge chat completions at {base_url}/custom/cartridge/chat/completions
     """
 
     def __init__(self, config: TokasaurusConfig, logger: Optional[Logger] = None):
@@ -60,7 +62,6 @@ class TokasaurusClient(LanguageModel):
         self,
         messages: List[Dict[str, str]],
         cartridges: Optional[List[Dict[str, Any]]] = None,
-        top_logprobs: Optional[int] = None,
     ) -> Dict[str, Any]:
         call_id = self._begin_call(messages)
         start_time = time.time()
@@ -81,19 +82,60 @@ class TokasaurusClient(LanguageModel):
 
         for attempt in range(1, self.config.max_retries + 2):
             try:
-                text, metrics, logprobs = self._chat_request(
-                    messages,
-                    start_time,
-                    cartridges=cartridges,
-                    top_logprobs=top_logprobs,
-                )
-                self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                response: Dict[str, Any] = {"text": text}
-                if metrics:
-                    response["metrics"] = metrics
-                if logprobs:
-                    response["logprobs"] = logprobs
-                return response
+                # Decide light vs heavy path based on config
+                cfg_topk = self.cfg.top_logprobs
+                if cfg_topk is None:
+                    text, metrics, logprobs = self._chat_request(
+                        messages,
+                        start_time,
+                        cartridges=cartridges,
+                        top_logprobs=None,
+                    )
+                    extra: Dict[str, Any] = {"metrics": metrics} if metrics else {}
+                    # In light path, only include logprobs if present
+                    if logprobs is not None:
+                        extra["logprobs"] = logprobs
+                        # Alias for consumers expecting snake_case
+                        extra["log_probs"] = logprobs
+                    self._end_call(call_id, text, extra=extra or None)
+                    response: Dict[str, Any] = {"text": text}
+                    if metrics:
+                        response["metrics"] = metrics
+                    if logprobs:
+                        response["logprobs"] = logprobs
+                    return response
+                else:
+                    # Heavy path with tensor data via system_fingerprint
+                    text, metrics, logprobs, system_fingerprint = self._chat_request_with_fingerprint(
+                        messages,
+                        start_time,
+                        cartridges=cartridges,
+                        top_logprobs=cfg_topk,
+                    )
+                    tensor_data = self._extract_tensor_data_from_fingerprint(
+                        system_fingerprint, cfg_topk
+                    )
+                    extra: Dict[str, Any] = {"metrics": metrics} if metrics else {}
+                    # In heavy path, include logprobs in logs. If server omitted it,
+                    # derive a compact representation from tensor_data.
+                    if logprobs is not None:
+                        extra["logprobs"] = logprobs
+                        extra["log_probs"] = logprobs
+                    else:
+                        alias = {
+                            "topk_token_ids": tensor_data.get("topk_token_ids"),
+                            "topk_logprobs": tensor_data.get("topk_logprobs"),
+                        }
+                        extra["logprobs"] = alias
+                        extra["log_probs"] = alias
+                    self._end_call(call_id, text, extra=extra)
+                    response: Dict[str, Any] = {
+                        "text": text,
+                        "metrics": metrics,
+                        "logprobs": logprobs,
+                        **tensor_data,
+                    }
+                    return response
             except Exception as e:
                 last_err = e
                 error_type = type(e).__name__
@@ -164,7 +206,7 @@ class TokasaurusClient(LanguageModel):
         if cartridges is None:
             url = f"{self.cfg.base_url}/v1/chat/completions"
         else:
-            url = f"{self.cfg.base_url}/v1/cartridge/chat/completions"
+            url = f"{self.cfg.base_url}/custom/cartridge/chat/completions"
 
         ctx: Dict[str, Any] = jsonlogger.json_get_context()
         mode = ctx.get("mode")
@@ -211,6 +253,7 @@ class TokasaurusClient(LanguageModel):
             "thinking_tokens": None,
             "output_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
+            "temperature": temperature,
         }
         
         # Extract logprobs if requested
@@ -231,122 +274,6 @@ class TokasaurusClient(LanguageModel):
             )
         return text, metrics, logprobs
 
-    def call_with_full_sequence_data(
-        self,
-        messages: List[Dict[str, str]],
-        cartridges: Optional[List[Dict[str, Any]]] = None,
-        top_logprobs: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        """
-        Execute chat request and return full sequence tensor data for distillation training.
-        
-        This method extracts tensor data from the system_fingerprint and combines it with
-        input token IDs to provide the complete sequence information needed for training.
-        
-        Returns:
-            Dict containing:
-            - text: Generated text
-            - metrics: Performance metrics
-            - logprobs: OpenAI-style logprobs (if requested)
-            - ids: Full sequence token IDs (input + output)
-            - topk_logprobs: Top-k logprobs for answer tokens only
-            - topk_token_ids: Top-k token IDs for answer tokens only  
-            - topk_token_idxs: Indices of answer tokens in full sequence
-        """
-        call_id = self._begin_call(messages)
-        start_time = time.time()
-        last_err: Optional[Exception] = None
-
-        # Optional health check
-        if self.cfg.enable_health_check:
-            ping_ok = self._ping()
-            if not ping_ok:
-                self.logger.debug(
-                    f"Health check failed for Tokasaurus server at {self.cfg.base_url} "
-                    f"(model={self.cfg.model}). "
-                    "Proceeding anyway to allow cold start."
-                )
-
-        ctx: Dict[str, Any] = jsonlogger.json_get_context()
-        mode = ctx.get("mode")
-        should_retry_truncation = not (mode == "val" or mode == "validation")
-
-        for attempt in range(1, self.config.max_retries + 2):
-            try:
-                
-                # Make the API call with logprobs_in_fingerprint=True to get tensor data
-                text, metrics, logprobs, system_fingerprint = self._chat_request_with_fingerprint(
-                    messages,
-                    start_time,
-                    cartridges=cartridges,
-                    top_logprobs=top_logprobs,
-                )
-                
-                # Extract tensor data from system_fingerprint
-                tensor_data = self._extract_tensor_data_from_fingerprint(
-                    system_fingerprint, top_logprobs
-                )
-                
-                self._end_call(call_id, text, extra={"metrics": metrics} if metrics else None)
-                
-                response: Dict[str, Any] = {
-                    "text": text,
-                    "metrics": metrics,
-                    "logprobs": logprobs,
-                    **tensor_data
-                }
-                return response
-            
-            except Exception as e:
-                last_err = e
-                error_type = type(e).__name__
-                
-                # Build detailed error context
-                error_context = {
-                    "base_url": self.cfg.base_url,
-                    "model": self.cfg.model,
-                    "error_type": error_type,
-                    "messages_count": len(messages),
-                    "timeout_s": self.cfg.timeout_s,
-                }
-                
-                # Add HTTP-specific details if available
-                if hasattr(e, 'response') and getattr(e, 'response', None) is not None:
-                    response = getattr(e, 'response')
-                    error_context["status_code"] = getattr(response, 'status_code', None)
-                    try:
-                        error_context["response_text"] = getattr(response, 'text', '')[:500]
-                    except:
-                        pass
-                
-                # Only retry on truncation during training
-                if not (should_retry_truncation and isinstance(e, GenerationTruncatedError)):
-                    self.logger.error(
-                        f"Tokasaurus call FAILED (no retry). URL: {self.cfg.base_url}, Model: {self.cfg.model}, Error: {error_type}: {e}",
-                        extra=error_context
-                    )
-                    break
-                if attempt > self.config.max_retries:
-                    self.logger.error(
-                        f"Tokasaurus call FAILED after {attempt} attempts. "
-                        f"URL: {self.cfg.base_url}, Model: {self.cfg.model}, Error: {error_type}: {e}",
-                        extra=error_context
-                    )
-                    break
-                delay = min(
-                    self.config.starting_delay * (self.config.backoff_factor ** attempt),
-                    self.config.max_delay,
-                )
-                self.logger.warning(
-                    f"Tokasaurus call failed at attempt {attempt}/{self.config.max_retries + 1}. "
-                    f"URL: {self.cfg.base_url}, Error: {error_type}: {e}. "
-                    f"Retrying in {delay:.2f}s...",
-                    extra=error_context
-                )
-                time.sleep(delay)
-
-        self._end_call(call_id, "", extra={"error": str(last_err) if last_err else "unknown"})
-        return {"text": "", "metrics": None, "logprobs": None, "ids": [], "topk_logprobs": None, "topk_token_ids": None, "topk_token_idxs": []}
 
     def _tokenize_messages(self, messages: List[Dict[str, str]]) -> List[int]:
         """Tokenize messages to get input token IDs."""
@@ -386,7 +313,7 @@ class TokasaurusClient(LanguageModel):
         if cartridges is None:
             url = f"{self.cfg.base_url}/v1/chat/completions"
         else:
-            url = f"{self.cfg.base_url}/v1/cartridge/chat/completions"
+            url = f"{self.cfg.base_url}/custom/cartridge/chat/completions"
 
         ctx: Dict[str, Any] = jsonlogger.json_get_context()
         mode = ctx.get("mode")
@@ -432,6 +359,7 @@ class TokasaurusClient(LanguageModel):
             "thinking_tokens": None,
             "output_tokens": usage.get("completion_tokens"),
             "total_tokens": usage.get("total_tokens"),
+            "temperature": temperature,
         }
         
         # Extract logprobs if requested

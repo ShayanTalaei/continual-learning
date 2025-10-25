@@ -1,4 +1,4 @@
-from typing import Optional, Generic, TypeVar, Dict, Any, Union
+from typing import Optional, Generic, TypeVar, Dict, Any, Union, List
 from logging import Logger, getLogger
 from pydantic import BaseModel
 from contextlib import contextmanager
@@ -15,6 +15,8 @@ class AgentConfig(BaseModel):
     lm_config: Optional[Dict[str, Any]] = None
     system_prompt: Optional[str] = None
     verbose: bool = True
+    # Optional cartridges passed to LM calls when provided
+    cartridges: Optional[List[Dict[str, Any]]] = None
 
 
 C = TypeVar("C", bound=AgentConfig)
@@ -82,6 +84,21 @@ class Agent(Generic[C]):
 
     def clone_for_episode(self, training: bool, share_memory: bool = True) -> "Agent":
         raise NotImplementedError
+
+    # -----------------------------
+    # LM call wrapper with cartridges
+    # -----------------------------
+    def _lm_call(self, messages: List[Dict[str, str]], **kwargs: Any) -> Dict[str, Any]:
+        """Central LM call that injects cartridges if configured.
+
+        Args:
+            messages: Chat messages for the model
+            **kwargs: Extra keyword options forwarded to the LM client
+        """
+        cartridges = getattr(self.config, "cartridges", None)
+        if cartridges:
+            return self.lm.call(messages, cartridges=cartridges, **kwargs)  # type: ignore[arg-type]
+        return self.lm.call(messages, **kwargs)
 
     # -----------------------------
     # Checkpointing (default hooks)

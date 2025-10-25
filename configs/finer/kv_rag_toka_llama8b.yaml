@@ -1,0 +1,72 @@
+## FinLoRA Finer — RAGAgent with cartridges on local
+
+runtime:
+  max_envs_to_visit: 4000
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 200
+  validation_freq: 100
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 100
+  checkpoint_strategy: last_n
+  checkpoint_keep_last: 40
+  checkpoint_on_start: false
+  start_episode_index: 1000
+  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/rag_agent/oct21_rag1ktrain_128tokens_sysmem-cache-step1000-continue-from-checkpoint/20251022_112215/checkpoints/ep_002000"
+
+train_dataset:
+  type: finer
+  hf_dataset: stalaei/finer_v1
+  split: train_ICL
+  input_field: context
+  target_field: target
+  instruction_template: null
+  max_samples: 4000
+  shuffle: false
+
+validation_dataset:
+  type: finer
+  hf_dataset: stalaei/finer_v1
+  split: val
+  input_field: context
+  target_field: target
+  instruction_template: null
+  max_samples: 1000
+  shuffle: false
+
+agent:
+  type: rag_agent
+  lm_config:
+    model: toka:meta-llama/Llama-3.1-8B-Instruct
+    train_temperature: 0.3
+    val_temperature: 0.0
+    max_output_tokens: 2048
+    log_calls: true
+    base_url: "http://localhost:8096"
+    stop_sequences: [FEEDBACK, OBSERVATION]
+    max_retries: 3
+  memory_config:
+    _type: vector_db
+    distance: cosine
+    normalize: true
+    embedding_config:
+      model: text-embedding-004
+      output_dimensionality: 768
+      normalize: true
+  cartridges:
+    - id: oct21_rag1ktrain_128tokens_sysmem-cache-step1000
+      source: local
+      force_redownload: false
+  history_k: null
+  system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+  top_k: 20
+  include_actions: true
+  include_feedback: true
+  flipping_examples: false
+
+output:
+  results_dir: outputs/finer/rag_agent/oct21_rag1ktrain_128tokens_sysmem-cache-step1000-continue-from-checkpoint
+  log_level: INFO
+
+

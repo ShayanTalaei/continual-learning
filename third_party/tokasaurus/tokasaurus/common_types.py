@@ -65,7 +65,7 @@ class ServerConfig(pydra.Config):
     max_topk_logprobs: int | None = None
 
     port: int = 10210
-    local_proc_name: str = "server"
+    local_proc_name: str = "server" #"server"
 
     log_level: str = "INFO"
     log_procs: list[str] | None = None

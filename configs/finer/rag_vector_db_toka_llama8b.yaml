@@ -1,22 +1,18 @@
-## FinLoRA Finer — HistoryAgent on local JSONL test set
+## FinLoRA Finer — RAGAgent with VectorDB memory on local JSONL test set
 
 runtime:
-  max_envs_to_visit: 250
+  max_envs_to_visit: 4000
   max_steps_per_episode: 1
   scores_path: scores.jsonl
   run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 10
-  # Checkpointing
+  validation_freq: 100
   checkpoint_dir: checkpoints
-  checkpoint_every_episodes: 50
-  # Use one of the following strategies:
-  # - last_n: keeps the last N checkpoints saved every `checkpoint_every_episodes`
-  # - top_k_val: keeps the top-K checkpoints by validation mean score (saved on validation)
+  checkpoint_every_episodes: 100
   checkpoint_strategy: last_n
   checkpoint_keep_last: 20
   checkpoint_on_start: false
-  # resume_from: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_fewshots/20251019_194436/checkpoints/ep_000100"
+  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/rag_agent/brad_magic_with_progressive_fewshots/20251020_202751_top20_1_cont2/checkpoints/ep_002000"
 
 train_dataset:
   type: finer
@@ -25,7 +21,7 @@ train_dataset:
   input_field: "context"
   target_field: "target"
   instruction_template: null
-  max_samples: 2000
+  max_samples: 4000
   shuffle: false
 
 validation_dataset:
@@ -39,26 +35,33 @@ validation_dataset:
   shuffle: false
 
 agent:
-  type: history_agent
+  type: rag_agent
   lm_config:
-    # Use provider-prefixed model to dispatch to Tokasaurus
     model: "toka:meta-llama/Llama-3.1-8B-Instruct"
     train_temperature: 0.3
     val_temperature: 0.0
     max_output_tokens: 2048
     log_calls: true
-    # Tokasaurus-specific fields (present on TokasaurusConfig)
-    base_url: "http://localhost:8080"
+    base_url: "http://localhost:8096"
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 3
   memory_config:
-    _type: history_list
-    max_length: null
+    _type: vector_db
+    distance: cosine
+    normalize: true
+    embedding_config:
+      model: text-embedding-004
+      output_dimensionality: 768
+      normalize: true
   history_k: null
   system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic_with_gpt_fewshots.txt}"
+  top_k: 20
+  include_actions: true
+  include_feedback: true
+  flipping_examples: false
 
 output:
-  results_dir: outputs/finer/history_agent/brad_magic_with_progressive_fewshots
+  results_dir: outputs/finer/rag_agent/brad_magic_with_progressive_fewshots
   log_level: INFO
 
 

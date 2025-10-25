@@ -58,7 +58,7 @@ class GeminiClient(LanguageModel):
         
         generate_content_config = GenerateContentConfig(
             system_instruction=system_instruction,
-            temperature=self.config.temperature ,
+            temperature=self.config.val_temperature ,
             max_output_tokens=self.config.max_output_tokens,
             response_mime_type=("application/json" if use_json_mode else None),
             thinking_config=(
