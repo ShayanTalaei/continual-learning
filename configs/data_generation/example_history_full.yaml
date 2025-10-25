@@ -10,17 +10,7 @@ include_teacher_messages_texts: true
 metadata:
   project: continual-learning
 
-llm:
-  model: toka:mixtral
-  base_url: http://localhost:8080
-  temperature: 0.0
-  max_output_tokens: 512
-  top_logprobs: 5
-  max_retries: 5
-  starting_delay: 1.0
-  backoff_factor: 2.0
-  max_delay: 10.0
-  timeout_s: 900.0
+strategy_llm: ${llm}
 
 strategy:
   type: replay
@@ -30,11 +20,3 @@ strategy:
       system: "You are a helpful assistant."
       include_actions: true
       include_feedback: true
-  data_source:
-    target_dataset_config:
-      name: env_val
-    max_samples: 500
-    start_idx: 0
-    end_idx: 500
-    student_template:
-      system: "Solve the task"

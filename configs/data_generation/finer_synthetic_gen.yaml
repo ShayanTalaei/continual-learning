@@ -1,0 +1,30 @@
+# Example config for src.datagen.generate (ReplayStrategy)
+output_dir: outputs/replay_history_envs
+output_format: jsonl
+
+num_threads: 4
+max_samples: 1000
+num_repeat_samples: 1
+save_individual_files: true
+include_teacher_messages_texts: true
+metadata:
+  project: continual-learning
+
+llm:
+  model: toka:mixtral
+  base_url: http://localhost:8080
+  temperature: 0.0
+  max_output_tokens: 512
+  top_logprobs: 5
+  max_retries: 5
+  starting_delay: 1.0
+  backoff_factor: 2.0
+  max_delay: 10.0
+  timeout_s: 900.0
+
+strategy:
+  type: synthetic_gen
+  synthetic_gen_prompt_path: src/data/prompts/finer/synthetic_gen_prompt.txt
+  memory_adapter:
+    checkpoint_path: /scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250
+    type: history_list

@@ -33,8 +33,8 @@ class DataGenConfig(BaseModel):
     num_repeat_samples: int = 1
     save_individual_files: bool = True
     include_teacher_messages_texts: bool = True
-    llm: LMConfig
-    strategy: StrategyConfig
+    llm: Dict[str, Any]
+    strategy: Dict[str, Any]
     cartridges: Optional[List[Dict[str, Any]]] = None
 
 
