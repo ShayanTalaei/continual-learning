@@ -43,7 +43,7 @@ class HistoryList(MemoryModule):
         config = HistoryListConfig()
         mem = cls(config)
         if not path.exists():
-            return mem
+            raise FileNotFoundError(f"Snapshot file {path} not found")
         try:
             with open(path, "r") as f:
                 for line in f:

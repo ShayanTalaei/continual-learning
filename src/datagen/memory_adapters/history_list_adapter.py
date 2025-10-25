@@ -14,7 +14,7 @@ class HistoryAdapter(MemoryAdapter):
         
         self.history_list = HistoryList.load_snapshot(str(self.checkpoint_path))
 
-    def _to_triplets(self) -> List[Dict[str, Any]]:
+    def to_triplets(self) -> List[Dict[str, Any]]:
         triplets: List[Dict[str, Any]] = []
         obs: Optional[Any] = None
         act: Optional[Any] = None
