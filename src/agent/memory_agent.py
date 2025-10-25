@@ -74,7 +74,7 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
             messages = [
                 {"role": "system", "content": system_prompt}
             ] + user_messages
-            resp = self.lm.call(messages)
+            resp = self._lm_call(messages)
         action = (resp.get("text") or "").strip()
         if not action:
             self.logger.warning("No action returned from LM")
