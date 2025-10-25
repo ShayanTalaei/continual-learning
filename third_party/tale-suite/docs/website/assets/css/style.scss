@@ -1,0 +1,549 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Tabs styling */
+.tab-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tabs, .nested-tabs {
+    display: flex; /* Add flexbox display */
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    border-radius: 4px 4px 0 0;
+    width: 100%; /* Ensure full width */
+}
+
+.nested-tabs {
+    margin-bottom: 15px;
+}
+
+/* Shared styles for both main and nested tab buttons */
+.tab-button, .nested-tab-button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    flex: 1; /* Make tabs grow evenly to fill space */
+    text-align: center; /* Center text in tabs */
+}
+
+/* Main tab button specific styles */
+.tab-button {
+    padding: 14px 16px;
+    font-size: 16px;
+}
+
+/* Nested tab button specific styles */
+.nested-tab-button {
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.tab-button:hover, .nested-tab-button:hover {
+    background-color: #ddd;
+}
+
+.tab-button.active {
+    background-color: #157878;
+    color: white;
+}
+
+.nested-tab-button.active {
+    background-color: #1a9a9a; /* Slightly different color to distinguish */
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    width: 100%; /* Ensure content takes full width */
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.nested-tab-content {
+    display: none;
+    padding: 10px 0;
+    border-top: none;
+    width: 100%; /* Ensure nested content takes full width */
+}
+
+.nested-tab-content.active {
+    display: block;
+}
+
+#main-description {
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* If needed, control other text properties */
+#main-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.author-tagline {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.abstract-container {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid #ddd;
+}
+
+.abstract-container h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.abstract-container p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.abstract-tagline {
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+// .table-container {
+//     overflow-x: auto;
+//     margin: 20px 0;
+//   }
+  
+  .model-scores {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  .model-scores th {
+    background-color: #157878;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+  }
+  
+  .model-scores td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .model-scores tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .model-scores tr:hover {
+    background-color: #e8f4f4;
+  }
+  
+  /* Responsive design for mobile */
+  @media screen and (max-width: 768px) {
+    .model-scores {
+      font-size: 12px;
+    }
+    
+    .model-scores th, .model-scores td {
+      padding: 6px;
+    }
+  }
+
+  .environment-container {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid #157878;
+}
+
+.environment-tagline {
+    text-align: center;
+    font-weight: bold;
+    color: #157878;
+    margin-bottom: 20px;
+}
+
+.environment-container p:not(.environment-tagline) {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.cite-button {
+    background: none;
+    border: none;
+    color: #157878;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0 5px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.cite-button:hover {
+    transform: scale(1.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  /* The Close Button */
+  .close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close-modal:hover,
+  .close-modal:focus {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .citation-popup {
+    display: none;
+    position: absolute;  /* Use absolute instead of fixed */
+    z-index: 1000;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 400px;
+    max-width: 90vw;
+    padding: 15px;
+}
+  
+  /* Citation box styling */
+  .citation-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .citation-box pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+    font-family: monospace;
+    font-size: 12px;
+  }
+  
+  /* Popup header */
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .close-popup {
+    cursor: pointer;
+    color: #888;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .close-popup:hover {
+    color: #333;
+  }
+  
+  /* Copy button styling */
+  .copy-button {
+    background-color: #157878;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 10px 0 0 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .copy-button:hover {
+    background-color: #0b5c5c;
+  }
+  
+  /* Existing button styling */
+  .cite-button {
+    background: none;
+    border: none;
+    color: #157878;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0 5px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+    position: relative; /* For positioning the popup */
+  }
+  
+  .cite-button:hover {
+    transform: scale(1.2);
+  }
+
+  .citation-notice {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+  }
+
+  .environment-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .environment-image-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+
+  .image-caption {
+    text-align: center;
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Add this to your stylesheet */
+.table-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Force the table to fit within the container */
+.responsive-table {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Style the model-scores table */
+.model-scores {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 14px; /* Base font size */
+}
+
+/* Give more space to model names, less to percentages */
+.model-scores th:first-child,
+.model-scores td:first-child {
+  width: 16%; /* Prioritize model names */
+  text-align: left;
+  font-weight: 500;
+  padding-right: 8px;
+}
+
+/* Make percentage columns very compact */
+.model-scores th:not(:first-child),
+.model-scores td:not(:first-child) {
+  width: 14%; /* Distribute remaining 65% across 6 columns */
+  text-align: center;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+/* Force text wrapping in all cells */
+.model-scores th,
+.model-scores td {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Progressive font size reduction for different screen sizes */
+@media screen and (max-width: 992px) {
+  .model-scores {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .model-scores {
+    font-size: 12px;
+  }
+  
+  .model-scores th:first-child,
+  .model-scores td:first-child {
+    width: 16%;
+  }
+  
+  .model-scores th:not(:first-child),
+  .model-scores td:not(:first-child) {
+    width: 14%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .model-scores {
+    font-size: 10px;
+  }
+  
+  .model-scores th:first-child,
+  .model-scores td:first-child {
+    width: 12.5%;
+  }
+  
+  .model-scores th:not(:first-child),
+  .model-scores td:not(:first-child) {
+    width: 25%;
+  }
+}
+
+/* For extremely small screens */
+@media screen and (max-width: 400px) {
+  .model-scores {
+    font-size: 9px;
+  }
+}
+
+.simplified-table-container {
+  width: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Make sure simplified-table-container is correctly displayed in nested-tab-content */
+#tab6-subtab1 .responsive-table.simplified-table-container {
+  width: 100%;
+  overflow-x: auto; /* Change from hidden to auto if table might overflow on small screens */
+}
+
+/* Column-specific widths for the simplified table */
+.simplified-table-container .model-scores th:nth-child(1),
+.simplified-table-container .model-scores td:nth-child(1) {
+  width: 10%; /* Rank column - very narrow */
+  text-align: center;
+}
+
+.simplified-table-container .model-scores th:nth-child(2),
+.simplified-table-container .model-scores td:nth-child(2) {
+  width: 40%; /* Model name column - give it most space */
+  text-align: center;
+}
+
+.simplified-table-container .model-scores th:nth-child(3),
+.simplified-table-container .model-scores td:nth-child(3) {
+  width: 20%; /* Score column - moderate space */
+  text-align: center;
+}
+
+.simplified-table-container .model-scores th:nth-child(4),
+.simplified-table-container .model-scores td:nth-child(4) {
+  width: 20%; /* Reasoning column - moderate space */
+  text-align: center;
+}
+
+.simplified-table-container .model-scores th:nth-child(5),
+.simplified-table-container .model-scores td:nth-child(5) {
+  width: 20%; /* Reasoning column - moderate space */
+  text-align: center;
+}
+
+/* Responsive adjustments for simplified table */
+@media screen and (max-width: 768px) {
+  .simplified-table-container .model-scores th:nth-child(1),
+  .simplified-table-container .model-scores td:nth-child(1) {
+    width: 10%;
+  }
+  
+  .simplified-table-container .model-scores th:nth-child(2),
+  .simplified-table-container .model-scores td:nth-child(2) {
+    width: 40%;
+  }
+  
+  .simplified-table-container .model-scores th:nth-child(3),
+  .simplified-table-container .model-scores td:nth-child(3),
+  .simplified-table-container .model-scores th:nth-child(4),
+  .simplified-table-container .model-scores td:nth-child(4),
+  .simplified-table-container .model-scores td:nth-child(5)
+   {
+    width: 10;
+  }
+}
+
+.asterisk-note {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.video-container {
+  width: 100%;
+  margin: 1em 0;
+  position: relative;
+}
+
+.video-container video {
+  width: 100%;
+  display: block;
+}

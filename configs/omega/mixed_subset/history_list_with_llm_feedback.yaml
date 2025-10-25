@@ -1,0 +1,65 @@
+## OMEGA (allenai/omega-explorative) — HistoryAgent
+
+runtime:
+  max_envs_to_visit: 120
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 100
+  validation_freq: 3
+
+train_dataset:
+  hf_dataset: "stalaei/omega-explorative-mixed-subset-with-pro-gt-solutions"
+  split: "train"
+  input_field: "messages"
+  target_field: "ground_truth"
+  instruction_template: null
+  max_samples: 12
+  shuffle: false
+  seed: 42
+  eval_mode: numeric_tol
+  eval_tolerance: 1e-6
+  expect_boxed: true
+  # Enable LLM-generated feedback only for training dataset
+  feedback_lm_config:
+    model: "gemini-2.5-pro"
+    temperature: 0.0
+    max_output_tokens: 65536
+    log_calls: true
+  enable_llm_feedback: true
+  # Controls how incorrect answers are explained
+  feedback_type: llm_feedback_from_ground_truth_solution
+
+validation_dataset:
+  hf_dataset: "stalaei/omega-explorative-mixed-subset-with-pro-gt-solutions"
+  split: "train"
+  input_field: "messages"
+  target_field: "ground_truth"
+  instruction_template: null
+  max_samples: 12
+  shuffle: false
+  seed: 42
+  eval_mode: numeric_tol
+  eval_tolerance: 1e-6
+  expect_boxed: true
+  # During validation, use templated message only
+  feedback_type: final_answer
+
+agent:
+  type: history_agent
+  lm_config:
+    model: "gemini-2.0-flash"
+    temperature: 0.0
+    max_output_tokens: 8192
+    log_calls: true
+  memory_config:
+    _type: history_list
+    max_length: 2000
+  history_k: null # this the number previous history items obs, action, feedback collectively, and not their tuples
+  system_prompt: "You are a careful math assistant. You will recieve feedback after each action. You should continually learn from the feedback to improve your performance in the subsequent actions."
+
+output:
+  results_dir: outputs/omega_mixed_subset/explorative_history_agent/8k_flash_2.0_with_pro_2.5_feedback
+  log_level: INFO
+
+
