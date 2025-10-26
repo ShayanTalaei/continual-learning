@@ -16,5 +16,6 @@ class RunConfig(BaseModel):
     agent: Dict[str, Any]
     output: Optional[OutputConfig] = None
     seed: Optional[int] = None
+    set_ob_as_system: bool = False
 
 

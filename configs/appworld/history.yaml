@@ -1,14 +1,15 @@
 runtime:
-  max_envs_to_visit: 2
-  max_steps_per_episode: 20
+  max_envs_to_visit: 750
+  max_steps_per_episode: 30
   scores_path: scores.jsonl
   verbose: true
+  set_ob_as_system: true
 
 train_dataset:
   type: appworld
   root: third_party/appworld
   dataset_name: "train"  # choose a valid dataset name under appworld data
-  num_episodes: 2
+  num_episodes: 750
   max_steps: 20
   # prompts_path: "third_party/appworld/experiments/prompts/react_code_agent/instructions.txt"
   prompts_path: "src/data/prompts/appworld/agent_prompt.txt"
@@ -17,29 +18,34 @@ train_dataset:
 agent:
   type: history_agent
   lm_config:
-    # Small chat model to minimize VRAM; adjust if you prefer another tiny chat model
-    # model: vllm:Qwen/Qwen3-1.7B
-    model: vllm:mistralai/Mistral-7B-Instruct-v0.3
-    temperature: 0.0
-    max_output_tokens: 8092
+    model: "gemini-2.5-flash-lite"
+    train_temperature: 0.0
+    max_output_tokens: 20000
     log_calls: true
+  # lm_config:
+  #   # Small chat model to minimize VRAM; adjust if you prefer another tiny chat model
+  #   model: vllm:Qwen/Qwen3-8B
+  #   # model: vllm:mistralai/Mistral-7B-Instruct-v0.3
+  #   temperature: 0.0
+  #   max_output_tokens: 8092
+  #   log_calls: true
 
-    use_server: false
-    base_url: http://localhost:8000
-    protocol: openai
-    api_key: null
-    timeout_s: 900.0
+  #   use_server: false
+  #   base_url: http://localhost:8000
+  #   protocol: openai
+  #   api_key: null
+  #   timeout_s: 900.0
 
-    # Conservative vLLM settings for low memory usage
-    trust_remote_code: true
-    gpu_memory_utilization: 0.5
-    dtype: "bfloat16"
-    max_model_len: 15000
-    strip_think_tags: true
-    tensor_parallel_size: 1
+    # # Conservative vLLM settings for low memory usage
+    # trust_remote_code: true
+    # gpu_memory_utilization: 0.5
+    # dtype: "bfloat16"
+    # max_model_len: 15000
+    # strip_think_tags: true
+    # tensor_parallel_size: 1
   memory_config:
     _type: history_list
-    max_length: 5
+    max_length: 50
   system_prompt: |
     You are an AppWorld coding agent operating in a Python REPL.
     - Reason with python comments, if you do not, the code will NOT be executed.

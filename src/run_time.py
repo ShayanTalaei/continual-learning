@@ -32,6 +32,7 @@ class RunTimeConfig(BaseModel):
     checkpoint_strategy: Optional[str] = None
     resume_from: Optional[str] = None
     start_episode_index: int = 0
+    set_ob_as_system: bool = False
 
 
 class StepResult(BaseModel):
@@ -67,6 +68,7 @@ class RunTime:
                 every_episodes=self.config.checkpoint_every_episodes,
                 logger=self.logger,
             )
+        self.set_ob_as_system = self.config.set_ob_as_system
 
     def run(self) -> Dict[str, Any]:
         environments = self.train_dataset.get_dataset()
@@ -115,22 +117,47 @@ class RunTime:
                 if self._cp_manager and mean_val is not None:
                     self._cp_manager.on_validation_complete(self.agent, episode_index=self.num_seen_episodes, train_steps_total=train_steps_total, mean_val_score=mean_val)
 
-        # Aggregates: mean score across steps
+        # Aggregates: mean score across steps AND final task completion status
         total = 0
         score_sum = 0.0
+        successful_episodes = 0
+        total_episodes = len(all_steps)
+        
         for episode in all_steps:
+            # Check if the final step of this episode was successful
+            if episode:
+                final_step = episode[-1]
+                episode_success = self._is_episode_successful(final_step.feedback)
+                if episode_success:
+                    successful_episodes += 1
+            
+            # Accumulate scores for mean calculation
             for step in episode:
                 total += 1
                 score_sum += float(self._get_score(step.feedback))
+        
         mean_score = (score_sum / total) if total > 0 else 0.0
-        self.logger.info("Run finished: mean_score=%.3f total=%d", mean_score, total)
+        success_rate = (successful_episodes / total_episodes) if total_episodes > 0 else 0.0
+        
+        self.logger.info("Run finished: mean_score=%.3f total_steps=%d success_rate=%.3f successful_episodes=%d/%d", 
+                        mean_score, total, success_rate, successful_episodes, total_episodes)
+        
         episodes_serialized = [[s.model_dump() for s in episode] for episode in all_steps]
-        return {"mean_score": mean_score, "episodes": episodes_serialized, 
-                "train_steps": train_steps_total, "train_episodes": self.num_seen_episodes}
+        return {
+            "mean_score": mean_score, 
+            "success_rate": success_rate,
+            "successful_episodes": successful_episodes,
+            "total_episodes": total_episodes,
+            "episodes": episodes_serialized, 
+            "train_steps": train_steps_total, 
+            "train_episodes": self.num_seen_episodes
+        }
 
     def _run_episode_with_agent(self, running_agent: Agent, environment: Environment, episode_index: int, mode: str) -> List[StepResult]:
         steps: List[StepResult] = []
         obs = environment.reset()
+        if self.set_ob_as_system:
+            running_agent.system_prompt = obs
         running_agent.reset()
         done = False
         step_counter = 0
@@ -210,11 +237,23 @@ class RunTime:
                     futures.append(executor.submit(self._run_episode_with_agent, agent_clone, env, j, "val"))
                 for fut in tqdm(as_completed(futures), total=len(futures), desc="Validation"):
                     results.append(fut.result())
-        # Aggregate
+        # Aggregate both mean score and success rate
         total = sum(len(ep) for ep in results)
         score_sum = sum(self._get_score(s.feedback) for ep in results for s in ep)
         mean_score_val = (score_sum / total) if total > 0 else 0.0
-        self.logger.info("Validation finished: mean_score_val=%.3f total=%d", mean_score_val, total)
+        
+        # Calculate success rate for validation
+        successful_episodes = 0
+        for episode in results:
+            if episode:
+                final_step = episode[-1]
+                if self._is_episode_successful(final_step.feedback):
+                    successful_episodes += 1
+        
+        success_rate_val = (successful_episodes / len(results)) if results else 0.0
+        
+        self.logger.info("Validation finished: mean_score_val=%.3f total_steps=%d success_rate_val=%.3f successful_episodes=%d/%d", 
+                        mean_score_val, total, success_rate_val, successful_episodes, len(results))
         # Flush validation logs in deterministic order
         self._val_logs_buffer.flush()
         return mean_score_val
@@ -233,6 +272,15 @@ class RunTime:
             self.logger.warning("Deprecated 'is_correct' key detected; please migrate to 'score'.")
             return 1.0 if bool(feedback.get("is_correct")) else 0.0
         return 0.0
+
+    def _is_episode_successful(self, feedback: Dict[str, Any]) -> bool:
+        """Determine if an episode was successful based on the final step feedback."""
+        # AppWorld already provides success indicators in feedback
+        # Primary indicator: won flag (set by AppWorld when task completes successfully)
+        if feedback.get("won") is True:
+            return True
+        
+        return False
 
     def _write_score_line(self, mode: str, 
                           environment: Environment,

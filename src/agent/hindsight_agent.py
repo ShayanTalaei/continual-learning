@@ -36,7 +36,7 @@ class HindsightAgent(MemoryAgent):
             elif entry.type.lower() == "action":
                 messages.append({"role": "assistant", "content": str(entry.content)})
             elif entry.type.lower() == "feedback":
-                messages.append({"role": "user", "content": f"Feedback: {str(entry.content["message"])}"})
+                messages.append({"role": "user", "content": f"Feedback: {str(entry.content['message'])}"})
 
         # Current observation as final user message
         messages.append({"role": "user", "content": f"{obs}"})
@@ -132,7 +132,7 @@ Question: {question}
             elif entry.type.lower() == "action":
                 base_messages.append({"role": "assistant", "content": str(entry.content)})
             elif entry.type.lower() == "feedback":
-                base_messages.append({"role": "user", "content": f"Feedback: {str(entry.content["message"])}"})
+                base_messages.append({"role": "user", "content": f"Feedback: {str(entry.content['message'])}"})
     
         base_messages.append({"role": "user", "content": self._compose_hindsight_instruction(obs)})
         return base_messages

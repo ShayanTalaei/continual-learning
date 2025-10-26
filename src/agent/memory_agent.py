@@ -95,9 +95,9 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         # Create a generic experience content string
         if obs is not None:
             obs_event = self.create_observation_event(obs)
-            if obs_event is not None:
-                self.memory.update(obs_event)
-                self._trajectory.append(obs_event)
+            # if obs_event is not None:
+            #     self.memory.update(obs_event)
+            #     self._trajectory.append(obs_event)
             self.logger.info("Logged Observation (post-step)")
         
         feedback_event = self.create_feedback_event(feedback)

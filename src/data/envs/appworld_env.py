@@ -7,6 +7,33 @@ from logging import getLogger, Logger
 from pydantic import BaseModel
 
 from src.data.env import Environment, EnvDataset, EnvDatasetConfig
+from appworld.common.code_tools import extract_code_from_text
+
+
+def extract_python_code_loose(text: str) -> str:
+    """Extract Python code from markdown fences without requiring strict newlines.
+
+    Supports variants like:
+    - ```python\n...\n```
+    - ```python ... ``` (inline, no newlines required)
+    - ```python ... (no closing fence) -> captures to end of string
+    Returns the first matched code block content or an empty string if none.
+    """
+    try:
+        import re
+        # Prefer standard fenced block with optional newline after header
+        pattern_block = re.compile(r"```\s*python\b[^\n]*\n?([\s\S]*?)\n?```", re.IGNORECASE)
+        m = pattern_block.search(text)
+        if m and m.group(1) is not None:
+            return m.group(1).strip()
+        # Fallback: capture until end if closing fence is missing
+        pattern_open_ended = re.compile(r"```\s*python\b[^\n]*\n?([\s\S]*)$", re.IGNORECASE)
+        m2 = pattern_open_ended.search(text)
+        if m2 and m2.group(1) is not None:
+            return m2.group(1).strip()
+        return ""
+    except Exception:
+        return ""
 
 
 class AppWorldEnvConfig(BaseModel):
@@ -66,6 +93,11 @@ class AppWorldEnv(Environment):
                 "{{ supervisor.last_name }}": getattr(sup, "last_name", ""),
                 "{{ supervisor.email }}": getattr(sup, "email", ""),
                 "{{ supervisor.phone_number }}": getattr(sup, "phone_number", ""),
+                # Add main_user aliases (same as supervisor for AppWorld)
+                "{{ main_user.first_name }}": getattr(sup, "first_name", ""),
+                "{{ main_user.last_name }}": getattr(sup, "last_name", ""),
+                "{{ main_user.email }}": getattr(sup, "email", ""),
+                "{{ main_user.phone_number }}": getattr(sup, "phone_number", ""),
             }
             for k, v in replacements.items():
                 rendered = rendered.replace(k, str(v))
@@ -75,6 +107,11 @@ class AppWorldEnv(Environment):
                 "{{supervisor.last_name}}": getattr(sup, "last_name", ""),
                 "{{supervisor.email}}": getattr(sup, "email", ""),
                 "{{supervisor.phone_number}}": getattr(sup, "phone_number", ""),
+                # Add main_user aliases (same as supervisor for AppWorld)
+                "{{main_user.first_name}}": getattr(sup, "first_name", ""),
+                "{{main_user.last_name}}": getattr(sup, "last_name", ""),
+                "{{main_user.email}}": getattr(sup, "email", ""),
+                "{{main_user.phone_number}}": getattr(sup, "phone_number", ""),
             }
             for k, v in replacements_no_space.items():
                 rendered = rendered.replace(k, str(v))
@@ -116,8 +153,14 @@ class AppWorldEnv(Environment):
                 feedback["done"] = True
             return "OK.", feedback, done, {}
 
-        # AppWorld expects Python code in execute(). Allow direct code or wrap common intents.
-        code = act
+        # AppWorld expects Python code in execute(). Prefer AppWorld extractor first.
+        code = extract_code_from_text(act)
+        if not code.strip():
+            code = extract_python_code_loose(act)
+            if not code.strip():
+                code = extract_code_from_text(act)
+        if not code.strip():
+            code = act
 
         try:
             message: str = self._app.execute(code)
