@@ -11,3 +11,5 @@ _data/
 !src/data/
 
 wandb/
+src/gcp.json
+src/gcp.json
