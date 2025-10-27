@@ -995,3 +995,50 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval \
     training.weight_decay=1e-5
+
+
+## n24
+
+### Redoing evals
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250synthtrain_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F \
+    load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct25_250synthtrain_128tokens-cache-step700/cartridge.pt
+
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250synthtrain_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F \
+    load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct25_250synthtrain_128tokens-cache-step700/cartridge.pt \
+    generate_batch_size=1
