@@ -928,4 +928,70 @@ CUDA_VISIBLE_DEVICES=1 python -m src.memory.distillation.distill_into_cartridge 
 
 /scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250
 
-python -m src.datagen.generate --config configs/data_generation/finer_synthetic_gen_matx.yaml
+python -m src.datagen.generate --config configs/data_generation/finer_synthetic_gen.yaml
+
+# Mixing synthetic data
+
+## n16
+only synthetic
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250synthtrain_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_synthetic_gen/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F \
+    .no_evals
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250synthtrain_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_synthetic_gen/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5
+
+## n23
+
+python scripts/merge_jsonl_files.py --list input_files /scratch/m000122/stalaei/logs/continual_learning/data/finer_synthetic_gen/dataset.jsonl /scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7/dataset.jsonl list-- destination_file=/scratch/m000122/stalaei/logs/continual_learning/data/finer_synthetic_and_real_merged/dataset.jsonl max_per_jsonl=50000 shuffle_each=T
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250synthandrealtrain_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_synthetic_and_real_merged/dataset.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5
