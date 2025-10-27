@@ -26,5 +26,5 @@ strategy:
   type: synthetic_gen
   synthetic_gen_prompt_path: src/data/prompts/finer/synthetic_gen_prompt.txt
   memory_adapter:
-    checkpoint_path: /scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250
+    checkpoint_path: /matx/u/bcabrown/shayan_memory/data/250train_history
     type: history_list

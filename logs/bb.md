@@ -928,4 +928,4 @@ CUDA_VISIBLE_DEVICES=1 python -m src.memory.distillation.distill_into_cartridge 
 
 /scratch/m000122/stalaei/logs/continual_learning/outputs/finer/history_agent/brad_magic_with_progressive_fewshots/20251020_111212/checkpoints/ep_000250
 
-python -m src.datagen.generate --config configs/data_generation/finer_synthetic_gen.yaml
+python -m src.datagen.generate --config configs/data_generation/finer_synthetic_gen_matx.yaml
