@@ -716,7 +716,7 @@ def process_request(
 
                 if (overrides := request.apply_chat_template_overrides) is not None:
                     apply_chat_template_kwargs.update(overrides)
-                
+                # breakpoint()
                 if len(cartridges_in_system_prompt) > 0:                # Create a new CartridgeChatCompletionRequest with the same data
                     request_dict = request.model_dump()
                     request_dict['cartridges'] = cartridges_in_system_prompt
@@ -724,8 +724,9 @@ def process_request(
                     # Replace the original request with the cartridge request
                     request = cartridge_request
                 
-                    if "llama" in state.tokenizer.name_or_path:
-                        apply_chat_template_kwargs["chat_template"] = LLAMA_CARTRIDGE_TEMPLATE
+                print ("Warning: brough the llama template out of the len if statement.")
+                if "llama" in state.tokenizer.name_or_path:
+                    apply_chat_template_kwargs["chat_template"] = LLAMA_CARTRIDGE_TEMPLATE
 
                 prompt = state.tokenizer.apply_chat_template(
                     messages, **apply_chat_template_kwargs

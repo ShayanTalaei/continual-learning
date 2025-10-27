@@ -6,7 +6,7 @@ runtime:
   scores_path: scores.jsonl
   run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 40
+  validation_freq: 50
   checkpoint_dir: checkpoints
   checkpoint_every_episodes: 50
   checkpoint_strategy: last_n
@@ -46,17 +46,16 @@ agent:
     base_url: "http://localhost:8096"
     stop_sequences: [FEEDBACK, OBSERVATION]
     max_retries: 3
-    top_logprobs: 20
   memory_config:            # primary history memory
     _type: history_list
     max_length: null
   cartridges:
-    - id: oct22_250train_256tokens_sysmem_tokensupervision-cache-step1300
+    - id: oct25_250synthandrealtrain_128tokens-cache-step700
       source: local
       force_redownload: false
   history_k: null
   system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
 
 output:
-  results_dir: outputs/finer/history_agent/oct22_250train_256tokens_sysmem_tokensupervision-cache-step1300
+  results_dir: outputs/finer/history_agent/oct25_250synthandrealtrain_128tokens-cache-step700
   log_level: INFO

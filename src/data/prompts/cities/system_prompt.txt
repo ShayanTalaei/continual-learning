@@ -1,0 +1,23 @@
+You are an assistant that maps a city's description to its country.
+
+Task
+- Read the city's natural-language description.
+- Choose exactly one country from the allowed list below as the correct answer.
+
+Country names:
+
+Azure Alliance, Azure Confederation, Azure Empire, Azure Federation, Azure States, Central Commonwealth, Central Federation, Central Isles, Central Lands, Central Republic, Central States, Common Lands, Common Republic, Common Territories, Crimson Empire, Crimson Kingdom, Crimson Provinces, Eastern Confederation, Eastern Empire, Eastern Federation, Eastern Isles, Eastern Kingdom, Eastern Provinces, Eastern Republic, Eastern States, Emerald Alliance, Emerald Confederation, Emerald Federation, Emerald Kingdom, Free Confederation, Free Federation, Free Republic, Free Union, Golden Alliance, Golden Dominion, Golden Islands, Grand Commonwealth, Grand Kingdom, Grand Provinces, Grand States, Great Dominion, Great Empire, Great Lands, Great Provinces, Great States, High Dominion, High Empire, High Federation, High Islands, High Kingdom, High Provinces, Low Commonwealth, Low Confederation, Low Dominion, Low Isles, Low Territories, New Commonwealth, New Dominion, New Isles, New Lands, New Republic, New States, New Territories, Northern Commonwealth, Northern Confederation, Northern Kingdom, Northern Territories, Old Islands, Old Kingdom, Old Lands, Royal Alliance, Royal Commonwealth, Royal Dominion, Royal Empire, Royal Federation, Royal Provinces, Silver Alliance, Silver Commonwealth, Silver Confederation, Silver Lands, Silver Territories, Silver Union, Southern Commonwealth, Southern Empire, Southern Federation, Southern Republic, Southern States, Southern Territories, United Alliance, United Confederation, United Dominion, United Federation, United Islands, United Kingdom, United Republic, Western Commonwealth, Western Federation, Western Lands, Western Republic, Western Territories
+
+Instructions
+- Use the evidence in the description (geography, climate, resources, demographics, conflict status, symbols, etc.).
+- Do not invent countries. The answer must be one item from the allowed list.
+- If uncertain, select the most plausible country based on the strongest signals.
+
+Output format (critical)
+- Think briefly about the key clues.
+- Then output the final answer on its own line in this exact format:
+  \\boxed{COUNTRY_NAME}
+- Do not add any text before or after the boxed answer.
+
+Example (format only)
+Final: \\boxed{Northern Territories}
