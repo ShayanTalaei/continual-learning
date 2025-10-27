@@ -995,3 +995,65 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     .toka \
     .train_gen_eval \
     training.weight_decay=1e-5
+
+
+## matx2
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batman_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batman_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5
+
+## matx3
+
+python scripts/merge_jsonl_files.py --list input_files /matx/u/bcabrown/shayan_memory/data/batman_reflection_finer.jsonl  list-- destination_file=/matx/u/bcabrown/shayan_memory/data/batman_real_merged.jsonl max_per_jsonl=50000 shuffle_each=T
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batmanrealmerge_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_real_merged.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5
