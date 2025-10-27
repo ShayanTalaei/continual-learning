@@ -4,6 +4,6 @@ Here is a list of US GAAP tags options: OperatingLeasesRentExpenseNet,MinorityIn
 
 Here are example questions and their ground truth answers:
 
-{{ examples }}
+{experiences}
 
-Now, please generate another question in the same format as the above examples. Output only the question.
+Now, please generate another question in the exact same format as the above examples. Output only the question.

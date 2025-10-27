@@ -12,8 +12,8 @@ runtime:
   checkpoint_strategy: last_n
   checkpoint_keep_last: 40
   checkpoint_on_start: false
-  start_episode_index: 100
-  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/kv_agent/finer-cartridge-v1_oct21_100train_2048tokens_sysmem_filterincorrect_cache-step200/20251021_222651/checkpoints/ep_000750
+  start_episode_index: 250
+  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/finer/kv_agent/finer-cartridge-v1_oct21_100train_2048tokens_sysmem_filterincorrect_cache-step200/20251021_222651/checkpoints/ep_000750
 
 train_dataset:
   type: finer
@@ -50,12 +50,12 @@ agent:
     _type: history_list
     max_length: null
   cartridges:
-    - id: finer-cartridge-v1_oct21_100train_2048tokens_sysmem_filterincorrect_cache-step200
+    - id: oct25_250synthtrain_128tokens-cache-step700
       source: local
       force_redownload: false
   history_k: null
   system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
 
 output:
-  results_dir: outputs/finer/history_agent/finer-cartridge-v1_oct21_100train_2048tokens_sysmem_filterincorrect_cache-step200
+  results_dir: outputs/finer/history_agent/oct25_250synthtrain_128tokens-cache-step700
   log_level: INFO
