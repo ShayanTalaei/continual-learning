@@ -19,4 +19,5 @@ class SyntheticGenStrategy(Strategy):
         self.memory_adapter = build_memory_adapter(config.memory_adapter)
         
     def generate(self) -> List[GenerationItem]:
+        triplets = self.memory_adapter._to_triplets()
         breakpoint()

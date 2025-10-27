@@ -40,7 +40,7 @@ class ReflectionStrategy(Strategy):
             question = triplet["Observation"]
             answer = triplet["Action"]
             feedback = triplet["Feedback"]
-            result.append(f"Question: {question}\n Generated Answer: {answer}\nFeedback: {feedback}\n\n")
+            result.append(f"Question: {question}\nGenerated Answer: {answer}\nFeedback: {feedback}\n\n")
         return "".join(result)
     
     def generate(self) -> List[GenerationItem]:

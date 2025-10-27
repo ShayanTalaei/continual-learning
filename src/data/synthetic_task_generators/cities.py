@@ -1,0 +1,316 @@
+from dataclasses import dataclass
+from typing import Literal
+import random
+from transformers import AutoTokenizer
+
+# If you already have a Country type, keep it. Otherwise, you can treat it as str.
+Country = str
+
+@dataclass
+class ShayanCity:
+    name: str
+    country: Country
+    weather: Literal["sunny", "cloudy", "rainy", "snowy"]
+    population: Literal["small", "medium", "large"]
+    founded: Literal["old", "new"]
+    is_in_war: Literal["yes", "no"]
+    water_source: Literal["river", "lake", "ocean"]
+    has_mountains: Literal["yes", "no"]
+    flag_description: Literal["colorful", "simple"]
+    happiness_score: Literal["low", "high"]
+    crime_rate: Literal["low", "high"]
+    education_level: Literal["low", "high"]
+    healthcare_level: Literal["low", "high"]
+
+
+WEATHER_DESCRIPTIONS = {
+    "sunny": [
+        "The weather is sunny, with clear skies and bright daylight; conditions are explicitly categorized as sunny.",
+        "It is sunny with clear skies and strong sunlight, leaving no doubt that today’s weather is sunny.",
+        "Conditions are bright and sunny, and the day is officially recorded as sunny rather than cloudy or rainy.",
+        "Skies are clear; the weather is sunny, and the forecast identifies the day as unmistakably sunny.",
+        "Today’s weather is unequivocally sunny, featuring persistent sunshine and no cloud cover of note."
+    ],
+    "cloudy": [
+        "The weather is cloudy, with overcast skies that clearly indicate a cloudy classification.",
+        "It is cloudy with uniform gray coverage, and the day is formally identified as cloudy.",
+        "Conditions are fully cloudy; the sky lacks breaks of sun, confirming a cloudy weather status.",
+        "Skies are overcast and consistent, so the weather is designated as cloudy rather than sunny.",
+        "The day is categorized as cloudy, with extensive cloud cover and no direct sunshine observed."
+    ],
+    "rainy": [
+        "The weather is rainy, with ongoing precipitation that clearly marks the day as rainy.",
+        "It is rainy with persistent rainfall, and the conditions are explicitly classified as rainy.",
+        "Conditions are rainy throughout the day, and measurable precipitation confirms a rainy status.",
+        "Skies bring rain; the weather is rainy, featuring steady showers and a definitive rainy designation.",
+        "The forecast confirms rainy weather, with precipitation present and the day labeled as rainy."
+    ],
+    "snowy": [
+        "The weather is snowy, with ongoing snowfall that unambiguously classifies the day as snowy.",
+        "It is snowy with consistent snowfall, and the conditions are officially recorded as snowy.",
+        "Conditions are snowy across the city, and accumulating snow establishes a snowy designation.",
+        "Snow is falling; the weather is snowy, and surface accumulation verifies a snowy status.",
+        "The day’s weather is classified as snowy, with active snow and temperatures supporting snowfall."
+    ]
+}
+
+POPULATION_DESCRIPTIONS = {
+    "small": [
+        "The population size is small, placing the city in the small population category by count.",
+        "It is a small city by population, and demographic totals confirm the small classification.",
+        "Population category: small, with resident numbers well within the small range.",
+        "This city is small in population, and census measures identify it as small.",
+        "Residents are few; the population is small, meeting criteria for the small tier."
+    ],
+    "medium": [
+        "The population size is medium, fitting squarely into the medium population category.",
+        "It is a medium-sized city by population, and demographic totals confirm a medium status.",
+        "Population category: medium, with resident counts centered in the medium range.",
+        "This city is medium in population, and census data assigns it a medium classification.",
+        "Resident count places it in the medium population tier, aligning with medium-size thresholds."
+    ],
+    "large": [
+        "The population size is large, placing the city in the large population category by count.",
+        "It is a large city by population, and demographic totals confirm the large classification.",
+        "Population category: large, with resident numbers firmly within the large range.",
+        "This city is large in population, and census measures identify it as large.",
+        "Resident count places it in the large population tier, meeting criteria for the large class."
+    ]
+}
+
+FOUNDED_DESCRIPTIONS = {
+    "old": [
+        "The city is old in its founding, with a historically early establishment date that marks it as old.",
+        "Founding age: old, indicating the city was established long ago and remains classified as old.",
+        "It was founded long ago and is considered old, reflecting a clearly old founding status.",
+        "This is an old, historically established city, and its founding era confirms the old designation.",
+        "By founding age, the city is classified as old, having origins far in the past."
+    ],
+    "new": [
+        "The city is new in its founding, with a recent establishment date that marks it as new.",
+        "Founding age: new, indicating the city was established recently and remains classified as new.",
+        "It was founded recently and is considered new, reflecting a clearly new founding status.",
+        "This is a new, recently established city, and its founding era confirms the new designation.",
+        "By founding age, the city is classified as new, having origins in the modern period."
+    ]
+}
+
+WAR_DESCRIPTIONS = {
+    "yes": [
+        "The city is currently at war, and its conflict status is explicitly marked as yes (in war).",
+        "War status: yes, the city is in war, confirming active involvement in armed conflict.",
+        "The city is involved in an active war, and official status records it as being at war.",
+        "Conflict status indicates the city is at war, verifying a yes designation for war involvement.",
+        "Present condition: the city is in a state of war, with an affirmative wartime status."
+    ],
+    "no": [
+        "The city is not at war, and its conflict status is explicitly marked as no (not in war).",
+        "War status: no, the city is at peace, confirming no active conflict is present.",
+        "There is no active war affecting the city, and the official status is recorded as no.",
+        "Conflict status indicates the city is not at war, verifying a peaceful, non-war designation.",
+        "Present condition: the city is in peacetime (not in war), with a negative war status."
+    ]
+}
+
+WATER_SOURCE_DESCRIPTIONS = {
+    "river": [
+        "The primary water source is a river, and municipal supply is explicitly drawn from river water.",
+        "Water source: river, with the system relying mainly on river intake and treatment.",
+        "The city draws its water from a river, and the official designation lists river as the source.",
+        "Main hydrological source identified as a river, confirming river-based potable supply.",
+        "Potable supply is based on river water, and infrastructure is designed around a river source."
+    ],
+    "lake": [
+        "The primary water source is a lake, and municipal supply is explicitly drawn from lake water.",
+        "Water source: lake, with the system relying mainly on lake intake and treatment.",
+        "The city draws its water from a lake, and the official designation lists lake as the source.",
+        "Main hydrological source identified as a lake, confirming lake-based potable supply.",
+        "Potable supply is based on lake water, and infrastructure is designed around a lake source."
+    ],
+    "ocean": [
+        "The primary water source is the ocean, and municipal supply uses desalinated ocean water.",
+        "Water source: ocean, with reliance on desalination systems for potable output.",
+        "The city draws its water from the ocean (desalinated), and the source is recorded as ocean.",
+        "Main hydrological source identified as the ocean, confirming desalination as the method.",
+        "Potable supply is based on ocean water (via desalination), with the source listed as ocean."
+    ]
+}
+
+MOUNTAINS_DESCRIPTIONS = {
+    "yes": [
+        "The city has mountains, and topographic surveys confirm the presence of mountainous terrain.",
+        "Mountain presence: yes, indicating mountains exist within or adjacent to the city.",
+        "There are mountains in or near the city, and official mapping marks them clearly.",
+        "The terrain includes mountains, verifying a positive classification for mountain presence.",
+        "Topography confirms the city has mountains, establishing a yes designation for mountains."
+    ],
+    "no": [
+        "The city has no mountains, and topographic surveys confirm the absence of mountainous terrain.",
+        "Mountain presence: no, indicating mountains do not exist within or adjacent to the city.",
+        "There are no mountains in or near the city, and official mapping shows none present.",
+        "The terrain does not include mountains, verifying a negative classification for mountain presence.",
+        "Topography confirms the city lacks mountains, establishing a no designation for mountains."
+    ]
+}
+
+FLAG_DESCRIPTIONS = {
+    "colorful": [
+        "The city’s flag is colorful, featuring multiple distinct hues and officially classified as colorful.",
+        "Flag style: colorful, with several colors used prominently in the approved design.",
+        "Its flag features multiple colors and is colorful, matching the colorful style designation.",
+        "The official flag is described as colorful, with varied pigments documented in the standard.",
+        "By design category, the flag is colorful, employing a multicolor palette in its layout."
+    ],
+    "simple": [
+        "The city’s flag is simple, using minimal elements and officially classified as simple.",
+        "Flag style: simple, with restrained design choices and few graphical components.",
+        "Its flag uses minimal elements and is simple, matching the simple style designation.",
+        "The official flag is described as simple, with basic shapes and limited detail.",
+        "By design category, the flag is simple, favoring clarity and minimal ornamentation."
+    ]
+}
+
+HAPPINESS_DESCRIPTIONS = {
+    "low": [
+        "The happiness score is low, indicating residents report low subjective well-being overall.",
+        "Happiness level: low, based on survey data that consistently records low happiness.",
+        "Residents report a low happiness score, and indices categorize the city as low happiness.",
+        "Surveyed well-being is categorized as low, with metrics placing it in the low band.",
+        "Quality-of-life sentiment is low, and the official rating marks happiness as low."
+    ],
+    "high": [
+        "The happiness score is high, indicating residents report high subjective well-being overall.",
+        "Happiness level: high, based on survey data that consistently records high happiness.",
+        "Residents report a high happiness score, and indices categorize the city as high happiness.",
+        "Surveyed well-being is categorized as high, with metrics placing it in the high band.",
+        "Quality-of-life sentiment is high, and the official rating marks happiness as high."
+    ]
+}
+
+CRIME_DESCRIPTIONS = {
+    "low": [
+        "The crime rate is low, with incident counts placing the city in a low-crime category.",
+        "Crime level: low, as reported statistics consistently classify crime as low.",
+        "Reported crime categorizes the city as low crime, with risk assessed as low.",
+        "Public safety indicators show a low crime rate, confirming a low classification.",
+        "Security assessment: crime rate is low, and the city is designated as low crime."
+    ],
+    "high": [
+        "The crime rate is high, with incident counts placing the city in a high-crime category.",
+        "Crime level: high, as reported statistics consistently classify crime as high.",
+        "Reported crime categorizes the city as high crime, with risk assessed as high.",
+        "Public safety indicators show a high crime rate, confirming a high classification.",
+        "Security assessment: crime rate is high, and the city is designated as high crime."
+    ]
+}
+
+EDUCATION_DESCRIPTIONS = {
+    "low": [
+        "The education level is low, with attainment indicators placing the city in the low tier.",
+        "Education status: low, as academic outcomes consistently classify achievement as low.",
+        "Attainment metrics indicate a low education level, confirming a low classification.",
+        "Academic outcomes classify education level as low, with performance below benchmarks.",
+        "Education quality is assessed as low, and the city is recorded in the low education band."
+    ],
+    "high": [
+        "The education level is high, with attainment indicators placing the city in the high tier.",
+        "Education status: high, as academic outcomes consistently classify achievement as high.",
+        "Attainment metrics indicate a high education level, confirming a high classification.",
+        "Academic outcomes classify education level as high, with performance above benchmarks.",
+        "Education quality is assessed as high, and the city is recorded in the high education band."
+    ]
+}
+
+HEALTHCARE_DESCRIPTIONS = {
+    "low": [
+        "The healthcare level is low, with service availability and outcomes placing it in the low tier.",
+        "Healthcare status: low, as system performance consistently classifies care as low.",
+        "Medical services indicate a low healthcare level, confirming a low classification.",
+        "Health system performance is categorized as low, with limited access and capacity.",
+        "Care availability reflects a low healthcare level, and the city is recorded in the low band."
+    ],
+    "high": [
+        "The healthcare level is high, with service availability and outcomes placing it in the high tier.",
+        "Healthcare status: high, as system performance consistently classifies care as high.",
+        "Medical services indicate a high healthcare level, confirming a high classification.",
+        "Health system performance is categorized as high, with broad access and strong capacity.",
+        "Care availability reflects a high healthcare level, and the city is recorded in the high band."
+    ]
+}
+
+def generate_city() -> ShayanCity:
+    return ShayanCity(
+        name="ShayanVille",
+        country="United States",
+        weather=random.choice(list(WEATHER_DESCRIPTIONS.keys())),
+        population=random.choice(list(POPULATION_DESCRIPTIONS.keys())),
+        founded=random.choice(list(FOUNDED_DESCRIPTIONS.keys())),
+        is_in_war=random.choice(list(WAR_DESCRIPTIONS.keys())),
+        water_source=random.choice(list(WATER_SOURCE_DESCRIPTIONS.keys())),
+        has_mountains=random.choice(list(MOUNTAINS_DESCRIPTIONS.keys())),
+        flag_description=random.choice(list(FLAG_DESCRIPTIONS.keys())),
+        happiness_score=random.choice(list(HAPPINESS_DESCRIPTIONS.keys())),
+        crime_rate=random.choice(list(CRIME_DESCRIPTIONS.keys())),
+        education_level=random.choice(list(EDUCATION_DESCRIPTIONS.keys())),
+        healthcare_level=random.choice(list(HEALTHCARE_DESCRIPTIONS.keys())),
+    )
+
+def pick(options: list[str]) -> str:
+    return random.choice(options)
+
+def weather_description(weather: str) -> str:
+    return pick(WEATHER_DESCRIPTIONS[weather])
+
+def population_description(pop: str) -> str:
+    return pick(POPULATION_DESCRIPTIONS[pop])
+
+def founded_description(age: str) -> str:
+    return pick(FOUNDED_DESCRIPTIONS[age])
+
+def war_description(war: str) -> str:
+    return pick(WAR_DESCRIPTIONS[war])
+
+def water_source_description(ws: str) -> str:
+    return pick(WATER_SOURCE_DESCRIPTIONS[ws])
+
+def mountains_description(has_m: str) -> str:
+    return pick(MOUNTAINS_DESCRIPTIONS[has_m])
+
+def flag_description(flag: str) -> str:
+    return pick(FLAG_DESCRIPTIONS[flag])
+
+def happiness_description(h: str) -> str:
+    return pick(HAPPINESS_DESCRIPTIONS[h])
+
+def crime_description(c: str) -> str:
+    return pick(CRIME_DESCRIPTIONS[c])
+
+def education_description(e: str) -> str:
+    return pick(EDUCATION_DESCRIPTIONS[e])
+
+def healthcare_description(hc: str) -> str:
+    return pick(HEALTHCARE_DESCRIPTIONS[hc])
+
+def get_description(city: ShayanCity) -> str:
+    # Returns the city description that can directly be added to the prompt
+    parts = []
+    parts.append(f"The city is called {city.name}.")
+    parts.append(weather_description(city.weather))
+    parts.append(population_description(city.population))
+    parts.append(founded_description(city.founded))
+    parts.append(war_description(city.is_in_war))
+    parts.append(water_source_description(city.water_source))
+    parts.append(mountains_description(city.has_mountains))
+    parts.append(flag_description(city.flag_description))
+    parts.append(happiness_description(city.happiness_score))
+    parts.append(crime_description(city.crime_rate))
+    parts.append(education_description(city.education_level))
+    parts.append(healthcare_description(city.healthcare_level))
+    return " ".join(parts)
+
+
+if __name__ == "__main__":
+    city = generate_city()
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+    print(f"Description ({len(tokenizer.encode(get_description(city)))} tokens):")
+    print(get_description(city))
