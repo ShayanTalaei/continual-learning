@@ -1068,3 +1068,22 @@ torchrun --nproc_per_node 4  -m src.memory.distillation.distill_into_cartridge \
 
 # Gemma 3 27b cities
 
+ vllm serve google/gemma-3-27b-it \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.90 \
+  --max-model-len 128000 \
+  --port 8000 --host 0.0.0.0
+
+ vllm serve openai/gpt-oss-120b \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.90 \
+  --max-model-len 128000 \
+  --port 8000 --host 0.0.0.0
+
+python -m src.main --config configs/cities/gemma27b_cities.yaml
+
+python -m src.main --config configs/cities/gptoss120b_cities.yaml

@@ -19,7 +19,7 @@ class HistoryAgent(MemoryAgent):
         
         return self.system_prompt #+ "\n\n" + history_list_instructions
 
-    def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
+    def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None], merge_feedback_and_observation: bool = False) -> List[Dict[str, str]]:
         messages: List[dict] = []
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
         
@@ -38,6 +38,18 @@ class HistoryAgent(MemoryAgent):
         
         # Add current observation as the final user message
         messages.append({"role": "user", "content": f"{obs}"}) #Here is the current observation: 
+
+        if merge_feedback_and_observation:
+            merged_messages = []
+            curr_idx = 0
+            while curr_idx < len(messages):
+                if curr_idx < len(messages)-1 and messages[curr_idx]["role"] == "user" and messages[curr_idx+1]["role"] == "user":
+                    merged_messages.append({"role": "user", "content": f"{messages[curr_idx]['content']}\n\n{messages[curr_idx+1]['content']}"})
+                    curr_idx += 2
+                else:
+                    merged_messages.append(messages[curr_idx])
+                    curr_idx += 1
+            return merged_messages
         
         return messages
 

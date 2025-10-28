@@ -5,6 +5,7 @@ from src.lm.gemini_client import GeminiClient, GeminiConfig
 from src.lm.tokasaurus_client import TokasaurusClient, TokasaurusConfig
 from src.lm.embedding_model import EmbeddingConfig, EmbeddingModel
 from src.lm.google_embeddings_client import GoogleEmbeddingsClient, GoogleEmbeddingsConfig
+from src.lm.vllm_client import VLLMClient, VLLMConfig
 
 
 
@@ -33,6 +34,13 @@ def get_lm_client(lm_config: Union[LMConfig, Dict[str, Any]], logger: Optional[L
         cfg_dict["model"] = model_id
         toka_cfg = TokasaurusConfig(**cfg_dict)  
         return TokasaurusClient(toka_cfg, logger=logger)
+    elif model.startswith("vllm:"):
+        if VLLMClient is None or VLLMConfig is None:
+            raise ValueError("VLLM client not available. Ensure vllm is installed and src/lm/vllm_client.py exists.")
+        model_id = model.split(":", 1)[1]
+        cfg_dict["model"] = model_id
+        vllm_cfg = VLLMConfig(**cfg_dict)
+        return VLLMClient(vllm_cfg, logger=logger)
     
     raise ValueError(f"Model {model} not supported")
 

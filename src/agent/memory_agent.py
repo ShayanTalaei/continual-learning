@@ -14,6 +14,7 @@ class MemoryAgentConfig(AgentConfig):
     history_k: Union[int, None] = None
     system_prompt: Union[str, None] = None
     verbose: bool = True
+    merge_feedback_and_observation: bool = False
 
 class MemoryAgent(Agent[MemoryAgentConfig], ABC):
     def __init__(self, config: MemoryAgentConfig, logger=None):
@@ -60,7 +61,7 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self.logger.info("Act: obs_len=%d", len(obs))
         history = self.memory.recall()
         system_prompt = self.build_system_prompt()
-        user_messages = self.build_user_prompt(obs, history, self.config.history_k)
+        user_messages = self.build_user_prompt(obs, history, self.config.history_k, self.config.merge_feedback_and_observation)
         history_len = len(history[-self.config.history_k:]) if self.config.history_k is not None else len(history)
         self.logger.info("Prompt built: history_items=%d", history_len)
 

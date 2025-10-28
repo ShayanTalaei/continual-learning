@@ -26,7 +26,7 @@ class VLLMConfig(LMConfig):
     json_validation: bool = True    # Validate JSON responses when schema provided
     
     # Optional: use vLLM OpenAI-compatible server instead of in-process engine
-    use_server: bool = False
+    use_server: bool = True
     base_url: Optional[str] = None  # e.g., "http://localhost:8000"
     protocol: str = "openai"       # currently only "openai" supported for server mode
     api_key: Optional[str] = None
@@ -128,10 +128,15 @@ class VLLMClient(LanguageModel):
     def _call_openai_server(self, messages: List[Dict[str, str]], start_time: float) -> tuple[str, Optional[Dict[str, Any]]]:
         assert self.config.base_url is not None
         url = f"{self.config.base_url}/v1/chat/completions"
+
+        ctx: Dict[str, Any] = jsonlogger.json_get_context()
+        mode = ctx.get("mode")
+        temperature = self.config.val_temperature if (mode == "val" or mode == "validation") else self.config.train_temperature
+
         payload: Dict[str, Any] = {
             "model": self.config.model,
             "messages": messages,
-            "temperature": getattr(self.config, "temperature", None),
+            "temperature": temperature,
             "max_tokens": self.config.max_output_tokens,
         }
         if payload["temperature"] is None:
@@ -213,6 +218,8 @@ class VLLMClient(LanguageModel):
         call_id = self._begin_call(messages)
         ctx = jsonlogger.json_get_context()
         response_schema = ctx.get("response_schema")
+        mode = ctx.get("mode")
+        temperature = self.config.val_temperature if (mode == "val" or mode == "validation") else self.config.train_temperature
 
         # Ensure tokenizer is ready in local mode so chat templates can be applied
         if not self.config.use_server and self.config.use_chat_template and self._tokenizer is None:
@@ -246,11 +253,11 @@ class VLLMClient(LanguageModel):
         self.logger.debug(
             f"vLLM generate: prompt_chars={len(prompt)}, schema_bytes={schema_bytes}, "
             f"stops_count={(len(stops) if stops else 0)}, max_tokens={self.config.max_output_tokens}, "
-            f"temperature={getattr(self.config, 'temperature', None)}"
+            f"temperature={temperature}"
         )
-
+        
         sampling = SamplingParams(
-            temperature=getattr(self.config, "temperature", None),
+            temperature=temperature,
             max_tokens=self.config.max_output_tokens,
             stop=stops,
         )
