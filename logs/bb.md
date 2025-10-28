@@ -1066,4 +1066,5 @@ torchrun --nproc_per_node 4  -m src.memory.distillation.distill_into_cartridge \
     training.weight_decay=1e-5
 
 
-# 
+# Gemma 3 27b cities
+
