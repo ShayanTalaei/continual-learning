@@ -310,7 +310,9 @@ def get_description(city: ShayanCity) -> str:
 
 
 if __name__ == "__main__":
-    city = generate_city()
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
-    print(f"Description ({len(tokenizer.encode(get_description(city)))} tokens):")
-    print(get_description(city))
+    for _ in range(3):
+        city = generate_city()
+        for _ in range(2):
+            print(f"Description ({len(tokenizer.encode(get_description(city)))} tokens):")
+            print(get_description(city))

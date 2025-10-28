@@ -52,6 +52,9 @@ from cartridges.utils.wandb import WandBConfig, prepare_wandb
 logger = get_logger(__name__)
 
 
+def _collate_fn_first(x):
+    return x[0]
+
 class LossEvalConfig(BaseConfig):
     dataset: LossEvalDataset.Config | TrainDataset.Config
     name_for_wandb: str
@@ -270,7 +273,7 @@ def train(config: TrainConfig):
         # and extract it in the collate. We still use the dataloader to leverage
         # a single worker to avoid blocking the main process
         batch_size=1, 
-        collate_fn=lambda x: x[0], 
+        collate_fn=_collate_fn_first, 
         num_workers=config.dataloader_num_workers, 
     )
 
@@ -623,7 +626,7 @@ def evaluate_perplexity(
         # and extract it in the collate. We still use the dataloader to leverage
         # a single worker to avoid blocking the main process
         batch_size=1, 
-        collate_fn=lambda x: x[0], 
+        collate_fn=_collate_fn_first, 
         num_workers=config.dataloader_num_workers, 
     )
 
