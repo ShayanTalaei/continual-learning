@@ -37,13 +37,15 @@ class QAEnv(Environment):
         return None, feedback, True, info
 
     def evaluate(self, action: str) -> Dict[str, Any]:
+        has_boxed = False
         if "boxed" in action:
+            has_boxed = True
             predicted_answer = action.split("\\boxed{")[1].split("}")[0]
         else:
             predicted_answer = action
         correct = (predicted_answer == self.answer)
         score = 1 if correct else 0
-        message = "Correct!" if correct else f"Incorrect! The correct answer is {self.answer}."
-        return {"score": score, "target": self.answer, "message": message}
+        message = "Feedback: Correct!" if correct else f"Feedback: You incorrectly answered {predicted_answer}! But, the correct anwer for this question is {self.answer}."
+        return {"score": score, "target": self.answer, "message": message, "has_boxed": has_boxed}
 
 
