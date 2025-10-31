@@ -35,6 +35,8 @@ class VLLMConfig(LMConfig):
     # Post-processing options
     strip_think_tags: bool = False  # Remove <think>...</think> from outputs
     strip_code_fences: bool = True  # Remove ```...``` markdown fences and extract inner code
+    reasoning_effort: str | None = None
+    enable_thinking: bool = True
 
 
 class VLLMClient(LanguageModel):
@@ -139,11 +141,14 @@ class VLLMClient(LanguageModel):
             "temperature": temperature,
             "max_tokens": self.config.max_output_tokens,
         }
+        if self.config.reasoning_effort is not None:
+            print("WARNING: reasoning_effort is set to ", self.config.reasoning_effort, "but is not currently supported by vLLM")
+            payload["reasoning"] = {"effort": self.config.reasoning_effort}
         if payload["temperature"] is None:
             del payload["temperature"]
         if self.config.stop_sequences:
             payload["stop"] = self.config.stop_sequences
-
+        payload["chat_template_kwargs"] = {"enable_thinking": self.config.enable_thinking}
         r = requests.post(url, json=payload, headers=self._headers(), timeout=self.config.timeout_s)
         r.raise_for_status()
         data = r.json()
@@ -154,9 +159,12 @@ class VLLMClient(LanguageModel):
         first = choices[0]
         message = first.get("message") or {}
         text: Optional[str] = message.get("content") or first.get("text")
+        
         if text is None:
             raise ValueError("No text content in response")
-
+        if self.config.strip_think_tags:
+            text = self._strip_think_blocks(text)
+            
         duration = time.time() - start_time
         usage = data.get("usage") or {}
         metrics = {

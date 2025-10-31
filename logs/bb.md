@@ -1087,3 +1087,103 @@ torchrun --nproc_per_node 4  -m src.memory.distillation.distill_into_cartridge \
 python -m src.main --config configs/cities/gemma27b_cities.yaml
 
 python -m src.main --config configs/cities/gptoss120b_cities.yaml
+
+
+# Trying to get models to not be so dumb
+
+ vllm serve meta-llama/Llama-3.1-8B-Instruct \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.90 \
+  --max-model-len 128000 \
+  --port 8000 --host 0.0.0.0
+
+
+python src/data/synthetic_task_generators/easy_cities.py --num-cities 100 --repo-id Bradley/easy_synth_cities
+python src/data/synthetic_task_generators/easy_nonsense_cities.py
+
+python -m src.main --config configs/cities/l8b_cities_v2.yaml
+
+ vllm serve meta-llama/Llama-4-Scout-17B-16E-Instruct \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.70 \
+  --max-model-len 40000 \
+  --port 8000 --host 0.0.0.0
+
+python -m src.main --config configs/cities/scout_cities_v2.yaml
+
+
+ vllm serve openai/gpt-oss-120b \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.70 \
+  --max-model-len 40000 \
+  --port 8000 --host 0.0.0.0 \
+  --reasoning-effort low
+
+
+python -m src.main --config configs/cities/gptoss_120b_cities_v2.yaml
+
+ vllm serve Qwen/Qwen3-32B \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.70 \
+  --max-model-len 40000 \
+  --port 8000 --host 0.0.0.0
+
+python -m src.main --config configs/cities/qwen32b_cities_v2.yaml
+python -m src.main --config configs/cities/qwen32b_cities_nothinking.yaml
+
+
+ vllm serve meta-llama/Llama-3.1-8B-Instruct \
+  --tensor-parallel-size 4 \
+  --dtype float32 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.70 \
+  --max-model-len 128000 \
+  --port 8000 --host 0.0.0.0
+python -m src.main --config configs/cities/l8b_cities_v2.yaml
+python -m src.main --config configs/cities/l8b_cities_v2_alien.yaml
+python -m src.main --config configs/cities/l8b_cities_system.yaml
+
+toka model=meta-llama/Llama-3.1-8B-Instruct \
+     dp_size=2 \
+     port=8096 \
+     torch_compile=T \
+     kv_cache_num_tokens='(400000)' \
+     max_tokens_per_forward='(128*1024)' \
+     max_seqs_per_forward=128 \
+     use_hydragen=True \
+     hydragen_min_prefix_len=512 \
+     hydragen_min_group_size=32 \
+     cudagraph_max_size=16 \
+     stats_report_seconds=1 \
+     max_topk_logprobs=50 \
+     cartridge_dir=/scratch/m000122/stalaei/continual-learning/cartridges
+python -m src.main --config configs/cities/l8b_cities_system_toka.yaml
+
+python -m src.main --config configs/cities/l8b_mqar.yaml
+
+python -m src.main --config configs/cities/l8b_cities_notcontinual.yaml
+
+
+ vllm serve meta-llama/Llama-3.1-70B-Instruct \
+  --tensor-parallel-size 4 \
+  --dtype bfloat16 \
+  --kv-cache-dtype auto \
+  --gpu-memory-utilization 0.70 \
+  --max-model-len 128000 \
+  --port 8000 --host 0.0.0.0
+python -m src.main --config configs/cities/l70b_cities_system.yaml
+
+
+
+
+python -m src.main --config configs/cities/l70b_cities_system.yaml
+
+

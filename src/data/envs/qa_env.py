@@ -40,12 +40,17 @@ class QAEnv(Environment):
         has_boxed = False
         if "boxed" in action:
             has_boxed = True
-            predicted_answer = action.split("\\boxed{")[1].split("}")[0]
+            try:
+                predicted_answer = action.split("\\boxed{")[1].split("}")[0]
+            except Exception:
+                breakpoint()
+            feedback_message = f"You incorrectly answered {predicted_answer}! But, the correct anwer for this question is {self.answer}."
         else:
             predicted_answer = action
+            feedback_message = f"You did not output any answer surrounded by \\boxed{{}}! The correct anwer for this question is \\boxed{{{self.answer}}}."
         correct = (predicted_answer == self.answer)
         score = 1 if correct else 0
-        message = "Feedback: Correct!" if correct else f"Feedback: You incorrectly answered {predicted_answer}! But, the correct anwer for this question is {self.answer}."
+        message = "Feedback: Correct!" if correct else feedback_message
         return {"score": score, "target": self.answer, "message": message, "has_boxed": has_boxed}
 
 
