@@ -795,6 +795,7 @@ def generate_with_hf(
                 temperature=config.temperature,
                 show_progress=is_rank_zero
             )
+            breakpoint()
             
             pred = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
 

@@ -1,5 +1,6 @@
 from typing import Dict, Any, Optional, Tuple, List, Literal
 import json
+import random
 from pydantic import BaseModel
 from datasets import load_dataset, load_from_disk
 
@@ -7,7 +8,8 @@ from src.data.env import Environment, EnvDataset, EnvDatasetConfig
 from src.data.envs.qa_env import QAEnv
 from src.data.envs.math_qa_env import MathQAEnv
 from src.data.envs.mcq_env import MCQEnv
-from logging import Logger
+from logging import Logger, getLogger
+from typing import cast
 
 
 class QAEnvDatasetConfig(EnvDatasetConfig):
@@ -28,11 +30,17 @@ class QAEnvDatasetConfig(EnvDatasetConfig):
     # Backward-compat in-memory items (rarely used once HF is set up)
     items: List[Dict[str, Any]] = []
     verbose: bool = True
+    # Sampling/shuffle (optional)
+    max_samples: Optional[int] = None
+    shuffle: bool = False
+    seed: int = 42
 
 
 class QAEnvDataset(EnvDataset):
     def __init__(self, config: QAEnvDatasetConfig, logger: Optional[Logger] = None):
-        super().__init__(config, logger)
+        self.config = config
+        self.logger = logger or getLogger("qa_dataset")
+        self.dataset = self.load_dataset()
 
     def load_dataset(self) -> List[Environment]:
         dataset: List[Environment] = []
@@ -42,7 +50,7 @@ class QAEnvDataset(EnvDataset):
         rows: List[Dict[str, Any]]
         if self.config.hf_name:
             ds = load_dataset(self.config.hf_name, self.config.hf_config, split=self.config.split)
-            rows = list(ds)
+            rows = cast(List[Dict[str, Any]], list(ds))
         elif self.config.dataset_path:
             # Support both HF disk datasets and plain JSONL
             p = str(self.config.dataset_path)
@@ -51,9 +59,16 @@ class QAEnvDataset(EnvDataset):
                     rows = [json.loads(line) for line in f]
             else:
                 data = load_from_disk(self.config.dataset_path)
-                rows = list(data)
+                rows = cast(List[Dict[str, Any]], list(data))
         else:
             rows = list(self.config.items)
+
+        # Optional shuffle and sample
+        if self.config.shuffle and len(rows) > 1:
+            rng = random.Random(self.config.seed)
+            rng.shuffle(rows)
+        if self.config.max_samples is not None:
+            rows = rows[: max(0, int(self.config.max_samples))]
 
         # Env class routing map
         env_map = {
@@ -92,6 +107,8 @@ class QAEnvDataset(EnvDataset):
                 env_logger = self.logger.getChild(str(metadata.get("id", "env")))
 
             dataset.append(EnvCls(
+                env_id=str(metadata.get("id", "qa")),
+                env_type=str(metadata.get("dataset", metadata.get("split", "qa"))),
                 question=question,
                 answer=answer,
                 metadata=metadata,

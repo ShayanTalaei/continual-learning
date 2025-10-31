@@ -266,6 +266,7 @@ class DistillationConfig(pydra.Config):
             f"trust_remote_code=True",
             f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
             f"torch_compile=False",
+            "use_cudagraphs=F",
         ]
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
         self.generate_batch_size = 200

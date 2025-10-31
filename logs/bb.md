@@ -997,7 +997,9 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     training.weight_decay=1e-5
 
 
-## matx2
+## n24
+
+### Redoing evals
 
 python -m src.memory.distillation.distill_into_cartridge \
     run_name=oct25_250batman_128tokens \
@@ -1043,13 +1045,13 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
 
 python scripts/merge_jsonl_files.py --list input_files /matx/u/bcabrown/shayan_memory/data/batman_reflection_finer_filtered.jsonl /matx/u/bcabrown/shayan_memory/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7.jsonl list-- destination_file=/matx/u/bcabrown/shayan_memory/data/batman_real_merged_filtered.jsonl max_per_jsonl=50000 shuffle_each=T
 
-torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct25_250batmanrealmerge_128tokens \
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batman_128tokens \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
     .init_from_text \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
-    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_real_merged.jsonl \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer_filtered.jsonl \
     do_loss_evals=F \
     system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
     training.lr=5e-4 \
@@ -1057,7 +1059,7 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     streaming_dataset=T \
     dataloader_num_workers=8 \
     .streaming \
-    .toka \
     .train_gen_eval \
     training.weight_decay=1e-5 \
+    .toka \
     .matx
