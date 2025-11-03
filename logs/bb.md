@@ -1187,3 +1187,41 @@ python -m src.main --config configs/cities/l70b_cities_system.yaml
 python -m src.main --config configs/cities/l70b_cities_system.yaml
 
 
+
+# Cartridging synth cities
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .toka \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F \
+    .no_evals
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .toka \
+    training.weight_decay=1e-5
