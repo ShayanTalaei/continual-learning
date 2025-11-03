@@ -59,6 +59,7 @@ from cartridges.initialization.random import KVFromRandomVectors
 from cartridges.structs import Conversation, write_conversations
 from cartridges.utils.wandb import WandBConfig
 from cartridges.data.finer.evals import FinerGenerateDataset
+from cartridges.data.synth_cities.evals import SyntheticCitiesGenerateDataset
 
 
 # ============================================================================
@@ -195,6 +196,7 @@ class DistillationConfig(pydra.Config):
         self.num_generate_problems = 1000
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
+        self.eval_type = "finer"
         
         # Name
         self.run_name = None
@@ -226,6 +228,13 @@ class DistillationConfig(pydra.Config):
     def init_from_text(self):
         self.kv_cache.method = "text"
         self.kv_cache.init_text_file = "/mnt/home/bradleyb/continual-learning/src/memory/distillation/kv_cache_init_texts/v1.txt"
+    
+    def synth_cities(self):
+        self.eval_type = "synth_cities"
+        self.train_gen_split = "train"
+        self.num_train_generate_problems = 500
+        self.kv_cache.init_text_file = "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
+        self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
 
     def finalize(self):
         if self.run_name is None:
@@ -534,13 +543,21 @@ def run_distillation(config: DistillationConfig):
         ]
     else:
         loss_evals = []
+    
+    match config.eval_type:
+        case "finer":
+            eval_dataset_cls = FinerGenerateDataset
+        case "synth_cities":
+            eval_dataset_cls = SyntheticCitiesGenerateDataset
+        case _:
+            raise ValueError(f"Unknown eval type: {config.eval_type}")
 
     generate_evals = []
     # TODO: generalize beyond finer
     if config.do_val_gen_eval:
         generate_evals.append(
             GenerationEvalConfig(
-                dataset=FinerGenerateDataset.Config(
+                dataset=eval_dataset_cls.Config(
                     num_problems=config.num_generate_problems,
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.val_gen_split,
@@ -555,7 +572,7 @@ def run_distillation(config: DistillationConfig):
     if config.do_train_gen_eval:
         generate_evals.append(
             GenerationEvalConfig(
-                dataset=FinerGenerateDataset.Config(
+                dataset=eval_dataset_cls.Config(
                     num_problems=config.num_train_generate_problems,
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.train_gen_split,

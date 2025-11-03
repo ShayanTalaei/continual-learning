@@ -798,7 +798,6 @@ def generate_with_hf(
                 temperature=config.temperature,
                 show_progress=is_rank_zero
             )
-            breakpoint()
             
             pred = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
 
@@ -889,7 +888,7 @@ def generate_with_toka(
                     ]
                 )
                 requests.append((idx,request.model_dump(exclude_none=True)))
-
+                
             # Helper function for making a single request
             def make_request(args):
                 req_idx, request = args
