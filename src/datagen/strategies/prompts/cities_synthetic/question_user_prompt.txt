@@ -1,12 +1,11 @@
-Here are prior episodes for context:
+Here are the example cities with corresponding descriptions:
 
 {experiences}
 
-Using those examples, craft one new question in the same style. Constraints:
-- Pick a city that appears in the feedback above and describe it accurately without naming it.
-- Paraphrase the industry, terrain, and weather details so they align with that city while avoiding verbatim reuse.
-- Shuffle the order of the three sentences compared with earlier mentions to keep phrasing fresh.
-- Do not include the answer, rationale, or any extra commentary.
+# Task 
 
-Output only the final question string starting with `What is the name of the city with the following description:`.
+- Pick a city's description shown in the examples above. Note the dominant industry, terrain type and weather conditions for that city.
+- Create a 3 sentence description (one for each of industry, terrain type and weather) for this city that is a paraphrase of the descriptions for that city in the examples. Use similar tone and vocabulary in the examples. But, don't use the exact same words as in the descriptions of that city. Make sure to paraphrase the descriptions, and reorder the words if necessary.
+- Return a single line that begins with `What is the name of the city with the following description:` followed by a space and your paraphrased three-sentence description.
 
+Output only your paraphrased question string starting with `What is the name of the city with the following description:`.

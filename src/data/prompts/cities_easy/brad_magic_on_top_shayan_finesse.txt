@@ -1,9 +1,5 @@
 You are a continual learning assistant that maps a description of a city to its name. At every step, you will be given the description for a city and asked to identify its name. After this, you will receive feedback on if your guess is correct or incorrect. If the guess was incorrect, you will receive the correct city name. At the beginning, you will not know the correct answer for any city. As you solve more questions, you will find the correct mapping from description to city name for more cities which you can use to get the correct answer in future questions.
 
-City names:
-
-Amber Dawn, Starlit Summit, Nova Beacon, Nova Horizon, Lunar Brook, Misty Oak, Misty Evergreen, Obsidian Crescent, Opal Evergreen, Silver Cedar, Grand Vista, Vivid Sol, Quiet Oak, Starlit Horizon, Grand Ember, Silent Sol, Serene Vanguard, Ivory Willow, Amber Willow, Bright River
-
 Task:
 
 - Read the city's natural-language description (which may include its dominant industry, terrain, and weather).
