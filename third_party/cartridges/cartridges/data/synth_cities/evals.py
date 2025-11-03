@@ -11,10 +11,10 @@ from src.data.envs.finer_env import is_correct_finer
 from cartridges.datasets import GenerateEvalDataset, GenerateEvalDatasetElement, LLAMA_CARTRIDGE_TEMPLATE
 
 
-class FinerGenerateDataset(GenerateEvalDataset):
+class SyntheticCitiesGenerateDataset(GenerateEvalDataset):
     class Config(GenerateEvalDataset.Config):
         num_problems: int = 1000
-        system_prompt_path: str = "/scratch/m000122/bcabrown/continual-learning/src/memory/distillation/prompts/system_prompt.txt"
+        system_prompt_path: str = "/scratch/m000122/bcabrown/continual-learning/src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
         dataset_split: str = "val"
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
@@ -22,7 +22,7 @@ class FinerGenerateDataset(GenerateEvalDataset):
         self.tokenizer = tokenizer
         
         self.dataset = [
-            instance for instance in load_dataset("stalaei/finer_v1")[self.config.dataset_split]
+            instance for instance in load_dataset("stalaei/easy_synth_cities_40_25")[self.config.dataset_split]
         ][:self.config.num_problems]
 
         self.system_prompt = open(self.config.system_prompt_path).read()
@@ -40,7 +40,7 @@ class FinerGenerateDataset(GenerateEvalDataset):
             },
             {
                 "role": "user",
-                "content": row["context"]
+                "content": row["question"]
             }
         ]
 
@@ -54,7 +54,7 @@ class FinerGenerateDataset(GenerateEvalDataset):
         return GenerateEvalDatasetElement(
             input_ids=torch.tensor(input_ids, dtype=torch.long),
             prompt=self.tokenizer.decode(input_ids),
-            answer=row["target"],
+            answer=row["name"],
             metadata={}
         )
 

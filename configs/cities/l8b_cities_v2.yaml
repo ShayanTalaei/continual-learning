@@ -6,7 +6,7 @@ runtime:
   scores_path: scores.jsonl
   run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 10
+  validation_freq: 25
   # Checkpointing
   checkpoint_dir: checkpoints
   checkpoint_every_episodes: 50
@@ -39,7 +39,7 @@ validation_dataset:
   answer_field: "name"
   id_field: "id"
   instruction_template: null
-  max_samples: 20
+  # max_samples: 20
   shuffle: false
 
 agent:
