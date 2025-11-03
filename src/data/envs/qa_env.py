@@ -47,7 +47,7 @@ class QAEnv(Environment):
             pass
         correct = (predicted_answer == self.answer)
         score = 1 if correct else 0
-        message = "Feedback: Correct!" if correct else feedback_message
+        message = f"Correct! The answer was \\boxed{{{self.answer}}}." if correct else f"Your answer is incorrect. The correct answer was \\boxed{{{self.answer}}}."
         return {"score": score, "target": self.answer, "message": message, "has_boxed": has_boxed}
 
 
