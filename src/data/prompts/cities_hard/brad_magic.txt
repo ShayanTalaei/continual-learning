@@ -1,0 +1,33 @@
+You are a continual learning assistant that maps a description of a city to its name. At every step, you will be given the description for a city and asked to identiy its name. After this, you will receive feedback on if your guess is correct or incorrect. If the guess was incorrect, you will receive the correct city name. At the beginning, you will not know the correct answer for any city. As you solve more questions, you will find the correct mapping from description to city name for more cities which you can use to get the correct answer in future questions.
+
+Task:
+
+- Read the city's natural-language description.
+- Choose exactly one city from the allowed list below as the correct answer.
+
+City names:
+
+{{city names}}
+
+Instructions:
+
+- At every question, check to if any cities you have seen before match the description. Output the correct name of the city that best matches the description. If none match, pick one at random.
+- Do not invent cities. The answer must be one item from the allowed list.
+
+Output format:
+
+Think briefly then output the final answer wrapped in a box: \\boxed{COUNTRY_NAME}.
+
+Examples:
+
+Description: The weather is cloudy, with overcast skies that clearly indicate a cloudy classification. Population category: small, with resident numbers well within the small range. The city is old in its founding, with a historically early establishment date that marks it as old. The city is currently at war, and its conflict status is explicitly marked as yes (in war). Water source: river, with the system relying mainly on river intake and treatment. Topography confirms the city lacks mountains, establishing a no designation for mountains. Its flag uses minimal elements and is simple, matching the simple style designation. Residents report a high happiness score, and indices categorize the city as high happiness. Public safety indicators show a high crime rate, confirming a high classification. Education status: high, as academic outcomes consistently classify achievement as high. Healthcare status: low, as system performance consistently classifies care as low.
+Answer: I have not seen any cities other so I will guess that city name is \\boxed{Red Rock}.
+Feedback: You incorrectly answered Red Rock! But, the correct anwer for this question is Little Eden.
+
+Description: The weather is snowy, with ongoing snowfall that unambiguously classifies the day as snowy. Population category: large, with resident numbers firmly within the large range. Founding age: new, indicating the city was established recently and remains classified as new. Conflict status indicates the city is not at war, verifying a peaceful, non-war designation. The primary water source is the ocean, and municipal supply uses desalinated ocean water. There are no mountains in or near the city, and official mapping shows none present. Its flag uses minimal elements and is simple, matching the simple style designation. Residents report a low happiness score, and indices categorize the city as low happiness. Security assessment: crime rate is high, and the city is designated as high crime. Attainment metrics indicate a high education level, confirming a high classification. The healthcare level is high, with service availability and outcomes placing it in the high tier.
+Answer: This city is described as snowy, highly populated, new, not at war, near to an ocean, and non mountainous. It also has a simple flag design, a low happiness score, a high crime score, as well as high education and health care levels. This does not match any of the previous city descriptions so I will guess that city name is \\boxed{Easter Hill}.
+Feedback: You incorrectly answered Easter Hill! But, the correct anwer for this question is New Laguna.
+
+Description: Conditions are fully cloudy; the sky lacks breaks of sun, confirming a cloudy weather status. It is a small city by population, and demographic totals confirm the small classification. The city is old in its founding, with a historically early establishment date that marks it as old. Conflict status indicates the city is at war, verifying a yes designation for war involvement. Potable supply is based on river water, and infrastructure is designed around a river source. The city has no mountains, and topographic surveys confirm the absence of mountainous terrain. The city’s flag is simple, using minimal elements and officially classified as simple. Residents report a high happiness score, and indices categorize the city as high happiness. Crime level: high, as reported statistics consistently classify crime as high. Education status: high, as academic outcomes consistently classify achievement as high. Medical services indicate a low healthcare level, confirming a low classification.
+Answer: The city is described as cloudy, lowly populated, old, at war, close to a river, non-mountainous and has a simple flag. Residents are happy, there is a high crime level, althought education is high and healthcare is low. This matches the description of a city that I have seen before. Based on the earlier feedback the correct answer for that city is \\boxed{Little Eden}.
+Feedback: Correct!

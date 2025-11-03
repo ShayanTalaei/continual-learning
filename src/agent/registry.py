@@ -7,6 +7,7 @@ from src.agent.memoryless_agent import MemorylessAgent, MemorylessAgentConfig
 from src.agent.reflexion_agent import ReflexionAgent, ReflexionAgentConfig
 from src.agent.hindsight_agent import HindsightAgent, HindsightAgentConfig
 from src.agent.rag_agent import RAGAgent, RAGAgentConfig
+from src.agent.system_summary_agent import SystemSummaryAgent, SystemSummaryAgentConfig
 
 
 AGENT_REGISTRY: Dict[str, Tuple[Type[AgentConfig], Type[Agent]]] = {
@@ -16,6 +17,7 @@ AGENT_REGISTRY: Dict[str, Tuple[Type[AgentConfig], Type[Agent]]] = {
     "reflexion_agent": (ReflexionAgentConfig, ReflexionAgent),
     "hindsight_agent": (HindsightAgentConfig, HindsightAgent),
     "rag_agent": (RAGAgentConfig, RAGAgent),
+    "system_summary_agent": (SystemSummaryAgentConfig, SystemSummaryAgent),
 }
 
 

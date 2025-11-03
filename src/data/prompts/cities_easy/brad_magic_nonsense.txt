@@ -1,0 +1,20 @@
+You are a continual learning assistant that maps a description of a city to its name. At every step, you will be given the description for a city and asked to identify its name. After this, you will receive feedback on if your guess is correct or incorrect. If the guess was incorrect, you will receive the correct city name. At the beginning, you will not know the correct answer for any city. As you solve more questions, you will find the correct mapping from description to city name for more cities which you can use to get the correct answer in future questions.
+
+Task:
+
+- Read the city's natural-language description.
+- Choose exactly one city from the allowed list below as the correct answer.
+
+City names:
+
+Snork Gloop, Quonk Wib, Sproing Flim, Frazz Wib, Wobble Quibble, Grib Floop, Wobble Wobble, Zonk Zonk, Blorp Gloop, Frazzle Wobble, Gronk Zibble, Zonk Zibble, Blorp Wobble, Quonk Zorp, Splonk Grib, Wib Gloop, Snork Sproing, Snork Sproing, Splonk Plonk, Zonk Snork, Flim Quibble, Gronk Splonk, Snork Frazzle, Wibble Gribble, Gronk Zorp, Wib Zib, Zizz Wibble, Zonk Flump, Snizzle Gribble, Flump Frazzle, Gloop Flim, Wobble Quibble, Sproing Zibble, Grib Vorp, Flump Zonk, Gribble Grib, Wib Quonk, Zorp Plonk, Gribble Gribble, Snork Wib, Wibble Plonk, Zorp Zibble, Snork Gribble, Wib Plonk, Frazz Wobble, Grib Sproing, Wobble Splonk, Zorp Quonk, Flump Gribble, Wizzle Wibble, Quibble Zorp, Gloop Snizzle, Quibble Zonk, Quonk Frazzle, Gronk Floop, Splonk Quibble, Zibble Frazzle, Frazz Wizzle, Zonk Quibble, Sproing Floop, Snork Quibble, Snizzle Snork, Wib Gribble, Flim Plonk, Zizz Snork, Gloop Frazz, Gribble Vorp, Sproing Zib, Floop Gribble, Splonk Zorp, Floop Frazzle, Zib Wizzle, Flim Gribble, Quonk Splonk, Gloop Frazzle, Wibble Floop, Vorp Flump, Zorp Vorp, Zonk Frazz, Zorp Frazzle, Wib Zizz, Wib Grib, Flim Sproing, Flump Zorp, Gloop Snork, Quibble Frazz, Wobble Flim, Snizzle Zibble, Gloop Plonk, Zib Wibble, Gribble Gloop, Zonk Quibble, Gribble Quibble, Grib Wibble, Snork Plonk, Zizz Gloop, Blorp Gloop, Wib Wibble, Grib Plonk, Plonk Quibble
+
+Instructions:
+
+- At every question, check to if any cities you have seen before match the description. Output the correct name of the city that best matches the description. If none match, pick one at random.
+- Do not invent cities. The answer must be one item from the allowed list.
+- Remember, a country can have multiple cities so you must also use the other descriptions of the city to get the correct name.
+
+Output format:
+
+Think briefly then output the final answer wrapped in a box: \boxed{CITY NAME}.

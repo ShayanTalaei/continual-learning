@@ -1,10 +1,10 @@
 ## FinLoRA Finer — HistoryAgent on local JSONL test set
 
 runtime:
-  max_envs_to_visit: 250
+  max_envs_to_visit: 500
   max_steps_per_episode: 1
   scores_path: scores.jsonl
-  run_validation_at_start: true
+  run_validation_at_start: false
   validation_num_workers: 200
   validation_freq: 5
   # Checkpointing
@@ -16,51 +16,53 @@ runtime:
   checkpoint_strategy: last_n
   checkpoint_keep_last: 20
   checkpoint_on_start: false
-  # resume_from: "/mnt/data/stalaei/logs/outputs/finer/history_agent/brad_magic_with_fewshots/20251019_194436/checkpoints/ep_000100"
+  # start_episode_index: 250
+  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/cities/history_agent/synth_cities_gemini_flash/20251027_182112/checkpoints/ep_000250"
 
 train_dataset:
   type: qa
-  hf_name: "stalaei/synth_cities"
+  hf_name: "Bradley/easy_synth_cities"
   split: "train"
-  question_field: "description"
-  answer_field: "country"
+  question_field: "question"
+  answer_field: "name"
   id_field: "id"
   instruction_template: null
-  max_samples: 5000
+  max_samples: 500
   shuffle: false
 
 validation_dataset:
   type: qa
-  hf_name: "stalaei/synth_cities"
+  hf_name: "Bradley/easy_synth_cities"
   split: "val"
-  question_field: "description"
-  answer_field: "country"
+  question_field: "question"
+  answer_field: "name"
   id_field: "id"
   instruction_template: null
-  max_samples: 5000
+  max_samples: 500
   shuffle: false
 
 agent:
-  type: history_agent
+  type: system_summary_agent
   lm_config:
-    # Use provider-prefixed model to dispatch to Tokasaurus
-    model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    model: "vllm:meta-llama/Llama-3.1-8B-Instruct"
     train_temperature: 0.3
     val_temperature: 0.0
     max_output_tokens: 2048
     log_calls: true
-    # Tokasaurus-specific fields (present on TokasaurusConfig)
-    base_url: "http://localhost:8096"
+    # Vllm-specific fields (present on VLLMConfig)
+    base_url: "http://localhost:8000"
+    tensor_parallel_size: 4
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 3
   memory_config:
     _type: history_list
     max_length: null
   history_k: null
-  system_prompt: "{file:src/data/prompts/cities/system_prompt.txt}"
+  system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_ss.txt}"
+  merge_feedback_and_observation: true
 
 output:
-  results_dir: outputs/cities/history_agent/synth_cities_toka_llama8b
+  results_dir: outputs/cities/system_summary_agent/synth_cities_vllm_l8b
   log_level: INFO
 
 

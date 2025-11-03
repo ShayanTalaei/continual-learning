@@ -215,6 +215,7 @@ def build_score_record(
         "episode_index": episode_index,
         "step_index": step_index,
         "score": score,
+        "has_boxed": feedback.get("has_boxed", False),
         "episode_cum_score": episode_cum_score,
         "env_id": getattr(environment, "env_id", None),
         "env_type": getattr(environment, "env_type", None),

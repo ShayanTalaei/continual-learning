@@ -4,6 +4,7 @@ import pydra
 from pathlib import Path
 from typing import List, Optional
 import random
+import json
 
 
 class MergeJsonlConfig(pydra.Config):
@@ -23,6 +24,7 @@ class MergeJsonlConfig(pydra.Config):
         self.max_per_jsonl: int = pydra.REQUIRED
         self.shuffle_each: bool = False
         self.seed: int = 42
+        self.filter_none_output_ids: bool = False
 
 
 def _reservoir_sample_lines(path: Path, k: int, rng: random.Random) -> List[str]:
@@ -84,6 +86,8 @@ def merge_jsonl_files(config: MergeJsonlConfig) -> None:
                 lines = _reservoir_sample_lines(src, config.max_per_jsonl, rng)
             else:
                 lines = _head_lines(src, config.max_per_jsonl)
+            if config.filter_none_output_ids:
+                lines = [line for line in lines if json.loads(line)["output_ids"] is not None]
             out_f.writelines(lines)
             total_written += len(lines)
             print(f"[MergeJSONL]   Selected {len(lines)} lines")

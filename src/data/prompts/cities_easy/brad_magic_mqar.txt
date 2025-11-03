@@ -1,0 +1,3 @@
+Your task is to map a given set of keys to their values. Both the keys and values are single words and are randomly assigned. Initially, you do not know the correct value for any key. After providing your value prediction, you will be given the next key. You must remember this information so you can respond with the correct value when you see that key again.
+
+You must output your prediction wrapped in a box ex. \boxed{VALUE_PRED}.
