@@ -17,7 +17,7 @@ runtime:
   checkpoint_keep_last: 20
   checkpoint_on_start: false
   # start_episode_index: 250
-  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b/20251102_152217/checkpoints/ep_000500"
+  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b/20251102_203844/checkpoints/ep_000500"
 
 train_dataset:
   type: qa
@@ -27,7 +27,7 @@ train_dataset:
   answer_field: "name"
   id_field: "id"
   instruction_template: null
-  idx_range: [0, 500]
+  idx_range: [500, 1000]
   shuffle: true
   seed: 42
 
@@ -58,11 +58,13 @@ agent:
     _type: history_list
     max_length: null
   history_k: null
+  collapse_messages: true
+  only_boxed: true
   system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
-  merge_feedback_and_observation: true
+  merge_feedback_and_observation: false
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_collapsed_only_boxed
   log_level: INFO
 
 
