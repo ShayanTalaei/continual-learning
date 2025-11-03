@@ -17,23 +17,23 @@ runtime:
   checkpoint_keep_last: 20
   checkpoint_on_start: false
   # start_episode_index: 250
-  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b/20251102_152217/checkpoints/ep_000500"
+  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b/20251102_152217/checkpoints/ep_000500"
 
 train_dataset:
   type: qa
-  hf_name: "stalaei/easy_synth_cities_20_50"
+  hf_name: "stalaei/easy_synth_cities_40_25"
   split: "train"
   question_field: "question"
   answer_field: "name"
   id_field: "id"
   instruction_template: null
-  idx_range: [500, 1000]
+  idx_range: [0, 500]
   shuffle: true
   seed: 42
 
 validation_dataset:
   type: qa
-  hf_name: "stalaei/easy_synth_cities_20_50"
+  hf_name: "stalaei/easy_synth_cities_40_25"
   split: "val"
   question_field: "question"
   answer_field: "name"
@@ -62,7 +62,7 @@ agent:
   merge_feedback_and_observation: true
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b
   log_level: INFO
 
 
