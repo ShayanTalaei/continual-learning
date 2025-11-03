@@ -1,0 +1,39 @@
+# Config for generating synthetic city QA data using the history-agent checkpoint
+output_dir: "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b"
+output_format: jsonl
+
+num_threads: 4
+num_repeat_samples: 1
+save_individual_files: true
+include_teacher_messages_texts: true
+metadata:
+  project: continual-learning
+  task: cities_easy
+
+llm:
+  model: toka:meta-llama/Llama-3.1-8B-Instruct
+  base_url: http://localhost:8096
+  train_temperature: 0.0
+  val_temperature: 0.0
+  max_output_tokens: 2048
+  top_logprobs: 20
+  max_retries: 2
+
+strategy:
+  type: synthetic_gen
+  synthetic_gen_system_prompt_path: "src/datagen/strategies/prompts/cities_synthetic/question_system_prompt.txt"
+  synthetic_gen_user_prompt_path: "src/datagen/strategies/prompts/cities_synthetic/question_user_prompt.txt"
+  task_system_prompt_path: "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
+  memory_adapter:
+    type: history_list
+    checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b/20251102_133639/checkpoints/ep_000500/memory_500.jsonl"
+  num_generations: 50000
+  num_threads: 64
+  lm_config:
+    model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    base_url: "http://localhost:8096"
+    train_temperature: 0.7
+    val_temperature: 1.0
+    max_output_tokens: 2048
+    max_retries: 2
+

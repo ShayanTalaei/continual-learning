@@ -1,12 +1,12 @@
 ## FinLoRA Finer — HistoryAgent on local JSONL test set
 
 runtime:
-  max_envs_to_visit: 500
+  max_envs_to_visit: 1000
   max_steps_per_episode: 1
   scores_path: scores.jsonl
-  run_validation_at_start: false
+  run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 5
+  validation_freq: 10
   # Checkpointing
   checkpoint_dir: checkpoints
   checkpoint_every_episodes: 50
@@ -17,40 +17,40 @@ runtime:
   checkpoint_keep_last: 20
   checkpoint_on_start: false
   # start_episode_index: 250
-  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/cities/history_agent/synth_cities_gemini_flash/20251027_182112/checkpoints/ep_000250"
+  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b/20251102_152217/checkpoints/ep_000500"
 
 train_dataset:
   type: qa
-  hf_name: "Bradley/easy_synth_cities"
+  hf_name: "stalaei/easy_synth_cities_20_50"
   split: "train"
   question_field: "question"
   answer_field: "name"
   id_field: "id"
   instruction_template: null
-  max_samples: 500
-  shuffle: false
+  idx_range: [500, 1000]
+  shuffle: true
+  seed: 42
 
 validation_dataset:
   type: qa
-  hf_name: "Bradley/easy_synth_cities"
+  hf_name: "stalaei/easy_synth_cities_20_50"
   split: "val"
   question_field: "question"
   answer_field: "name"
   id_field: "id"
   instruction_template: null
-  max_samples: 500
+  max_samples: 20
   shuffle: false
 
 agent:
   type: history_agent
   lm_config:
-    model: "vllm:meta-llama/Llama-3.1-8B-Instruct"
-    train_temperature: 0.3
+    model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    train_temperature: 0.7
     val_temperature: 0.0
     max_output_tokens: 2048
     log_calls: true
-    # Vllm-specific fields (present on VLLMConfig)
-    base_url: "http://localhost:8000"
+    base_url: "http://localhost:8096"
     tensor_parallel_size: 4
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 3
@@ -58,11 +58,11 @@ agent:
     _type: history_list
     max_length: null
   history_k: null
-  system_prompt: "{file:src/data/prompts/cities_easy/brad_magic.txt}"
+  system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
   merge_feedback_and_observation: true
 
 output:
-  results_dir: outputs/cities/history_agent/synth_cities_vllm_l8b
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_20_50_l8b
   log_level: INFO
 
 
