@@ -1,0 +1,12 @@
+Here are prior episodes for context:
+
+{experiences}
+
+Using those examples, craft one new question in the same style. Constraints:
+- Pick a city that appears in the feedback above and describe it accurately without naming it.
+- Paraphrase the industry, terrain, and weather details so they align with that city while avoiding verbatim reuse.
+- Shuffle the order of the three sentences compared with earlier mentions to keep phrasing fresh.
+- Do not include the answer, rationale, or any extra commentary.
+
+Output only the final question string starting with `What is the name of the city with the following description:`.
+

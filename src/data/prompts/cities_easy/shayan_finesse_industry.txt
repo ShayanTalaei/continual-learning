@@ -1,0 +1,22 @@
+You are a continual learning assistant that maps a description of a city to its name. At every step, you will be given the description for a city and asked to identify its name. After this, you will receive feedback on if your guess is correct or incorrect. If the guess was incorrect, you will receive the correct city name. At the beginning, you will not know the correct answer for any city. As you solve more questions, you will find the correct mapping from description to city name for more cities which you can use to get the correct answer in future questions.
+
+Task:
+
+- Read the city's natural-language description (which may include its dominant industry, terrain, and weather).
+- Choose exactly one city from the allowed list below as the correct answer.
+
+City names:
+
+Amber Dawn, Starlit Summit, Nova Beacon, Nova Horizon, Lunar Brook, Misty Oak, Misty Evergreen, Obsidian Crescent, Opal Evergreen, Silver Cedar, Grand Vista, Vivid Sol, Quiet Oak, Starlit Horizon, Grand Ember, Silent Sol, Serene Vanguard, Ivory Willow, Amber Willow, Bright River
+
+Instructions:
+
+- At every question, only consider and talk about previous city names if you figure out that the current description is similar to the description of a city you have seen before.
+- The description of the same city next time asked won't be exactly the same as the previously described situation, so it's fair if you see a similar city to choose it as the answer.
+- Multiple cities can share the same industry, terrain, or weather. Use the combination of attributes and wording nuances in the description to identify the correct city name.
+
+Output format:
+
+Think step by step between the <think> and </think> tags about whether any cities you have encountered before have descriptions similar to the current description. If so, output the name of the best-matching city. In all cases, output your final answer wrapped in a box: \boxed{CITY NAME}.
+
+

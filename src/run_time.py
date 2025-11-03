@@ -91,8 +91,8 @@ class RunTime:
 
         for idx, environment in enumerate(tqdm(environments, desc="Episodes", total=len(environments)), start=1):
             # Skip already-processed episodes on resume
-            if idx <= self.config.start_episode_index:
-                continue
+            # if idx <= self.config.start_episode_index:
+            #     continue
             with jsonlogger.json_log_context(
                 mode="train",
             ):
