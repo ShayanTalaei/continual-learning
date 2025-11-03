@@ -1,0 +1,60 @@
+## FinLoRA Finer — ACE Agent with Playbook Memory
+
+runtime:
+  max_envs_to_visit: 500
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 200
+  validation_freq: 10
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 5
+  checkpoint_keep_last: 1
+  checkpoint_on_start: false
+  resume_from: null
+  start_episode_index: 0
+
+train_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_v1"
+  split: "train_ICL"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 2000
+  shuffle: false
+
+validation_dataset:
+  type: finer
+  hf_dataset: "stalaei/finer_v1"
+  split: "val"
+  input_field: "context"
+  target_field: "target"
+  instruction_template: null
+  max_samples: 1000
+  shuffle: false
+
+agent:
+  type: ace_agent
+  lm_config:
+    model: "gemini-2.5-flash"
+    train_temperature: 0.3
+    val_temperature: 0.0
+    thinking_budget: 24576
+    max_output_tokens: 65536
+    log_calls: true
+  memory_config:
+    _type: ace_playbook
+  history_k: null
+  system_prompt: "{file:src/data/prompts/finer/system_prompt_brad_magic.txt}"
+  generator_prompt: "src/data/prompts/ace/finer/generator_prompt.txt"
+  reflector_prompt: "src/data/prompts/ace/finer/reflector_prompt.txt"
+  curator_prompt: "src/data/prompts/ace/finer/curator_prompt.txt"
+  max_playbook_tokens: 4000
+  refine_mode: lazy
+
+output:
+  results_dir: outputs/finer/ace_agent/gemini_2.5_flash
+  log_level: INFO
+
+

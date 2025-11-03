@@ -47,6 +47,19 @@ class LanguageModel:
         """
         raise NotImplementedError
 
+    # -----------------------------
+    # Token utilities (optional overrides by clients)
+    # -----------------------------
+    def count_tokens(self, messages: List[Dict[str, str]]) -> int:
+        # Simple heuristic fallback: 4 chars per token
+        total_chars = 0
+        for m in messages:
+            total_chars += len(m.get("content", ""))
+        return max(1, total_chars // 4)
+
+    def max_model_tokens(self) -> int:
+        return getattr(self.config, "max_output_tokens", 8192)
+
     def _begin_call(self, messages: List[Dict[str, str]]) -> Optional[str]:
         if not self.config.log_calls:
             return None
@@ -84,7 +97,7 @@ class LanguageModel:
             "timestamp": datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ"),
             "model": getattr(self.config, "model", None),
             "messages": messages,
-            "context": ctx,
+            # "context": ctx,
         }
         call_id = jsonlogger.json_next_id()
         # Compose filename with call_type, episode and step if present

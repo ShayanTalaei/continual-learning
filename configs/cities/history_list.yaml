@@ -45,9 +45,7 @@ agent:
   type: history_agent
   lm_config:
     # Use provider-prefixed model to dispatch to Tokasaurus
-    # model: "toka:meta-llama/Llama-3.1-8B-Instruct"
-    model: "toka:meta-llama/Llama-3.2-3B-Instruct"
-    # model: "toka:meta-llama/Llama-3.1-70B-Instruct"
+    model: "toka:Qwen/Qwen2.5-7B-Instruct-1M"
     train_temperature: 0.3
     val_temperature: 0.0
     max_output_tokens: 2048
@@ -60,10 +58,10 @@ agent:
     _type: history_list
     max_length: null
   history_k: null
-  system_prompt: "{file:src/data/prompts/cities/system_prompt_brad_magicer.txt}"
+  system_prompt: "{file:src/data/prompts/cities/system_prompt_shayan_magic.txt}"
 
 output:
-  results_dir: outputs/cities/history_agent/synth_cities_toka_llama_3.2_3b
+  results_dir: outputs/cities/history_agent/synth_cities_qwen2.5_7b_instruct_1m
   log_level: INFO
 
 

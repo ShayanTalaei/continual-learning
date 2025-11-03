@@ -401,7 +401,9 @@ def calc_tokens_and_logprobs(
         greedy_ids,
         next_token_ids,
     )
-
+    # if torch.distributed.get_rank() == 0:
+    #     breakpoint()
+    # torch.distributed.barrier()
     if config.enable_chosen_logprobs:
         # Compute both base (unscaled) and scaled chosen logprobs; select via mask
         base_probs = F.softmax(logits, dim=-1)
@@ -411,23 +413,28 @@ def calc_tokens_and_logprobs(
         scaled_chosen = probs.gather(dim=-1, index=next_token_ids.unsqueeze(-1)).squeeze(-1)
         scaled_logprobs = scaled_chosen.log()
 
-        mask_f = ignore_temperature_for_logprobs.to(dtype=base_logprobs.dtype)
-        chosen_logprobs = mask_f * base_logprobs + (1 - mask_f) * scaled_logprobs
+        # TODO add ignore_temperature_for_logprobs back and work with TP
+        # mask_f = ignore_temperature_for_logprobs.to(dtype=base_logprobs.dtype)
+        chosen_logprobs = base_logprobs # mask_f * base_logprobs + (1 - mask_f) * scaled_logprobs
     else:
         chosen_logprobs = None
 
     topk = config.topk_logprobs
     if topk is not None:
         assert topk > 0
+        # TODO add ignore_temperature_for_logprobs back and work with TP
         # Compute base and scaled top-k; select via mask
-        base_topk_probs, base_topk_indices = torch.topk(F.softmax(logits, dim=-1), k=topk, dim=-1)
-        scaled_topk_probs, scaled_topk_indices = torch.topk(probs, k=topk, dim=-1)
+        # base_topk_probs, base_topk_indices = torch.topk(F.softmax(logits, dim=-1), k=topk, dim=-1)
+        # scaled_topk_probs, scaled_topk_indices = torch.topk(probs, k=topk, dim=-1)
 
-        use_base = ignore_temperature_for_logprobs.unsqueeze(-1)
-        topk_indices = torch.where(use_base, base_topk_indices, scaled_topk_indices)
-        topk_probs = torch.where(use_base, base_topk_probs, scaled_topk_probs)
-        topk_tokens = topk_indices
-        topk_logprobs = topk_probs.log()
+        # use_base = ignore_temperature_for_logprobs.unsqueeze(-1)
+        # topk_indices = torch.where(use_base, base_topk_indices, scaled_topk_indices)
+        # topk_probs = torch.where(use_base, base_topk_probs, scaled_topk_probs)
+        # topk_tokens = topk_indices
+        # topk_logprobs = topk_probs.log()
+        base_topk_probs, base_topk_indices = torch.topk(F.softmax(logits, dim=-1), k=topk, dim=-1)
+        topk_tokens = base_topk_indices
+        topk_logprobs = base_topk_probs.log()
     else:
         topk_tokens = None
         topk_logprobs = None
