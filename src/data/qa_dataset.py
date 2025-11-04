@@ -30,6 +30,7 @@ class QAEnvDatasetConfig(EnvDatasetConfig):
     # Backward-compat in-memory items (rarely used once HF is set up)
     items: List[Dict[str, Any]] = []
     verbose: bool = True
+    idx_range: Optional[Tuple[int, int]] = None
     # Sampling/shuffle (optional)
     max_samples: Optional[int] = None
     shuffle: bool = False
@@ -63,6 +64,8 @@ class QAEnvDataset(EnvDataset):
         else:
             rows = list(self.config.items)
 
+        if self.config.idx_range is not None:
+            rows = rows[self.config.idx_range[0]:self.config.idx_range[1]]
         # Optional shuffle and sample
         if self.config.shuffle and len(rows) > 1:
             rng = random.Random(self.config.seed)

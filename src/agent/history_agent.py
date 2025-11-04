@@ -14,42 +14,49 @@ class HistoryAgent(MemoryAgent):
         super().__init__(config, logger=logger)
 
     def build_system_prompt(self) -> str:
-        history_list_instructions = ("You will be given the previous experiences you've had and their feedback. "
-            "You should use this feedback to improve your performance in the subsequent actions.")
-        
-        return self.system_prompt #+ "\n\n" + history_list_instructions
+        return self.system_prompt
 
     def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None], merge_feedback_and_observation: bool = False) -> List[Dict[str, str]]:
         messages: List[dict] = []
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
         
-        # messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
-        # Add previous experiences as alternating user/assistant messages
+        # Combine all prior experiences into a single user message, each experience as a block (Observation, Action, Feedback)
+        experiences = []
+        current_experience = {}
+        # Gather sequentially as episodes: observation -> action -> feedback
         for entry in recent:
-            if entry.type.lower() == "observation":
-                messages.append({"role": "user", "content": str(entry.content)})
-            elif entry.type.lower() == "action":
-                messages.append({"role": "assistant", "content": str(entry.content)})
-            elif entry.type.lower() == "feedback":
-                # Add feedback as a user message
-                messages.append({"role": "user", "content": f"{entry.content}"}) #Feedback: 
-        # if len(recent) == 0:
-        #     messages.append({"role": "user", "content": "No previous experiences."})
-        
-        # Add current observation as the final user message
-        messages.append({"role": "user", "content": f"{obs}"}) #Here is the current observation: 
+            etype = entry.type.lower()
+            if etype == "observation":
+                # Start a new experience
+                if current_experience:
+                    experiences.append(current_experience)
+                    current_experience = {}
+                current_experience["observation"] = str(entry.content)
+            elif etype == "action":
+                content_str = str(entry.content)
+                # if "</think>" in content_str:
+                #     content_str = content_str.split("</think>", 1)[1]
+                current_experience["action"] = content_str
+            elif etype == "feedback":
+                current_experience["feedback"] = f"{entry.content}"
+        if current_experience:
+            experiences.append(current_experience)
 
-        if merge_feedback_and_observation:
-            merged_messages = []
-            curr_idx = 0
-            while curr_idx < len(messages):
-                if curr_idx < len(messages)-1 and messages[curr_idx]["role"] == "user" and messages[curr_idx+1]["role"] == "user":
-                    merged_messages.append({"role": "user", "content": f"{messages[curr_idx]['content']}\n\n{messages[curr_idx+1]['content']}"})
-                    curr_idx += 2
-                else:
-                    merged_messages.append(messages[curr_idx])
-                    curr_idx += 1
-            return merged_messages
+        exp_blocks = []
+        for i, exp in enumerate(experiences):
+            lines = []
+            if "observation" in exp:
+                lines.append(f"Observation: {exp['observation']}")
+            if "action" in exp:
+                lines.append(f"Action: {exp['action']}")
+            if "feedback" in exp:
+                lines.append(f"Feedback: {exp['feedback']}")
+            exp_blocks.append("\n".join(lines))
+        user_content = "Here are the previous experiences you've had and their feedback:\n\n"
+        user_content += "\n\n".join(exp_blocks)
+        user_content += f"\n\nHere is the current observation: {obs}"
+        messages.append({"role": "user", "content": user_content})
+
         
         return messages
 
@@ -57,8 +64,20 @@ class HistoryAgent(MemoryAgent):
         return Entry(type="Observation", content=obs)
 
     def create_action_event(self, action: str) -> Any:
+        # If the action contains \boxed{...}, extract whatever is inside the boxed
+        start = action.find('\\boxed{')
+        if start != -1:
+            start += len('\\boxed{')
+            end = action.find('}', start)
+            if end != -1:
+                action = f"\\boxed{{{action[start:end]}}}"
+            else:
+                action = ""
+        else:
+            action = ""
         return Entry(type="Action", content=action)
 
     def create_feedback_event(self, feedback: dict) -> Any:
         return Entry(type="Feedback", content=feedback.get("message", ""))
+
 

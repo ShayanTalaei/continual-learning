@@ -6,7 +6,7 @@ runtime:
   scores_path: scores.jsonl
   run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 10
+  validation_freq: 5
   # Checkpointing
   checkpoint_dir: checkpoints
   checkpoint_every_episodes: 50
@@ -23,7 +23,7 @@ train_dataset:
   type: qa
   hf_name: "stalaei/synth_cities"
   split: "train"
-  question_field: "question"
+  question_field: "question_no_city"
   answer_field: "country"
   id_field: "id"
   instruction_template: null
@@ -34,7 +34,7 @@ validation_dataset:
   type: qa
   hf_name: "stalaei/synth_cities"
   split: "val"
-  question_field: "question"
+  question_field: "question_no_city"
   answer_field: "country"
   id_field: "id"
   instruction_template: null
@@ -45,10 +45,13 @@ agent:
   type: history_agent
   lm_config:
     # Use provider-prefixed model to dispatch to Tokasaurus
-    model: "toka:Qwen/Qwen2.5-7B-Instruct-1M"
+    # model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    model: "gemini-2.5-flash"
+    # model: "toka:meta-llama/Llama-3.1-70B-Instruct"
     train_temperature: 0.3
     val_temperature: 0.0
-    max_output_tokens: 2048
+    thinking_budget: 0
+    max_output_tokens: 65536
     log_calls: true
     # Tokasaurus-specific fields (present on TokasaurusConfig)
     base_url: "http://localhost:8096"
@@ -61,7 +64,7 @@ agent:
   system_prompt: "{file:src/data/prompts/cities/system_prompt_shayan_magic.txt}"
 
 output:
-  results_dir: outputs/cities/history_agent/synth_cities_qwen2.5_7b_instruct_1m
+  results_dir: outputs/cities_hard/history_agent/synth_cities_gemini_flash
   log_level: INFO
 
 

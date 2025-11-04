@@ -18,10 +18,10 @@ class MemoryModule:
         return self._update(*args, **kwargs)
 
     def _update(self, *args: Any, **kwargs: Any):
-        raise NotImplementedError
+        pass
 
     def recall(self, *args: Any, **kwargs: Any):
-        raise NotImplementedError
+        pass
 
     def train(self) -> None:
         self.training = True

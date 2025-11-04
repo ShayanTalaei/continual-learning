@@ -33,15 +33,12 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
     def build_user_prompt(self, obs: str, history: List[Any], k: Union[int, None]) -> List[Dict[str, str]]:
         pass
 
-    @abstractmethod
     def create_observation_event(self, obs: str) -> Any:
         pass
 
-    @abstractmethod
     def create_action_event(self, action: str) -> Any:
         pass
 
-    @abstractmethod
     def create_feedback_event(self, feedback: dict) -> Any:
         pass
     
