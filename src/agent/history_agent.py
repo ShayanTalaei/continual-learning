@@ -63,9 +63,11 @@ class HistoryAgent(MemoryAgent):
                 lines.append(f"Feedback: {exp['feedback']}")
             exp_blocks.append("\n".join(lines))
         if collapse:
-            user_content = "Here are the previous experiences you've had and their feedback:\n\n"
+            user_content = "" #"Here are the previous experiences you've had and their feedback:\n\n"
             user_content += "\n\n".join(exp_blocks)
-            user_content += f"\n\nHere is the current observation: {obs}"
+            if exp_blocks:
+                user_content += "\n\n"
+            user_content += f"{obs}"
             messages.append({"role": "user", "content": user_content})
         else:
             if experiences:

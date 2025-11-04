@@ -89,21 +89,21 @@ class RunTime:
             with jsonlogger.json_log_context(mode="val"):
                 self._run_validation()
 
-        for idx, environment in enumerate(tqdm(environments, desc="Episodes", total=len(environments)), start=1):
+        for environment in tqdm(environments, desc="Episodes", total=len(environments)):
             # Skip already-processed episodes on resume
             # if idx <= self.config.start_episode_index:
             #     continue
             with jsonlogger.json_log_context(
                 mode="train",
             ):
-                self.logger.info("Episode %d: start", idx)
-                steps = self._run_episode_with_agent(self.agent, environment, idx, mode="train")
+                self.logger.info("Episode %d: start", self.num_seen_episodes)
+                steps = self._run_episode_with_agent(self.agent, environment, self.num_seen_episodes, mode="train")
                 all_steps.append(steps)
                 train_steps_total += len(steps)
                 # Update counters visible to logger contexts for subsequent validations
-                self.num_seen_episodes += 1
                 ep_score = sum(self._get_score(s.feedback) for s in steps)
-                self.logger.info("Episode %d: end steps=%d score_sum=%.3f", idx, len(steps), ep_score)
+                self.logger.info("Episode %d: end steps=%d score_sum=%.3f", self.num_seen_episodes, len(steps), ep_score)
+                self.num_seen_episodes += 1
 
             # Checkpoint after each episode if configured (delegated)
             if self._cp_manager:
