@@ -1001,14 +1001,13 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
 
 ### Redoing evals
 
-
-torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct25_250synthtrain_128tokens \
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batman_128tokens \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
     .init_from_text \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
-    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer.jsonl \
     do_loss_evals=F \
     system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
     training.lr=5e-4 \
@@ -1020,16 +1019,39 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     .train_gen_eval \
     training.weight_decay=1e-5 \
     wandb.enabled=F \
-    load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct25_250synthtrain_128tokens-cache-step700/cartridge.pt
+    .matx \
+    .no_evals
 
-
-python -m src.memory.distillation.distill_into_cartridge \
-    run_name=oct25_250synthtrain_128tokens \
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct27_250batman_128tokens \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
     .init_from_text \
     kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
-    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer_filtered.jsonl \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .toka \
+    .train_gen_eval \
+    training.weight_decay=1e-5 \
+    .matx
+
+## matx3
+
+python scripts/merge_jsonl_files.py --list input_files /matx/u/bcabrown/shayan_memory/data/batman_reflection_finer_filtered.jsonl /matx/u/bcabrown/shayan_memory/data/finer_v1_train_ICL_exclude_current_250_triplets_false_1000_reps_temp_0.7.jsonl list-- destination_file=/matx/u/bcabrown/shayan_memory/data/batman_real_merged_filtered.jsonl max_per_jsonl=50000 shuffle_each=T
+
+python -m src.memory.distillation.distill_into_cartridge \
+    run_name=oct25_250batman_128tokens \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    kv_cache.init_text_file=src/memory/distillation/kv_cache_init_texts/v1.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/batman_reflection_finer_filtered.jsonl \
     do_loss_evals=F \
     system_prompt_path=src/data/prompts/finer/system_prompt_brad_magic.txt \
     training.lr=5e-4 \
@@ -1039,6 +1061,10 @@ python -m src.memory.distillation.distill_into_cartridge \
     .streaming \
     .train_gen_eval \
     training.weight_decay=1e-5 \
+<<<<<<< HEAD
+    .toka \
+    .matx
+=======
     wandb.enabled=F \
     load_cache_path=/scratch/m000122/stalaei/continual-learning/cartridges/oct25_250synthtrain_128tokens-cache-step700/cartridge.pt \
     generate_batch_size=1
@@ -1187,6 +1213,9 @@ python -m src.main --config configs/cities/l70b_cities_system.yaml
 python -m src.main --config configs/cities/l70b_cities_system.yaml
 
 
+<<<<<<< HEAD
+>>>>>>> 1130da3a8d8d32c0895e3aeaa78649b7bbc47fbc
+=======
 
 # Cartridging synth cities
 
@@ -1222,6 +1251,202 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     dataloader_num_workers=8 \
     .streaming \
     .train_gen_eval \
-    .synth_cities \
+    .synth_cities_matx \
     .toka \
     training.weight_decay=1e-5
+
+
+# matx cartridging synth cities
+
+TORCHINDUCTOR_MAX_AUTOTUNE=0 TORCHINDUCTOR_MAX_AUTOTUNE_GEMM_BACKENDS=ATEN,TRITON python -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=1e-5 \
+    wandb.enabled=F \
+    .no_evals
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=1e-5
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain_citysysprompt \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse_with_citynames.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=1e-5
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain_5e3lr \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-3
+
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain_1e2lr \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=1e-2
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrain_5e4 \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    training.lr=5e-4 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-4
+
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov3_synthcitytrainrag_1e3 \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_same_experiences_and_shuffle.jsonl \
+    training.lr=1e-3 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-4
+
+
+# new chat style data
+
+### n13
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov4_chatthink_fixed \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_full_action_20000_with_subsample_and_original_experiences/dataset.jsonl
+
+### matx2
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov4_chatthink_wd1e5 \
+    kv_cache.num_tokens=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_non_collapsed_full_action_20000_with_subsample_and_original_experiences.jsonl \
+    training.lr=1e-3 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=1e-5 \
+    training.lr=5e-3
+
+
+### matx3
+torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov4_chatthink_256cartridge \
+    kv_cache.num_tokens=256 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    input_dataset.local_path=/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_non_collapsed_full_action_20000_with_subsample_and_original_experiences.jsonl \
+    training.lr=1e-3 \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities_matx \
+    .toka \
+    training.weight_decay=1e-5 \
+    training.lr=5e-3

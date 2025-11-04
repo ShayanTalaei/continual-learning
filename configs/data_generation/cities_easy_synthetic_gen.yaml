@@ -1,5 +1,5 @@
 # Config for generating synthetic city QA data using the history-agent checkpoint
-output_dir: "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_400_with_subsample_and_same_experiences_and_shuffle_paraphrased"
+output_dir: "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_full_action_20000_with_subsample_and_original_experiences"
 output_format: jsonl
 
 num_threads: 512
@@ -24,14 +24,14 @@ strategy:
   synthetic_gen_system_prompt_path: "src/datagen/strategies/prompts/cities_synthetic/question_system_prompt.txt"
   synthetic_gen_user_prompt_path: "src/datagen/strategies/prompts/cities_synthetic/question_user_prompt.txt"
   task_system_prompt_path: "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
-  chat_mode: false
+  chat_mode: true
   memory_adapter:
     type: history_list
-    checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b/20251102_203844/checkpoints/ep_000500/memory_500.jsonl"
-  num_generations: 400
+    checkpoint_path: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_full_action/20251103_105556/checkpoints/ep_000500/memory_500.jsonl"
+  num_generations: 20000
   num_experiences_subsample_per_task_generation: 20
-  use_task_generation_experiences_for_solving: true
-  shuffle_experiences_when_solving: true
+  use_task_generation_experiences_for_solving: false
+  shuffle_experiences_when_solving: false
   num_threads: 512
   lm_config:
     model: "toka:meta-llama/Llama-3.1-8B-Instruct"

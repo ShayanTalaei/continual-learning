@@ -45,6 +45,9 @@ from .configuration_llama import LlamaConfig
 logger = logging.get_logger(__name__)
 
 
+torch._inductor.config.max_autotune_gemm_backends = 'ATEN,TRITON,CPP'
+
+
 
 # SE (07/21): `dynamic=False` is necessary to avoid a "PassManager::run failed" error
 # when interacting with torch.amp.autocast. TODO (Sabri): This is not expected. Dig into
@@ -235,8 +238,6 @@ def flex_attention_forward(
 
     kernel_options = kwargs.get("kernel_options", None)
     attn = flex_attention_train if mode == "train" else flex_attention_generate
-    
-
 
     # SE (07/26): This helps to avoid recompiles, since during prefix tuning, the first
     # layer's query does not require grad.

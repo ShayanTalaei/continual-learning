@@ -234,7 +234,12 @@ class DistillationConfig(pydra.Config):
         self.train_gen_split = "train"
         self.num_train_generate_problems = 500
         self.kv_cache.init_text_file = "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
-        self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
+        # self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
+
+    def synth_cities_matx(self):
+        self.synth_cities()
+        self.matx()
+        self.input_dataset.local_path = "/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences.jsonl"
 
     def finalize(self):
         if self.run_name is None:
@@ -275,6 +280,7 @@ class DistillationConfig(pydra.Config):
             f"trust_remote_code=True",
             f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
             f"torch_compile=False",
+            "use_cudagraphs=F",
         ]
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
         self.generate_batch_size = 200
@@ -562,7 +568,7 @@ def run_distillation(config: DistillationConfig):
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.val_gen_split,
                 ),
-                name_for_wandb="finer",
+                name_for_wandb=config.eval_type,
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,
@@ -577,7 +583,7 @@ def run_distillation(config: DistillationConfig):
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.train_gen_split,
                 ),
-                name_for_wandb="finer_train",
+                name_for_wandb=config.eval_type + "_train",
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,
