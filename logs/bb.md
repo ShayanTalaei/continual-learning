@@ -1382,7 +1382,7 @@ torchrun --nproc_per_node 8 -m src.memory.distillation.distill_into_cartridge \
     dataloader_num_workers=8 \
     .streaming \
     .train_gen_eval \
-    .synth_cities_matx \
+    .synth_cities \
     .toka \
     training.weight_decay=0.0 \
     training.lr=5e-4
