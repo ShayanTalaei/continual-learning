@@ -234,7 +234,7 @@ class DistillationConfig(pydra.Config):
         self.train_gen_split = "train"
         self.num_train_generate_problems = 500
         self.kv_cache.init_text_file = "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
-        self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
+        # self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
 
     def synth_cities_matx(self):
         self.synth_cities()
