@@ -197,6 +197,11 @@ class DistillationConfig(pydra.Config):
         self.generate_temperature = 0.0
         self.generate_batch_size = 32
         self.eval_type = "finer"
+        self.gen_max_incontext_examples = 0
+        self.gen_min_incontext_examples = 0
+        self.in_context_examples_path = None
+        self.gen_val_num_repeats = 1
+        self.gen_train_num_repeats = 1
         
         # Name
         self.run_name = None
@@ -559,7 +564,6 @@ def run_distillation(config: DistillationConfig):
             raise ValueError(f"Unknown eval type: {config.eval_type}")
 
     generate_evals = []
-    # TODO: generalize beyond finer
     if config.do_val_gen_eval:
         generate_evals.append(
             GenerationEvalConfig(
@@ -567,6 +571,10 @@ def run_distillation(config: DistillationConfig):
                     num_problems=config.num_generate_problems,
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.val_gen_split,
+                    in_context_examples_path=config.in_context_examples_path,
+                    max_incontext_examples=config.gen_max_incontext_examples,
+                    min_incontext_examples=config.gen_min_incontext_examples,
+                    num_repeats=config.gen_val_num_repeats,
                 ),
                 name_for_wandb=config.eval_type,
                 generate_max_new_tokens=1024,
@@ -582,6 +590,10 @@ def run_distillation(config: DistillationConfig):
                     num_problems=config.num_train_generate_problems,
                     system_prompt_path=config.system_prompt_path,
                     dataset_split=config.train_gen_split,
+                    in_context_examples_path=config.in_context_examples_path,
+                    max_incontext_examples=config.gen_max_incontext_examples,
+                    min_incontext_examples=config.gen_min_incontext_examples,
+                    num_repeats=config.gen_train_num_repeats,
                 ),
                 name_for_wandb=config.eval_type + "_train",
                 generate_max_new_tokens=1024,
