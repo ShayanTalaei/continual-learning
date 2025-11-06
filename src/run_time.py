@@ -142,8 +142,27 @@ class RunTime:
         self.logger.info("Run finished: mean_score=%.3f total_steps=%d success_rate=%.3f successful_episodes=%d/%d", 
                         mean_score, total, success_rate, successful_episodes, total_episodes)
         
+        # Close all environments to release resources
+        self.logger.debug("Closing %d environments", len(environments))
+        for env in environments:
+            if hasattr(env, 'close'):
+                try:
+                    env.close()
+                except Exception as e:
+                    self.logger.warning("Failed to close environment %s: %s", env.env_id, e)
+        
         episodes_serialized = [[s.model_dump() for s in episode] for episode in all_steps]
-        return {
+        
+        # Run AppWorld evaluation if we're using AppWorld dataset
+        appworld_metrics = None
+        if hasattr(self.train_dataset, 'evaluate_appworld_metrics'):
+            try:
+                # Pass the environments that were actually run (respects max_envs_to_visit)
+                appworld_metrics = self.train_dataset.evaluate_appworld_metrics(environments=environments)
+            except Exception as e:
+                self.logger.warning("Failed to evaluate AppWorld metrics: %s", e)
+        
+        result = {
             "mean_score": mean_score, 
             "success_rate": success_rate,
             "successful_episodes": successful_episodes,
@@ -152,6 +171,12 @@ class RunTime:
             "train_steps": train_steps_total, 
             "train_episodes": self.num_seen_episodes
         }
+        
+        # Add AppWorld-specific metrics if available
+        if appworld_metrics:
+            result["appworld_metrics"] = appworld_metrics
+        
+        return result
 
     def _run_episode_with_agent(self, running_agent: Agent, environment: Environment, episode_index: int, mode: str) -> List[StepResult]:
         steps: List[StepResult] = []

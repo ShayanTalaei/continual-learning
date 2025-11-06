@@ -1,0 +1,75 @@
+runtime:
+  max_envs_to_visit: 750
+  max_steps_per_episode: 100
+  verbose: true
+  scores_path: scores.jsonl
+
+train_dataset:
+  type: appworld
+  root: third_party/appworld
+  dataset_name: "test_normal"  # choose a valid dataset name under appworld data
+  num_episodes: 750
+  max_steps: 100
+  # prompts_path: "third_party/appworld/experiments/prompts/react_code_agent/instructions.txt"
+  prompts_path: "src/data/prompts/appworld/agent_prompt.txt"
+  experiment_name: continual_learning/cuga/test_normal
+
+agent:
+  type: appworld_cuga
+  verbose: true
+  memory_config:
+    _type: history_list
+    max_length: 600
+  history_k: 300
+  lm_config:
+    model: "gemini-2.5-pro"
+    train_temperature: 0.0
+    max_output_tokens: 20000
+    log_calls: true
+
+  # Sub-component configurations
+  planner_config:
+    planning_enabled: true
+    replan_on_failure: true
+    max_planning_steps: 10
+    memory_config:
+      _type: history_list
+      max_length: 400
+    history_k: 300
+    lm_config:
+      model: "gemini-2.5-pro"
+      train_temperature: 0.0
+      max_output_tokens: 2000
+      log_calls: true
+
+  code_planner_config:
+    memory_config:
+      _type: history_list
+      max_length: 400
+    history_k: 300
+    lm_config:
+      model: "gemini-2.5-pro"
+      train_temperature: 0.0
+      max_output_tokens: 3000
+      log_calls: true
+
+  code_agent_config:
+    enable_reflection: true
+    memory_config:
+      _type: history_list
+      max_length: 600
+    history_k: 300
+    lm_config:
+      model: "gemini-2.5-pro"
+      train_temperature: 0.0
+      max_output_tokens: 2000
+      log_calls: true
+
+  # Coordination configuration
+  coordination_enabled: true
+  max_coordination_steps: 50
+  enable_reflection_feedback: true
+
+output:
+  results_dir: outputs/appworld_generalist
+  log_level: INFO

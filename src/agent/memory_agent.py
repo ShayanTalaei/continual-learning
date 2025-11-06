@@ -106,10 +106,12 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
             # Track minimal trajectory as raw content
             self._trajectory.append(feedback_event)
         self.logger.info("Logged Feedback correct=%s", str(feedback.get("correct")))
-
+    
     def end_episode(self) -> None:
         # No reflections in the minimal MemoryAgent
         self.logger.info("End episode: trajectory_len=%d", len(self._trajectory))
+        self.memory.reset()
+        self._last_action = None
         self._trajectory = []
 
     def clone_for_episode(self, training: bool, share_memory: bool = True) -> "MemoryAgent":

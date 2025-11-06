@@ -29,6 +29,9 @@ My name is: {{ main_user.first_name }} {{ main_user.last_name }}. My personal em
 Task: How many playlists do I have in my Spotify playlist library?
 
 ASSISTANT:
+think: To count the Spotify playlists, I need to: 1) Login to Spotify using credentials from the supervisor app, 2) Use the playlist library API to get all playlists with proper pagination, 3) Count them and complete the task. Let me start by exploring the Spotify APIs.
+
+ASSISTANT:
 Okay. Let's first find which APIs are available to use in Spotify.
 
 ```python
@@ -285,6 +288,9 @@ Output:
 ```
 
 ASSISTANT:
+think: Now that I'm logged in and have the API spec, I need to paginate through all playlist pages to get the complete count. The API supports pagination, so I'll loop through pages until no more results are returned.
+
+ASSISTANT:
 I need to page through all the playlists to get the list of playlists and save it in `playlists`.
 
 ```python
@@ -334,6 +340,8 @@ B. App-specific instructions:
 
 - All my personal information (biographical details, credentials, addresses, cards) is stored in the Supervisor app, accessible via its APIs.
 - Any reference to my friends, family or any other person or relation refers to the people in my phone's contacts list.
+- When referring to "friends", "family", or other relationships, filter phone contacts by the `relationships` field. For example, "my friends" means contacts where `relationships` contains "friend".
+- The phone app's `search_contacts` API supports a `relationship` parameter to filter by relationship type.
 - Always obtain the current date or time, from Python function calls like `datetime.now()`, or from the phone app's get_current_date_and_time API, never from your internal clock.
 - All requests are concerning a single, default (no) time zone.
 - For temporal requests, use proper time boundaries, e.g., when asked about periods like "yesterday", use complete ranges: 00:00:00 to 23:59:59.

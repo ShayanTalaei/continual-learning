@@ -23,7 +23,7 @@ class HistoryAgent(MemoryAgent):
         messages: List[dict] = []
         recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
         
-        messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
+        # messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback:"})
         # Add previous experiences as alternating user/assistant messages
         for entry in recent:
             if entry.type.lower() == "observation":
