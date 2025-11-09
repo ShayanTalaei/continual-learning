@@ -2,6 +2,8 @@ from pathlib import Path
 from typing import Dict, Any, Iterable, List, Set
 import json
 
+from src.datagen.types import SyntheticTask
+
 
 def ensure_output_dir(path: str) -> Path:
     out = Path(path)
@@ -45,5 +47,25 @@ def write_dataset_jsonl(output_dir: Path, filename: str, rows: List[Dict[str, An
         for row in rows:
             f.write(json.dumps(row) + "\n")
     return out_path
+
+
+def write_synthetic_tasks_jsonl(path: Path, tasks: List[SyntheticTask]) -> Path:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as f:
+        for task in tasks:
+            f.write(json.dumps(task.model_dump()) + "\n")
+    return path
+
+
+def load_synthetic_tasks_jsonl(path: Path) -> List[SyntheticTask]:
+    tasks: List[SyntheticTask] = []
+    with open(path, "r") as f:
+        for line in f:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            tasks.append(SyntheticTask(**json.loads(stripped)))
+    return tasks
 
 

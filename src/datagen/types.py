@@ -13,6 +13,13 @@ class DataSourceItem(BaseModel):
     metadata: Dict[str, Any] = {}
 
 
+class SyntheticTask(BaseModel):
+    id: str
+    prompt_text: str
+    used_experiences: Optional[List[Dict[str, Any]]] = None
+    metadata: Dict[str, Any] = {}
+
+
 class GenerationItem(BaseModel):
     id: str
     teacher_messages: List[Message]

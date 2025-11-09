@@ -19,11 +19,13 @@ from src.datagen.io import (
     write_per_sample_json,
     load_existing_rows,
     write_dataset_jsonl,
+    write_synthetic_tasks_jsonl,
+    load_synthetic_tasks_jsonl,
 )
 from src.lm.lm_factory import get_lm_client
 from src.lm.language_model import LMConfig, LanguageModel
 from src.datagen.strategies.strategy import StrategyConfig, Strategy
-from src.datagen.types import GenerationItem
+from src.datagen.types import GenerationItem, SyntheticTask
 
 class DataGenConfig(BaseModel):
     output_dir: str
@@ -36,6 +38,9 @@ class DataGenConfig(BaseModel):
     llm: Dict[str, Any]
     strategy: Dict[str, Any]
     cartridges: Optional[List[Dict[str, Any]]] = None
+    mode: Literal["full", "questions_only", "answers_only"] = "full"
+    questions_output_path: Optional[str] = None
+    questions_input_path: Optional[str] = None
 
 
 class DataGenerationOrchestrator:
@@ -49,11 +54,71 @@ class DataGenerationOrchestrator:
         # Initialize core components
         self.strategy: Strategy = build_strategy(cfg.strategy, logger=logger)
         self.lm_client: LanguageModel = get_lm_client(cfg.llm, logger=logger)
+        default_questions_path = self.out_dir / "synthetic_tasks.jsonl"
+        self.questions_output_path = (
+            Path(cfg.questions_output_path) if cfg.questions_output_path else default_questions_path
+        )
+        self.questions_input_path = (
+            Path(cfg.questions_input_path) if cfg.questions_input_path else self.questions_output_path
+        )
 
     def run(self) -> Path:
         cfg = self.cfg
 
+        if cfg.mode == "questions_only":
+            tasks = self._generate_questions()
+            checkpoint_path = self._save_questions(tasks)
+            print(f"\n[DataGen] ✓ SUCCESS! Questions checkpointed at: {checkpoint_path}")
+            return checkpoint_path
+
+        if cfg.mode == "answers_only":
+            tasks = self._load_questions()
+            return self._materialize_dataset_from_tasks(tasks)
+
+        if self._supports_two_stage_flow():
+            # breakpoint()
+            tasks = self._generate_questions()
+            if self.questions_output_path:
+                self._save_questions(tasks)
+            return self._materialize_dataset_from_tasks(tasks)
+
+        # Fallback for strategies without question/answer split
         generation_items = self.strategy.generate()
+        return self._materialize_dataset(generation_items)
+
+    def _supports_two_stage_flow(self) -> bool:
+        return all(
+            hasattr(self.strategy, attr)
+            for attr in ("generate_questions", "build_items_from_tasks")
+        )
+
+    def _generate_questions(self) -> List[SyntheticTask]:
+        if not hasattr(self.strategy, "generate_questions"):
+            raise ValueError("Strategy does not support question generation.")
+        tasks = self.strategy.generate_questions()  # type: ignore[attr-defined]
+        return tasks
+
+    def _save_questions(self, tasks: List[SyntheticTask]) -> Path:
+        checkpoint_path = self.questions_output_path
+        if checkpoint_path is None:
+            raise ValueError("Questions output path is not configured.")
+        return write_synthetic_tasks_jsonl(checkpoint_path, tasks)
+
+    def _load_questions(self) -> List[SyntheticTask]:
+        if self.questions_input_path is None:
+            raise ValueError("Questions input path is not configured.")
+        if not self.questions_input_path.exists():
+            raise FileNotFoundError(f"Questions checkpoint not found: {self.questions_input_path}")
+        return load_synthetic_tasks_jsonl(self.questions_input_path)
+
+    def _materialize_dataset_from_tasks(self, tasks: List[SyntheticTask]) -> Path:
+        if not hasattr(self.strategy, "build_items_from_tasks"):
+            raise ValueError("Strategy cannot build generation items from tasks.")
+        generation_items = self.strategy.build_items_from_tasks(tasks)  # type: ignore[attr-defined]
+        return self._materialize_dataset(generation_items)
+
+    def _materialize_dataset(self, generation_items: List[GenerationItem]) -> Path:
+        cfg = self.cfg
 
         existing_ids = (
             get_existing_sample_ids(self.out_dir) if cfg.save_individual_files else set()
@@ -129,7 +194,6 @@ class DataGenerationOrchestrator:
         out_path = write_dataset_jsonl(self.out_dir, filename, ordered_rows)
         print(f"\n[DataGen] ✓ SUCCESS! Dataset generated at: {out_path}")
         return out_path
-
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Generate distillation data using the new datagen pipeline",

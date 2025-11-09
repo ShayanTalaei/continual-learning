@@ -1,6 +1,6 @@
 # Config for generating synthetic city QA data using the history-agent checkpoint
 # Set mode to `questions_only`, `answers_only`, or `full` depending on the stage.
-output_dir: "/projects/bfsg/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_chatboxed_second_half_seed_23_20000_with_subsample_and_original_experiences"
+output_dir: "/projects/bfsg/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_chatboxed_question_gen-1to50_from_100_val_data_answer_gen-same_as_question_gen_shuffled_student_messages_teacher_context_2500"
 output_format: jsonl
 
 num_threads: 512
@@ -12,7 +12,7 @@ metadata:
   task: cities_easy
 
 mode: full
-questions_output_path: "/projects/bfsg/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_chatboxed_second_half_seed_23_20000_with_subsample_and_original_experiences/synthetic_tasks.jsonl"
+questions_output_path: "/projects/bfsg/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_chatboxed_question_gen-1to50_from_100_val_data_answer_gen-same_as_question_gen_shuffled_student_messages_teacher_context_2500/synthetic_tasks.jsonl"
 # When running in answers_only mode, point to the questions checkpoint:
 # questions_input_path: "/absolute/path/to/questions_checkpoint.jsonl"
 
@@ -33,18 +33,17 @@ strategy:
   chat_mode: true
   memory_adapter:
     type: history_list
-    checkpoint_path: "/projects/bfsg/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_no_checkpoint/20251107_155111/checkpoints/ep_000500/memory_500.jsonl"
+    checkpoint_path: "/projects/bfsg/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_no_checkpoint/20251106_184822/checkpoints/ep_000100/memory_100.jsonl"
   solver_memory_adapter:
     type: history_list
-    checkpoint_path: "/projects/bfsg/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_no_checkpoint/20251107_155111/checkpoints/ep_000500/memory_500.jsonl"
-  # student_messages_mode: teacher_context  # options: none, teacher_context, custom_memory
-  # student_memory_adapter:
-  #   type: history_list
-  #   checkpoint_path: "/absolute/path/to/student_memory.jsonl"
-  num_generations: 20000
-  num_experiences_subsample_per_task_generation: 20
-  use_task_generation_experiences_for_solving: false
-  shuffle_experiences_when_solving: false
+    checkpoint_path: "/projects/bfsg/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500/memory_500.jsonl"
+  student_messages_mode: teacher_context
+  num_generations: 2500
+  num_experiences_subsample_per_task_generation:
+    - 1
+    - 50
+  use_task_generation_experiences_for_solving: true
+  shuffle_experiences_when_solving: true
   num_threads: 512
   lm_config:
     model: "toka:meta-llama/Llama-3.1-8B-Instruct"
@@ -53,4 +52,3 @@ strategy:
     val_temperature: 1.0
     max_output_tokens: 2048
     max_retries: 2
-

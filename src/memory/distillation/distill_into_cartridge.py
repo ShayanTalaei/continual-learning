@@ -217,6 +217,11 @@ class DistillationConfig(pydra.Config):
 
         self.load_cache_path = None
     
+    def long_seqs(self):
+        self.dataset.packed_seq_length = 128_000
+        self.dataset.batch_size = 16
+        self.training.global_batch_size = 4
+    
     def quick_data(self):
         self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl"
     
@@ -244,7 +249,7 @@ class DistillationConfig(pydra.Config):
     def synth_cities_matx(self):
         self.synth_cities()
         self.matx()
-        self.input_dataset.local_path = "/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences.jsonl"
+        # self.input_dataset.local_path = "/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences.jsonl"
 
     def finalize(self):
         if self.run_name is None:
