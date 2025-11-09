@@ -64,9 +64,9 @@ agent:
     - id: nov4_chatboxed-cache-step600
       source: local
       force_redownload: false
-    # - id: nov4_chatboxed-cache-step600
-    #   source: local
-    #   force_redownload: false
+    - id: nov4_chatboxed-cache-step600-copy
+      source: local
+      force_redownload: false
   history_k: null
   collapse_messages: false
   only_boxed: true

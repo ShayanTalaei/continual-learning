@@ -6,7 +6,7 @@ runtime:
   scores_path: scores.jsonl
   run_validation_at_start: true
   validation_num_workers: 200
-  validation_freq: 25
+  validation_freq: 5
   # Checkpointing
   checkpoint_dir: checkpoints
   checkpoint_every_episodes: 50
@@ -29,7 +29,7 @@ train_dataset:
   instruction_template: null
   idx_range: [500, 1000]
   shuffle: true
-  seed: 42
+  seed: 111
 
 validation_dataset:
   type: qa
@@ -58,17 +58,14 @@ agent:
     _type: history_list
     max_length: null
   cartridges:
-    - id: nov3_synthcitytrain_1e2lr-cache-step1000 
+    - id: nov6_chatboxed_mixed_dataset-cache-step500
       source: local
       force_redownload: false
   history_k: null
-  collapse_messages: true
+  collapse_messages: false
   only_boxed: true
   system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
-  merge_feedback_and_observation: false
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_collapsed_only_boxed_cartridge
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov6_chatboxed_mixed_dataset-cache-step500
   log_level: INFO
-
-

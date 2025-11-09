@@ -24,76 +24,81 @@ class HistoryAgent(MemoryAgent):
         obs: str,
         history: List[Any],
         k: Union[int, None],
-        merge_feedback_and_observation: bool = False,
         collapse_messages: Union[bool, None] = None,
     ) -> List[Dict[str, str]]:
-        messages: List[Dict[str, str]] = []
         config = cast(HistoryAgentConfig, self.config)
         collapse = config.collapse_messages if collapse_messages is None else collapse_messages
-        recent: List[Entry] = history[-k:] if k is not None else history  # type: ignore[assignment]
-        
-        # Combine all prior experiences into a single user message, each experience as a block (Observation, Action, Feedback)
-        experiences = []
-        current_experience = {}
-        # Gather sequentially as episodes: observation -> action -> feedback
-        for entry in recent:
-            etype = entry.type.lower()
-            if etype == "observation":
-                # Start a new experience
-                if current_experience:
-                    experiences.append(current_experience)
-                    current_experience = {}
-                current_experience["observation"] = str(entry.content)
-            elif etype == "action":
-                content_str = str(entry.content)
-                current_experience["action"] = content_str
-            elif etype == "feedback":
-                current_experience["feedback"] = f"{entry.content}"
-        if current_experience:
-            experiences.append(current_experience)
+        recent_entries = cast(List[Entry], history[-k:] if k is not None else history)
 
-        exp_blocks = []
-        for i, exp in enumerate(experiences):
-            lines = []
-            if "observation" in exp:
-                lines.append(f"Observation: {exp['observation']}")
-            if "action" in exp:
-                lines.append(f"Action: {exp['action']}")
-            if "feedback" in exp:
-                lines.append(f"Feedback: {exp['feedback']}")
-            exp_blocks.append("\n".join(lines))
+        experiences = self._collect_experiences(recent_entries)
         if collapse:
-            user_content = "" #"Here are the previous experiences you've had and their feedback:\n\n"
-            user_content += "\n\n".join(exp_blocks)
-            if exp_blocks:
-                user_content += "\n\n"
-            user_content += f"{obs}"
-            messages.append({"role": "user", "content": user_content})
-        else:
-            if experiences:
-                messages.append({"role": "user", "content": "Here are the previous experiences you've had and their feedback."})
-                for exp in experiences:
-                    obs_text = exp.get("observation")
-                    action_text = exp.get("action")
-                    feedback_text = exp.get("feedback")
+            content = self._format_collapsed_prompt(experiences, obs)
+            return [{"role": "user", "content": content}]
 
-                    if obs_text:
-                        if merge_feedback_and_observation and feedback_text:
-                            messages.append({
-                                "role": "user",
-                                "content": f"Observation: {obs_text}\nFeedback: {feedback_text}",
-                            })
-                            feedback_text = None
-                        else:
-                            messages.append({"role": "user", "content": f"Observation: {obs_text}"})
+        messages = self._format_expanded_prompt(experiences)
+        messages.append({"role": "user", "content": str(obs)})
+        return messages
 
-                    if action_text:
-                        messages.append({"role": "assistant", "content": f"{action_text}"})
+    def _collect_experiences(self, entries: List[Entry]) -> List[Dict[str, str]]:
+        experiences: List[Dict[str, str]] = []
+        current: Dict[str, str] = {}
 
-                    if feedback_text:
-                        messages.append({"role": "user", "content": f"Feedback: {feedback_text}"})
+        for entry in entries:
+            etype = entry.type.lower()
+            content = str(entry.content)
 
-            messages.append({"role": "user", "content": f"Here is the current observation: {obs}"})
+            if etype == "observation":
+                if current:
+                    experiences.append(current)
+                    current = {}
+                current["observation"] = content
+            elif etype == "action":
+                current["action"] = content
+            elif etype == "feedback":
+                current["feedback"] = content
+
+        if current:
+            experiences.append(current)
+
+        return experiences
+
+    def _format_collapsed_prompt(self, experiences: List[Dict[str, str]], obs: str) -> str:
+        blocks = []
+        for exp in experiences:
+            lines = []
+            observation = exp.get("observation")
+            action = exp.get("action")
+            feedback = exp.get("feedback")
+
+            if observation:
+                lines.append(f"Observation: {observation}")
+            if action:
+                lines.append(f"Action: {action}")
+            if feedback:
+                lines.append(f"Feedback: {feedback}")
+
+            if lines:
+                blocks.append("\n".join(lines))
+
+        prior = "\n\n".join(blocks)
+        parts = [prior] if prior else []
+        parts.append(str(obs))
+        return "\n\n".join(parts)
+
+    def _format_expanded_prompt(self, experiences: List[Dict[str, str]]) -> List[Dict[str, str]]:
+        messages: List[Dict[str, str]] = []
+
+        for exp in experiences:
+            observation = exp.get("observation")
+            action = exp.get("action")
+            feedback = exp.get("feedback")
+
+            if observation:
+                messages.append({"role": "user", "content": observation})
+            if action:
+                messages.append({"role": "assistant", "content": action})
+            if feedback:
+                messages.append({"role": "user", "content": feedback})
 
         return messages
 

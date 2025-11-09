@@ -1256,9 +1256,9 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     training.weight_decay=1e-5
 
 
-# matx cartridging synth cities
+## synth cities on delta
 
-TORCHINDUCTOR_MAX_AUTOTUNE=0 TORCHINDUCTOR_MAX_AUTOTUNE_GEMM_BACKENDS=ATEN,TRITON python -m src.memory.distillation.distill_into_cartridge \
+python -m src.memory.distillation.distill_into_cartridge \
     run_name=nov3_synthcitytrain \
     kv_cache.num_tokens=128 \
     training.train_temperature=1 \
@@ -1271,7 +1271,7 @@ TORCHINDUCTOR_MAX_AUTOTUNE=0 TORCHINDUCTOR_MAX_AUTOTUNE_GEMM_BACKENDS=ATEN,TRITO
     dataloader_num_workers=8 \
     .streaming \
     .train_gen_eval \
-    .synth_cities_matx \
+    .synth_cities_delta \
     .toka \
     training.weight_decay=1e-5 \
     wandb.enabled=F \

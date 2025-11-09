@@ -16,8 +16,8 @@ runtime:
   checkpoint_strategy: last_n
   checkpoint_keep_last: 20
   checkpoint_on_start: false
-  start_episode_index: 500
-  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500"
+  # start_episode_index: 500
+  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500"
 
 train_dataset:
   type: qa
@@ -64,7 +64,7 @@ agent:
   merge_feedback_and_observation: false
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_no_checkpoint
   log_level: INFO
 
 
