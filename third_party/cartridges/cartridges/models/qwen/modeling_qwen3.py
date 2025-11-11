@@ -34,6 +34,7 @@ from transformers.utils import auto_docstring, can_return_tuple, logging
 
 from .configuration_qwen3 import Qwen3Config
 from cartridges.models.attention import create_block_mask_w_cache, flex_attention_forward, repeat_kv
+from cartridges.models.attention_capture import AttentionCapture
 
 
 logger = logging.get_logger(__name__)
@@ -51,6 +52,7 @@ class Qwen3Batch:
     attention_mask: Optional[torch.Tensor] = None
     use_cache: Optional[bool] = None
     mode: Literal["train", "generate"] = "train"
+    attention_capture: Optional[AttentionCapture] = None
 
     def update(self, **kwargs) -> "Qwen3Batch":
         return Qwen3Batch(
@@ -175,13 +177,48 @@ class Qwen3Attention(nn.Module):
 
 
         past_key_value = batch.past_key_values
+        kv_seq_ids = None
+        cache_len = 0
         if past_key_value is not None:
-            key_states, value_states = past_key_value.update(
-                key_states, value_states, batch.seq_ids, self.layer_idx,
-                skip_append=batch.mode == "train"
-            )
-        
+            if batch.attention_capture is not None:
+                key_states, value_states, kv_seq_ids = past_key_value.update(
+                    key_states,
+                    value_states,
+                    batch.seq_ids,
+                    self.layer_idx,
+                    skip_append=batch.mode == "train",
+                    return_seq_ids=True,
+                )
+            else:
+                key_states, value_states = past_key_value.update(
+                    key_states,
+                    value_states,
+                    batch.seq_ids,
+                    self.layer_idx,
+                    skip_append=batch.mode == "train",
+                )
+            cache_len = past_key_value.num_tokens()
+        elif batch.attention_capture is not None:
+            kv_seq_ids = batch.seq_ids
 
+        capture = batch.attention_capture
+        # Store Q/K/V tensors before flex_attention_forward to avoid compilation issues
+        if capture is not None:
+            num_local_query_heads = query_states.shape[1]
+            capture_enable_gqa = (num_local_query_heads & (num_local_query_heads - 1)) == 0
+            capture.record(
+                layer_idx=self.layer_idx,
+                mode=batch.mode,
+                query=query_states,
+                key=key_states,
+                value=value_states,
+                seq_ids=batch.seq_ids,
+                kv_seq_ids=kv_seq_ids,
+                cache_len=cache_len,
+                scaling=self.scaling,
+                enable_gqa=capture_enable_gqa,
+                has_block_mask=isinstance(batch.attention_mask, BlockMask),
+            )
 
         attn_output = flex_attention_forward(
             self,
@@ -340,12 +377,15 @@ class FlexQwen3Model(FlexQwen3PreTrainedModel):
         inputs_embeds: Optional[torch.FloatTensor] = None,
         use_cache: Optional[bool] = None,
         mode: Literal["train", "generate"] = "train",
+        attention_capture: Optional[AttentionCapture] = None,
     ) -> BaseModelOutputWithPast:
         """
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
             Sequence IDs for the input tokens.
         mode (`Literal["train", "generate"]`): Whether running a forward pass for training/eval or
             or generation.
+        attention_capture (`AttentionCapture`, *optional*):
+            Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
         """
         input_ids = input_ids.unsqueeze(0)
         position_ids = position_ids.unsqueeze(0)
@@ -378,6 +418,7 @@ class FlexQwen3Model(FlexQwen3PreTrainedModel):
             position_embeddings=position_embeddings,
             attention_mask=block_mask,
             mode=mode,
+            attention_capture=attention_capture,
         )
 
         for decoder_layer in self.layers[: self.config.num_hidden_layers]:
@@ -436,6 +477,7 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
         use_cache: Optional[bool] = None,
         logits_to_keep: Union[int, torch.Tensor] = 0,
         mode: Literal["train", "generate"] = "train",
+        attention_capture: Optional[AttentionCapture] = None,
     ) -> CausalLMOutputWithPast:
         r"""
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -446,6 +488,8 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
             (masked), the loss is only computed for the tokens with labels in `[0, ..., config.vocab_size]`.
         mode (`Literal["train", "generate"]`): Whether running a forward pass for training/eval or
             or generation.
+        attention_capture (`AttentionCapture`, *optional*):
+            Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
 
         Example:
 
@@ -471,6 +515,7 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
             inputs_embeds=inputs_embeds,
             use_cache=use_cache,
             mode=mode,
+            attention_capture=attention_capture,
         )
 
         hidden_states = outputs.last_hidden_state

@@ -1,6 +1,8 @@
+import math
+
 import torch
 
-from typing import Optional, Union, Literal
+from typing import Optional, Union, Literal, cast
 from torch.nn.attention.flex_attention import create_block_mask, flex_attention, BlockMask
 
 from cartridges.cache import TrainableCache
@@ -29,6 +31,7 @@ def repeat_kv(hidden_states: torch.Tensor, n_rep: int) -> torch.Tensor:
     hidden_states = hidden_states[:, :, None, :, :].expand(batch, num_key_value_heads, n_rep, slen, head_dim)
     return hidden_states.reshape(batch, num_key_value_heads * n_rep, slen, head_dim)
 
+
 def create_block_mask_w_cache(
     cache: Optional[TrainableCache],
     seq_ids: torch.LongTensor, # [sum(seq_lens)]
@@ -40,7 +43,9 @@ def create_block_mask_w_cache(
     # --- begin build block mask ---
     kv_seq_ids = seq_ids
     if cache_len > 0:
-        kv_seq_ids = torch.cat([cache.seq_ids(), kv_seq_ids])
+        if cache is None:
+            raise RuntimeError("Cache length reported but cache instance is None.")
+        kv_seq_ids = torch.cat([cast(torch.Tensor, cache.seq_ids()), kv_seq_ids])
 
     def mask_func(_, _h, q_idx, kv_idx):
         return (kv_seq_ids[kv_idx] == -1) | ((seq_ids[q_idx] == kv_seq_ids[kv_idx]) & (q_idx + cache_len >= kv_idx))
@@ -63,7 +68,7 @@ def flex_attention_forward(
     scaling: Optional[float] = None,
     mode: Literal["train", "generate"] = "train",
     **kwargs,
-) -> tuple[torch.Tensor, torch.Tensor]:
+) -> torch.Tensor:
 
     if kwargs.get("dropout", 0.0) > 0:
         raise ValueError(
@@ -105,8 +110,7 @@ def flex_attention_forward(
         kernel_options=kernel_options,
         return_lse=False,
     )    
-    attn_output = attn_output.transpose(1, 2).contiguous()
-
+    attn_output = cast(torch.Tensor, attn_output).transpose(1, 2).contiguous()
 
     return attn_output
 

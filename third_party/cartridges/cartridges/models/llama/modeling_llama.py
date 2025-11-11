@@ -39,6 +39,8 @@ from transformers.modeling_outputs import (
 from transformers.modeling_rope_utils import ROPE_INIT_FUNCTIONS, dynamic_rope_update
 from transformers.modeling_utils import ALL_ATTENTION_FUNCTIONS, PreTrainedModel
 from transformers.utils import auto_docstring, can_return_tuple, logging
+
+from cartridges.models.attention_capture import AttentionCapture
 from .configuration_llama import LlamaConfig
 
 
@@ -46,7 +48,6 @@ logger = logging.get_logger(__name__)
 
 
 torch._inductor.config.max_autotune_gemm_backends = 'ATEN,TRITON,CPP'
-
 
 
 # SE (07/21): `dynamic=False` is necessary to avoid a "PassManager::run failed" error
@@ -76,6 +77,7 @@ class LlamaBatch:
     attention_mask: Optional[torch.Tensor] = None
     use_cache: Optional[bool] = None
     mode: Literal["train", "generate"] = "train"
+    attention_capture: Optional[AttentionCapture] = None
 
     def update(self, **kwargs) -> "LlamaBatch":
         return LlamaBatch(
@@ -212,7 +214,7 @@ def flex_attention_forward(
     scaling: Optional[float] = None,
     mode: Literal["train", "generate"] = "train",
     **kwargs,
-) -> tuple[torch.Tensor, torch.Tensor]:
+) -> torch.Tensor:
 
     if kwargs.get("dropout", 0.0) > 0:
         raise ValueError(
@@ -256,7 +258,6 @@ def flex_attention_forward(
     )    
     attn_output = attn_output.transpose(1, 2).contiguous()
 
-
     return attn_output
 
 
@@ -299,15 +300,52 @@ class LlamaAttention(nn.Module):
         query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin)
 
         past_key_value = batch.past_key_values
+        kv_seq_ids = None
+        cache_len = 0
         if past_key_value is not None:
-            key_states, value_states = past_key_value.update(
-                key_states, value_states, batch.seq_ids, self.layer_idx,
-                skip_append=batch.mode == "train"
-            )
+            if batch.attention_capture is not None:
+                key_states, value_states, kv_seq_ids = past_key_value.update(
+                    key_states,
+                    value_states,
+                    batch.seq_ids,
+                    self.layer_idx,
+                    skip_append=batch.mode == "train",
+                    return_seq_ids=True,
+                )
+            else:
+                key_states, value_states = past_key_value.update(
+                    key_states,
+                    value_states,
+                    batch.seq_ids,
+                    self.layer_idx,
+                    skip_append=batch.mode == "train",
+                )
+            cache_len = past_key_value.num_tokens()
 
             if self.config.attention_dropout > 0:
                 key_states = F.dropout(key_states, p=self.config.attention_dropout, training=self.training)
                 value_states = F.dropout(value_states, p=self.config.attention_dropout, training=self.training)
+        elif batch.attention_capture is not None:
+            kv_seq_ids = batch.seq_ids
+
+        capture = batch.attention_capture
+        # Store Q/K/V tensors before flex_attention_forward to avoid compilation issues
+        if capture is not None:
+            num_local_query_heads = query_states.shape[1]
+            capture_enable_gqa = (num_local_query_heads & (num_local_query_heads - 1)) == 0
+            capture.record(
+                layer_idx=self.layer_idx,
+                mode=batch.mode,
+                query=query_states,
+                key=key_states,
+                value=value_states,
+                seq_ids=batch.seq_ids,
+                kv_seq_ids=kv_seq_ids,
+                cache_len=cache_len,
+                scaling=self.scaling,
+                enable_gqa=capture_enable_gqa,
+                has_block_mask=isinstance(batch.attention_mask, BlockMask),
+            )
 
         attn_output = flex_attention_forward(
             self,
@@ -318,6 +356,7 @@ class LlamaAttention(nn.Module):
             scaling=self.scaling,
             mode=batch.mode,
         )
+
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)
 
@@ -428,12 +467,15 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         inputs_embeds: Optional[torch.FloatTensor] = None,
         use_cache: Optional[bool] = None,
         mode: Literal["train", "generate"] = "train",
+        attention_capture: Optional[AttentionCapture] = None,
     ) -> BaseModelOutputWithPast:
         """
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
             Sequence IDs for the input tokens.
         mode (`Literal["train", "generate"]`): Whether running a forward pass for training/eval or
             or generation. Affects which compiled version of flex attention is used.
+        attention_capture (`AttentionCapture`, *optional*):
+            Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
         """
         input_ids = input_ids.unsqueeze(0)
         position_ids = position_ids.unsqueeze(0)
@@ -476,6 +518,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             position_embeddings=position_embeddings,
             attention_mask=block_mask,
             mode=mode,
+            attention_capture=attention_capture,
         )
         
         hidden_states.requires_grad = True
@@ -539,6 +582,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
         use_cache: Optional[bool] = None,
         logits_to_keep: Union[int, torch.Tensor] = 0,
         mode: Literal["train", "generate"] = "train",
+        attention_capture: Optional[AttentionCapture] = None,
     ) -> CausalLMOutputWithPast:
         r"""
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -549,6 +593,8 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
             (masked), the loss is only computed for the tokens with labels in `[0, ..., config.vocab_size]`.
         mode (`Literal["train", "generate"]`): Whether running a forward pass for training/eval or
             or generation.
+        attention_capture (`AttentionCapture`, *optional*):
+            Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
 
         Example:
 
@@ -574,6 +620,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
             inputs_embeds=inputs_embeds,
             use_cache=use_cache,
             mode=mode,
+            attention_capture=attention_capture,
         )
 
         hidden_states = outputs.last_hidden_state

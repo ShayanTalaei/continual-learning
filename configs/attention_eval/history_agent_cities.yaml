@@ -1,0 +1,36 @@
+runtime:
+  max_envs_to_visit: 512
+  max_steps_per_episode: 1
+  run_validation_at_start: true
+  validation_num_workers: 64
+
+validation_dataset:
+  type: qa
+  hf_name: "stalaei/easy_synth_cities_40_25"
+  split: "val"
+  question_field: "question"
+  answer_field: "name"
+  id_field: "id"
+  shuffle: false
+  max_samples: 128
+
+agent:
+  type: history_agent
+  history_k: null
+  collapse_messages: false
+  only_boxed: true
+  merge_feedback_and_observation: false
+  lm_config:
+    model: "toka:meta-llama/Llama-3.1-8B-Instruct"
+    val_temperature: 0.0
+    max_output_tokens: 2048
+    log_calls: false
+  memory_config:
+    _type: history_list
+    max_length: null
+  system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
+
+output:
+  results_dir: outputs/attention_eval/history_agent_cities
+  log_level: INFO
+

@@ -55,6 +55,7 @@ class TrainableCache(nn.Module):
         self.config = config
         self._keys = [None] * config.n_layers  # List of tensors per layer
         self._values = [None] * config.n_layers  # List of tensors per layer
+        self._layer_seq_ids: list[Optional[torch.Tensor]] = [None] * config.n_layers
         self._num_tokens = 0
 
         assert (init_keys is None) == (init_values is None)
@@ -147,6 +148,7 @@ class TrainableCache(nn.Module):
         new_seq_ids: torch.Tensor,
         layer_idx: int,
         skip_append: bool = False,
+        return_seq_ids: bool = False,
     ):
         """Update the cache with new keys and values while maintaining sequence contiguity.
         
@@ -157,6 +159,8 @@ class TrainableCache(nn.Module):
             layer_idx: index of the layer in the model.
             skip_append: if True, do not append the new keys and values to the cache, 
                 just return the concatenation of the new_keys and values. 
+            return_seq_ids: if True, also return the sequence ids corresponding to the
+                concatenated keys/values that will be used by the attention module.
         """
         assert new_seq_ids.shape[0] == new_keys.shape[2]
         assert new_seq_ids.shape[0] == new_values.shape[2]
@@ -178,9 +182,17 @@ class TrainableCache(nn.Module):
             keys = [self._keys[layer_idx]] + keys
             values = [self._values[layer_idx]] + values
 
+        layer_seq_ids_updated = False
         if not skip_append:
             self._keys[layer_idx] = torch.cat(keys, dim=2)
             self._values[layer_idx] = torch.cat(values, dim=2)
+            if self._layer_seq_ids[layer_idx] is None:
+                self._layer_seq_ids[layer_idx] = new_seq_ids
+            else:
+                self._layer_seq_ids[layer_idx] = torch.cat(
+                    [self._layer_seq_ids[layer_idx], new_seq_ids], dim=0
+                )
+            layer_seq_ids_updated = True
         
         if self._num_trainable_tokens > 0:
             keys = [self.trainable_keys[layer_idx]] + keys
@@ -194,7 +206,36 @@ class TrainableCache(nn.Module):
         # if self._num_trainable_tokens == 0 and self._num_frozen_tokens == 0:
         #     return self._keys[layer_idx], self._values[layer_idx]
 
-        return torch.cat(keys, dim=2), torch.cat(values, dim=2)
+        concatenated_keys = torch.cat(keys, dim=2)
+        concatenated_values = torch.cat(values, dim=2)
+
+        if return_seq_ids:
+            device = new_seq_ids.device
+            seq_components: list[torch.Tensor] = []
+
+            if self._num_frozen_tokens > 0 and self._init_seq_ids is not None:
+                seq_components.append(
+                    self._init_seq_ids[: self._num_frozen_tokens].to(device)
+                )
+            if self._num_trainable_tokens > 0 and self._init_seq_ids is not None:
+                start = self._num_frozen_tokens
+                seq_components.append(
+                    self._init_seq_ids[start : start + self._num_trainable_tokens].to(
+                        device
+                    )
+                )
+
+            if self._layer_seq_ids[layer_idx] is not None:
+                seq_components.append(self._layer_seq_ids[layer_idx].to(device))
+                if not layer_seq_ids_updated:
+                    seq_components.append(new_seq_ids)
+            else:
+                seq_components.append(new_seq_ids)
+
+            concatenated_seq_ids = torch.cat(seq_components, dim=0)
+            return concatenated_keys, concatenated_values, concatenated_seq_ids
+
+        return concatenated_keys, concatenated_values
     
     def num_tokens(self) -> int:
         """Get the sequence length of the cache."""
@@ -211,6 +252,7 @@ class TrainableCache(nn.Module):
     def clear(self):
         self._keys = [None] * self.config.n_layers
         self._values = [None] * self.config.n_layers
+        self._layer_seq_ids = [None] * self.config.n_layers
         self._num_tokens = 0
         self._seq_ids = self._init_seq_ids
 
