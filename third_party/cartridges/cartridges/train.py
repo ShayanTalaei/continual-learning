@@ -453,7 +453,11 @@ def train(config: TrainConfig):
                     if config.log_time:
                         torch.cuda.synchronize()
                         logger.info(f"Forward pass time: {time.time() - t0:.2f}s")
-
+                    
+                    # print(tokenizer.decode(batch.input_ids[batch.element_ids == 0]))
+                    # if torch.distributed.get_rank() == 0:
+                    #     breakpoint()
+                    # torch.distributed.barrier()
                     topk_pred_logprobs = torch.gather(
                         F.log_softmax(outputs.logits / config.train_temperature, dim=-1)[0],
                         dim=-1,

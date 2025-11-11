@@ -26,7 +26,7 @@ from cartridges.utils import get_logger
 from cartridges.utils.hf import read_conversations_from_hf
 from cartridges.utils.wandb import read_conversations_from_wandb
 
-# SE(04/02): required to silence tokenizer warnings when using dataloders with
+# SE(04/02): required to silence tokenizr warnings when using dataloders with
 # multiple worker processes
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
@@ -476,6 +476,9 @@ class TrainDataset(Dataset):
         topk_token_idxs = torch.cat(topk_token_idxs, dim=0)
 
         if len(input_ids) > self.config.packed_seq_length:
+            if self.config.packing_mode != "truncate":
+                raise ValueError(f"input ids are longer than the sequence length, but packing mode is {self.config.packing_mode}")
+            
             # if the input ids are longer than the sequence length, 
             # we need to truncate them
             input_ids = input_ids[:self.config.packed_seq_length]
@@ -566,7 +569,7 @@ class ShayanTrainDataset(TrainDataset):
                 "role": "system",
                 "content": self.system_prompt,
             },
-            row['input_messages'][1]
+            *row['input_messages'][1:]
         ]
         ids = self.tokenizer.apply_chat_template(
             messages,
