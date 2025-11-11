@@ -629,7 +629,7 @@ def prepare_and_submit_to_model(
             starting_prefill_offset=starting_offset,
             hydragen_groups=microbatch_hydragen_groups,
             microbatch_index=i,
-            microbatch_total=num_microbatches,
+            microbatch_total=num_microbatches
         )
 
         microbatches.append(for_model)

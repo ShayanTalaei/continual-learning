@@ -348,3 +348,49 @@ python -m src.attention_capture.run_eval_cli \
     --query-span-tag current_observation \
     --max-samples 1 \
     --capture-use-eager-attn
+
+
+## Nov 9, training cartridges with offsets
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov9_chatboxed_second_half_cities_with_offsets \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=128 \
+    non_cartridge_start_position_id_offset=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_chatboxed_second_half_seed_23_20000_with_subsample_and_original_experiences/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/
+
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov9_chatboxed_first_half_cities_with_offsets \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    non_cartridge_start_position_id_offset=128 \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .toka \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_boxed_only_20000_with_subsample_and_original_experiences/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/

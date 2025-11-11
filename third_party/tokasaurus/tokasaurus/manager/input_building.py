@@ -160,6 +160,7 @@ def seqs_to_input(
     microbatch_total: int = 1,
 ):
     use_hydragen = hydragen_groups is not None
+    
 
     position_ids = []
     lm_head_indices = []
@@ -196,8 +197,10 @@ def seqs_to_input(
 
         prefill_input_ids_list.extend(prefill_ids)
 
-        # Position IDs need to be offset by cartridge space
-        seq_pos_ids = list(range(cartridge_tokens + start_position, cartridge_tokens + end_position))
+        # Get offset from sequence's request (defaults to 0 if no request)
+        offset = seq.request.non_cartridge_start_position_id_offset if seq.request else 0
+        # Position IDs need to be offset by cartridge space and non-cartridge offset
+        seq_pos_ids = list(range(cartridge_tokens + start_position + offset, cartridge_tokens + end_position + offset))
         position_ids.extend(seq_pos_ids)
 
         # Calculate total KV sequence length including cartridge space
@@ -265,8 +268,10 @@ def seqs_to_input(
         # NOTE: minus one since last prefill token produces first
         # decode token.
         current_token_pos_id = seq.total_scheduled() - 1
-        # Position ID needs to be offset by cartridge space
-        position_ids.append(cartridge_tokens + current_token_pos_id)
+        # Get offset from sequence's request (defaults to 0 if no request)
+        offset = seq.request.non_cartridge_start_position_id_offset if seq.request else 0
+        # Position ID needs to be offset by cartridge space and non-cartridge offset
+        position_ids.append(cartridge_tokens + current_token_pos_id + offset)
 
         if use_hydragen and seq.id in sid_to_group:
             group = sid_to_group[seq.id]

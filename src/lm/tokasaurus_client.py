@@ -24,6 +24,7 @@ class TokasaurusConfig(LMConfig):
     enable_health_check: bool = False  # Ping check before each call (can be noisy under load)
     # When set, request top-k logprobs and include full sequence tensor data in responses
     top_logprobs: Optional[int] = None
+    non_cartridge_start_position_id_offset: int = 0  # Offset for non-cartridge start position IDs (passed per-request)
 
 
 class TokasaurusClient(LanguageModel):
@@ -220,6 +221,9 @@ class TokasaurusClient(LanguageModel):
         }
         if cartridges is not None:
             payload["cartridges"] = cartridges
+            # Pass non_cartridge_start_position_id_offset if configured
+            if self.cfg.non_cartridge_start_position_id_offset != 0:
+                payload["non_cartridge_start_position_id_offset"] = self.cfg.non_cartridge_start_position_id_offset
         if self.cfg.stop_sequences:
             payload["stop"] = self.cfg.stop_sequences
         if top_logprobs is not None:
@@ -328,6 +332,9 @@ class TokasaurusClient(LanguageModel):
         }
         if cartridges is not None:
             payload["cartridges"] = cartridges
+            # Pass non_cartridge_start_position_id_offset if configured
+            if self.cfg.non_cartridge_start_position_id_offset != 0:
+                payload["non_cartridge_start_position_id_offset"] = self.cfg.non_cartridge_start_position_id_offset
         if self.cfg.stop_sequences:
             payload["stop"] = self.cfg.stop_sequences
         if top_logprobs is not None:

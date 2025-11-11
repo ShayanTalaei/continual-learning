@@ -54,24 +54,22 @@ agent:
     tensor_parallel_size: 4
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
     max_retries: 3
+    non_cartridge_start_position_id_offset: 4096
   memory_config:
     _type: history_list
     max_length: null
   cartridges:
-    # - id: nov7_chatboxed_second_half_cities-cache-step600
+    - id: nov9_chatboxed_second_half_cities_with_offsets-cache-step1000
+      source: local
+      force_redownload: false
+    # - id: nov9_chatboxed_second_half_cities_with_offsets-cache-step1000
     #   source: local
-    #   force_redownload: false
-    - id: nov4_chatboxed-cache-step600
-      source: local
-      force_redownload: false
-    - id: nov4_chatboxed-cache-step600-copy
-      source: local
-      force_redownload: false
+      # force_redownload: false
   history_k: null
   collapse_messages: false
   only_boxed: true
   system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_two_cartridges_nov4_chatboxed_nov7_chatboxed_second_half_cities
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_nov9_chatboxed_second_half_cities_with_offsets-cache-step1000_with_4096_offset
   log_level: INFO

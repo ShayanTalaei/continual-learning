@@ -14,8 +14,9 @@ class KVFromText(KVCacheFactory):
     class Config(KVCacheFactory.Config):
         max_tokens: Optional[int]
         text_source: str = DEFAULT_TEXT_SOURCE
-
+        
         system_prompt_template: Optional[str] = "{text}"
+        cartridge_start_position: int = 0
 
     def initialize_kv_cache(
         self,
@@ -42,7 +43,7 @@ class KVFromText(KVCacheFactory):
 
                 input_ids = input_ids.to(model.device)
                 seq_ids = torch.full_like(input_ids, 0, dtype=torch.long)
-                position_ids = torch.arange(input_ids.shape[-1], dtype=torch.long).to(model.device)
+                position_ids = torch.arange(input_ids.shape[-1], dtype=torch.long).to(model.device) + self.config.cartridge_start_position
                 model(
                     input_ids=input_ids,
                     seq_ids=seq_ids,

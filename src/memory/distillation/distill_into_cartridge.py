@@ -101,6 +101,7 @@ class KVCacheInitConfig(pydra.Config):
         self.method = "random"  # Initialization method: "random" or "text"
         self.num_tokens = pydra.REQUIRED  # Number of tokens in the cartridge
         self.num_frozen_tokens = 4  # Number of tokens to freeze (prevents forgetting)
+        self.cartridge_start_position = 0  # Starting position for cartridge tokens
         
         # For text initialization
         self.init_text = None  # Text to initialize from (for method='text')
@@ -171,6 +172,7 @@ class DistillationConfig(pydra.Config):
         
         # Model
         self.model_name = "meta-llama/Llama-3.1-8B-Instruct"  # Model name
+        self.non_cartridge_start_position_id_offset = 0  # Offset for non-cartridge start position IDs
         
         # KV Cache
         self.kv_cache = KVCacheInitConfig()
@@ -383,6 +385,7 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
             max_tokens=config.num_tokens,
             text_source=str(init_text_file),
             num_frozen_tokens=config.num_frozen_tokens,
+            cartridge_start_position=config.cartridge_start_position,
         )
     
     else:
@@ -629,6 +632,9 @@ def run_distillation(config: DistillationConfig):
             model=HFModelConfig(
                 pretrained_model_name_or_path=config.model_name,
                 model_cls=FlexLlamaForCausalLM,  # Use custom model that supports TrainableCache
+                load_kwargs={
+                    "non_cartridge_start_position_id_offset": config.non_cartridge_start_position_id_offset,
+                },
             ),
             
             # Dataset

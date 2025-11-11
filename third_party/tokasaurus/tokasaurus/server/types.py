@@ -67,6 +67,7 @@ class CompletionsRequest(BaseModel):
 class CartridgeCompletionsRequest(CompletionsRequest):
     # Tokasaurus-specific fields
     cartridges: Optional[list[Cartridge]] = None
+    non_cartridge_start_position_id_offset: Optional[int] = None
 
 class JsonSchemaResponseFormat(BaseModel):
     name: str
@@ -128,6 +129,7 @@ class CartridgeChatCompletionRequest(ChatCompletionRequest):
 
     # Tokasaurus-specific fields
     cartridges: Optional[list[Cartridge]] = None
+    non_cartridge_start_position_id_offset: Optional[int] = None
 
 
 
@@ -192,6 +194,7 @@ class TokasaurusRequest:
     ignore_eos: bool
     cartridges: Optional[list[Cartridge]] = None
     topk_logprobs: int | None = None  # Number of top tokens to return log probs for
+    non_cartridge_start_position_id_offset: int = 0  # Offset for non-cartridge start position IDs
     created_timestamp: float = field(default_factory=time.time)
 
 

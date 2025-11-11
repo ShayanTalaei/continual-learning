@@ -737,8 +737,14 @@ def process_request(
                 input_ids = request.ids
             if isinstance(request, CartridgeChatCompletionRequest):
                 cartridges = request.cartridges
+                non_cartridge_start_position_id_offset = (
+                    request.non_cartridge_start_position_id_offset
+                    if request.non_cartridge_start_position_id_offset is not None
+                    else 0
+                )
             else:
                 cartridges = None
+                non_cartridge_start_position_id_offset = 0
             top_logprobs = request.top_logprobs
             max_tokens = request.max_completion_tokens or request.max_tokens
         case CompletionsRequest():
@@ -753,8 +759,14 @@ def process_request(
                 )
             if isinstance(request, CartridgeCompletionsRequest):
                 cartridges = request.cartridges
+                non_cartridge_start_position_id_offset = (
+                    request.non_cartridge_start_position_id_offset
+                    if request.non_cartridge_start_position_id_offset is not None
+                    else 0
+                )
             else:
                 cartridges = None
+                non_cartridge_start_position_id_offset = 0
             top_logprobs = request.logprobs
             max_tokens = request.max_tokens
 
@@ -773,6 +785,7 @@ def process_request(
         ignore_eos=request.ignore_eos,
         cartridges=cartridges,
         topk_logprobs=top_logprobs,
+        non_cartridge_start_position_id_offset=non_cartridge_start_position_id_offset,
     )
 
     validate_length(state, req)

@@ -874,6 +874,11 @@ def generate_with_toka(
             if len(elements) == 0:
                 continue
             
+            # Get non_cartridge_start_position_id_offset from model config if available
+            non_cartridge_start_position_id_offset = config.model.load_kwargs.get(
+                "non_cartridge_start_position_id_offset"
+            )
+            
             # Build list of requests
             requests = []
             for idx_and_element in elements:
@@ -885,7 +890,8 @@ def generate_with_toka(
                     temperature=eval_config.temperature,
                     cartridges=[
                         Cartridge(id="cache_for_generation", source="local")
-                    ]
+                    ],
+                    non_cartridge_start_position_id_offset=non_cartridge_start_position_id_offset,
                 )
                 requests.append((idx,request.model_dump(exclude_none=True)))
                 
