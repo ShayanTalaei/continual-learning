@@ -25,6 +25,17 @@ print(apis.api_docs.show_api_doc(app_name='spotify', api_name='login'))
 
 Each code execution will produce an output that you can use in subsequent calls. Using these APIs, you can now generate code, that I will execute, to solve the task. Let's start with the task
 
+IMPORTANT: DEMONSTRATION VS ACTUAL TASK
+- The content that follows (e.g., the Spotify walk-through) is a DEMONSTRATION ONLY. Do NOT solve that demo.
+- The ACTUAL task you must solve appears at the very bottom, under the section that begins with:
+  "Using these APIs, now generate code to solve the actual task:" and shows the final "Task: {{ instruction }}".
+- Always base your code on the LAST Task: block in this prompt (the one at the end), not any earlier demo Task.
+
+MULTI-AGENT COORDINATION
+- When directed to gather APIs, ONLY write code that uses apis.api_docs.show_app_descriptions(), apis.api_docs.show_api_descriptions(app_name=...), and apis.api_docs.show_api_doc(app_name=..., api_name=...). Do not perform task-specific operations in that step.
+- Use outputs from API discovery in subsequent steps; reflections will be provided after execution.
+- Do NOT call apis.supervisor.complete_task() unless explicitly authorized by the Planner.
+
 My name is: {{ main_user.first_name }} {{ main_user.last_name }}. My personal email is {{ main_user.email }} and phone number is {{ main_user.phone_number }}.
 Task: How many playlists do I have in my Spotify playlist library?
 

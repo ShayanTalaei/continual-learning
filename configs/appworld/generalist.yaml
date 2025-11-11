@@ -1,18 +1,18 @@
 runtime:
   max_envs_to_visit: 750
-  max_steps_per_episode: 100
+  max_steps_per_episode: 300
   verbose: true
   scores_path: scores.jsonl
 
 train_dataset:
   type: appworld
   root: third_party/appworld
-  dataset_name: "test_normal"  # choose a valid dataset name under appworld data
+  dataset_name: "test_challenge"  # choose a valid dataset name under appworld data
   num_episodes: 750
-  max_steps: 100
+  max_steps: 300
   # prompts_path: "third_party/appworld/experiments/prompts/react_code_agent/instructions.txt"
   prompts_path: "src/data/prompts/appworld/agent_prompt.txt"
-  experiment_name: continual_learning/cuga/test_normal
+  experiment_name: continual_learning/cuga/test_challenge_claude
 
 agent:
   type: appworld_cuga
