@@ -394,3 +394,19 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     training.lr=5e-3 \
     input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_boxed_only_20000_with_subsample_and_original_experiences/dataset.jsonl \
     output.local_dir=/data/stalaei/continual-learning/cartridges/
+
+
+## Nov 10
+
+export CARTRIDGES_DIR=/u/stalaei/code/continual-learning/third_party/cartridges
+export CARTRIDGES_OUTPUT_DIR=/projects/bfsg/stalaei/capture_attention/
+export PYTHONPATH=/u/stalaei/code/continual-learning/third_party/cartridges:$PYTHONPATH
+
+python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /path/to/memory_700.jsonl \
+    --output-dir outputs/attention_eval/history_agent_cities \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --device cuda \
+    --mode generate
