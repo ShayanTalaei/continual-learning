@@ -12,4 +12,5 @@ _data/
 
 wandb/
 src/gcp.json
-src/gcp.json
+src/lm/.env
+src/lm/gcp.json
