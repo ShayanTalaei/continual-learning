@@ -19,12 +19,17 @@
 # limitations under the License.
 from typing import Callable, Literal, Optional, Union, Tuple
 from dataclasses import dataclass
+from time import perf_counter
+import os
 
 import torch
 import torch.utils.checkpoint
 from torch import nn
 import torch.nn.functional as F
 from torch.nn.attention.flex_attention import create_block_mask, flex_attention, BlockMask
+
+# Enable profiling via environment variable: PROFILE_ATTENTION=1
+_PROFILE_ATTENTION = os.environ.get("PROFILE_ATTENTION", "0") == "1"
 
 from transformers.activations import ACT2FN
 from transformers.cache_utils import Cache, DynamicCache
@@ -246,6 +251,12 @@ def flex_attention_forward(
     if key.requires_grad and not query.requires_grad:
         query.requires_grad = True
 
+    # Profiling: time the flex_attention call
+    if _PROFILE_ATTENTION:
+        layer_idx = getattr(module, 'layer_idx', -1)
+        q_len, kv_len = query.shape[2], key.shape[2]
+        t_start = perf_counter()
+    
     attn_output = attn(
         query,
         key,
@@ -255,7 +266,12 @@ def flex_attention_forward(
         scale=scaling,
         kernel_options=kernel_options,
         return_lse=False,
-    )    
+    )
+    
+    if _PROFILE_ATTENTION:
+        t_end = perf_counter()
+        print(f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s (Q={q_len}, KV={kv_len}, mode={mode})")
+    
     attn_output = attn_output.transpose(1, 2).contiguous()
 
     return attn_output
@@ -289,6 +305,9 @@ class LlamaAttention(nn.Module):
         )
 
     def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> torch.Tensor:
+        if _PROFILE_ATTENTION:
+            t_attn_start = perf_counter()
+        
         input_shape = hidden_states.shape[:-1]
         hidden_shape = (*input_shape, -1, self.head_dim)
 
@@ -303,6 +322,9 @@ class LlamaAttention(nn.Module):
         kv_seq_ids = None
         cache_len = 0
         if past_key_value is not None:
+            if _PROFILE_ATTENTION:
+                t_cache_start = perf_counter()
+            
             if batch.attention_capture is not None:
                 key_states, value_states, kv_seq_ids = past_key_value.update(
                     key_states,
@@ -321,6 +343,10 @@ class LlamaAttention(nn.Module):
                     skip_append=batch.mode == "train",
                 )
             cache_len = past_key_value.num_tokens()
+            
+            if _PROFILE_ATTENTION:
+                t_cache_end = perf_counter()
+                print(f"[PROFILE] cache.update L{self.layer_idx}: {t_cache_end - t_cache_start:.4f}s")
 
             if self.config.attention_dropout > 0:
                 key_states = F.dropout(key_states, p=self.config.attention_dropout, training=self.training)
@@ -331,6 +357,9 @@ class LlamaAttention(nn.Module):
         capture = batch.attention_capture
         # Store Q/K/V tensors before flex_attention_forward to avoid compilation issues
         if capture is not None:
+            if _PROFILE_ATTENTION:
+                t_capture_start = perf_counter()
+            
             num_local_query_heads = query_states.shape[1]
             capture_enable_gqa = (num_local_query_heads & (num_local_query_heads - 1)) == 0
             capture.record(
@@ -346,6 +375,10 @@ class LlamaAttention(nn.Module):
                 enable_gqa=capture_enable_gqa,
                 has_block_mask=isinstance(batch.attention_mask, BlockMask),
             )
+            
+            if _PROFILE_ATTENTION:
+                t_capture_end = perf_counter()
+                print(f"[PROFILE] capture.record L{self.layer_idx}: {t_capture_end - t_capture_start:.4f}s")
 
         attn_output = flex_attention_forward(
             self,
@@ -359,6 +392,10 @@ class LlamaAttention(nn.Module):
 
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)
+        
+        if _PROFILE_ATTENTION:
+            t_attn_end = perf_counter()
+            print(f"[PROFILE] LlamaAttention.forward L{self.layer_idx}: {t_attn_end - t_attn_start:.4f}s")
 
         return attn_output, batch
 
@@ -375,6 +412,9 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
         self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
     def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> Tuple[torch.Tensor, LlamaBatch]:
+        if _PROFILE_ATTENTION:
+            t_layer_start = perf_counter()
+        
         residual = hidden_states
         hidden_states = self.input_layernorm(hidden_states)
 
@@ -391,10 +431,11 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
         hidden_states = self.post_attention_layernorm(hidden_states)
         hidden_states = self.mlp(hidden_states)
         hidden_states = residual + hidden_states
-        # if hidden_states.shape[1] > 1000:
-        #     ohidden_states_mlp = torch.load(f"/scratch/m000122/bcabrown/debug/tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
-        #     print("After MLP rabs mean: ", rabs(hidden_states[0], ohidden_states_mlp).mean())
-        #     breakpoint()
+        
+        if _PROFILE_ATTENTION:
+            t_layer_end = perf_counter()
+            seq_len = hidden_states.shape[1]
+            print(f"[PROFILE] LlamaDecoderLayer L{self.layer_idx}: {t_layer_end - t_layer_start:.4f}s (seq_len={seq_len})")
 
         return hidden_states, batch
 
@@ -491,6 +532,9 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         
         # Build the block mask
         # --- begin build block mask ---
+        if _PROFILE_ATTENTION:
+            t_mask_start = perf_counter()
+        
         kv_seq_ids = seq_ids
         if cache_len > 0:
             kv_seq_ids = torch.cat([past_key_values.seq_ids(), kv_seq_ids])
@@ -503,6 +547,10 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             device=inputs_embeds.device,
             _compile=mode == "train"
         )
+        
+        if _PROFILE_ATTENTION:
+            t_mask_end = perf_counter()
+            print(f"[PROFILE] create_block_mask: {t_mask_end - t_mask_start:.4f}s (Q_LEN={len(seq_ids)}, KV_LEN={len(seq_ids) + cache_len})")
         # --- end build block mask ---
 
         hidden_states = inputs_embeds
@@ -521,10 +569,20 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             attention_capture=attention_capture,
         )
         
-        hidden_states.requires_grad = True
+        if self.training: ## ST: Added this to avoid grad computation slowdown for generation
+            hidden_states.requires_grad = True
+        
+        if _PROFILE_ATTENTION:
+            t_layers_start = perf_counter()
+            print(f"[PROFILE] Starting {self.config.num_hidden_layers} decoder layers (seq_len={len(seq_ids)}, cache_len={cache_len})")
+        
         for decoder_layer in self.layers[: self.config.num_hidden_layers]:
             hidden_states, batch = decoder_layer(hidden_states, batch)
             # print(f"Layer {decoder_layer.layer_idx} hidden states: {hidden_states.sum()}, shape: {hidden_states.shape}")
+        
+        if _PROFILE_ATTENTION:
+            t_layers_end = perf_counter()
+            print(f"[PROFILE] All decoder layers: {t_layers_end - t_layers_start:.4f}s (avg per layer: {(t_layers_end - t_layers_start) / self.config.num_hidden_layers:.4f}s)")
 
         hidden_states = self.norm(hidden_states)
         return BaseModelOutputWithPast(
@@ -627,7 +685,6 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
         # Only compute necessary logits, and do not upcast them to float if we are not computing the loss
         slice_indices = slice(-logits_to_keep, None) if isinstance(logits_to_keep, int) else logits_to_keep
         logits = self.lm_head(hidden_states[:, slice_indices, :])
-        # breakpoint()
 
         loss = None
         if labels is not None:

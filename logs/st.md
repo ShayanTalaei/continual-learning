@@ -398,15 +398,142 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
 
 ## Nov 10
 
-export CARTRIDGES_DIR=/u/stalaei/code/continual-learning/third_party/cartridges
-export CARTRIDGES_OUTPUT_DIR=/projects/bfsg/stalaei/capture_attention/
-export PYTHONPATH=/u/stalaei/code/continual-learning/third_party/cartridges:$PYTHONPATH
+export CARTRIDGES_DIR=/home/shayant/code/continual-learning/third_party/cartridges
+export CARTRIDGES_OUTPUT_DIR=/data/stalaei/capture_attention/
+export PYTHONPATH=/home/shayant/code/continual-learning/third_party/cartridges:$PYTHONPATH
 
+
+### Taking so long
 python -m src.attention_capture.run_eval_cli \
     --config configs/attention_eval/history_agent_cities.yaml \
-    --memory-snapshot /path/to/memory_700.jsonl \
-    --output-dir outputs/attention_eval/history_agent_cities \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/checkpoints/ep_000700/memory_700.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities \
     --model-type llama \
     --model-name meta-llama/Llama-3.1-8B-Instruct \
     --device cuda \
     --mode generate
+
+### Testing a smaller memory
+python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000050/memory_50.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --device cuda \
+    --mode generate
+
+## Nov 11
+
+### small
+python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000050/memory_50.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_mem_50 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31
+
+### medium
+PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000250/memory_250.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_mem_250 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 20
+
+### large
+CUDA_VISIBLE_DEVICES=1 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/checkpoints/ep_000700/memory_700.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_mem_700 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23
+
+
+
+## Nov 11
+
+### cartridge only
+PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov4_chatboxed \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov4_chatboxed
+
+## memory 500
+PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500/memory_500.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_mem_500 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23
+
+## cartridge + memory 550 (50 experiences only)
+CUDA_VISIBLE_DEVICES=2 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov4_chatboxed-cache-step600/20251105_000849/checkpoints/ep_000550/memory_550.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov4_chatboxed_mem_550 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov4_chatboxed
+
+CUDA_VISIBLE_DEVICES=2 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov4_chatboxed-cache-step600/20251105_000849/checkpoints/ep_000600/memory_600.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov4_chatboxed_mem_600 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov4_chatboxed
+
+CUDA_VISIBLE_DEVICES=2 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov6_chatboxed_mixed_dataset-cache-step500 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov6_chatboxed_mixed_dataset-cache-step500
+
+CUDA_VISIBLE_DEVICES=2 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov6_chatboxed_mixed_dataset-cache-step500/20251107_123708/checkpoints/ep_000550/memory_550.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov6_chatboxed_mixed_dataset-cache-step500_mem_550 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov6_chatboxed_mixed_dataset-cache-step500
+
+CUDA_VISIBLE_DEVICES=1 PROFILE_ATTENTION=1 python -m src.attention_capture.run_eval_cli \
+    --config configs/attention_eval/history_agent_cities.yaml \
+    --memory-snapshot /data/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov6_chatboxed_mixed_dataset-cache-step500/20251107_123708/checkpoints/ep_000600/memory_600.jsonl \
+    --output-dir /data/stalaei/logs/continual_learning/attention_eval/history_agent_cities_chatboxed_cartridge_nov6_chatboxed_mixed_dataset-cache-step500_mem_600 \
+    --model-type llama \
+    --model-name meta-llama/Llama-3.1-8B-Instruct \
+    --layer-idxs 0 16 31 \
+    --prompts-idxs 0 1 2 3 20 21 22 23 \
+    --cartridge-dir /data/stalaei/continual-learning/cartridges \
+    --cartridge-ids nov6_chatboxed_mixed_dataset-cache-step500
+
+
+
+

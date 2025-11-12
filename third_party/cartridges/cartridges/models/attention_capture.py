@@ -31,9 +31,11 @@ class AttentionCapture:
         self,
         store_qkv: bool = True,
         move_to_cpu: bool = True,
+        layers_to_capture: Optional[List[int]] = None,
     ) -> None:
         self.store_qkv = store_qkv
         self.move_to_cpu = move_to_cpu
+        self.layers_to_capture = layers_to_capture  # If None, capture all layers
         self._records: List[AttentionRecord] = []
 
     @property
@@ -46,6 +48,19 @@ class AttentionCapture:
         processed = tensor.detach()
         if processed.dim() > 0 and processed.shape[0] == 1:
             processed = processed.squeeze(0)
+        if self.move_to_cpu:
+            # Move to CPU synchronously to avoid graph compilation issues
+            processed = processed.to("cpu", non_blocking=False)
+        return processed
+
+    def _process_seq_ids(self, tensor: Optional[torch.Tensor]) -> Optional[torch.Tensor]:
+        """Process seq_ids tensor, ensuring it remains at least 1D for slicing operations."""
+        if tensor is None:
+            return None
+        processed = tensor.detach()
+        # Ensure seq_ids is at least 1D (don't squeeze to 0-dim, as it needs to be sliceable)
+        if processed.dim() == 0:
+            processed = processed.unsqueeze(0)
         if self.move_to_cpu:
             # Move to CPU synchronously to avoid graph compilation issues
             processed = processed.to("cpu", non_blocking=False)
@@ -66,6 +81,10 @@ class AttentionCapture:
         enable_gqa: bool,
         has_block_mask: bool,
     ) -> None:
+        # Skip recording if this layer is not in the list of layers to capture
+        if self.layers_to_capture is not None and layer_idx not in self.layers_to_capture:
+            return
+        
         stored_query: Optional[torch.Tensor]
         stored_key: Optional[torch.Tensor]
         stored_value: Optional[torch.Tensor]
@@ -84,8 +103,8 @@ class AttentionCapture:
             query=stored_query,
             key=stored_key,
             value=stored_value,
-            seq_ids=self._process_tensor(seq_ids),
-            kv_seq_ids=self._process_tensor(kv_seq_ids),
+            seq_ids=self._process_seq_ids(seq_ids),
+            kv_seq_ids=self._process_seq_ids(kv_seq_ids),
             cache_len=cache_len,
             scaling=float(scaling) if scaling is not None else None,
             enable_gqa=enable_gqa,

@@ -4,23 +4,20 @@
   ],
   "exclude": [
     "**/__pycache__",
-    "**/node_modules",
-    "**/.git"
-  ],
-  "extraPaths": [
-    "third_party/cartridges"
+    "**/node_modules"
   ],
   "executionEnvironments": [
     {
       "root": ".",
       "extraPaths": [
-        "third_party/cartridges"
+        "third_party/cartridges",
+        "src"
       ]
     }
   ],
-  "pythonVersion": "3.8",
-  "typeCheckingMode": "basic",
-  "useLibraryCodeForTypes": true,
-  "reportMissingImports": "none",
-  "reportMissingTypeStubs": "none"
+  "stubPath": "",
+  "pythonVersion": "3.10",
+  "typeCheckingMode": "basic"
 }
+
+

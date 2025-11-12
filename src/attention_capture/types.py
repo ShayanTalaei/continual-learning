@@ -55,10 +55,9 @@ class LayerAttentionSummary:
     num_heads: int
     seq_len: int
     cache_len: int
-    cartridge_mass_mean: float
-    normal_mass_mean: float
-    cartridge_mass_per_head: List[float]
-    cartridge_mass_per_token: List[float]
+    # Per-tag attention masses
+    tag_mass_means: Dict[str, float] = field(default_factory=dict)
+    tag_mass_per_token: Dict[str, List[float]] = field(default_factory=dict)
 
 
 @dataclass

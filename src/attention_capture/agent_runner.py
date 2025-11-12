@@ -50,11 +50,12 @@ def load_run_configuration(config_path: Union[str, Path]) -> Tuple[RunConfig, Di
 
 def load_history_memory(
     history_config: HistoryListConfig,
-    snapshot_path: Union[str, Path],
+    snapshot_path: Optional[Union[str, Path]] = None,
 ) -> HistoryList:
-    if snapshot_path is None:
-        raise ValueError("snapshot_path must be provided")
-    mem = HistoryList.load_snapshot(snapshot_path)
+    if snapshot_path is not None:
+        mem = HistoryList.load_snapshot(snapshot_path)
+    else:
+        mem = HistoryList(history_config)
     if history_config.max_length is not None and len(mem.history_list) > history_config.max_length:
         mem.history_list = mem.history_list[-history_config.max_length :]
     return mem
@@ -182,10 +183,8 @@ def prepare_conversation_messages(
 
 
 def build_validation_dataset(
-    config: Optional[Dict[str, object]],
-) -> Optional[EnvDataset]:
-    if config is None:
-        return None
+    config: Dict[str, object],
+) -> EnvDataset:
     return build_dataset(config, logger=None)
 
 

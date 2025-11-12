@@ -1,8 +1,6 @@
 .env
 .vscode/
 
-notebooks/
-
 *pyc
 *.pyc
 
