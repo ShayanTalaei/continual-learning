@@ -1,0 +1,72 @@
+## FinLoRA Finer — HistoryAgent on local JSONL test set
+
+runtime:
+  max_envs_to_visit: 500
+  max_steps_per_episode: 1
+  scores_path: scores.jsonl
+  run_validation_at_start: true
+  validation_num_workers: 1
+  validation_freq: 5
+  # Checkpointing
+  checkpoint_dir: checkpoints
+  checkpoint_every_episodes: 50
+  # Use one of the following strategies:
+  # - last_n: keeps the last N checkpoints saved every `checkpoint_every_episodes`
+  # - top_k_val: keeps the top-K checkpoints by validation mean score (saved on validation)
+  checkpoint_strategy: last_n
+  checkpoint_keep_last: 20
+  checkpoint_on_start: false
+  start_episode_index: 500
+  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500"
+
+train_dataset:
+  type: qa
+  hf_name: "stalaei/easy_synth_cities_40_25"
+  split: "train"
+  question_field: "question"
+  answer_field: "name"
+  id_field: "id"
+  instruction_template: null
+  idx_range: [500, 1000]
+  shuffle: true
+  seed: 111
+
+validation_dataset:
+  type: qa
+  hf_name: "stalaei/easy_synth_cities_40_25"
+  split: "val"
+  question_field: "question"
+  answer_field: "name"
+  id_field: "id"
+  instruction_template: null
+  # max_samples: 20
+  shuffle: false
+
+agent:
+  type: history_agent
+
+  memory_config:
+    _type: history_list
+    max_length: null
+  lm_config:
+    model: "cartridge:meta-llama/Llama-3.1-8B-Instruct"
+    cartridge_dir: "/data/stalaei/continual-learning/cartridges/"
+    torch_dtype: "bfloat16"
+    device: "cuda"
+    train_temperature: 0.7
+    val_temperature: 0.0
+    max_output_tokens: 2048
+    use_unrotated_queries_for_cartridges: false
+    non_cartridge_start_position_id_offset: 0
+    cartridges:
+      - id: nov6_chatboxed_mixed_dataset-cache-step300
+        source: local
+        force_redownload: false
+  history_k: null
+  collapse_messages: false
+  only_boxed: true
+  system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
+
+output:
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov6_chatboxed_mixed_dataset-cache-step300
+  log_level: INFO

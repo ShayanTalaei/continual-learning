@@ -25,6 +25,7 @@ class TokasaurusConfig(LMConfig):
     # When set, request top-k logprobs and include full sequence tensor data in responses
     top_logprobs: Optional[int] = None
     non_cartridge_start_position_id_offset: int = 0  # Offset for non-cartridge start position IDs (passed per-request)
+    cartridges: Optional[List[Dict[str, Any]]] = None  # Cartridge configs (loaded from config)
 
 
 class TokasaurusClient(LanguageModel):
@@ -62,7 +63,6 @@ class TokasaurusClient(LanguageModel):
     def call(
         self,
         messages: List[Dict[str, str]],
-        cartridges: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         call_id = self._begin_call(messages)
         start_time = time.time()
@@ -89,7 +89,6 @@ class TokasaurusClient(LanguageModel):
                     text, metrics, logprobs = self._chat_request(
                         messages,
                         start_time,
-                        cartridges=cartridges,
                         top_logprobs=None,
                     )
                     extra: Dict[str, Any] = {"metrics": metrics} if metrics else {}
@@ -110,7 +109,6 @@ class TokasaurusClient(LanguageModel):
                     text, metrics, logprobs, system_fingerprint = self._chat_request_with_fingerprint(
                         messages,
                         start_time,
-                        cartridges=cartridges,
                         top_logprobs=cfg_topk,
                     )
                     tensor_data = self._extract_tensor_data_from_fingerprint(
@@ -192,7 +190,6 @@ class TokasaurusClient(LanguageModel):
         messages: List[Dict[str, str]],
         start_time: float,
         *,
-        cartridges: Optional[List[Dict[str, Any]]] = None,
         top_logprobs: Optional[int] = None,
     ) -> "tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]]]":
         """
@@ -204,6 +201,7 @@ class TokasaurusClient(LanguageModel):
             logprobs: Logprobs data (only when top_logprobs is requested)
         """
         # Select endpoint based on whether cartridges are provided
+        cartridges = self.cfg.cartridges
         if cartridges is None:
             url = f"{self.cfg.base_url}/v1/chat/completions"
         else:
@@ -307,13 +305,13 @@ class TokasaurusClient(LanguageModel):
         messages: List[Dict[str, str]],
         start_time: float,
         *,
-        cartridges: Optional[List[Dict[str, Any]]] = None,
         top_logprobs: Optional[int] = None,
     ) -> "tuple[str, Optional[Dict[str, Any]], Optional[Dict[str, Any]], Dict[str, Any]]":
         """
         Execute chat request and return (text, metrics, logprobs, system_fingerprint).
         """
         # Select endpoint based on whether cartridges are provided
+        cartridges = self.cfg.cartridges
         if cartridges is None:
             url = f"{self.cfg.base_url}/v1/chat/completions"
         else:

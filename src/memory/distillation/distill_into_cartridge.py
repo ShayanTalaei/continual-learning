@@ -173,6 +173,7 @@ class DistillationConfig(pydra.Config):
         # Model
         self.model_name = "meta-llama/Llama-3.1-8B-Instruct"  # Model name
         self.non_cartridge_start_position_id_offset = 0  # Offset for non-cartridge start position IDs
+        self.use_unrotated_queries_for_cartridges = False  # Use unrotated queries for cartridge attention
         
         # KV Cache
         self.kv_cache = KVCacheInitConfig()
@@ -634,6 +635,7 @@ def run_distillation(config: DistillationConfig):
                 model_cls=FlexLlamaForCausalLM,  # Use custom model that supports TrainableCache
                 load_kwargs={
                     "non_cartridge_start_position_id_offset": config.non_cartridge_start_position_id_offset,
+                    "use_unrotated_queries_for_cartridges": config.use_unrotated_queries_for_cartridges,
                 },
             ),
             
@@ -754,4 +756,6 @@ def main(config: DistillationConfig):
 
 
 if __name__ == "__main__":
+    main()
+
     main()

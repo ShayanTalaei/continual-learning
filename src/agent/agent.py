@@ -15,8 +15,6 @@ class AgentConfig(BaseModel):
     lm_config: Optional[Dict[str, Any]] = None
     system_prompt: Optional[str] = None
     verbose: bool = True
-    # Optional cartridges passed to LM calls when provided
-    cartridges: Optional[List[Dict[str, Any]]] = None
 
 
 C = TypeVar("C", bound=AgentConfig)
@@ -26,9 +24,8 @@ class Agent(Generic[C]):
     def __init__(self, config: C, logger: Optional[Logger] = None):
         self.config = config
         self.logger = logger or getLogger("agent")
-        if config.lm_config is None:
-            raise ValueError("lm_config is required but was None")
-        self.lm: LanguageModel = get_lm_client(config.lm_config, logger=child(self.logger, "lm"))
+
+        self.lm: LanguageModel  = get_lm_client(config.lm_config, logger=child(self.logger, "lm")) if config.lm_config is not None else None
         self.training: bool = True
         self._set_system_prompt()
         
@@ -86,18 +83,15 @@ class Agent(Generic[C]):
         raise NotImplementedError
 
     # -----------------------------
-    # LM call wrapper with cartridges
+    # LM call wrapper
     # -----------------------------
     def _lm_call(self, messages: List[Dict[str, str]], **kwargs: Any) -> Dict[str, Any]:
-        """Central LM call that injects cartridges if configured.
+        """Central LM call.
 
         Args:
             messages: Chat messages for the model
             **kwargs: Extra keyword options forwarded to the LM client
         """
-        cartridges = getattr(self.config, "cartridges", None)
-        if cartridges:
-            return self.lm.call(messages, cartridges=cartridges, **kwargs)  # type: ignore[arg-type]
         return self.lm.call(messages, **kwargs)
 
     # -----------------------------

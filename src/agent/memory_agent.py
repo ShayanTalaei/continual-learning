@@ -19,8 +19,6 @@ class MemoryAgentConfig(AgentConfig):
 class MemoryAgent(Agent[MemoryAgentConfig], ABC):
     def __init__(self, config: MemoryAgentConfig, logger=None):
         super().__init__(config, logger=logger)
-        if config.lm_config is None:
-            raise ValueError("MemoryAgent requires lm_config in config")
         self.memory: MemoryModule = build_memory(config.memory_config)
         self._last_action: str | None = None
         self._trajectory: List[Any] = []
@@ -111,7 +109,11 @@ class MemoryAgent(Agent[MemoryAgentConfig], ABC):
         self._trajectory = []
 
     def clone_for_episode(self, training: bool, share_memory: bool = True) -> "MemoryAgent":
-        clone = self.__class__(self.config, logger=self.logger)
+        import copy
+        config_copy = copy.deepcopy(self.config)
+        if hasattr(config_copy, "lm_config"):
+            config_copy.lm_config = None
+        clone = self.__class__(config_copy, logger=self.logger)
         # Share LM to save resources
         clone.lm = self.lm
         # Optionally share memory (safe for eval when training=False)
