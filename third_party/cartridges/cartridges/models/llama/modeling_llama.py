@@ -83,6 +83,7 @@ class LlamaBatch:
     use_cache: Optional[bool] = None
     mode: Literal["train", "generate"] = "train"
     attention_capture: Optional[AttentionCapture] = None
+    cartridge_mask: Optional[BlockMask] = None
 
     def update(self, **kwargs) -> "LlamaBatch":
         return LlamaBatch(
@@ -218,6 +219,8 @@ def flex_attention_forward(
     attention_mask: Union[torch.Tensor, "BlockMask"],
     scaling: Optional[float] = None,
     mode: Literal["train", "generate"] = "train",
+    query_unrot: Optional[torch.Tensor] = None,
+    cartridge_mask: Optional["BlockMask"] = None,
     **kwargs,
 ) -> torch.Tensor:
 
@@ -257,20 +260,69 @@ def flex_attention_forward(
         q_len, kv_len = query.shape[2], key.shape[2]
         t_start = perf_counter()
     
-    attn_output = attn(
-        query,
-        key,
-        value,
-        block_mask=block_mask,
-        enable_gqa=enable_gqa,
-        scale=scaling,
-        kernel_options=kernel_options,
-        return_lse=False,
-    )
-    
-    if _PROFILE_ATTENTION:
-        t_end = perf_counter()
-        print(f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s (Q={q_len}, KV={kv_len}, mode={mode})")
+    # Handle cartridge attention with unrotated queries
+    if query_unrot is not None and cartridge_mask is not None:
+        # First call: normal keys only, rotated queries
+        out_norm, lse_norm = attn(
+            query,                        # rotated
+            key,
+            value,
+            block_mask=block_mask,        # excludes cartridges
+            enable_gqa=enable_gqa,
+            scale=scaling,
+            kernel_options=kernel_options,
+            return_lse=True,
+        )
+        
+        # Second call: cartridge keys only, unrotated queries
+        # Ensure unrotated query has gradients if needed
+        if key.requires_grad and not query_unrot.requires_grad:
+            query_unrot.requires_grad = True
+        
+        out_cart, lse_cart = attn(
+            query_unrot,                  # unrotated
+            key,
+            value,
+            block_mask=cartridge_mask,     # only cartridges
+            enable_gqa=enable_gqa,
+            scale=scaling,
+            kernel_options=kernel_options,
+            return_lse=True,
+        )
+        
+        # Combine using LSE (numerically stable)
+        # Cast LSE to output dtype
+        lse_norm = lse_norm.to(out_norm.dtype)
+        lse_cart = lse_cart.to(out_cart.dtype)
+        
+        # logZ = log(exp(lse_norm) + exp(lse_cart)) in a stable way
+        logZ = torch.logaddexp(lse_norm, lse_cart)
+        
+        # Mixture weights for the two groups
+        w_norm = torch.exp(lse_norm - logZ)[..., None]  # (B,H,L,1)
+        w_cart = torch.exp(lse_cart - logZ)[..., None]
+        
+        attn_output = out_norm * w_norm + out_cart * w_cart
+        
+        if _PROFILE_ATTENTION:
+            t_end = perf_counter()
+            print(f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s (Q={q_len}, KV={kv_len}, mode={mode}, cartridge=True)")
+    else:
+        # Standard single call (backward compatible)
+        attn_output = attn(
+            query,
+            key,
+            value,
+            block_mask=block_mask,
+            enable_gqa=enable_gqa,
+            scale=scaling,
+            kernel_options=kernel_options,
+            return_lse=False,
+        )
+        
+        if _PROFILE_ATTENTION:
+            t_end = perf_counter()
+            print(f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s (Q={q_len}, KV={kv_len}, mode={mode})")
     
     attn_output = attn_output.transpose(1, 2).contiguous()
 
@@ -314,6 +366,11 @@ class LlamaAttention(nn.Module):
         query_states = self.q_proj(hidden_states).view(hidden_shape).transpose(1, 2)
         key_states = self.k_proj(hidden_states).view(hidden_shape).transpose(1, 2)
         value_states = self.v_proj(hidden_states).view(hidden_shape).transpose(1, 2)
+
+        # Store unrotated copy if feature is enabled
+        query_states_unrot = None
+        if self.config.use_unrotated_queries_for_cartridges:
+            query_states_unrot = query_states
 
         cos, sin = batch.position_embeddings
         query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin)
@@ -388,6 +445,8 @@ class LlamaAttention(nn.Module):
             attention_mask=batch.attention_mask,
             scaling=self.scaling,
             mode=batch.mode,
+            query_unrot=query_states_unrot,
+            cartridge_mask=batch.cartridge_mask,
         )
 
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
@@ -530,7 +589,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         cartridge_len = past_key_values.num_cartridge_tokens() if past_key_values is not None else 0
         position_ids = position_ids + cartridge_len + self.config.non_cartridge_start_position_id_offset
         
-        # Build the block mask
+        # Build the block mask(s)
         # --- begin build block mask ---
         if _PROFILE_ATTENTION:
             t_mask_start = perf_counter()
@@ -539,14 +598,43 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         if cache_len > 0:
             kv_seq_ids = torch.cat([past_key_values.seq_ids(), kv_seq_ids])
     
-        def mask_func(_, _h, q_idx, kv_idx):
+        def base_mask_func(_, _h, q_idx, kv_idx):
             return (kv_seq_ids[kv_idx] == -1) | ((seq_ids[q_idx] == kv_seq_ids[kv_idx]) & (q_idx + cache_len >= kv_idx))
 
         block_mask = create_block_mask(
-            mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
+            base_mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
             device=inputs_embeds.device,
             _compile=mode == "train"
         )
+        
+        # Build cartridge-aware masks if feature is enabled and cartridges exist
+        block_mask_cart = None
+        if self.config.use_unrotated_queries_for_cartridges and cartridge_len > 0:
+            def mask_noncart(_, _h, q_idx, kv_idx):
+                # Same as base, but exclude cartridge keys
+                return (kv_seq_ids[kv_idx] != -1) & (
+                    (seq_ids[q_idx] == kv_seq_ids[kv_idx]) & (q_idx + cache_len >= kv_idx)
+                )
+            
+            def mask_cart(_, _h, q_idx, kv_idx):
+                # Only cartridge keys; accessible to all queries
+                return kv_seq_ids[kv_idx] == -1
+            
+            block_mask_noncart = create_block_mask(
+                mask_noncart, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len,
+                device=inputs_embeds.device,
+                _compile=mode == "train"
+            )
+            block_mask_cart = create_block_mask(
+                mask_cart, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len,
+                device=inputs_embeds.device,
+                _compile=mode == "train"
+            )
+            # Use non-cartridge mask for attention_mask
+            block_mask = block_mask_noncart
+        else:
+            # Use existing block_mask for both when feature is disabled or no cartridges
+            block_mask_noncart = block_mask
         
         if _PROFILE_ATTENTION:
             t_mask_end = perf_counter()
@@ -567,6 +655,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             attention_mask=block_mask,
             mode=mode,
             attention_capture=attention_capture,
+            cartridge_mask=block_mask_cart,
         )
         
         if self.training: ## ST: Added this to avoid grad computation slowdown for generation

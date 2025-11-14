@@ -129,6 +129,10 @@ class LlamaConfig(PretrainedConfig):
         non_cartridge_start_position_id_offset (`int`, *optional*, defaults to 0):
             Offset for non-cartridge start position IDs. This is added to position_ids when computing
             position embeddings for non-cartridge tokens.
+        use_unrotated_queries_for_cartridges (`bool`, *optional*, defaults to `False`):
+            Whether to use unrotated queries when attending to cartridge tokens. When `True`, queries
+            use rotary position embeddings (RoPE) for normal tokens but not for cartridge tokens.
+            When `False`, uses standard behavior with rotated queries for all tokens.
 
     ```python
     >>> from transformers import LlamaModel, LlamaConfig
@@ -186,6 +190,7 @@ class LlamaConfig(PretrainedConfig):
         mlp_bias=False,
         head_dim=None,
         non_cartridge_start_position_id_offset=0,
+        use_unrotated_queries_for_cartridges=False,
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -212,6 +217,7 @@ class LlamaConfig(PretrainedConfig):
         self.mlp_bias = mlp_bias
         self.head_dim = head_dim if head_dim is not None else self.hidden_size // self.num_attention_heads
         self.non_cartridge_start_position_id_offset = non_cartridge_start_position_id_offset
+        self.use_unrotated_queries_for_cartridges = use_unrotated_queries_for_cartridges
         # Validate the correctness of rotary position embeddings parameters
         # BC: if there is a 'type' field, copy it it to 'rope_type'.
         if self.rope_scaling is not None and "type" in self.rope_scaling:
