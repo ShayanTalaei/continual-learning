@@ -103,6 +103,13 @@ class KVCacheInitConfig(pydra.Config):
         self.num_frozen_tokens = 4  # Number of tokens to freeze (prevents forgetting)
         self.cartridge_start_position = 0  # Starting position for cartridge tokens
         
+        # Parametrization configuration
+        self.parametrization_type = "offset"  # "offset" or "mlp_residual"
+        # Individual fields for MLP parameters (pydra doesn't support nested dict access)
+        self.parametrization_hidden_multiplier = 4.0  # MLP hidden dimension multiplier
+        self.parametrization_activation = "relu"  # Activation function: "relu" or "gelu"
+        self.parametrization_share_across_layers = True  # Whether to share MLP across layers
+        
         # For text initialization
         self.init_text = None  # Text to initialize from (for method='text')
         self.init_text_file = pydra.REQUIRED  # File containing init text (overrides init_text)
@@ -358,11 +365,20 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
     Returns:
         KVCacheFactory.Config for initializing the cache
     """
+    # Build parametrization_config dict from individual fields
+    parametrization_config = {
+        "hidden_multiplier": config.parametrization_hidden_multiplier,
+        "activation": config.parametrization_activation,
+        "share_across_layers": config.parametrization_share_across_layers,
+    }
+    
     if config.method == "random":
         print(f"[Distill] Using random initialization for {config.num_tokens} tokens")
         return KVFromRandomVectors.Config(
             max_tokens=config.num_tokens,
             num_frozen_tokens=config.num_frozen_tokens,
+            parametrization_type=config.parametrization_type,
+            parametrization_config=parametrization_config,
         )
     
     elif config.method == "text":
@@ -387,6 +403,8 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
             text_source=str(init_text_file),
             num_frozen_tokens=config.num_frozen_tokens,
             cartridge_start_position=config.cartridge_start_position,
+            parametrization_type=config.parametrization_type,
+            parametrization_config=parametrization_config,
         )
     
     else:

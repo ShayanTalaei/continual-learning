@@ -3,9 +3,10 @@ from dataclasses import dataclass
 import itertools
 import json
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Literal
 
 from pydrantic import ObjectConfig
+from pydantic import Field
 import torch
 import torch.nn as nn
 
@@ -20,6 +21,246 @@ class AttnConfig:
     head_dim: int
 
 CARTRIDGE_SEQ_ID = -1
+
+
+class CartridgeParametrization(nn.Module, abc.ABC):
+    """
+    Responsible for producing the cartridge (prefix) K/V tensors for all layers.
+
+    It owns *all* trainable parameters associated with the cartridge, and knows
+    how many frozen/trainable tokens there are.
+    """
+
+    def __init__(
+        self,
+        attn_config: AttnConfig,
+        init_keys: list[torch.Tensor],
+        init_values: list[torch.Tensor],
+        num_frozen_tokens: int,
+    ):
+        super().__init__()
+        self.attn_config = attn_config
+        self.num_frozen_tokens = num_frozen_tokens
+        self.num_init_tokens = init_keys[0].shape[2]
+        self.num_trainable_tokens = self.num_init_tokens - num_frozen_tokens
+
+    @abc.abstractmethod
+    def get_frozen(self) -> tuple[list[torch.Tensor], list[torch.Tensor]]:
+        """
+        Returns lists of length n_layers of frozen keys/values,
+        each of shape (1, n_heads, num_frozen_tokens, head_dim).
+        Can return empty lists if there are no frozen tokens.
+        """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_trainable(self) -> tuple[list[torch.Tensor], list[torch.Tensor]]:
+        """
+        Returns lists of length n_layers of *current* trainable prefix keys/values,
+        each of shape (1, n_heads, num_trainable_tokens, head_dim).
+
+        This is where parametrization (offsets, MLP, etc.) is applied.
+        """
+        raise NotImplementedError
+
+    def logging_metrics(self) -> dict[str, torch.Tensor]:
+        """Optional hook for logging parametrization-specific metrics."""
+        return {}
+
+
+class OffsetParametrization(CartridgeParametrization):
+    """Offset-based parametrization: trainable = reference + offset."""
+
+    def __init__(
+        self,
+        attn_config: AttnConfig,
+        init_keys: list[torch.Tensor],
+        init_values: list[torch.Tensor],
+        num_frozen_tokens: int,
+    ):
+        super().__init__(attn_config, init_keys, init_values, num_frozen_tokens)
+
+        n_layers = attn_config.n_layers
+
+        # Separate frozen vs reference
+        if num_frozen_tokens > 0:
+            self.frozen_keys = nn.ParameterList(
+                [
+                    nn.Parameter(k[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for k in init_keys
+                ]
+            )
+            self.frozen_values = nn.ParameterList(
+                [
+                    nn.Parameter(v[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for v in init_values
+                ]
+            )
+        else:
+            self.frozen_keys = nn.ParameterList([])
+            self.frozen_values = nn.ParameterList([])
+
+        self.reference_keys = nn.ParameterList(
+            [
+                nn.Parameter(k[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for k in init_keys
+            ]
+        )
+        self.reference_values = nn.ParameterList(
+            [
+                nn.Parameter(v[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for v in init_values
+            ]
+        )
+
+        self.trainable_key_offsets = nn.ParameterList(
+            [nn.Parameter(torch.zeros_like(ref_k)) for ref_k in self.reference_keys]
+        )
+        self.trainable_value_offsets = nn.ParameterList(
+            [nn.Parameter(torch.zeros_like(ref_v)) for ref_v in self.reference_values]
+        )
+
+    def get_frozen(self):
+        return list(self.frozen_keys), list(self.frozen_values)
+
+    def get_trainable(self):
+        keys = [
+            ref_k + offset_k
+            for ref_k, offset_k in zip(self.reference_keys, self.trainable_key_offsets)
+        ]
+        values = [
+            ref_v + offset_v
+            for ref_v, offset_v in zip(self.reference_values, self.trainable_value_offsets)
+        ]
+        return keys, values
+
+    def logging_metrics(self) -> dict[str, torch.Tensor]:
+        key_norms = torch.stack([p.norm() for p in self.trainable_key_offsets])
+        value_norms = torch.stack([p.norm() for p in self.trainable_value_offsets])
+        ref_key_norms = torch.stack([p.norm() for p in self.reference_keys])
+        ref_value_norms = torch.stack([p.norm() for p in self.reference_values])
+        return {
+            "mean_key_offset_norm": key_norms.mean(),
+            "mean_value_offset_norm": value_norms.mean(),
+            "mean_reference_key_norm": ref_key_norms.mean(),
+            "mean_reference_value_norm": ref_value_norms.mean(),
+        }
+
+
+class ResidualMLPParametrization(CartridgeParametrization):
+    """MLP + residual parametrization: trainable = MLP(reference) + reference."""
+
+    class Config(ObjectConfig):
+        _pass_as_config = True
+        hidden_multiplier: float = 4.0  # width of the MLP
+        activation: Literal["relu", "gelu"] = "relu"
+        share_across_layers: bool = True
+
+    def __init__(
+        self,
+        config: Config,
+        attn_config: AttnConfig,
+        init_keys: list[torch.Tensor],
+        init_values: list[torch.Tensor],
+        num_frozen_tokens: int,
+    ):
+        super().__init__(attn_config, init_keys, init_values, num_frozen_tokens)
+        self.cfg = config
+
+        # Save reference embeddings like OffsetParametrization,
+        # but now they are the *input* to the MLP.
+        if num_frozen_tokens > 0:
+            self.frozen_keys = nn.ParameterList(
+                [
+                    nn.Parameter(k[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for k in init_keys
+                ]
+            )
+            self.frozen_values = nn.ParameterList(
+                [
+                    nn.Parameter(v[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for v in init_values
+                ]
+            )
+        else:
+            self.frozen_keys = nn.ParameterList([])
+            self.frozen_values = nn.ParameterList([])
+
+        self.reference_keys = nn.ParameterList(
+            [
+                nn.Parameter(k[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for k in init_keys
+            ]
+        )
+        self.reference_values = nn.ParameterList(
+            [
+                nn.Parameter(v[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for v in init_values
+            ]
+        )
+
+        head_dim = attn_config.head_dim
+        hidden_dim = int(head_dim * self.cfg.hidden_multiplier)
+
+        # Get dtype from input tensors to ensure MLP matches
+        input_dtype = init_keys[0].dtype
+
+        def make_mlp():
+            act = nn.ReLU() if self.cfg.activation == "relu" else nn.GELU()
+            return nn.Sequential(
+                nn.Linear(head_dim, hidden_dim),
+                act,
+                nn.Linear(hidden_dim, head_dim),
+            ).to(dtype=input_dtype)
+
+        if self.cfg.share_across_layers:
+            self.key_mlp = make_mlp()
+            self.value_mlp = make_mlp()
+        else:
+            self.key_mlp = nn.ModuleList([make_mlp() for _ in range(attn_config.n_layers)])
+            self.value_mlp = nn.ModuleList([make_mlp() for _ in range(attn_config.n_layers)])
+
+    def _apply_mlp(self, mlp, x: torch.Tensor) -> torch.Tensor:
+        # x: (1, n_heads, num_trainable_tokens, head_dim)
+        b, h, t, d = x.shape
+        y = x.view(-1, d)  # (b*h*t, d)
+        y = mlp(y)
+        return (y.view(b, h, t, d) + x)  # residual
+
+    def get_frozen(self):
+        return list(self.frozen_keys), list(self.frozen_values)
+
+    def get_trainable(self):
+        keys, values = [], []
+        for layer_idx, (ref_k, ref_v) in enumerate(
+            zip(self.reference_keys, self.reference_values)
+        ):
+            if isinstance(self.key_mlp, nn.ModuleList):
+                k_mlp = self.key_mlp[layer_idx]
+                v_mlp = self.value_mlp[layer_idx]
+            else:
+                k_mlp = self.key_mlp
+                v_mlp = self.value_mlp
+
+            keys.append(self._apply_mlp(k_mlp, ref_k))
+            values.append(self._apply_mlp(v_mlp, ref_v))
+
+        return keys, values
+
+    def logging_metrics(self) -> dict[str, torch.Tensor]:
+        # Example: norms of outputs vs references
+        ks, vs = self.get_trainable()
+        ref_k_norm = torch.stack([rk.norm() for rk in self.reference_keys]).mean()
+        ref_v_norm = torch.stack([rv.norm() for rv in self.reference_values]).mean()
+        k_norm = torch.stack([k.norm() for k in ks]).mean()
+        v_norm = torch.stack([v.norm() for v in vs]).mean()
+        return {
+            "mean_reference_key_norm": ref_k_norm,
+            "mean_reference_value_norm": ref_v_norm,
+            "mean_mlp_key_norm": k_norm,
+            "mean_mlp_value_norm": v_norm,
+        }
+
 
 class TrainableCache(nn.Module):
     """A trainable packed cache for generation with FlexAttention.
@@ -50,6 +291,7 @@ class TrainableCache(nn.Module):
         init_keys: list[torch.Tensor]=None,
         init_values: list[torch.Tensor]=None,
         num_frozen_tokens: int = 0,
+        parametrization: Optional[CartridgeParametrization] = None,
     ):
         super().__init__()
         self.config = config
@@ -60,86 +302,85 @@ class TrainableCache(nn.Module):
 
         assert (init_keys is None) == (init_values is None)
         if init_keys is None:
-            self._num_trainable_tokens, self._num_frozen_tokens = 0, 0
-            self.frozen_keys, self.frozen_values = None, None
-            # self.trainable_keys, self.trainable_values = None, None
+            # No cartridge / no parametrization – pure runtime cache
+            self._num_frozen_tokens = 0
+            self._num_trainable_tokens = 0
+            self.parametrization = None
             self._seq_ids = None
             self._init_seq_ids = None
+            return
+
+        self._num_init_tokens = init_keys[0].shape[2]
+        self._num_frozen_tokens = num_frozen_tokens
+        self._num_trainable_tokens = self._num_init_tokens - num_frozen_tokens
+        assert len(init_keys) == config.n_layers == len(init_values)
+        
+        # we initialize the seq ids for the first 
+        # `num_trainable_tokens + num_frozen_tokens` tokens to -1, which means that 
+        # the tokens are part of the cartridge and should be attended to by 
+        # all tokens.
+        _seq_ids =torch.full(
+            (self._num_init_tokens,),
+            fill_value=CARTRIDGE_SEQ_ID, 
+            dtype=torch.long,
+        )
+        self.register_buffer("_init_seq_ids", _seq_ids)
+        self.register_buffer("_seq_ids", _seq_ids)  # .to moves the tensor to the correct device
+
+        for vec in itertools.chain(init_keys, init_values):
+            assert vec.shape == (1, config.n_heads, self._num_init_tokens, config.head_dim)
+
+        # Plug in parametrization (default: OffsetParametrization)
+        if parametrization is None:
+            self.parametrization = OffsetParametrization(
+                attn_config=config,
+                init_keys=init_keys,
+                init_values=init_values,
+                num_frozen_tokens=num_frozen_tokens,
+            )
         else:
-            self._num_init_tokens = init_keys[0].shape[2]
-            self._num_frozen_tokens = num_frozen_tokens
-            self._num_trainable_tokens = self._num_init_tokens - num_frozen_tokens
-            assert len(init_keys) == config.n_layers == len(init_values)
-            
-            # we initialize the seq ids for the first 
-            # `num_trainable_tokens + num_frozen_tokens` tokens to -1, which means that 
-            # the tokens are part of the cartridge and should be attended to by 
-            # all tokens.
-            _seq_ids =torch.full(
-                (self._num_init_tokens,),
-                fill_value=CARTRIDGE_SEQ_ID, 
-                dtype=torch.long,
-            )
-            self.register_buffer("_init_seq_ids", _seq_ids)
-            self.register_buffer("_seq_ids", _seq_ids)  # .to moves the tensor to the correct device
+            self.parametrization = parametrization
 
-            for vec in itertools.chain(init_keys, init_values):
-                assert vec.shape == (1, config.n_heads, self._num_init_tokens, config.head_dim)
+        # Register parametrization as submodule
+        if self.parametrization is not None:
+            self.add_module("parametrization", self.parametrization)
 
-            self.frozen_keys = nn.ParameterList(
-                [
-                    nn.Parameter(keys_vec[:, :, :num_frozen_tokens].contiguous())
-                    for keys_vec in init_keys
-                ]
-                if num_frozen_tokens
-                else []
-            )
-            self.frozen_values = nn.ParameterList(
-                [
-                    nn.Parameter(values_vec[:, :, :num_frozen_tokens].contiguous())
-                    for values_vec in init_values
-                ]
-                if num_frozen_tokens
-                else []
-            )
-            self.reference_keys = nn.ParameterList(
-                [
-                    nn.Parameter(keys_vec[:, :, num_frozen_tokens:].contiguous())
-                    for keys_vec in init_keys
-                ]
-            )
-            self.reference_values = nn.ParameterList(
-                [
-                    nn.Parameter(values_vec[:, :, num_frozen_tokens:].contiguous())
-                    for values_vec in init_values
-                ]
-            )
+        # Convenience cached numbers
+        assert (
+            self.parametrization.num_trainable_tokens == self._num_trainable_tokens
+        )
+        assert self.parametrization.num_frozen_tokens == self._num_frozen_tokens
 
-            for param in itertools.chain(self.frozen_keys, self.frozen_values, self.reference_keys, self.reference_values):
-                param.requires_grad = False
-
-            self.trainable_key_offsets = nn.ParameterList(
-                [
-                    torch.zeros_like(layer_key)
-                    for layer_key in self.reference_keys
-                ]
-            )
-            self.trainable_value_offsets = nn.ParameterList(
-                [
-                    torch.zeros_like(layer_value)
-                    for layer_value in self.reference_values
-                ]
-            )
-            logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
-            logger.info(f"num_frozen_tokens: {self._num_frozen_tokens}")
+        logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
+        logger.info(f"num_frozen_tokens: {self._num_frozen_tokens}")
     
     @property
     def trainable_keys(self) -> list[torch.Tensor]:
-        return [self.reference_keys[layer_idx] + self.trainable_key_offsets[layer_idx] for layer_idx in range(self.config.n_layers)]
+        if self.parametrization is None:
+            return []
+        ks, _ = self.parametrization.get_trainable()
+        return ks
     
     @property
     def trainable_values(self) -> list[torch.Tensor]:
-        return [self.reference_values[layer_idx] + self.trainable_value_offsets[layer_idx] for layer_idx in range(self.config.n_layers)]
+        if self.parametrization is None:
+            return []
+        _, vs = self.parametrization.get_trainable()
+        return vs
+
+    @property
+    def frozen_keys(self) -> list[torch.Tensor]:
+        if self.parametrization is None:
+            return []
+        ks, _ = self.parametrization.get_frozen()
+        return ks
+
+    @property
+    def frozen_values(self) -> list[torch.Tensor]:
+        if self.parametrization is None:
+            return []
+        _, vs = self.parametrization.get_frozen()
+        return vs
                 
     def update(
         self, 
@@ -194,13 +435,15 @@ class TrainableCache(nn.Module):
                 )
             layer_seq_ids_updated = True
         
-        if self._num_trainable_tokens > 0:
-            keys = [self.trainable_keys[layer_idx]] + keys
-            values = [self.trainable_values[layer_idx]] + values
+        if self._num_trainable_tokens > 0 and self.parametrization is not None:
+            trainable_keys, trainable_values = self.parametrization.get_trainable()
+            keys = [trainable_keys[layer_idx]] + keys
+            values = [trainable_values[layer_idx]] + values
         
-        if self._num_frozen_tokens > 0:
-            keys = [self.frozen_keys[layer_idx]] + keys
-            values = [self.frozen_values[layer_idx]] + values
+        if self._num_frozen_tokens > 0 and self.parametrization is not None:
+            frozen_keys, frozen_values = self.parametrization.get_frozen()
+            keys = [frozen_keys[layer_idx]] + keys
+            values = [frozen_values[layer_idx]] + values
         
         # BB: TODO: why is this here?
         # if self._num_trainable_tokens == 0 and self._num_frozen_tokens == 0:
@@ -245,7 +488,7 @@ class TrainableCache(nn.Module):
         """Get the number of tokens in the cartridge."""
         return self._num_frozen_tokens + self._num_trainable_tokens
     
-    def seq_ids(self) -> torch.Tensor:
+    def seq_ids(self) -> Optional[torch.Tensor]:
         """Returns the sequence ids of the cache."""
         return self._seq_ids
        
@@ -258,12 +501,14 @@ class TrainableCache(nn.Module):
 
     def save(self, path: str):
         """Saves the trainable keys and values to the specified path."""
+        trainable_keys, trainable_values = self.parametrization.get_trainable() if self.parametrization else ([], [])
+        frozen_keys, frozen_values = self.parametrization.get_frozen() if self.parametrization else ([], [])
         torch.save(
             {
-                "trainable_keys": self.trainable_keys,
-                "trainable_values": self.trainable_values,
-                "frozen_keys": self.frozen_keys,
-                "frozen_values": self.frozen_values,
+                "trainable_keys": trainable_keys,
+                "trainable_values": trainable_values,
+                "frozen_keys": frozen_keys,
+                "frozen_values": frozen_values,
             },
             path,
         )
@@ -285,7 +530,8 @@ class TrainableCache(nn.Module):
         num_tokens = checkpoint["trainable_keys"][0].size(2)
         head_dim = checkpoint["trainable_keys"][0].size(3)
 
-        if len(checkpoint["frozen_keys"]) != n_layers:
+        # Allow empty frozen_keys list (when num_frozen_tokens == 0)
+        if checkpoint["frozen_keys"] and len(checkpoint["frozen_keys"]) != n_layers:
             raise AssertionError(
                 "Mismatch in number of layers between trainable and fixed keys"
             )
@@ -302,33 +548,81 @@ class TrainableCache(nn.Module):
         # Here, num_tokens is inferred from trainable keys, but note that the total tokens may be different if fixed tokens exist.
         # The number of fixed tokens can be inferred from frozen_keys if available.
         num_frozen_tokens = (
-            checkpoint["frozen_keys"][0].size(1) if checkpoint["frozen_keys"] else 0
+            checkpoint["frozen_keys"][0].size(2) if checkpoint["frozen_keys"] else 0
+        )
+
+        # Reconstruct init_keys and init_values from checkpoint
+        if num_frozen_tokens > 0:
+            init_keys = [
+                torch.cat([fixed, trainable], dim=2).contiguous()
+                for fixed, trainable in zip(
+                    checkpoint["frozen_keys"], checkpoint["trainable_keys"]
+                )
+            ]
+            init_values = [
+                torch.cat([fixed, trainable], dim=2).contiguous()
+                for fixed, trainable in zip(
+                    checkpoint["frozen_values"], checkpoint["trainable_values"]
+                )
+            ]
+        else:
+            # No frozen tokens, just use trainable keys/values
+            init_keys = list(checkpoint["trainable_keys"])
+            init_values = list(checkpoint["trainable_values"])
+
+        # Create OffsetParametrization from loaded data (backward compatible)
+        parametrization = OffsetParametrization(
+            attn_config=config,
+            init_keys=init_keys,
+            init_values=init_values,
+            num_frozen_tokens=num_frozen_tokens,
         )
 
         return cls(
             config=config,
-            init_keys=[
-                (
-                    torch.cat([fixed, trainable], dim=2).contiguous()
-                    if num_frozen_tokens > 0
-                    else trainable
-                )
-                for fixed, trainable in zip(
-                    checkpoint["frozen_keys"], checkpoint["trainable_keys"]
-                )
-            ],
-            init_values=[
-                (
-                    torch.cat([fixed, trainable], dim=2).contiguous()
-                    if num_frozen_tokens > 0
-                    else trainable
-                )
-                for fixed, trainable in zip(
-                    checkpoint["frozen_values"], checkpoint["trainable_values"]
-                )
-            ],
+            init_keys=init_keys,
+            init_values=init_values,
+            num_frozen_tokens=num_frozen_tokens,
+            parametrization=parametrization,
+        )
+
+
+# Parametrization registry
+PARAM_REGISTRY = {
+    "offset": OffsetParametrization,
+    "mlp_residual": ResidualMLPParametrization,
+}
+
+
+def create_parametrization(
+    parametrization_type: str,
+    parametrization_config: dict,
+    attn_config: AttnConfig,
+    init_keys: list[torch.Tensor],
+    init_values: list[torch.Tensor],
+    num_frozen_tokens: int,
+) -> CartridgeParametrization:
+    """Helper function to create a parametrization from config."""
+    ParamCls = PARAM_REGISTRY[parametrization_type]
+
+    if ParamCls is ResidualMLPParametrization:
+        param_cfg = ResidualMLPParametrization.Config(**parametrization_config)
+        parametrization = ParamCls(
+            config=param_cfg,
+            attn_config=attn_config,
+            init_keys=init_keys,
+            init_values=init_values,
             num_frozen_tokens=num_frozen_tokens,
         )
+    else:
+        parametrization = ParamCls(
+            attn_config=attn_config,
+            init_keys=init_keys,
+            init_values=init_values,
+            num_frozen_tokens=num_frozen_tokens,
+        )
+
+    return parametrization
 
 
 class KVCacheFactory(abc.ABC):
@@ -337,6 +631,10 @@ class KVCacheFactory(abc.ABC):
 
         # SE (03/26): we freeze the first token to prevent forgetting
         num_frozen_tokens: int = 1
+
+        # Parametrization configuration
+        parametrization_type: Literal["offset", "mlp_residual"] = "offset"
+        parametrization_config: dict = Field(default_factory=dict)
 
     def __init__(self, config: Config):
         self.config = config

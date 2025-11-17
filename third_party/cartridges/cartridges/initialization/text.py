@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Literal, Optional
 import torch
 
-from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache
+from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache, create_parametrization
 from cartridges.initialization.tokenization_utils import MODEL_TO_SYSTEM_PROMPT_TOKENIZER
 
 DEFAULT_TEXT_SOURCE = os.path.join(
@@ -53,11 +53,24 @@ class KVFromText(KVCacheFactory):
                     mode="generate",
                 )
                 
+            init_keys = init_cache._keys
+            init_values = init_cache._values
+
+            parametrization = create_parametrization(
+                parametrization_type=self.config.parametrization_type,
+                parametrization_config=self.config.parametrization_config,
+                attn_config=attn_config,
+                init_keys=init_keys,
+                init_values=init_values,
+                num_frozen_tokens=self.config.num_frozen_tokens,
+            )
+
             return TrainableCache(
                 config=attn_config,
-                init_keys=init_cache._keys,
-                init_values=init_cache._values,
+                init_keys=init_keys,
+                init_values=init_values,
                 num_frozen_tokens=self.config.num_frozen_tokens,
+                parametrization=parametrization,
             )
 
 class KVFromRandomText(KVFromText):

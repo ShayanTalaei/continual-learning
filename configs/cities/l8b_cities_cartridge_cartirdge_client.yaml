@@ -56,10 +56,10 @@ agent:
     train_temperature: 0.7
     val_temperature: 0.0
     max_output_tokens: 2048
-    use_unrotated_queries_for_cartridges: false
+    use_unrotated_queries_for_cartridges: true
     non_cartridge_start_position_id_offset: 0
     cartridges:
-      - id: nov6_chatboxed_mixed_dataset-cache-step300
+      - id: nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8-cache-step5000
         source: local
         force_redownload: false
   history_k: null
@@ -68,5 +68,5 @@ agent:
   system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_cartridge_nov6_chatboxed_mixed_dataset-cache-step300
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8-cache-step5000
   log_level: INFO

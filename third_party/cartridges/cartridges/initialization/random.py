@@ -1,6 +1,6 @@
 
 import torch
-from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache
+from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache, create_parametrization
 
 class KVFromRandomVectors(KVCacheFactory):
     class Config(KVCacheFactory.Config):
@@ -23,9 +23,22 @@ class KVFromRandomVectors(KVCacheFactory):
             for _ in range(attn_config.n_layers)
         ]
 
+        init_keys = rand_vectors()
+        init_values = rand_vectors()
+
+        parametrization = create_parametrization(
+            parametrization_type=self.config.parametrization_type,
+            parametrization_config=self.config.parametrization_config,
+            attn_config=attn_config,
+            init_keys=init_keys,
+            init_values=init_values,
+            num_frozen_tokens=self.config.num_frozen_tokens,
+        )
+
         return TrainableCache(
             config=attn_config,
-            init_keys=rand_vectors(),
-            init_values=rand_vectors(),
+            init_keys=init_keys,
+            init_values=init_values,
             num_frozen_tokens=self.config.num_frozen_tokens,
+            parametrization=parametrization,
         )

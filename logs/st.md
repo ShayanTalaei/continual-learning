@@ -659,3 +659,216 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     gen_min_incontext_examples=0 \
     in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
     gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+## Nov 14
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov14_chatboxed_mixed_dataset_with_rot_queries_eval_with_up_to_50_distractors_8192_tokens_cartridge \
+    kv_cache.num_tokens=8192 \
+    kv_cache.cartridge_start_position=0 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=False \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8 \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_2 \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=2.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+## Nov 16
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_2_cartridge_1024 \
+    kv_cache.num_tokens=1024 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=2.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8_cartridge_8192 \
+    kv_cache.num_tokens=8192 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+## Nov 17
+
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov17_chatboxed_with_up_to_50_distractors_dataset_with_unrot_queries_mlp_residual_2 \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=2.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_boxed_only_20000_with_subsample_and_original_experiences/dataset_with_up_to_50_new_cities_distractors.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
+
+
+### Testing the OOM for the above command
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov17_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8 \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    .long_seqs \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/data/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_mixed_15000_boxed_20000_distractors_plus_two_val_datasets/dataset.jsonl \
+    output.local_dir=/data/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/home/shayant/code/continual-learning/notebooks/experiences.jsonl \
+    gen_val_num_repeats=10 .long_seqs dataset.packed_seq_length=82000
