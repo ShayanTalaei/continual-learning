@@ -165,6 +165,7 @@ class LlamaAttention(nn.Module):
         )
         def attn_fn(
             ragged_q: Tensor,
+            ragged_q_unrot: Tensor | None,  # NEW: unrotated queries
             ragged_k: Tensor,
             ragged_v: Tensor,
             k_cache: Tensor,
@@ -182,17 +183,21 @@ class LlamaAttention(nn.Module):
             orig_q = ragged_q
             if num_padding > 0:
                 ragged_q = ragged_q[:-num_padding]
+                if ragged_q_unrot is not None:
+                    ragged_q_unrot = ragged_q_unrot[:-num_padding]
                 ragged_k = ragged_k[:-num_padding]
                 ragged_v = ragged_v[:-num_padding]
 
             out = tokasaurus_attention(
                 ragged_q=ragged_q,
+                ragged_q_unrot=ragged_q_unrot,
                 ragged_k=ragged_k,
                 ragged_v=ragged_v,
                 k_cache=k_cache,
                 v_cache=v_cache,
                 attn_info=attention_info,
                 wrappers=self.wrapper_collection,
+                use_unrotated_queries=self.extra_config.use_unrotated_queries_for_cartridges,
             )
 
             if num_padding > 0:
@@ -206,6 +211,7 @@ class LlamaAttention(nn.Module):
         @attn_fn.register_fake
         def _(
             ragged_q: Tensor,
+            ragged_q_unrot: Tensor | None,
             ragged_k: Tensor,
             ragged_v: Tensor,
             k_cache: Tensor,
@@ -240,6 +246,11 @@ class LlamaAttention(nn.Module):
         key_states = key_states.view(bsz, self.num_kv_heads, -1)
         value_states = value_states.view(bsz, self.num_kv_heads, -1)
 
+        # Store unrotated copy if feature is enabled
+        query_states_unrot = None
+        if self.extra_config.use_unrotated_queries_for_cartridges:
+            query_states_unrot = query_states.clone()  # Before RoPE
+
         cos, sin = batch_state.position_embeddings
 
         dtype = query_states.dtype
@@ -256,6 +267,7 @@ class LlamaAttention(nn.Module):
         key_states = key_states.to(dtype)
         raw_attn_output = self.attn_fn(
             ragged_q=query_states,
+            ragged_q_unrot=query_states_unrot,  # NEW: unrotated queries
             ragged_k=key_states,
             ragged_v=value_states,
             k_cache=self.layer_cache.k_cache,

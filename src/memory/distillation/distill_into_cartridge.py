@@ -213,6 +213,15 @@ class DistillationConfig(pydra.Config):
         self.gen_val_num_repeats = 1
         self.gen_train_num_repeats = 1
         
+        self.targeted_evals = []
+        
+        # Generic field for grouped eval configs (any eval type can use this)
+        # When set, the dataset will create samples for all configs and group results
+        self.grouped_eval_configs = None  # Optional list of eval config dicts for grouped evaluation
+        
+        # Dynamic batching
+        self.max_tokens_per_batch = None  # If set, use token-based dynamic batching
+        
         # Name
         self.run_name = None
 
@@ -255,7 +264,22 @@ class DistillationConfig(pydra.Config):
         self.num_train_generate_problems = 500
         self.kv_cache.init_text_file = "src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt"
         # self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences/dataset.jsonl"
-
+        self.max_tokens_per_batch = 82_000  # Use token-based dynamic batching for synth cities
+        
+        # Set up grouped eval configs - this is synth_cities specific
+        # All combinations will be processed in a single dataset for efficient batching
+        self.grouped_eval_configs = []
+        for data_tags, problems_range in [("old cities", (0, 20)), ("new cities", (20, 40))]:
+            for num_incontext_examples in [0, 25, 50, 100, 250, 500]:
+                self.grouped_eval_configs.append(
+                    {
+                        "data_tags": data_tags,
+                        "problems_range": problems_range,
+                        "num_incontext_examples": num_incontext_examples,
+                    }
+                )
+                    
+        
     def synth_cities_matx(self):
         self.synth_cities()
         self.matx()
@@ -301,6 +325,7 @@ class DistillationConfig(pydra.Config):
             f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
             f"torch_compile=False",
             "use_cudagraphs=F",
+            f"use_unrotated_queries_for_cartridges={self.use_unrotated_queries_for_cartridges}",
         ]
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
         self.generate_batch_size = 200
@@ -592,44 +617,64 @@ def run_distillation(config: DistillationConfig):
 
     generate_evals = []
     if config.do_val_gen_eval:
+        # Generic: Check if grouped eval configs are provided
+        dataset_config_kwargs = {
+            "num_problems": config.num_generate_problems,
+            "system_prompt_path": config.system_prompt_path,
+            "dataset_split": config.val_gen_split,
+            "in_context_examples_path": config.in_context_examples_path,
+            "num_repeats": config.gen_val_num_repeats,
+        }
+        
+        # If grouped_eval_configs is set, use it; otherwise use single config approach
+        if config.grouped_eval_configs is not None:
+            dataset_config_kwargs["eval_configs"] = config.grouped_eval_configs
+        else:
+            # Single config mode (backward compatible)
+            dataset_config_kwargs["max_incontext_examples"] = config.gen_max_incontext_examples
+            dataset_config_kwargs["min_incontext_examples"] = config.gen_min_incontext_examples
+        
         generate_evals.append(
             GenerationEvalConfig(
-                dataset=eval_dataset_cls.Config(
-                    num_problems=config.num_generate_problems,
-                    system_prompt_path=config.system_prompt_path,
-                    dataset_split=config.val_gen_split,
-                    in_context_examples_path=config.in_context_examples_path,
-                    max_incontext_examples=config.gen_max_incontext_examples,
-                    min_incontext_examples=config.gen_min_incontext_examples,
-                    num_repeats=config.gen_val_num_repeats,
-                ),
+                dataset=eval_dataset_cls.Config(**dataset_config_kwargs),
                 name_for_wandb=config.eval_type,
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,
                 batch_size=config.generate_batch_size,
+                max_tokens_per_batch=config.max_tokens_per_batch,
             )
         )
+    
     if config.do_train_gen_eval:
+        # Same generic approach for train eval
+        dataset_config_kwargs = {
+            "num_problems": config.num_train_generate_problems,
+            "system_prompt_path": config.system_prompt_path,
+            "dataset_split": config.train_gen_split,
+            "in_context_examples_path": config.in_context_examples_path,
+            "num_repeats": config.gen_train_num_repeats,
+        }
+        
+        # if config.grouped_eval_configs is not None:
+        #     dataset_config_kwargs["eval_configs"] = config.grouped_eval_configs
+        # else:
+        dataset_config_kwargs["max_incontext_examples"] = config.gen_max_incontext_examples
+        dataset_config_kwargs["min_incontext_examples"] = config.gen_min_incontext_examples
+        
         generate_evals.append(
             GenerationEvalConfig(
-                dataset=eval_dataset_cls.Config(
-                    num_problems=config.num_train_generate_problems,
-                    system_prompt_path=config.system_prompt_path,
-                    dataset_split=config.train_gen_split,
-                    in_context_examples_path=config.in_context_examples_path,
-                    max_incontext_examples=config.gen_max_incontext_examples,
-                    min_incontext_examples=config.gen_min_incontext_examples,
-                    num_repeats=config.gen_train_num_repeats,
-                ),
+                dataset=eval_dataset_cls.Config(**dataset_config_kwargs),
                 name_for_wandb=config.eval_type + "_train",
                 generate_max_new_tokens=1024,
                 num_samples=1,
                 temperature=config.generate_temperature,
                 batch_size=config.generate_batch_size,
+                max_tokens_per_batch=config.max_tokens_per_batch,
             )
         )
-
+    
+    # Note: targeted_evals loop removed - use grouped_eval_configs instead for efficient batching
     # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_path = Path(temp_dir)

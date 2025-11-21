@@ -352,6 +352,7 @@ def make_model(
         torch_compile=config.torch_compile,
         enable_chosen_logprobs=config.enable_chosen_logprobs,
         topk_logprobs=config.max_topk_logprobs,
+        use_unrotated_queries_for_cartridges=config.use_unrotated_queries_for_cartridges,
     )
 
     if config.rope_scaling is not None:

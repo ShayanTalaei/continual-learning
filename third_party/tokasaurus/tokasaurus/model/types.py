@@ -110,6 +110,76 @@ class PageInformation:
             num_tokens=0,
         )
 
+    def split_by_cartridge_blocks(
+        self, 
+        cartridge_block_indices: set[int],
+        page_size: int
+    ) -> tuple["PageInformation", "PageInformation"]:
+        """
+        Split into two PageInformation objects:
+        1. Non-cartridge blocks (normal tokens)
+        2. Cartridge blocks only
+        
+        Both use the same qo_indptr since queries attend to both.
+        """
+        if not cartridge_block_indices:
+            return self, PageInformation.new_empty()
+        
+        # Split kv_indices
+        noncart_kv_indices = []
+        cart_kv_indices = []
+        
+        # New kv_indptr lists
+        noncart_kv_indptr = [0]
+        cart_kv_indptr = [0]
+        
+        # New kv_last_page_len lists (though typically last page len is only relevant for the last block of the full seq)
+        # For split routes, we need to preserve the last page len if the last block ends up in that route.
+        # However, FlashInfer uses kv_last_page_len[i] for the ith sequence.
+        # If we split blocks, the concept of "last page" is tricky.
+        # Usually, cartridge blocks are at the start (prefix). Normal blocks are at the end.
+        # So non-cartridge route usually has the "true" last page.
+        # Cartridge route (prefix) usually consists of full pages.
+        # We will clone kv_last_page_len for both, assuming standard usage.
+        
+        for seq_idx in range(self.num_seqs):
+            seq_start = self.kv_indptr[seq_idx].item()
+            seq_end = self.kv_indptr[seq_idx + 1].item()
+            seq_blocks = self.kv_indices[seq_start:seq_end].tolist()
+            
+            # Split blocks for this sequence
+            noncart_blocks = [b for b in seq_blocks if b not in cartridge_block_indices]
+            cart_blocks = [b for b in seq_blocks if b in cartridge_block_indices]
+            
+            noncart_kv_indices.extend(noncart_blocks)
+            cart_kv_indices.extend(cart_blocks)
+            
+            noncart_kv_indptr.append(noncart_kv_indptr[-1] + len(noncart_blocks))
+            cart_kv_indptr.append(cart_kv_indptr[-1] + len(cart_blocks))
+        
+        noncart_info = PageInformation(
+            qo_indptr=self.qo_indptr,
+            kv_indptr=torch.tensor(noncart_kv_indptr, dtype=torch.int32, device=self.kv_indices.device),
+            kv_indices=torch.tensor(noncart_kv_indices, dtype=torch.int32, device=self.kv_indices.device) if noncart_kv_indices else torch.zeros([], dtype=torch.int32, device=self.kv_indices.device),
+            kv_last_page_len=self.kv_last_page_len.clone(),
+            num_seqs=self.num_seqs,
+            num_tokens=self.num_tokens,
+        )
+        
+        # Cartridges are always full pages, so last page len is page_size
+        cart_last_page_len = torch.full_like(self.kv_last_page_len, page_size)
+        
+        cart_info = PageInformation(
+            qo_indptr=self.qo_indptr,
+            kv_indptr=torch.tensor(cart_kv_indptr, dtype=torch.int32, device=self.kv_indices.device),
+            kv_indices=torch.tensor(cart_kv_indices, dtype=torch.int32, device=self.kv_indices.device) if cart_kv_indices else torch.zeros([], dtype=torch.int32, device=self.kv_indices.device),
+            kv_last_page_len=cart_last_page_len,
+            num_seqs=self.num_seqs,
+            num_tokens=self.num_tokens,
+        )
+        
+        return noncart_info, cart_info
+
 
 @dataclass
 class PageInformationBuilder:
@@ -177,6 +247,7 @@ class AttentionInfoBuilder:
     hydragen_builder: PageInformationBuilder | None = None
 
     num_padding: int = 0
+    cartridge_block_indices: set[int] | None = None
 
     def build(self) -> "AttentionInfo":
         """Convert builders to tensors"""
@@ -191,6 +262,7 @@ class AttentionInfoBuilder:
             if self.hydragen_builder
             else None,
             num_padding=self.num_padding,
+            cartridge_block_indices=self.cartridge_block_indices,
         )
 
 
@@ -212,6 +284,11 @@ class AttentionInfo:
 
     # to make batches that are a tp-sized multiple for tensor parallelism
     num_padding: int = 0
+    cartridge_block_indices: set[int] | None = None
+
+    def has_cartridges(self) -> bool:
+        """Check if any cartridge blocks are present."""
+        return self.cartridge_block_indices is not None and len(self.cartridge_block_indices) > 0
 
     def split_q(self, q: Tensor):
         start = 0
@@ -696,3 +773,4 @@ class ExtraModelConfig:
 
     enable_chosen_logprobs: bool = True
     topk_logprobs: int | None = None
+    use_unrotated_queries_for_cartridges: bool = False

@@ -332,6 +332,15 @@ def seqs_to_input(
     for seq in decoding_seqs:
         register_batch_index(seq, 1)
 
+    # Collect all cartridge block indices from sequences
+    cartridge_block_set = set()
+    for seq, _ in prefill_seqs:
+        if seq.cartridge_indices:
+            cartridge_block_set.update(seq.cartridge_indices)
+    for seq in decoding_seqs:
+        if seq.cartridge_indices:
+            cartridge_block_set.update(seq.cartridge_indices)
+    
     # No need to call build() on builders anymore, just pass them directly
     attention_info_builder = AttentionInfoBuilder(
         page_size=page_size,
@@ -339,6 +348,7 @@ def seqs_to_input(
         prefill_builder=prefill_builder,
         decode_builder=decode_builder,
         hydragen_builder=hydragen_builder if use_hydragen else None,
+        cartridge_block_indices=cartridge_block_set if cartridge_block_set else None,
     )
 
     inp = ModelInput(

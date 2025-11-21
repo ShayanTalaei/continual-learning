@@ -135,6 +135,7 @@ class ServerConfig(pydra.Config):
 
     # Cartridge configuration
     cartridge_dir: str = "./cartridges"
+    use_unrotated_queries_for_cartridges: bool = False
 
     def uvsh(self):
         self.uvicorn_log_level = "warning"
