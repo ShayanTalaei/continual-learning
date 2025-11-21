@@ -9,7 +9,7 @@ from pathlib import Path
 import re
 from datetime import timedelta
 import time
-from typing import Dict, List, Literal, Optional
+from typing import Dict, List, Literal, Optional, Tuple
 import yaml
 import httpx
 def mean(x): return sum(x) / len(x)
@@ -70,6 +70,7 @@ class GenerationEvalConfig(BaseConfig):
     temperature: float = 0.0
     batch_size: int = 1
     override_max_tokens: int | None = None
+    max_tokens_per_batch: Optional[int] = None  # If set, use token-based dynamic batching instead of fixed batch size
 
 
 class TrainConfig(RunConfig):
@@ -399,6 +400,7 @@ def train(config: TrainConfig):
         logger.info(f"Dataloader length: {len(dataloader)}")
         for batch in train_pbar:
             batch: DatasetBatch
+            step_start_time = time.time()
             do_step = (iter_idx + 1) % accumulate_grad_steps == 0
 
             if (
@@ -491,7 +493,10 @@ def train(config: TrainConfig):
 
             if do_step:
                 optimizer.step()
-                optimizer.zero_grad()              
+                optimizer.zero_grad()
+                
+                # Calculate step time (forward + backward + optimizer step)
+                step_time = time.time() - step_start_time
 
                 # SE (05/02): We are careful to only reduce the loss immediately
                 # after the optimizer step. Doing this outside the `do_step` block
@@ -538,6 +543,7 @@ def train(config: TrainConfig):
                         "train/step_num_target_tokens": accum_num_target_tokens,
                         "train/num_input_tokens": total_num_input_tokens,
                         "train/num_target_tokens": total_num_target_tokens,
+                        "train/step_time": step_time,
                         **{f"train/{k}": v for k, v in metrics.items()},
                         **{
                             f"optimizer/lr_group{i}": param_group["lr"]
@@ -754,33 +760,55 @@ def generate_with_hf(
     batch_size: int,
     num_samples: int,
     indexes: List[int],
+    context: str = "",
 ):
     from cartridges.generation import flex_generate
 
     has_score = hasattr(dataset, "score")
     results = []
-    for batch_start in tqdm(
-        range(0, len(indexes), batch_size),
-        desc=f"Generating [step={optimizer_step}] ({config.name_for_wandb})",
+    
+    # Determine batching strategy: token-based dynamic batching or fixed batch size
+    if config.max_tokens_per_batch is not None:
+        # Use token-based dynamic batching
+        from cartridges.evaluate import _create_token_based_batches
+        batch_boundaries = _create_token_based_batches(
+            dataset=dataset,
+            max_tokens_per_batch=config.max_tokens_per_batch,
+            num_samples=num_samples,
+            indexes=indexes,
+        )
+        logger.info(f"Using token-based dynamic batching with max_tokens_per_batch={config.max_tokens_per_batch}, created {len(batch_boundaries)} batches")
+        batch_iter = batch_boundaries
+    else:
+        # Use fixed batch size (existing behavior)
+        batch_iter = [(i, min(i + batch_size, len(indexes))) for i in range(0, len(indexes), batch_size)]
+        logger.info(f"Using fixed batch size: {batch_size} examples per batch, {len(batch_iter)} total batches")
+    
+    for batch_start_idx, batch_end_idx in tqdm(
+        batch_iter,
+        desc=f"Generating {config.name_for_wandb} [{context}]",
         leave=False,
         disable=not is_rank_zero,
     ):
         for sample_idx in range(num_samples):
             logger.info(f"Generating sample {sample_idx} of {num_samples}")
 
+            # Create elements with (idx_pos, element) pairs where idx_pos is position in indexes list
             elements = [
-                (i, dataset[indexes[i]])
-                for i in range(batch_start, batch_start + batch_size)
-                if i < len(indexes)
+                (idx_pos, dataset[indexes[idx_pos]])
+                for idx_pos in range(batch_start_idx, batch_end_idx)
             ]
             if len(elements) == 0:
                 continue
             
+            # Use batch-local seq_id (0-indexed) to ensure proper batching
+            # seq_ids must be 0-indexed within each batch for flex_generate to work correctly
             input_ids = torch.cat([elem.input_ids for _, elem in elements]).to(local_rank)
+            # Use batch-local seq_id (0-indexed) instead of idx_pos
             seq_ids = torch.cat(
                 [
-                    torch.full((elem.input_ids.shape[0],), idx, dtype=torch.long, device=local_rank)
-                    for idx, elem in elements
+                    torch.full((elem.input_ids.shape[0],), batch_local_seq_id, dtype=torch.long, device=local_rank)
+                    for batch_local_seq_id, (_, elem) in enumerate(elements)
                 ]
             )
             position_ids = torch.cat(
@@ -805,10 +833,12 @@ def generate_with_hf(
             
             pred = tokenizer.batch_decode(pred_ids, skip_special_tokens=True)
 
-            elements = {seq_id: elem for seq_id, elem in elements}
+            # Convert elements to dict using batch-local seq_id as key
+            elements_dict = {batch_local_seq_id: (idx_pos, elem) for batch_local_seq_id, (idx_pos, elem) in enumerate(elements)}
 
-            for  (seq_id, curr_pred_ids) in pred_ids.items():
-                element = elements[seq_id]
+            for (seq_id, curr_pred_ids) in pred_ids.items():
+                # seq_id is now batch-local (0-indexed), get the corresponding idx_pos and element
+                idx_pos, element = elements_dict[seq_id]
                 pred = tokenizer.decode(curr_pred_ids, skip_special_tokens=True)
 
                 if has_score:
@@ -826,7 +856,7 @@ def generate_with_hf(
                 
                 results.append(
                     {
-                        "index": indexes[seq_id],
+                        "index": indexes[idx_pos],  # Use idx_pos to get the actual dataset index
                         "optimizer_step": optimizer_step,
                         "prompt": element.prompt,
                         "answer": element.answer,
@@ -834,7 +864,7 @@ def generate_with_hf(
                         "convo_id": element.convo_id,
                         "sample_idx": sample_idx,
                         "num_system_and_user_tokens": element.input_ids.shape[0],
-                        "num_assistant_tokens": len(pred_ids),
+                        "num_assistant_tokens": len(curr_pred_ids),  # Fix: use curr_pred_ids length, not pred_ids dict
                         **metrics,
                         **element.metadata,
                         **extras,
@@ -853,109 +883,144 @@ def generate_with_toka(
     batch_size: int,
     num_samples: int,
     indexes: List[int],
+    context: str = "",
 ):
-    # TODO: merge shared code with hf generation
-    from tenacity import retry, stop_after_attempt, wait_exponential
-
+    import asyncio
+    import httpx
+    
     url = f"http://localhost:{config.toka_server_config.port}/custom/cartridge/chat/completions"
-
     has_score = hasattr(dataset, "score")
-    results = []
-    for batch_start in tqdm(
-        range(0, len(indexes), batch_size),
-        desc=f"Generating [step={optimizer_step}] ({eval_config.name_for_wandb})",
-        leave=False,
-        disable=local_rank == 0,
-    ):
-        for sample_idx in range(num_samples):
-            logger.info(f"Generating sample {sample_idx} of {num_samples}")
+    
+    # Get non_cartridge_start_position_id_offset from model config if available
+    non_cartridge_start_position_id_offset = config.model.load_kwargs.get(
+        "non_cartridge_start_position_id_offset"
+    )
 
-            elements = [
-                (i, dataset[indexes[i]])
-                for i in range(batch_start, batch_start + batch_size)
-                if i < len(indexes)
-            ]
-            if len(elements) == 0:
-                continue
+    async def run_generation():
+        # Use a larger connection pool to allow high throughput
+        limits = httpx.Limits(max_keepalive_connections=batch_size, max_connections=batch_size * 2)
+        timeout = httpx.Timeout(600.0, connect=10.0)
+        
+        async with httpx.AsyncClient(limits=limits, timeout=timeout) as client:
+            # Semaphore to control concurrency
+            # We allow slightly more than batch_size to keep the server busy (pipelining)
+            sem = asyncio.Semaphore(batch_size)
             
-            # Get non_cartridge_start_position_id_offset from model config if available
-            non_cartridge_start_position_id_offset = config.model.load_kwargs.get(
-                "non_cartridge_start_position_id_offset"
+            tasks = set()
+            results_list = []
+            
+            progress_bar = tqdm(
+                total=len(indexes) * num_samples,
+                desc=f"Generating {eval_config.name_for_wandb} [{context}]",
+                leave=False,
+                disable=local_rank != 0,
             )
-            
-            # Build list of requests
-            requests = []
-            for idx_and_element in elements:
-                idx, element = idx_and_element
-                request = CartridgeChatCompletionRequest(
-                    ids=element.input_ids.tolist(),
-                    model=config.toka_server_config.model,
-                    max_tokens=eval_config.generate_max_new_tokens,
-                    temperature=eval_config.temperature,
-                    cartridges=[
-                        Cartridge(id="cache_for_generation", source="local")
-                    ],
-                    non_cartridge_start_position_id_offset=non_cartridge_start_position_id_offset,
-                )
-                requests.append((idx,request.model_dump(exclude_none=True)))
-                
-            # Helper function for making a single request
-            def make_request(args):
-                req_idx, request = args
-                
-                @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
-                def make_post_request(client, url, request):
-                    return client.post(url, json=request, timeout=60*10)
-                
-                with httpx.Client() as client:
-                    response = make_post_request(client, url, request)
-                return req_idx, response.json()["choices"][0]["message"]["content"]
 
-            # Make requests in parallel using ThreadPoolExecutor
-            preds = {}
-            with ThreadPoolExecutor(max_workers=batch_size) as executor:
-                # Submit all requests and maintain index mapping
-                futures = list(executor.map(make_request, requests))
-                
-                # Collect results in order
-                for req_idx, pred in futures:
-                    preds[req_idx] = pred
-                    
-            elements = {seq_id: elem for seq_id, elem in elements}
-
-            for (seq_id, pred) in preds.items():
-                element = elements[seq_id]
-
-                if has_score:
-                    metrics, extras = dataset.score(
-                        pred=pred, answer=element.answer, convo_id=element.convo_id
+            async def process_sample(seq_idx: int, sample_idx: int, element):
+                async with sem:
+                    request = CartridgeChatCompletionRequest(
+                        ids=element.input_ids.tolist(),
+                        model=config.toka_server_config.model,
+                        max_tokens=eval_config.generate_max_new_tokens,
+                        temperature=eval_config.temperature,
+                        cartridges=[
+                            Cartridge(id="cache_for_generation", source="local")
+                        ],
+                        non_cartridge_start_position_id_offset=non_cartridge_start_position_id_offset,
                     )
-                else:
-                    metrics, extras = None, {}
+                    
+                    # Simple retry logic for network errors
+                    for attempt in range(3):
+                        try:
+                            response = await client.post(url, json=request.model_dump(exclude_none=True))
+                            response.raise_for_status()
+                            content = response.json()["choices"][0]["message"]["content"]
+                            return seq_idx, sample_idx, content
+                        except Exception as e:
+                            if attempt == 2:
+                                logger.error(f"Failed to generate for index {seq_idx} (sample {sample_idx}): {e}")
+                                return seq_idx, sample_idx, ""
+                            await asyncio.sleep(1 * (2 ** attempt))
 
-                if not isinstance(metrics, dict):
-                    # Support for older datasets that return a single bool or float as metrics
-                    metrics = {"score": metrics}
-                else:
-                    metrics = {f"{k}_score": v for k, v in metrics.items()}
+            # Generator to lazily yield elements/indices
+            def item_generator():
+                for i, idx in enumerate(indexes):
+                    # We fetch the element here. If dataset is lazy, this might do I/O or tokenization.
+                    # Since this runs in the main thread (asyncio loop), it might block slightly.
+                    # For now we assume it's fast enough or acceptable.
+                    yield i, dataset[idx]
+
+            gen = item_generator()
+            
+            # Fill the pipeline initially
+            try:
+                # We want enough tasks in flight to saturate the semaphore and have some buffered
+                while len(tasks) < batch_size * 2:
+                    i, element = next(gen)
+                    for sample_idx in range(num_samples):
+                        task = asyncio.create_task(process_sample(i, sample_idx, element))
+                        tasks.add(task)
+            except StopIteration:
+                pass
+
+            # Process tasks as they complete and refill
+            while tasks:
+                done, tasks = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
                 
-                results.append(
-                    {
-                        "index": indexes[seq_id],
-                        "optimizer_step": optimizer_step,
-                        "prompt": element.prompt,
-                        "answer": element.answer,
-                        "pred": pred,
-                        "convo_id": element.convo_id,
-                        "sample_idx": sample_idx,
-                        "num_system_and_user_tokens": element.input_ids.shape[0],
-                        "num_assistant_tokens": 0, # TODO
-                        **metrics,
-                        **element.metadata,
-                        **extras,
-                    }
-                )
-    return results
+                for task in done:
+                    progress_bar.update(1)
+                    try:
+                        seq_idx, sample_idx, pred = await task
+                        
+                        # Re-fetch element for scoring/metadata
+                        # (We could pass it through, but that keeps it in memory)
+                        element = dataset[indexes[seq_idx]]
+                        
+                        if has_score:
+                            metrics, extras = dataset.score(
+                                pred=pred, answer=element.answer, convo_id=element.convo_id
+                            )
+                        else:
+                            metrics, extras = None, {}
+
+                        if not isinstance(metrics, dict):
+                            metrics = {"score": metrics}
+                        else:
+                            metrics = {f"{k}_score": v for k, v in metrics.items()}
+                        
+                        results_list.append(
+                            {
+                                "index": indexes[seq_idx],
+                                "optimizer_step": optimizer_step,
+                                "prompt": element.prompt,
+                                "answer": element.answer,
+                                "pred": pred,
+                                "convo_id": element.convo_id,
+                                "sample_idx": sample_idx,
+                                "num_system_and_user_tokens": element.input_ids.shape[0],
+                                "num_assistant_tokens": 0, # TODO
+                                **metrics,
+                                **element.metadata,
+                                **extras,
+                            }
+                        )
+                    except Exception as e:
+                        logger.error(f"Error processing task result: {e}")
+
+                # Refill tasks
+                try:
+                    while len(tasks) < batch_size * 2:
+                        i, element = next(gen)
+                        for sample_idx in range(num_samples):
+                            task = asyncio.create_task(process_sample(i, sample_idx, element))
+                            tasks.add(task)
+                except StopIteration:
+                    pass
+            
+            progress_bar.close()
+            return results_list
+
+    return asyncio.run(run_generation())
 
 
 def evaluate_generations(
@@ -990,6 +1055,14 @@ def evaluate_generations(
     has_batch_score = hasattr(dataset, "batch_score")
     prefix = f"generate_{eval_config.name_for_wandb}"
 
+    # Determine context string for logging
+    if final:
+        context_str = "final"
+    elif step == 0 or (step is None and optimizer_step == 0):
+        context_str = "before_training"
+    else:
+        context_str = f"step_{optimizer_step}"
+
     if eval_config.num_samples_final is not None and final:
         num_samples = eval_config.num_samples_final
     else:
@@ -1006,7 +1079,7 @@ def evaluate_generations(
     start_generate_time = time.time()
     if generation_server_type == "toka":
         results = generate_with_toka(
-            config, eval_config, tokenizer, dataset, optimizer_step, local_rank, batch_size, num_samples, indexes
+            config, eval_config, tokenizer, dataset, optimizer_step, local_rank, batch_size, num_samples, indexes, context=context_str
         )
     else:
         results = generate_with_hf(
@@ -1020,7 +1093,8 @@ def evaluate_generations(
             is_rank_zero=is_rank_zero,
             batch_size=batch_size,
             num_samples=num_samples,
-            indexes=indexes
+            indexes=indexes,
+            context=context_str
         )
     if is_ddp:
         torch.distributed.barrier()
@@ -1058,31 +1132,77 @@ def evaluate_generations(
             )
             df = df.drop_duplicates(subset=["convo_id", "sample_idx"])
 
-        score_cols = [col for col in df.columns if col.endswith("score")]
-        avg_scores = {f"{prefix}/{col}": df[col].mean() for col in score_cols}
+        # Generic: Check if results have eval_group_id for grouped evaluation
+        if "eval_group_id" in df.columns:
+            # Grouped evaluation mode: compute and log metrics separately for each group
+            grouped = df.groupby("eval_group_id")
+            
+            all_group_scores = {}
+            all_group_logs = {}
+            
+            for group_id, group_df in grouped:
+                group_prefix = f"{prefix}_{group_id}" if group_id else prefix
+                score_cols = [col for col in group_df.columns if col.endswith("score")]
+                avg_scores = {f"{group_prefix}/{col}": group_df[col].mean() for col in score_cols}
+                all_group_scores.update(avg_scores)
+                
+                if log_to_wandb:
+                    log_dict = {
+                        **avg_scores,
+                        f"{group_prefix}/table": group_df,
+                        f"{group_prefix}/num_system_and_user_tokens": group_df[
+                            "num_system_and_user_tokens"
+                        ].mean(),
+                        "train/optimizer_step": optimizer_step,
+                        f"{group_prefix}/num_assistant_tokens": group_df["num_assistant_tokens"].mean(),
+                        f"{group_prefix}/generation_time": generation_time,
+                        f"{group_prefix}/num_samples": len(group_df),
+                    }
+                    
+                    # Compute batch score for this group if available
+                    if has_batch_score:
+                        group_pred = group_df["pred"].tolist()
+                        group_gt = group_df["answer"].tolist()
+                        group_batch_score = dataset.batch_score_with_answers(group_pred, group_gt)
+                        if isinstance(group_batch_score, dict):
+                            log_dict.update({f"{group_prefix}/{k}": v for k, v in group_batch_score.items()})
+                        else:
+                            log_dict[f"{group_prefix}/batch_score"] = group_batch_score
+                    
+                    all_group_logs.update(log_dict)
+            
+            if log_to_wandb:
+                wandb.log(all_group_logs, step=optimizer_step)
+            
+            logger.info(f"Grouped eval scores: {all_group_scores}")
+            print(f"Avg scores (grouped): {all_group_scores}")
+        else:
+            # Single evaluation mode (original behavior)
+            score_cols = [col for col in df.columns if col.endswith("score")]
+            avg_scores = {f"{prefix}/{col}": df[col].mean() for col in score_cols}
 
-        if log_to_wandb:
-            log_dict = {
-                **avg_scores,
-                f"{prefix}/table": df,
-                f"{prefix}/num_system_and_user_tokens": df[
-                    "num_system_and_user_tokens"
-                ].mean(),
-                "train/optimizer_step": optimizer_step,
-                f"{prefix}/num_assistant_tokens": df["num_assistant_tokens"].mean(),
-                f"{prefix}/generation_time": generation_time,
-            }
-            logger.info(avg_scores)
+            if log_to_wandb:
+                log_dict = {
+                    **avg_scores,
+                    f"{prefix}/table": df,
+                    f"{prefix}/num_system_and_user_tokens": df[
+                        "num_system_and_user_tokens"
+                    ].mean(),
+                    "train/optimizer_step": optimizer_step,
+                    f"{prefix}/num_assistant_tokens": df["num_assistant_tokens"].mean(),
+                    f"{prefix}/generation_time": generation_time,
+                }
+                logger.info(avg_scores)
 
-            if batch_score is not None:
-                log_dict[f"{prefix}/batch_score"] = batch_score
+                if batch_score is not None:
+                    log_dict[f"{prefix}/batch_score"] = batch_score
 
-            wandb.log(
-                log_dict,
-                step=optimizer_step,
-            )
-    
-        print(f"Avg scores: {avg_scores}")
+                wandb.log(
+                    log_dict,
+                    step=optimizer_step,
+                )
+            
+            print(f"Avg scores: {avg_scores}")
     
     if is_ddp:
         dist.barrier()

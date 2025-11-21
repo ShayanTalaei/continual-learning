@@ -6,7 +6,7 @@ import itertools
 import math
 import os
 import time
-from typing import Callable, Dict, List, Literal, Optional, Union
+from typing import Callable, Dict, List, Literal, Optional, Union, Tuple
 
 # from kvpress import DuoAttentionPress, ExpectedAttentionPress
 import pandas as pd
@@ -129,6 +129,7 @@ class GenerationEvalRunConfig(pydrantic.RunConfig):
 
     batch_size: int
     max_num_batches_in_parallel: int = 1
+    max_tokens_per_batch: Optional[int] = None  # If set, use token-based dynamic batching instead of fixed batch size
 
     tokenizer: str = "meta-llama/Llama-3.2-1B-Instruct"
 
@@ -157,8 +158,25 @@ async def evaluate_generation(config: GenerationEvalRunConfig):
         config.wandb.name = config.name
         prepare_wandb(config.wandb, config.to_dict())
 
-    dataset_batch_size = config.batch_size // config.eval.num_samples
-    total_batches = math.ceil(len(dataset) / dataset_batch_size)
+    # Determine batching strategy: token-based dynamic batching or fixed batch size
+    if config.max_tokens_per_batch is not None:
+        # Use token-based dynamic batching
+        batches = _create_token_based_batches(
+            dataset=dataset,
+            max_tokens_per_batch=config.max_tokens_per_batch,
+            num_samples=config.eval.num_samples,
+        )
+        logger.info(f"Using token-based dynamic batching with max_tokens_per_batch={config.max_tokens_per_batch}, created {len(batches)} batches")
+    else:
+        # Use fixed batch size (existing behavior)
+        dataset_batch_size = config.batch_size // config.eval.num_samples
+        total_batches = math.ceil(len(dataset) / dataset_batch_size)
+        batches = [
+            (batch_idx * dataset_batch_size, min((batch_idx + 1) * dataset_batch_size, len(dataset)))
+            for batch_idx in range(total_batches)
+        ]
+        logger.info(f"Using fixed batch size: {dataset_batch_size} examples per batch, {len(batches)} total batches")
+    
     all_rows = []
 
     # TODO: the generate dataset actually determines the temperature for training
@@ -170,15 +188,13 @@ async def evaluate_generation(config: GenerationEvalRunConfig):
     # Use asyncio for concurrent execution
     tasks = [
         _process_batch(
-            batch_start=batch_idx * dataset_batch_size,
-            batch_end=min(
-                (batch_idx + 1) * dataset_batch_size, len(dataset)
-            ),
+            batch_start=batch_start,
+            batch_end=batch_end,
             generator=generator,
             dataset=dataset,
             eval_config=config.eval,
         )
-        for batch_idx in range(total_batches)
+        for batch_start, batch_end in batches
     ]
     
     # Process in chunks to limit concurrency
@@ -268,6 +284,73 @@ async def _process_batch(
             }
         )
     return results
+
+
+def _create_token_based_batches(
+    dataset: GenerateEvalDataset,
+    max_tokens_per_batch: int,
+    num_samples: int,
+    indexes: Optional[List[int]] = None,
+) -> List[Tuple[int, int]]:
+    """
+    Create batches based on token count rather than example count.
+    
+    This function groups examples into batches such that the total number of tokens
+    (accounting for num_samples multiplication) does not exceed max_tokens_per_batch.
+    This is useful when sequences have highly variable lengths (e.g., 0-500 ICL examples).
+    
+    Args:
+        dataset: The evaluation dataset
+        max_tokens_per_batch: Maximum number of tokens per batch (before num_samples multiplication)
+        num_samples: Number of samples per example (each element is processed this many times)
+        indexes: Optional list of dataset indices to process. If None, processes entire dataset.
+        
+    Returns:
+        List of (batch_start, batch_end) tuples representing batch boundaries
+        (within indexes if provided, otherwise within full dataset)
+    """
+    if indexes is None:
+        indexes = list(range(len(dataset)))
+    
+    if len(indexes) == 0:
+        return []
+    
+    batches = []
+    current_batch_start = 0
+    current_batch_tokens = 0
+    
+    for idx_pos in range(len(indexes)):
+        dataset_idx = indexes[idx_pos]
+        element = dataset[dataset_idx]
+        # Get sequence length (input_ids length)
+        seq_length = len(element.input_ids)
+        
+        # Account for num_samples multiplication since each element is processed multiple times
+        tokens_needed = seq_length * num_samples
+        
+        # If a single element exceeds the limit, put it in its own batch
+        if tokens_needed > max_tokens_per_batch:
+            # Finalize current batch if it has any elements
+            if current_batch_start < idx_pos:
+                batches.append((current_batch_start, idx_pos))
+            # Create a batch with just this element
+            batches.append((idx_pos, idx_pos + 1))
+            current_batch_start = idx_pos + 1
+            current_batch_tokens = 0
+        # If adding this example would exceed the limit, start a new batch
+        elif current_batch_tokens > 0 and current_batch_tokens + tokens_needed > max_tokens_per_batch:
+            batches.append((current_batch_start, idx_pos))
+            current_batch_start = idx_pos
+            current_batch_tokens = tokens_needed
+        else:
+            # Add to current batch
+            current_batch_tokens += tokens_needed
+    
+    # Add the final batch if there are remaining elements
+    if current_batch_start < len(indexes):
+        batches.append((current_batch_start, len(indexes)))
+    
+    return batches
 
 
 @dataclass
