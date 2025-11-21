@@ -59,7 +59,7 @@ agent:
     use_unrotated_queries_for_cartridges: true
     non_cartridge_start_position_id_offset: 0
     cartridges:
-      - id: nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8-cache-step5000
+      - id: nov20_mixed_dataset_unrot_queries_mlp_residual_8_toka_attempt_1-cache-step1200
         source: local
         force_redownload: false
   history_k: null
@@ -68,5 +68,5 @@ agent:
   system_prompt: "{file:src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt}"
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_nov14_chatboxed_mixed_dataset_with_unrot_queries_eval_with_up_to_50_distractors_mlp_residual_8-cache-step5000
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_nov20_mixed_dataset_unrot_queries_mlp_residual_8_toka_attempt_1-cache-step1200
   log_level: INFO
