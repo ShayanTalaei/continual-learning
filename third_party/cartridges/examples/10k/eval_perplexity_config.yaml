@@ -1,0 +1,37 @@
+# Configuration for evaluating perplexity with cartridges on eval questions
+# 
+# Usage:
+#   python examples/10k/eval_perplexity_with_cartridge.py --config examples/10k/eval_perplexity_config.yaml
+
+# Paths to trained cartridge files (cartridge.pt)
+# Provide one or both. If both are provided, composition evaluation will also run.
+# Example: "outputs/amd_train/abc123-cache-step22/cartridge.pt"
+amd_cartridge_path: "/home/ubuntu/ding/continual-learning/third_party/cartridges/outputs/8192-amd_train/b26eff66-6d2e-4355-b6a4-df514f6d82d9-cache-step351/cartridge.pt"  # "outputs/amd_train/cartridge.pt"
+pepsi_cartridge_path: "/home/ubuntu/ding/continual-learning/third_party/cartridges/outputs/8192-pepsi_train/410b076d-e5ab-44d2-ba64-a703b1b79fec-cache-step345/cartridge.pt" # "outputs/pepsi_train/cartridge.pt"
+# amd_cartridge_path: "/home/ubuntu/ding/continual-learning/third_party/cartridges/outputs/good512amd_train/dade8082-7eff-4bd2-9776-d5cd92a50e46-cache-step22/cartridge.pt"
+# pepsi_cartridge_path: "/home/ubuntu/ding/continual-learning/third_party/cartridges/outputs/good512pepsi_train/ea548e25-61fb-4b1a-840d-4d0ce85c8e66-cache-step22/cartridge.pt"
+# Model name (should match the model used for training)
+# Options: "meta-llama/Llama-3.2-3B-Instruct", "meta-llama/Llama-3.2-1B-Instruct", etc.
+model_name: "meta-llama/Llama-3.2-3B-Instruct"
+
+# Evaluation type
+# Options: "perplexity" (loss-based evaluation with cartridge) or "qa" (generation-based QA evaluation with EM/F1)
+eval_type: "qa"  # or "qa"
+
+# Optional: System prompt (set to null to disable)
+system_prompt: null #"You are a helpful financial analyst assistant."
+
+# Optional: Device to use (default: "cuda")
+device: "cuda"
+
+# Optional: Seed for reproducibility (default: 42)
+seed: 42
+
+# Optional: QA evaluation parameters (only used when eval_type="qa")
+max_new_tokens: 256  # Maximum tokens to generate per answer
+temperature: 1 #0.0     # Generation temperature (0.0 for deterministic)
+batch_size: 4        # Batch size for generation
+
+# Optional: override QA JSON sources (default are *financebench.json)
+amd_qa_json: "data/10k/eval/amd_qa_gemini.json"
+pepsi_qa_json: "data/10k/eval/pepsi_qa_gemini.json"

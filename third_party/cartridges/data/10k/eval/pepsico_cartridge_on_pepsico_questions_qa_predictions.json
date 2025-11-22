@@ -1,0 +1,1458 @@
+[
+  {
+    "idx": 0,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the IRS Employer Identification Number for PepsiCo, Inc.?"
+      }
+    ],
+    "answer": "13-1584302",
+    "pred": " \n\n Let To To To To To To To To To ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 1,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the par value per share for PepsiCo's Common Stock?"
+      }
+    ],
+    "answer": "1-2/3 cents per share",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unusually unusually unusually unusually unusually unusually unusually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually usually especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially especially",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 2,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was the Form 8-K report signed?"
+      }
+    ],
+    "answer": "May 30, 2023",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 3,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who signed the Form 8-K report on behalf of PepsiCo?"
+      }
+    ],
+    "answer": "Cynthia A. Nastanski",
+    "pred": "\n\nTheToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToTo",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 4,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the trading symbol for PepsiCo's 0.750% Senior Notes due 2033?"
+      }
+    ],
+    "answer": "PEP33",
+    "pred": "\n\nInTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 5,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total value of the 364 day unsecured revolving credit agreement from 2022 that was terminated?"
+      }
+    ],
+    "answer": "$3,800,000,000",
+    "pred": "\n\nAccordingTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 6,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the expiration date for the new 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "May 24, 2024",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallyNormallynormallynormallynormallynormallynormallynormallyrequentlyrequentlyrequentlyrequentlyrequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently frequently temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily temporarily",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 7,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, what is the maximum amount the commitments can be increased to?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 8,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the size of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$750,000,000",
+    "pred": "\n\nUnfortunatelyIIIIIIIiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 9,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who are the two Syndication Agents for the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "pred": "\n\nToAccordingThereareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareareare",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 10,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 364-Day Credit Agreement, what is the minimum borrowing amount for advances denominated in Dollars?"
+      }
+    ],
+    "answer": "$10,000,000",
+    "pred": "\n\nTheInininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininin",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 11,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the annual commitment fee rate under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "0.025%",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================ -------------------------------- -------------------------------- -------------------------------- -------------------------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ---------------- ----------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 12,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the fee, as a percentage of the aggregate principal amount, for making a Term Loan Election under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "0.50%",
+    "pred": "\n\n\n\nBasedAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 13,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the Five Year Credit Agreement, what is the annual commitment fee rate on the unused portion of the Revolving Credit Commitment?"
+      }
+    ],
+    "answer": "0.045%",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponupon",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 14,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to Section 6.01, what is the monetary threshold for a judgment against the company that could trigger an Event of Default?"
+      }
+    ],
+    "answer": "$500,000,000",
+    "pred": "\n\nBasedAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 15,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the processing and recordation fee for an Assignment and Assumption under the Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 16,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the stock ticker for The Toronto-Dominion Bank, a lender whose New York Branch is a party to the credit agreement?"
+      }
+    ],
+    "answer": "TD",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 17,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what city are the headquarters of Mizuho Bank, Ltd., one of the Initial Lenders in the credit agreement?"
+      }
+    ],
+    "answer": "Tokyo",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 18,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of Barclays Bank PLC, one of the lenders listed in the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "1690",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntiluntil",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 19,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of JPMorgan Chase & Co., the parent company of JPMorgan Chase Bank, N.A., which is listed as a Syndication Agent?"
+      }
+    ],
+    "answer": "Jamie Dimon",
+    "pred": "\n\nUnfortunatelyBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 20,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of The Northern Trust Company, one of the lenders that signed the credit agreements?"
+      }
+    ],
+    "answer": "1889",
+    "pred": " Let Let me me tell tell you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you you",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 21,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the official currency of Australia, where the Australia and New Zealand Banking Group Limited, a lender, is based?"
+      }
+    ],
+    "answer": "Australian dollar",
+    "pred": "\n\nBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 22,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was The Goldman Sachs Group, Inc., the parent company of lender Goldman Sachs Bank USA, founded?"
+      }
+    ],
+    "answer": "1869",
+    "pred": "\n\nHereHereHereHereHereHereHereHereHereHereHereHereHereHereHereTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 23,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Bank of America, which is listed as a Syndication Agent in the agreement?"
+      }
+    ],
+    "answer": "Brian Moynihan",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 24,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The lender Societe Generale is headquartered in which country?"
+      }
+    ],
+    "answer": "France",
+    "pred": "\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 25,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the stock ticker for Royal Bank of Canada, one of the lenders party to the credit agreement?"
+      }
+    ],
+    "answer": "RY",
+    "pred": "\n\nBasedBasedActually,, the the the the the the the the the the the the Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal Royal",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 26,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was KPMG, PepsiCo's independent registered public accounting firm, formed through its major merger?"
+      }
+    ],
+    "answer": "1987",
+    "pred": "\n\nHereTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 27,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of U.S. Bancorp, the parent company of lender U.S. Bank National Association?"
+      }
+    ],
+    "answer": "1863",
+    "pred": "\n\nToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeTypeType",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 28,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what city is the headquarters of Banco Bilbao Vizcaya Argentaria, S.A. (BBVA), whose New York branch is a lender?"
+      }
+    ],
+    "answer": "Bilbao",
+    "pred": "\n\nBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based_based_based_based_based",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 29,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Citigroup, the parent company of Citibank, N.A., which served as the Administrative Agent?"
+      }
+    ],
+    "answer": "Jane Fraser",
+    "pred": "\n\nBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 30,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the primary stock exchange for Deutsche Bank AG, whose New York branch is listed as a lender?"
+      }
+    ],
+    "answer": "Frankfurt Stock Exchange",
+    "pred": "\n\nThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThereThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThis",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 31,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of Morgan Stanley, the parent company of lender Morgan Stanley Bank, N.A.?"
+      }
+    ],
+    "answer": "1935",
+    "pred": " \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 32,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the per annum commitment fee for the 364-day credit agreement, which is included as an exhibit in a report signed by Cynthia A. Nastanski on behalf of PepsiCo?"
+      }
+    ],
+    "answer": "0.025%",
+    "pred": "\n\nAccordingAccordingtototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototototo",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 33,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the par value per share of PepsiCo's common stock, for which the associated credit agreements are governed by the law of the State of New York?"
+      }
+    ],
+    "answer": "1-2/3 cents per share",
+    "pred": "\n\nIIIIHoweverHoweverHoweverBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based-Based",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 34,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Gregory T. Martin at JPMorgan Chase Bank, N.A., a lender to the company whose principal executive offices are located at 700 Anderson Hill Road, Purchase, New York?"
+      }
+    ],
+    "answer": "Executive Director",
+    "pred": " Based Based on on the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 35,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the value of the terminated 364-day unsecured revolving credit agreement dated May 27, 2022, from the company that entered into a new five-year agreement expiring on May 26, 2028?"
+      }
+    ],
+    "answer": "$3,800,000,000",
+    "pred": "\n\nAccordingTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 36,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the credit agreements filed with the report signed by Cynthia A. Nastanski, what is the minimum debt amount failure to pay which would constitute an Event of Default?"
+      }
+    ],
+    "answer": "$500,000,000",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeThereforeTherefore",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 37,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company incorporated in North Carolina, what is the value of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$750,000,000",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingaccordingaccordingaccordingincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincludedincluded",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 38,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the administrative agent for the new credit agreements for the company whose 0.250% Senior Notes due 2024 trade under the symbol PEP24?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "\n\nUnfortunatelyThePPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 39,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company with IRS Employer Identification No. 13-1584302, the aggregate amount of secured Debt cannot exceed what percentage of Consolidated Net Tangible Assets?"
+      }
+    ],
+    "answer": "15%",
+    "pred": "\n\nBasedTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 40,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was the report signed that includes a credit agreement executed by Ryan Van Stedum on behalf of Bank of America, N.A.?"
+      }
+    ],
+    "answer": "May 30, 2023",
+    "pred": "\n\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 41,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the per annum commitment fee rate under the new Five Year Credit Agreement for the company with Commission File Number 1-1183?"
+      }
+    ],
+    "answer": "0.045%",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordance",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 42,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company whose common stock trades under the symbol PEP, what is the maximum amount the commitments under the 2023 364 Day Credit Agreement can be increased to?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\nThereAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingIncorrectIncorrectIncorrectIncorrectvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvidedvided",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 43,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is one of the Joint Lead Arrangers for the credit agreements that define a \"Principal Property\" as a manufacturing plant, office building, or warehouse not deemed immaterial by the Board of Directors?"
+      }
+    ],
+    "answer": "BofA Securities, Inc.",
+    "pred": "\n\nUnfortunatelyUnfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unsuccessfullyensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredensoredencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedencedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedacedaced",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 44,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the termination date of the 364-day credit agreement signed by Ada Cheng, Senior Vice President, Finance & Treasurer?"
+      }
+    ],
+    "answer": "May 24, 2024",
+    "pred": "\nAccordingItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItItIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIfIf",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 45,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the credit agreement where JPMorgan Chase Bank, N.A. is a Syndication Agent, what is the defined interest rate \"Floor\"?"
+      }
+    ],
+    "answer": "0.00%",
+    "pred": "\n\n UnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilUntilDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespiteDespite despite despite despite důvodu appropriated appropriated appropriated appropriated appropriated appropriated appropriated appropriated appropriated appropriated appropriatedropriropriropriropriropriropriropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropripropri",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 46,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company incorporated in North Carolina, what is the processing and recordation fee for an Assignment and Assumption under the 364-day credit agreement?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\nAccordingBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBase",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 47,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total amount of the new five-year unsecured revolving credit agreement entered into by the company, as reported in the document signed by the Senior Vice President, Corporate Law and Deputy Corporate Secretary?"
+      }
+    ],
+    "answer": "$4,200,000,000",
+    "pred": " Based According to to the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 48,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total value of the two new unsecured revolving credit agreements PepsiCo entered into on May 26, 2023?"
+      }
+    ],
+    "answer": "$8,400,000,000",
+    "pred": " \n\n \n\n \n\n \n\nTheAccordingAccordingAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswerAnswer",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 49,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the three financial institutions that served as Joint Lead Arrangers and Joint Bookrunners for both the 2023 364-Day and Five Year Credit Agreements."
+      }
+    ],
+    "answer": "Citibank, N.A., JPMorgan Chase Bank, N.A., and BofA Securities, Inc.",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 50,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total value of the two credit agreements from 2022 that PepsiCo terminated on May 26, 2023?"
+      }
+    ],
+    "answer": "$7,600,000,000",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 51,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Across both the 2023 364-Day and Five-Year credit agreements, what is the maximum total commitment amount if PepsiCo fully exercises its option to increase them?"
+      }
+    ],
+    "answer": "$9,900,000,000",
+    "pred": "ToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 52,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which entity served as the administrative agent for all four credit agreements mentioned in Item 8.01 (the two new 2023 agreements and the two terminated 2022 agreements)?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "\n\nTheBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 53,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Summarize the three components used to calculate the \"Base Rate\" as defined in the 364-Day Credit Agreement."
+      }
+    ],
+    "answer": "The highest of: Citibank's announced \"base rate\", the Federal Funds Rate plus 0.50%, and the Adjusted Term SOFR for a one-month tenor plus 1.00%.",
+    "pred": "\n\nThereAccordingAccordingAccordingAccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 54,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which two entities are named as Syndication Agents for both the 2023 364-Day and Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "JPMorgan Chase Bank, N.A. and Bank of America, N.A.",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunableunablenablenablenableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableableable",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 55,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the two main categories of negative covenants the Company must adhere to, as listed in Section 5.02 of the Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "Secured Debt and Mergers, Etc.",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 56,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the respective expiration dates for the new 2023 364 Day Credit Agreement and the new 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "The 364 Day Credit Agreement expires on May 24, 2024, and the Five Year Credit Agreement expires on May 26, 2028.",
+    "pred": "\n\nCurrentlyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponUponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponuponupon",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 57,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List at least five of the initial lenders who are signatories to the 2023 Five Year Credit Agreement, besides the agents and arrangers."
+      }
+    ],
+    "answer": "BNP PARIBAS, DEUTSCHE BANK AG NEW YORK BRANCH, GOLDMAN SACHS BANK USA, HSBC BANK USA, NATIONAL ASSOCIATION, MIZUHO BANK, LTD. (and others).",
+    "pred": "\n\nAccordingTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 58,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the 2023 364-Day Credit Agreement, what three \"Types\" of Advances can be made?"
+      }
+    ],
+    "answer": "Base Rate Advance, Eurocurrency Rate Advance, or Term SOFR Advance.",
+    "pred": "\n\nAccordingBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 59,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For what purposes can PepsiCo use the funds borrowed under the 2023 Five Year Credit Agreement, as stated in the Preliminary Statement of Exhibit 99.2?"
+      }
+    ],
+    "answer": "General corporate purposes, including but not limited to working capital, capital investments and acquisitions.",
+    "pred": "\n\nAccordingTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 60,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what two currencies can PepsiCo borrow funds under both the 2023 364 Day and Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "U.S. Dollars and/or Euros.",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunlessunless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless unless",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 61,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Synthesize the conditions that constitute a financial \"Event of Default\" related to other debts and judgments as described in Section 6.01(d) and 6.01(f) of the credit agreements."
+      }
+    ],
+    "answer": "Failure to pay on any other debt of at least $500,000,000, or having an unstayed judgment for a payment of money in excess of $500,000,000 rendered against the company.",
+    "pred": " HereToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToTo",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 62,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who signed the Form 8-K on behalf of PepsiCo, and what is their full title?"
+      }
+    ],
+    "answer": "Cynthia A. Nastanski, Senior Vice President, Corporate Law and Deputy Corporate Secretary.",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 63,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the three exhibit numbers and their corresponding descriptions listed under Item 9.01 of the Form 8-K?"
+      }
+    ],
+    "answer": "99.1: 364 Day Credit Agreement; 99.2: Five Year Credit Agreement; 104: The cover page from this Current Report on Form 8-K, formatted in Inline XBRL.",
+    "pred": "\n\nHereHereReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReferenceReference",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 64,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the main form type of this SEC filing?"
+      }
+    ],
+    "answer": "Form 8-K",
+    "pred": "\n\nThereThereThereThereThereThereThere||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n |\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 65,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many exhibits are listed under Item 9.01 in the main body of the Form 8-K?"
+      }
+    ],
+    "answer": "3",
+    "pred": "\n\nLetAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 66,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of the document filed as Exhibit 99.1?"
+      }
+    ],
+    "answer": "364-DAY CREDIT AGREEMENT",
+    "pred": "`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 67,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the FIVE YEAR CREDIT AGREEMENT (Exhibit 99.2), how many main Articles are there?"
+      }
+    ],
+    "answer": "Nine",
+    "pred": "\n\nUnfortunatelyTheIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 68,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Article V in the 364-DAY CREDIT AGREEMENT (Exhibit 99.1)?"
+      }
+    ],
+    "answer": "COVENANTS OF THE COMPANY",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblemProblem",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 69,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the Table of Contents for the FIVE YEAR CREDIT AGREEMENT, which section is titled 'WAIVER OF JURY TRIAL'?"
+      }
+    ],
+    "answer": "Section 8.12",
+    "pred": " Based According the the the provided Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement Agreement",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 70,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On which page does the 'SIGNATURES' section of the primary Form 8-K document begin?"
+      }
+    ],
+    "answer": "3",
+    "pred": "\n\nInTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 71,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the FIVE YEAR CREDIT AGREEMENT, which comes first: Article VI (EVENTS OF DEFAULT) or Article VII (THE AGENT)?"
+      }
+    ],
+    "answer": "Article VI (EVENTS OF DEFAULT)",
+    "pred": "\n\nUnfortunatelyTheUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyFortunatelyfortunatelyfortunately fortunately                                                                                                                                                                                                                                         ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 72,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many lettered Exhibits (e.g., Exhibit A, Exhibit B) are listed in the Table of Contents for the 364-DAY CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "5",
+    "pred": "\n\nInThethethethethethethetheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 73,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What form is provided in Exhibit D to the FIVE YEAR CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "Form of Designation Letter",
+    "pred": "`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 74,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the 364-DAY CREDIT AGREEMENT, which Article is titled 'GUARANTEE'?"
+      }
+    ],
+    "answer": "Article IX",
+    "pred": "\n\nInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInInIn",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 75,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Item 9.01 in the main Form 8-K report?"
+      }
+    ],
+    "answer": "Financial Statements and Exhibits.",
+    "pred": "\n\nIIIIIITheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 76,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which Article in the 'TABLE OF CONTENTS' for the FIVE YEAR CREDIT AGREEMENT contains the most sections?"
+      }
+    ],
+    "answer": "ARTICLE II",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n If According the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 77,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Section 7.11 in the 364-DAY CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "Erroneous Payments",
+    "pred": "\n\nBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 78,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many schedules are listed in the Table of Contents for the FIVE YEAR CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "1",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n                                                                                                                                                                                                                               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 79,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the last page number of the main body of the FIVE YEAR CREDIT AGREEMENT before the signature pages?"
+      }
+    ],
+    "answer": "68",
+    "pred": "\n\nTheIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 80,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement were a movie, what would be the tagline summarizing the maximum amount PepsiCo could borrow after an increase?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 81,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Write a haiku about the termination of the 2022 credit agreements. What specific date marks this event in the document?"
+      }
+    ],
+    "answer": "May 26, 2023",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 82,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Imagine 'Guaranteed Obligations' is a character in a play based on Article IX. Who plays the unwavering guarantor, ensuring all obligations are met?"
+      }
+    ],
+    "answer": "The Company (PepsiCo, Inc.)",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyFortunatelyFortunatelyFortunatelyfortunatelyfortunatelyfortunately proverb proverb proverb proverb proverb proverb Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro Pro",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 83,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the credit agreements were secret treaties, what U.S. state's law would be the secret code they are written in, as per Section 8.09?"
+      }
+    ],
+    "answer": "State of New York",
+    "pred": "\n\nHoweverHoweverhourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshourshours",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 84,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the Administrative Agent in the 2023 credit agreements is a superhero, what is its everyday, corporate secret identity?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "\n\nTheAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAsAs",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 85,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You're a financial mixologist creating a cocktail called 'The Default Rate'. According to Section 2.07(d) of the 364-Day agreement, what percentage do you add to the Base Rate to create this potent mix?"
+      }
+    ],
+    "answer": "two percent (2%)",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 86,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the magical world of finance described in the 364-Day Credit Agreement, what is the fee percentage, or 'mana cost', for casting the 'Term Loan Election' spell under Section 3.03(b)?"
+      }
+    ],
+    "answer": "0.50%",
+    "pred": " Based The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The......\n...\n...\n\nInThethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 87,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement was a person, on what date would it celebrate its fifth and final birthday, before any extensions?"
+      }
+    ],
+    "answer": "May 26, 2028",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 88,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the signature on this Form 8-K report belonged to an author, what would be the full, multi-part title listed for Cynthia A. Nastanski on the book jacket?"
+      }
+    ],
+    "answer": "Senior Vice President, Corporate Law and Deputy Corporate Secretary",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyFortunatelyFortunatelyfortunatelyfortunatelyfortunately fortunately therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore therefore,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 89,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The Administrative Agent has two partners helping with syndication. If this were a crime-fighting trio, what are the names of the two Syndication Agent 'sidekicks' listed in the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "pred": "UnfortunatelyIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 90,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo made a social media post announcing its new $4.2 billion, 364-day credit line, what date would be in the \"in a relationship since\" field?"
+      }
+    ],
+    "answer": "May 26, 2023",
+    "pred": "\n\nAccordingAccordingAccordingthethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethethetheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheytheyyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyouyou",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 91,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the board game 'Credit Conquest' based on the 364-Day agreement, what is the maximum number of separate Eurocurrency Rate Advance 'armies' a player can have on the board at one time, according to Section 2.02(b)?"
+      }
+    ],
+    "answer": "twelve",
+    "pred": "\n\nUnfortunatelyAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 92,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement were planning a trip, it would need a special sub-agent for its European leg. What is the name of the 'Sub-Agent' for its Euro-denominated travels?"
+      }
+    ],
+    "answer": "Citibank Europe plc, UK Branch",
+    "pred": "\n\nTheTheTheTheTheTheTheTheStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudyStudy",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 93,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the sport of 'Corporate Finance', a player (Borrower) has five business days to correct a payment foul. If they fail, what 'Event' is triggered according to Section 6.01(a) of the Five-Year agreement?"
+      }
+    ],
+    "answer": "Events of Default",
+    "pred": "\nSectionAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 94,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To join the exclusive 'Lender's Club' by assignment, a new member must pay a processing and recordation fee. According to Section 8.07(a) of the 364-day agreement, what is this 'cover charge'?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 95,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To summon funds from the Swing Line Lenders under the Five-Year agreement, a special incantation (a notice) must be uttered before a certain time in London. What is this deadline, as stated in Section 2.20(b)?"
+      }
+    ],
+    "answer": "9:30 A.M. (London time)",
+    "pred": "`\n\n````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 96,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the increase in the principal amount, in dollars, from the terminated 2022 364 Day Credit Agreement to the new 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "400000000",
+    "pred": "\n\nUnfortunatelyBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBaseBase",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 97,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total initial principal amount, in dollars, available to PepsiCo under both the new 2023 364 Day and 2023 Five Year credit agreements combined?"
+      }
+    ],
+    "answer": "8400000000",
+    "pred": "\n\nUnfortunatelyI don do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do do \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 98,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how much can the commitments under the 2023 364 Day Credit Agreement be increased from its initial amount, in dollars?"
+      }
+    ],
+    "answer": "750000000",
+    "pred": "\n\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUnUn",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 99,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the maximum total commitment, in dollars, PepsiCo could have if it fully increases the commitments for both the 2023 364 Day and 2023 Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "9900000000",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 100,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo has an outstanding principal of $4,200,000,000 under the 364-Day Credit Agreement and elects the Term Loan Conversion, what would be the fee in dollars?"
+      }
+    ],
+    "answer": "21000000",
+    "pred": "\n\nAccordingBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 101,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference in the per annum commitment fee rate, as a percentage, between the 2023 364 Day Credit Agreement and the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "0.020",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe; \n\n \n\n)\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 102,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo makes a partial reduction to its commitments under the 2023 Five Year Credit Agreement for the minimum aggregate amount plus one integral multiple, what would be the total reduction in dollars?"
+      }
+    ],
+    "answer": "26000000",
+    "pred": "\n\nBasedThereBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 103,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total value, in dollars, of the two terminated credit agreements from May 27, 2022?"
+      }
+    ],
+    "answer": "7600000000",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 104,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference, in dollars, between the swing line subfacility amount and the maximum potential increase for the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "0",
+    "pred": "\n\nThereTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 105,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, if the outstanding advances reach 106% of the initial $4,200,000,000 commitment, by how much, in dollars, does this exceed the mandatory prepayment threshold of 105%?"
+      }
+    ],
+    "answer": "42000000",
+    "pred": "\n\nAccordingUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableUnableunableunableunableunable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unable unaware unaware ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 106,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference in basis points between the interest rate margin for Term SOFR Advances (0.625%) and the fee for a Term Loan Election (0.50%) under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "12.5",
+    "pred": "\n\nBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBasedBased",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 107,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo had an unused portion of the 364-Day Credit Agreement of $2,000,000,000 for an entire year, what would be the total commitment fee in dollars?"
+      }
+    ],
+    "answer": "500000",
+    "pred": "`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 108,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, how many times can a minimum dollar borrowing be made from the initial total commitment of $4,200,000,000?"
+      }
+    ],
+    "answer": "420",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccording",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 109,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the sum, in dollars, of the minimum partial reduction amount and the minimum Proposed Aggregate Commitment Increase amount under the 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "50000000",
+    "pred": "\nBasedTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 110,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total increase in principal, in dollars, from the combined 2022 agreements to the combined initial 2023 agreements?"
+      }
+    ],
+    "answer": "800000000",
+    "pred": "\nUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessRegardlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnlessUnless Unless Unless Unless Unless Unless Unless Unless Unless Unless Unless \n\n \n\n That According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 111,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo wants to add two New Lenders to the 2023 364 Day Credit Agreement, each committing the minimum possible amount, what is the total of their new commitments in dollars?"
+      }
+    ],
+    "answer": "50000000",
+    "pred": "\n\nInToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToToTo",
+    "em": 0.0,
+    "f1": 0.0
+  }
+]

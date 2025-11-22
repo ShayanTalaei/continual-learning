@@ -1,0 +1,1122 @@
+[
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 0,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the IRS Employer Identification Number for PepsiCo, Inc.?",
+    "answer": "13-1584302",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 1,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the par value per share for PepsiCo's Common Stock?",
+    "answer": "1-2/3 cents per share",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 2,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "On what date was the Form 8-K report signed?",
+    "answer": "May 30, 2023",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 3,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Who signed the Form 8-K report on behalf of PepsiCo?",
+    "answer": "Cynthia A. Nastanski",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 4,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the trading symbol for PepsiCo's 0.750% Senior Notes due 2033?",
+    "answer": "PEP33",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 5,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What was the total value of the 364 day unsecured revolving credit agreement from 2022 that was terminated?",
+    "answer": "$3,800,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 6,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the expiration date for the new 2023 364 Day Credit Agreement?",
+    "answer": "May 24, 2024",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 7,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Under the 2023 Five Year Credit Agreement, what is the maximum amount the commitments can be increased to?",
+    "answer": "$4,950,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 8,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the size of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?",
+    "answer": "$750,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 9,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Who are the two Syndication Agents for the 364-Day Credit Agreement?",
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 10,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Under the 364-Day Credit Agreement, what is the minimum borrowing amount for advances denominated in Dollars?",
+    "answer": "$10,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 11,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the annual commitment fee rate under the 364-Day Credit Agreement?",
+    "answer": "0.025%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 12,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the fee, as a percentage of the aggregate principal amount, for making a Term Loan Election under the 364-Day Credit Agreement?",
+    "answer": "0.50%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 13,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "In the Five Year Credit Agreement, what is the annual commitment fee rate on the unused portion of the Revolving Credit Commitment?",
+    "answer": "0.045%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 14,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "According to Section 6.01, what is the monetary threshold for a judgment against the company that could trigger an Event of Default?",
+    "answer": "$500,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "factual",
+    "seed_index": 15,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone’s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the processing and recordation fee for an Assignment and Assumption under the Five Year Credit Agreement?",
+    "answer": "$3,500",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 0,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the stock ticker for The Toronto-Dominion Bank, a lender whose New York Branch is a party to the credit agreement?",
+    "answer": "TD",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 1,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what city are the headquarters of Mizuho Bank, Ltd., one of the Initial Lenders in the credit agreement?",
+    "answer": "Tokyo",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 2,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the founding year of Barclays Bank PLC, one of the lenders listed in the 364-Day Credit Agreement?",
+    "answer": "1690",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 3,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who is the current CEO of JPMorgan Chase & Co., the parent company of JPMorgan Chase Bank, N.A., which is listed as a Syndication Agent?",
+    "answer": "Jamie Dimon",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 4,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the founding year of The Northern Trust Company, one of the lenders that signed the credit agreements?",
+    "answer": "1889",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 5,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the official currency of Australia, where the Australia and New Zealand Banking Group Limited, a lender, is based?",
+    "answer": "Australian dollar",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 6,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what year was The Goldman Sachs Group, Inc., the parent company of lender Goldman Sachs Bank USA, founded?",
+    "answer": "1869",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 7,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who is the current CEO of Bank of America, which is listed as a Syndication Agent in the agreement?",
+    "answer": "Brian Moynihan",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 8,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "The lender Societe Generale is headquartered in which country?",
+    "answer": "France",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 9,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the stock ticker for Royal Bank of Canada, one of the lenders party to the credit agreement?",
+    "answer": "RY",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 10,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what year was KPMG, PepsiCo's independent registered public accounting firm, formed through its major merger?",
+    "answer": "1987",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 11,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the founding year of U.S. Bancorp, the parent company of lender U.S. Bank National Association?",
+    "answer": "1863",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 12,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what city is the headquarters of Banco Bilbao Vizcaya Argentaria, S.A. (BBVA), whose New York branch is a lender?",
+    "answer": "Bilbao",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 13,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who is the current CEO of Citigroup, the parent company of Citibank, N.A., which served as the Administrative Agent?",
+    "answer": "Jane Fraser",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 14,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the primary stock exchange for Deutsche Bank AG, whose New York branch is listed as a lender?",
+    "answer": "Frankfurt Stock Exchange",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "knowledge",
+    "seed_index": 15,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse’s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the founding year of Morgan Stanley, the parent company of lender Morgan Stanley Bank, N.A.?",
+    "answer": "1935",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 0,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the per annum commitment fee for the 364-day credit agreement, which is included as an exhibit in a report signed by Cynthia A. Nastanski on behalf of PepsiCo?",
+    "answer": "0.025%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 1,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the par value per share of PepsiCo's common stock, for which the associated credit agreements are governed by the law of the State of New York?",
+    "answer": "1-2/3 cents per share",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 2,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the title of Gregory T. Martin at JPMorgan Chase Bank, N.A., a lender to the company whose principal executive offices are located at 700 Anderson Hill Road, Purchase, New York?",
+    "answer": "Executive Director",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 3,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What was the value of the terminated 364-day unsecured revolving credit agreement dated May 27, 2022, from the company that entered into a new five-year agreement expiring on May 26, 2028?",
+    "answer": "$3,800,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 4,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "According to the credit agreements filed with the report signed by Cynthia A. Nastanski, what is the minimum debt amount failure to pay which would constitute an Event of Default?",
+    "answer": "$500,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 5,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "For the company incorporated in North Carolina, what is the value of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?",
+    "answer": "$750,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 6,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the name of the administrative agent for the new credit agreements for the company whose 0.250% Senior Notes due 2024 trade under the symbol PEP24?",
+    "answer": "Citibank, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 7,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "For the company with IRS Employer Identification No. 13-1584302, the aggregate amount of secured Debt cannot exceed what percentage of Consolidated Net Tangible Assets?",
+    "answer": "15%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 8,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "On what date was the report signed that includes a credit agreement executed by Ryan Van Stedum on behalf of Bank of America, N.A.?",
+    "answer": "May 30, 2023",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 9,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the per annum commitment fee rate under the new Five Year Credit Agreement for the company with Commission File Number 1-1183?",
+    "answer": "0.045%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 10,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "For the company whose common stock trades under the symbol PEP, what is the maximum amount the commitments under the 2023 364 Day Credit Agreement can be increased to?",
+    "answer": "$4,950,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 11,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "Who is one of the Joint Lead Arrangers for the credit agreements that define a \"Principal Property\" as a manufacturing plant, office building, or warehouse not deemed immaterial by the Board of Directors?",
+    "answer": "BofA Securities, Inc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 12,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the termination date of the 364-day credit agreement signed by Ada Cheng, Senior Vice President, Finance & Treasurer?",
+    "answer": "May 24, 2024",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 13,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "According to the credit agreement where JPMorgan Chase Bank, N.A. is a Syndication Agent, what is the defined interest rate \"Floor\"?",
+    "answer": "0.00%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 14,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "For the company incorporated in North Carolina, what is the processing and recordation fee for an Assignment and Assumption under the 364-day credit agreement?",
+    "answer": "$3,500",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "disjoint",
+    "seed_index": 15,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone’s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn’t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one’s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the total amount of the new five-year unsecured revolving credit agreement entered into by the company, as reported in the document signed by the Senior Vice President, Corporate Law and Deputy Corporate Secretary?",
+    "answer": "$4,200,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 0,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "What is the total value of the two new unsecured revolving credit agreements PepsiCo entered into on May 26, 2023?",
+    "answer": "$8,400,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 1,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "List the three financial institutions that served as Joint Lead Arrangers and Joint Bookrunners for both the 2023 364-Day and Five Year Credit Agreements.",
+    "answer": "Citibank, N.A., JPMorgan Chase Bank, N.A., and BofA Securities, Inc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 2,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "What was the total value of the two credit agreements from 2022 that PepsiCo terminated on May 26, 2023?",
+    "answer": "$7,600,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 3,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Across both the 2023 364-Day and Five-Year credit agreements, what is the maximum total commitment amount if PepsiCo fully exercises its option to increase them?",
+    "answer": "$9,900,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 4,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Which entity served as the administrative agent for all four credit agreements mentioned in Item 8.01 (the two new 2023 agreements and the two terminated 2022 agreements)?",
+    "answer": "Citibank, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 5,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Summarize the three components used to calculate the \"Base Rate\" as defined in the 364-Day Credit Agreement.",
+    "answer": "The highest of: Citibank's announced \"base rate\", the Federal Funds Rate plus 0.50%, and the Adjusted Term SOFR for a one-month tenor plus 1.00%.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 6,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Which two entities are named as Syndication Agents for both the 2023 364-Day and Five Year Credit Agreements?",
+    "answer": "JPMorgan Chase Bank, N.A. and Bank of America, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 7,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "What are the two main categories of negative covenants the Company must adhere to, as listed in Section 5.02 of the Five Year Credit Agreement?",
+    "answer": "Secured Debt and Mergers, Etc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 8,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "What are the respective expiration dates for the new 2023 364 Day Credit Agreement and the new 2023 Five Year Credit Agreement?",
+    "answer": "The 364 Day Credit Agreement expires on May 24, 2024, and the Five Year Credit Agreement expires on May 26, 2028.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 9,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "List at least five of the initial lenders who are signatories to the 2023 Five Year Credit Agreement, besides the agents and arrangers.",
+    "answer": "BNP PARIBAS, DEUTSCHE BANK AG NEW YORK BRANCH, GOLDMAN SACHS BANK USA, HSBC BANK USA, NATIONAL ASSOCIATION, MIZUHO BANK, LTD. (and others).",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 10,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "According to the 2023 364-Day Credit Agreement, what three \"Types\" of Advances can be made?",
+    "answer": "Base Rate Advance, Eurocurrency Rate Advance, or Term SOFR Advance.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 11,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "For what purposes can PepsiCo use the funds borrowed under the 2023 Five Year Credit Agreement, as stated in the Preliminary Statement of Exhibit 99.2?",
+    "answer": "General corporate purposes, including but not limited to working capital, capital investments and acquisitions.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 12,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "In what two currencies can PepsiCo borrow funds under both the 2023 364 Day and Five Year Credit Agreements?",
+    "answer": "U.S. Dollars and/or Euros.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 13,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Synthesize the conditions that constitute a financial \"Event of Default\" related to other debts and judgments as described in Section 6.01(d) and 6.01(f) of the credit agreements.",
+    "answer": "Failure to pay on any other debt of at least $500,000,000, or having an unstayed judgment for a payment of money in excess of $500,000,000 rendered against the company.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 14,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "Who signed the Form 8-K on behalf of PepsiCo, and what is their full title?",
+    "answer": "Cynthia A. Nastanski, Senior Vice President, Corporate Law and Deputy Corporate Secretary.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "synthesize",
+    "seed_index": 15,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company’s business mode",
+    "question": "What are the three exhibit numbers and their corresponding descriptions listed under Item 9.01 of the Form 8-K?",
+    "answer": "99.1: 364 Day Credit Agreement; 99.2: Five Year Credit Agreement; 104: The cover page from this Current Report on Form 8-K, formatted in Inline XBRL.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 0,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the main form type of this SEC filing?",
+    "answer": "Form 8-K",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 1,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many exhibits are listed under Item 9.01 in the main body of the Form 8-K?",
+    "answer": "3",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 2,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of the document filed as Exhibit 99.1?",
+    "answer": "364-DAY CREDIT AGREEMENT",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 3,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "In the FIVE YEAR CREDIT AGREEMENT (Exhibit 99.2), how many main Articles are there?",
+    "answer": "Nine",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 4,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of Article V in the 364-DAY CREDIT AGREEMENT (Exhibit 99.1)?",
+    "answer": "COVENANTS OF THE COMPANY",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 5,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "According to the Table of Contents for the FIVE YEAR CREDIT AGREEMENT, which section is titled 'WAIVER OF JURY TRIAL'?",
+    "answer": "Section 8.12",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 6,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "On which page does the 'SIGNATURES' section of the primary Form 8-K document begin?",
+    "answer": "3",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 7,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "In the FIVE YEAR CREDIT AGREEMENT, which comes first: Article VI (EVENTS OF DEFAULT) or Article VII (THE AGENT)?",
+    "answer": "Article VI (EVENTS OF DEFAULT)",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 8,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many lettered Exhibits (e.g., Exhibit A, Exhibit B) are listed in the Table of Contents for the 364-DAY CREDIT AGREEMENT?",
+    "answer": "5",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 9,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What form is provided in Exhibit D to the FIVE YEAR CREDIT AGREEMENT?",
+    "answer": "Form of Designation Letter",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 10,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "In the 364-DAY CREDIT AGREEMENT, which Article is titled 'GUARANTEE'?",
+    "answer": "Article IX",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 11,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of Item 9.01 in the main Form 8-K report?",
+    "answer": "Financial Statements and Exhibits.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 12,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "Which Article in the 'TABLE OF CONTENTS' for the FIVE YEAR CREDIT AGREEMENT contains the most sections?",
+    "answer": "ARTICLE II",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 13,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of Section 7.11 in the 364-DAY CREDIT AGREEMENT?",
+    "answer": "Erroneous Payments",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 14,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many schedules are listed in the Table of Contents for the FIVE YEAR CREDIT AGREEMENT?",
+    "answer": "1",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "structure",
+    "seed_index": 15,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the last page number of the main body of the FIVE YEAR CREDIT AGREEMENT before the signature pages?",
+    "answer": "68",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 0,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the 2023 Five Year Credit Agreement were a movie, what would be the tagline summarizing the maximum amount PepsiCo could borrow after an increase?",
+    "answer": "$4,950,000,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 1,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "Write a haiku about the termination of the 2022 credit agreements. What specific date marks this event in the document?",
+    "answer": "May 26, 2023",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 2,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "Imagine 'Guaranteed Obligations' is a character in a play based on Article IX. Who plays the unwavering guarantor, ensuring all obligations are met?",
+    "answer": "The Company (PepsiCo, Inc.)",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 3,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the credit agreements were secret treaties, what U.S. state's law would be the secret code they are written in, as per Section 8.09?",
+    "answer": "State of New York",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 4,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the Administrative Agent in the 2023 credit agreements is a superhero, what is its everyday, corporate secret identity?",
+    "answer": "Citibank, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 5,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "You're a financial mixologist creating a cocktail called 'The Default Rate'. According to Section 2.07(d) of the 364-Day agreement, what percentage do you add to the Base Rate to create this potent mix?",
+    "answer": "two percent (2%)",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 6,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "In the magical world of finance described in the 364-Day Credit Agreement, what is the fee percentage, or 'mana cost', for casting the 'Term Loan Election' spell under Section 3.03(b)?",
+    "answer": "0.50%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 7,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the 2023 Five Year Credit Agreement was a person, on what date would it celebrate its fifth and final birthday, before any extensions?",
+    "answer": "May 26, 2028",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 8,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the signature on this Form 8-K report belonged to an author, what would be the full, multi-part title listed for Cynthia A. Nastanski on the book jacket?",
+    "answer": "Senior Vice President, Corporate Law and Deputy Corporate Secretary",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 9,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "The Administrative Agent has two partners helping with syndication. If this were a crime-fighting trio, what are the names of the two Syndication Agent 'sidekicks' listed in the 364-Day Credit Agreement?",
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 10,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If PepsiCo made a social media post announcing its new $4.2 billion, 364-day credit line, what date would be in the \"in a relationship since\" field?",
+    "answer": "May 26, 2023",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 11,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "In the board game 'Credit Conquest' based on the 364-Day agreement, what is the maximum number of separate Eurocurrency Rate Advance 'armies' a player can have on the board at one time, according to Section 2.02(b)?",
+    "answer": "twelve",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 12,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the 2023 Five Year Credit Agreement were planning a trip, it would need a special sub-agent for its European leg. What is the name of the 'Sub-Agent' for its Euro-denominated travels?",
+    "answer": "Citibank Europe plc, UK Branch",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 13,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "In the sport of 'Corporate Finance', a player (Borrower) has five business days to correct a payment foul. If they fail, what 'Event' is triggered according to Section 6.01(a) of the Five-Year agreement?",
+    "answer": "Events of Default",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 14,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "To join the exclusive 'Lender's Club' by assignment, a new member must pay a processing and recordation fee. According to Section 8.07(a) of the 364-day agreement, what is this 'cover charge'?",
+    "answer": "$3,500",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "creative",
+    "seed_index": 15,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone’s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn’t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "To summon funds from the Swing Line Lenders under the Five-Year agreement, a special incantation (a notice) must be uttered before a certain time in London. What is this deadline, as stated in Section 2.20(b)?",
+    "answer": "9:30 A.M. (London time)",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 0,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the increase in the principal amount, in dollars, from the terminated 2022 364 Day Credit Agreement to the new 2023 364 Day Credit Agreement?",
+    "answer": "400000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 1,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the total initial principal amount, in dollars, available to PepsiCo under both the new 2023 364 Day and 2023 Five Year credit agreements combined?",
+    "answer": "8400000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 2,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "By how much can the commitments under the 2023 364 Day Credit Agreement be increased from its initial amount, in dollars?",
+    "answer": "750000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 3,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the maximum total commitment, in dollars, PepsiCo could have if it fully increases the commitments for both the 2023 364 Day and 2023 Five Year Credit Agreements?",
+    "answer": "9900000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 4,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "If PepsiCo has an outstanding principal of $4,200,000,000 under the 364-Day Credit Agreement and elects the Term Loan Conversion, what would be the fee in dollars?",
+    "answer": "21000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 5,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the difference in the per annum commitment fee rate, as a percentage, between the 2023 364 Day Credit Agreement and the 2023 Five Year Credit Agreement?",
+    "answer": "0.020",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 6,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "If PepsiCo makes a partial reduction to its commitments under the 2023 Five Year Credit Agreement for the minimum aggregate amount plus one integral multiple, what would be the total reduction in dollars?",
+    "answer": "26000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 7,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the total value, in dollars, of the two terminated credit agreements from May 27, 2022?",
+    "answer": "7600000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 8,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the difference, in dollars, between the swing line subfacility amount and the maximum potential increase for the 2023 Five Year Credit Agreement?",
+    "answer": "0",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 9,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "Under the 2023 Five Year Credit Agreement, if the outstanding advances reach 106% of the initial $4,200,000,000 commitment, by how much, in dollars, does this exceed the mandatory prepayment threshold of 105%?",
+    "answer": "42000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 10,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the difference in basis points between the interest rate margin for Term SOFR Advances (0.625%) and the fee for a Term Loan Election (0.50%) under the 364-Day Credit Agreement?",
+    "answer": "12.5",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 11,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "If PepsiCo had an unused portion of the 364-Day Credit Agreement of $2,000,000,000 for an entire year, what would be the total commitment fee in dollars?",
+    "answer": "500000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 12,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "Under the 2023 Five Year Credit Agreement, how many times can a minimum dollar borrowing be made from the initial total commitment of $4,200,000,000?",
+    "answer": "420",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 13,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the sum, in dollars, of the minimum partial reduction amount and the minimum Proposed Aggregate Commitment Increase amount under the 2023 364 Day Credit Agreement?",
+    "answer": "50000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 14,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the total increase in principal, in dollars, from the combined 2022 agreements to the combined initial 2023 agreements?",
+    "answer": "800000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  },
+  {
+    "company": "pepsi",
+    "seed_type": "reasoning",
+    "seed_index": 15,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "If PepsiCo wants to add two New Lenders to the 2023 364 Day Credit Agreement, each committing the minimum possible amount, what is the total of their new commitments in dollars?",
+    "answer": "50000000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/pepsi_10k_financebench.txt"
+  }
+]

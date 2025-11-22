@@ -1,0 +1,2914 @@
+[
+  {
+    "idx": 0,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's total revenue for the fiscal year 2022?"
+      }
+    ],
+    "answer": "$23.6 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 1,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what month and year did AMD complete its acquisition of Xilinx?"
+      }
+    ],
+    "answer": "February 2022",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 2,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What company, acquired in May 2022, provides AMD with data processing units (DPUs)?"
+      }
+    ],
+    "answer": "Pensando Systems, Inc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 3,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the annual revenue for AMD's Data Center segment in 2022?"
+      }
+    ],
+    "answer": "$6.0 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n </ </ </ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / //////////////////////////////////////////////////////////////////////////////////////////////////////////",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 4,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By what percentage did AMD's Client segment annual revenue decline in 2022?"
+      }
+    ],
+    "answer": "10 percent",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n...\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n............................................................",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 5,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the annual revenue for AMD's Gaming segment in 2022?"
+      }
+    ],
+    "answer": "$6.8 billion",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 6,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the Chair & Chief Executive Officer of AMD as of the 2022 annual report?"
+      }
+    ],
+    "answer": "Dr. Lisa Su",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 7,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under what stock symbol is AMD's common stock listed on The NASDAQ Global Select Market?"
+      }
+    ],
+    "answer": "AMD",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 8,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was Advanced Micro Devices, Inc. incorporated?"
+      }
+    ],
+    "answer": "May 1, 1969",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 9,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Approximately how many employees did AMD have in its global workforce as of December 31, 2022?"
+      }
+    ],
+    "answer": "25,000",
+    "pred": "\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\n\n\n\n        ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 10,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What percentage of AMD's 2022 consolidated net revenue was accounted for by its largest single customer?"
+      }
+    ],
+    "answer": "16%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 11,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total purchase consideration for the acquisition of Pensando in 2022?"
+      }
+    ],
+    "answer": "approximately $1.9 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                       Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 12,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How much did AMD invest in Research & Development (R&D) during 2022?"
+      }
+    ],
+    "answer": "$5.0 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 13,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the new brand campaign launched by AMD in 2022?"
+      }
+    ],
+    "answer": "together we advance",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 14,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which California city are the three Superfund sites for which AMD has been named a responsible party located?"
+      }
+    ],
+    "answer": "Sunnyvale",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 15,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the aggregate principal amount of the five-year unsecured revolving credit facility AMD entered into in 2022?"
+      }
+    ],
+    "answer": "$3.0 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 16,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the parent company of Google, which utilizes AMD EPYC processors for its internal infrastructure?"
+      }
+    ],
+    "answer": "Alphabet Inc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n......\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n.\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 17,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which city is the headquarters of Valve, the company that produces the AMD-powered Steam Deck?"
+      }
+    ],
+    "answer": "Bellevue, Washington",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Con Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com Com",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 18,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the founder and CEO of SpaceX, a company that has adopted AMD's adaptive computing products?"
+      }
+    ],
+    "answer": "Elon Musk",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 19,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Microsoft, the company responsible for the Xbox Series X and S consoles powered by AMD chips?"
+      }
+    ],
+    "answer": "Satya Nadella",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 20,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what country is the headquarters of Sony, the manufacturer of the AMD-powered PlayStation 5, located?"
+      }
+    ],
+    "answer": "Japan",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 21,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "From which university did AMD's Chair and CEO, Dr. Lisa Su, receive her Ph.D.?"
+      }
+    ],
+    "answer": "Massachusetts Institute of Technology",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 22,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the nickname for the geographic region in California where AMD's headquarters in Santa Clara is located?"
+      }
+    ],
+    "answer": "Silicon Valley",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 23,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who was the CEO of Xilinx at the time of its acquisition by AMD in February 2022?"
+      }
+    ],
+    "answer": "Victor Peng",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n-\n-\n-\n-------------------------------------------\n\n-\n-\n-\n-\n-\n-\n----------------- at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at at",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 24,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was the NASDAQ stock market, where AMD's common stock is listed under the symbol 'AMD', founded?"
+      }
+    ],
+    "answer": "1971",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 25,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the co-founder and current Chairman of Oracle, a company whose cloud services use AMD EPYC processors?"
+      }
+    ],
+    "answer": "Larry Ellison",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 26,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the capital city of Delaware, the state where AMD was incorporated in 1969?"
+      }
+    ],
+    "answer": "Dover",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n...............................................................................................................................................................................................................................................................................................................................................................................................................\n\n...\n \n \n \n \n \n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 27,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What NASA center is primarily responsible for managing the Perseverance Mars rover, which utilizes AMD's computing products?"
+      }
+    ],
+    "answer": "Jet Propulsion Laboratory (JPL)",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 28,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the former Cisco CEO who co-founded Pensando, a company AMD acquired in May 2022?"
+      }
+    ],
+    "answer": "John Chambers",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</></></}}</</</</</</———————————————————————————————\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n—\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n—\n\n—with—with—the-the-the-the-the-the-the-the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the_the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 29,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which country is the headquarters of Tencent, one of the cloud companies that uses AMD EPYC processors?"
+      }
+    ],
+    "answer": "China",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</></]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\n\n]]\n\n]]></</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 30,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which U.S. President signed the Sarbanes-Oxley Act, a law referenced in the risk factors section of the document?"
+      }
+    ],
+    "answer": "George W. Bush",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 31,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the names of the two primary co-founders of Intel Corporation, AMD's main competitor mentioned in the document?"
+      }
+    ],
+    "answer": "Robert Noyce and Gordon Moore",
+    "pred": "\n\n\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 32,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the result in millions when you subtract the total square footage of AMD's owned space from its estimated environmental liability in millions of dollars?"
+      }
+    ],
+    "answer": "2.9",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 33,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many employees did AMD have globally at the end of the fiscal year when its annual revenue was $23.6 billion?"
+      }
+    ],
+    "answer": "Approximately 25,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 34,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many shares of common stock were repurchased in the fiscal quarter that included the completion of the Xilinx acquisition?"
+      }
+    ],
+    "answer": "15,785,806",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 35,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the approximate net revenue, in billions of dollars, generated from the single largest customer in the Gaming segment in fiscal year 2022?"
+      }
+    ],
+    "answer": "$3.776 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 36,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the year AMD's international sales represented 66% of its net revenue, how many U.S. patents did the company hold?"
+      }
+    ],
+    "answer": "Approximately 8,200",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 37,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many full years passed between AMD's incorporation date and the maturity year of its 7.50% Senior Notes?"
+      }
+    ],
+    "answer": "53",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 38,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's Research & Development investment as a percentage of its total revenue in the year its gross profit was $4.3 billion?"
+      }
+    ],
+    "answer": "Approximately 20.4%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                            ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 39,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The single largest customer, whose sales came from the Gaming segment, accounted for what approximate percentage of that entire segment's 2022 revenue?"
+      }
+    ],
+    "answer": "55.5%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                          ...\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 40,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the one-word response provided for both 'Unresolved Staff Comments' and 'Changes in and Disagreements with Accountants on Accounting and Financial Disclosure'?"
+      }
+    ],
+    "answer": "None",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                              ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 41,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which California city, different from its Santa Clara headquarters, has AMD been named a responsible party for three Superfund sites?"
+      }
+    ],
+    "answer": "Sunnyvale",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 42,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many million shares of common stock did AMD issue as part of the transaction described as the 'largest acquisition in semiconductor history'?"
+      }
+    ],
+    "answer": "429 million",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 43,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many years after the Wafer Supply Agreement with GLOBALFOUNDRIES is set to expire are the 3.924% Senior Notes scheduled to mature?"
+      }
+    ],
+    "answer": "7 years",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 44,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the risk factors, who is AMD's primary competitor in the microprocessor market, even as AMD powers 75% of the top 20 most energy-efficient supercomputers?"
+      }
+    ],
+    "answer": "Intel Corporation",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX\tX<X<X '\">)}>)}> Историяassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistantassistant",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 45,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what page number does the section begin that incorporates by reference the 'Security Ownership of Certain Beneficial Owners and Management' information from the 2023 Proxy Statement?"
+      }
+    ],
+    "answer": "104",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 46,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To which reporting segment was the goodwill attributed from the acquisition that closed on May 26, 2022?"
+      }
+    ],
+    "answer": "Data Center",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n    \n    \n                                                                                                                                                                                                                                                                                                                                                                                ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( from from from from from",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 47,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By what percentage did the Client segment's revenue decline in the same year that AMD was recognized by the Bloomberg Gender-Equality Index for the fourth consecutive time?"
+      }
+    ],
+    "answer": "10 percent",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 48,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the four reportable business segments for AMD as of 2022?"
+      }
+    ],
+    "answer": "Data Center, Client, Gaming, and Embedded.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 49,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the three main competitors AMD faces in the Data Center segment."
+      }
+    ],
+    "answer": "Intel Corporation, NVIDIA Corporation, and companies with ARM-based designs.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 50,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the names of the two companies AMD acquired in 2022?"
+      }
+    ],
+    "answer": "Xilinx, Inc. and Pensando Systems, Inc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                     ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 51,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Summarize the five strategic pillars of AMD's business strategy."
+      }
+    ],
+    "answer": "Compute technology leadership, expanding data center leadership, enabling pervasive artificial intelligence (AI), providing software platforms and developer enablement, and designing custom silicon and solutions.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 52,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's total revenue for the three-year period from 2020 to 2022?"
+      }
+    ],
+    "answer": "$49.8 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 53,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What types of semiconductor products does AMD primarily offer, as listed in the \"Overview\" section of Item 1?"
+      }
+    ],
+    "answer": "Server CPUs and GPUs, DPUs, FPGAs, Adaptive SoC products, desktop and notebook CPUs and APUs, discrete GPUs, and semi-custom SoC products.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n,\n,\n,,,,,,",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 54,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which three major game consoles are powered by AMD's semi-custom chips?"
+      }
+    ],
+    "answer": "Sony PlayStation 5, Microsoft Xbox Series X and S, and Valve Steam Deck.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 55,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the third-party wafer foundry partners mentioned in the document."
+      }
+    ],
+    "answer": "Taiwan Semiconductor Manufacturing Company Limited (TSMC), GLOBALFOUNDRIES Inc. (GF), United Microelectronics Corporation (UMC), and Samsung Electronics Co., Ltd.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 56,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which two recognitions related to gender equality and LGBTQ+ equality did AMD receive in 2022?"
+      }
+    ],
+    "answer": "Member of the 2022 Bloomberg Gender-Equality Index and a 100% score from the Human Rights Campaign’s (HRC) Corporate Equality Index.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n,\n\n,\n,\n,\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTheirThirdThird Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third Third",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 57,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Across which major industries does AMD state its products are used, as mentioned in the introductory letter to shareholders?"
+      }
+    ],
+    "answer": "Cloud computing, enterprise, communications, healthcare, aerospace, automotive, PCs, and gaming.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 58,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the different types of intellectual property rights AMD uses to protect its technology?"
+      }
+    ],
+    "answer": "Copyrights, patents, patent applications, trademarks, trade secrets, and mask work rights.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 59,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the respective annual revenues for the Data Center, Client, Gaming, and Embedded segments in 2022?"
+      }
+    ],
+    "answer": "Data Center: $6.0 billion; Client: $6.2 billion; Gaming: $6.8 billion; Embedded: $4.6 billion.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 60,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the primary competitors AMD faces in the Gaming segment for discrete graphics."
+      }
+    ],
+    "answer": "NVIDIA, Intel, and other suppliers of discrete graphics and integrated graphics processor (IGP) chipsets.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 61,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total R&D investment for AMD from 2020 through 2022?"
+      }
+    ],
+    "answer": "$9.8 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n_\n_\n_\n_\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n_\n_\n_\n_\n_\n_\n_\n__\n__\n__\n__\n__\n__\n__\n__\n__\n__\n__\n__\n____________________________________________________________________________________________________________________________________________________________________________________________________",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 62,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Identify the five main types of compute engines AMD provides that are central to its AI strategy."
+      }
+    ],
+    "answer": "CPUs, GPUs, FPGAs, DPUs, and adaptive SOCs.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 63,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which major cloud companies are listed as using AMD EPYC processors for their infrastructure and services?"
+      }
+    ],
+    "answer": "Amazon, Google, Microsoft Azure, Meta, Oracle Cloud, and Tencent.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 64,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many main parts is the 10-K document divided into according to the index?"
+      }
+    ],
+    "answer": "4",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 65,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of ITEM 1A in PART I?"
+      }
+    ],
+    "answer": "Risk Factors",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...(...(...(...(...(...(...(...(...(...(...(...(...(...((...))...)...)...)...)...)...)...)...)...)...)...)...)...)...)...)...)...)...)...)......)\n\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n...)\n )),\n )),\n)),\n)),\n)),\n)),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),),",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 66,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the index, on what page does PART II begin?"
+      }
+    ],
+    "answer": "41",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                 Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Inc Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub Sub",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 67,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which Item number is marked as '[Reserved]' in the document's index?"
+      }
+    ],
+    "answer": "ITEM 6",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 68,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of the final item, ITEM 16, listed in the index?"
+      }
+    ],
+    "answer": "Form 10-K Summary",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 69,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many items are listed under PART III in the index?"
+      }
+    ],
+    "answer": "5",
+    "pred": "\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 70,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the page number for the beginning of 'ITEM 8. Financial Statements and Supplementary Data'?"
+      }
+    ],
+    "answer": "56",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 71,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Does 'ITEM 2. Properties' come before or after 'ITEM 3. Legal Proceedings' in the document structure?"
+      }
+    ],
+    "answer": "Before",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 72,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which main Part of the document contains 'ITEM 15. Exhibits, Financial Statements Schedules'?"
+      }
+    ],
+    "answer": "PART IV",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 73,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the full title of ITEM 7 in PART II?"
+      }
+    ],
+    "answer": "Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</                      ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 74,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the index, on what page do the 'SIGNATURES' appear?"
+      }
+    ],
+    "answer": "113",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 75,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the full title of ITEM 9A?"
+      }
+    ],
+    "answer": "Controls and Procedures",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 76,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Between 'ITEM 1A. Risk Factors' and 'ITEM 1. Business', which section starts on page 1?"
+      }
+    ],
+    "answer": "ITEM 1. Business",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 77,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the item number for 'Principal Accounting Fees and Services'?"
+      }
+    ],
+    "answer": "ITEM 14",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</#######################################################################################################################################",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 78,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many items are listed in the index for PART I of the document?"
+      }
+    ],
+    "answer": "6",
+    "pred": "\n\n\n\n\n\n\n\n\n    \n\n    \n    \n    \n    \n    \n    \n    \n    \n\n    \n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 79,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the page number listed in the index for the start of 'ITEM 1A. Risk Factors'?"
+      }
+    ],
+    "answer": "15",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 80,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's 2022 annual revenue growth were a character in a comic book, what would be its power level, expressed as a percentage?"
+      }
+    ],
+    "answer": "44 percent",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 81,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You are a historian documenting the semiconductor industry. On what date in 2022 would you commemorate the completion of the largest acquisition in semiconductor history by AMD?"
+      }
+    ],
+    "answer": "February 14, 2022",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                         ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 82,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's four reportable segments were in a race in 2022, which segment would be the 'comeback kid' with the highest percentage revenue increase year-over-year?"
+      }
+    ],
+    "answer": "Data Center segment",
+    "pred": " \n\n \n\n \n\n \n\n \n\n..............................\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n.....................\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...................................................................................................\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n.........................................................................................................................................................................................................................................................................................................................................................................................................................................................",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 83,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "An artist is commissioned to create a sculpture representing AMD's total revenue in 2022. What dollar amount, in billions, should be etched onto the base of this sculpture?"
+      }
+    ],
+    "answer": "$23.6 billion",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 84,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You are a financial therapist counseling AMD's segments. Which segment would you console for its 10 percent revenue decline in 2022?"
+      }
+    ],
+    "answer": "Client segment",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 85,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In a sci-fi novel, a groundbreaking mission to return astronauts to the moon is powered by AMD's adaptive computing. What is the name of this mission series?"
+      }
+    ],
+    "answer": "Artemis missions",
+    "pred": "\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 86,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If you were to write a short poem about AMD's 2022 brand campaign, what three-word slogan would be its centerpiece?"
+      }
+    ],
+    "answer": "together we advance",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 87,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Imagine you are a video game character on a quest to find the ultimate handheld gaming device. The legendary device you seek is powered by a semi-custom AMD APU. What is this device called?"
+      }
+    ],
+    "answer": "Steam Deck",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 88,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the world's fastest supercomputer, powered by AMD, could speak, what is the one-word term it would use to describe its performance of one quintillion calculations per second?"
+      }
+    ],
+    "answer": "exaflop",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 89,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If you were writing the script for a movie about AMD's history, what date would you list as the company's incorporation date?"
+      }
+    ],
+    "answer": "May 1, 1969",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 90,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A secret agent is given the codename 'Pensando' and a mission date. What was the date in May 2022 that AMD completed its acquisition of Pensando?"
+      }
+    ],
+    "answer": "May 26, 2022",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                              Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury Treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury treasury",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 91,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In a futuristic city, a monument is built to honor Dr. Lisa Su's leadership at AMD. What is her full title as listed in the 2022 annual report?"
+      }
+    ],
+    "answer": "Chair & Chief Executive Officer",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 92,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's total number of employees at the end of 2022 were to form a new city, what would be its approximate population?"
+      }
+    ],
+    "answer": "25,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 93,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A spy is trying to identify a company by its stock market symbol. The only clue is that its common stock is listed on NASDAQ. What three-letter symbol would identify AMD?"
+      }
+    ],
+    "answer": "AMD",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 94,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "As a futurist predicting energy trends, you note AMD's ambitious 2022 goal for AI and HPC applications. By what multiple does AMD aim to increase energy efficiency by 2025?"
+      }
+    ],
+    "answer": "30x",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n..........................\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 95,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A treasure map leads to AMD's intellectual property vault. The final clue reveals the approximate number of U.S. patents the company held as of December 31, 2022. What is that number?"
+      }
+    ],
+    "answer": "8,200",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 96,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the percentage increase in total net revenue from 2021 to 2022, rounded to the nearest whole number?"
+      }
+    ],
+    "answer": "44",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n\n.\n\n...........\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n................\n\n.\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 97,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the increase in Gross Profit, in millions of dollars, from 2020 to 2022?"
+      }
+    ],
+    "answer": "6256",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 98,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the Research and Development expenses as a percentage of total net revenue in 2022, rounded to one decimal place?"
+      }
+    ],
+    "answer": "21.2",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 99,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the combined net revenue, in millions of dollars, for the Data Center and Gaming segments in 2022?"
+      }
+    ],
+    "answer": "12848",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 100,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total combined operating income from all four reportable segments (Data Center, Client, Gaming, and Embedded) in 2022, in millions of dollars?"
+      }
+    ],
+    "answer": "6243",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                      ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n)\n))\n\n))\n\n)\n\n)\n\n)\n\n)\n\n)\n\n))\n\n))\n\n))\n\n))\n\n)))\n\n)))\n\n)))\n\n)))\n)))\n)])\n)))\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n)\n\n\"))\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 101,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how many million dollars did the Client segment's annual revenue decrease from 2021 to 2022?"
+      }
+    ],
+    "answer": "686",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 102,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In 2022, what were the Marketing, general and administrative expenses as a percentage of gross profit, rounded to one decimal place?"
+      }
+    ],
+    "answer": "22.0",
+    "pred": "\n\n\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*\n\n*************************************",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 103,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many total shares of common stock were repurchased as part of the publicly announced program during the first two fiscal quarters of 2022?"
+      }
+    ],
+    "answer": "25945706",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 104,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference, in millions of dollars, between the net revenue of the highest-earning and lowest-earning segments in 2022?"
+      }
+    ],
+    "answer": "2253",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 105,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the value of total stockholders' equity in millions of dollars as of December 31, 2022?"
+      }
+    ],
+    "answer": "54750",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 106,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the gross margin percentage in 2020, rounded to one decimal place?"
+      }
+    ],
+    "answer": "44.5",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 107,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total net cash provided by operating activities, in millions of dollars, for the fiscal years 2021 and 2022 combined?"
+      }
+    ],
+    "answer": "7086",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 108,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how many million dollars did the principal amount of total debt increase from the end of fiscal year 2021 to the end of fiscal year 2022?"
+      }
+    ],
+    "answer": "2188",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 109,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In 2021, what was the combined net revenue from the Client and Gaming segments, in millions of dollars?"
+      }
+    ],
+    "answer": "12494",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 110,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the sum of Research and development and Marketing, general and administrative expenses in 2022, in millions of dollars?"
+      }
+    ],
+    "answer": "7341",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n.\n.\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n.\n.\n.\n.\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 111,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the Data Center segment in 2022, what was the operating income as a percentage of net revenue, rounded to one decimal place?"
+      }
+    ],
+    "answer": "30.6",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                           ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 112,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the IRS Employer Identification Number for PepsiCo, Inc.?"
+      }
+    ],
+    "answer": "13-1584302",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 113,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the par value per share for PepsiCo's Common Stock?"
+      }
+    ],
+    "answer": "1-2/3 cents per share",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</],],],],...........\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n                                   \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 114,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was the Form 8-K report signed?"
+      }
+    ],
+    "answer": "May 30, 2023",
+    "pred": "\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 115,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who signed the Form 8-K report on behalf of PepsiCo?"
+      }
+    ],
+    "answer": "Cynthia A. Nastanski",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 116,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the trading symbol for PepsiCo's 0.750% Senior Notes due 2033?"
+      }
+    ],
+    "answer": "PEP33",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 117,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total value of the 364 day unsecured revolving credit agreement from 2022 that was terminated?"
+      }
+    ],
+    "answer": "$3,800,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 118,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the expiration date for the new 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "May 24, 2024",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 119,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, what is the maximum amount the commitments can be increased to?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 120,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the size of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$750,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 121,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who are the two Syndication Agents for the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n...................\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 122,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 364-Day Credit Agreement, what is the minimum borrowing amount for advances denominated in Dollars?"
+      }
+    ],
+    "answer": "$10,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n_\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 123,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the annual commitment fee rate under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "0.025%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</](](](](](](](](]( agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agreed agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree agree",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 124,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the fee, as a percentage of the aggregate principal amount, for making a Term Loan Election under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "0.50%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 125,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the Five Year Credit Agreement, what is the annual commitment fee rate on the unused portion of the Revolving Credit Commitment?"
+      }
+    ],
+    "answer": "0.045%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 126,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to Section 6.01, what is the monetary threshold for a judgment against the company that could trigger an Event of Default?"
+      }
+    ],
+    "answer": "$500,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 127,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the processing and recordation fee for an Assignment and Assumption under the Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 128,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the stock ticker for The Toronto-Dominion Bank, a lender whose New York Branch is a party to the credit agreement?"
+      }
+    ],
+    "answer": "TD",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 129,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what city are the headquarters of Mizuho Bank, Ltd., one of the Initial Lenders in the credit agreement?"
+      }
+    ],
+    "answer": "Tokyo",
+    "pred": ".\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n...\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 130,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of Barclays Bank PLC, one of the lenders listed in the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "1690",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 131,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of JPMorgan Chase & Co., the parent company of JPMorgan Chase Bank, N.A., which is listed as a Syndication Agent?"
+      }
+    ],
+    "answer": "Jamie Dimon",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 132,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of The Northern Trust Company, one of the lenders that signed the credit agreements?"
+      }
+    ],
+    "answer": "1889",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n </ </ </ </ </</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 133,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the official currency of Australia, where the Australia and New Zealand Banking Group Limited, a lender, is based?"
+      }
+    ],
+    "answer": "Australian dollar",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                         \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 134,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was The Goldman Sachs Group, Inc., the parent company of lender Goldman Sachs Bank USA, founded?"
+      }
+    ],
+    "answer": "1869",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 135,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Bank of America, which is listed as a Syndication Agent in the agreement?"
+      }
+    ],
+    "answer": "Brian Moynihan",
+    "pred": ".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n]\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 136,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The lender Societe Generale is headquartered in which country?"
+      }
+    ],
+    "answer": "France",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n,\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n...................\n\n.\n\n.\n\n.....................................\n\n..",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 137,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the stock ticker for Royal Bank of Canada, one of the lenders party to the credit agreement?"
+      }
+    ],
+    "answer": "RY",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 138,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was KPMG, PepsiCo's independent registered public accounting firm, formed through its major merger?"
+      }
+    ],
+    "answer": "1987",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 139,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of U.S. Bancorp, the parent company of lender U.S. Bank National Association?"
+      }
+    ],
+    "answer": "1863",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 140,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what city is the headquarters of Banco Bilbao Vizcaya Argentaria, S.A. (BBVA), whose New York branch is a lender?"
+      }
+    ],
+    "answer": "Bilbao",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 141,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Citigroup, the parent company of Citibank, N.A., which served as the Administrative Agent?"
+      }
+    ],
+    "answer": "Jane Fraser",
+    "pred": "\n\n\n\n\n\n\n\n\n\n to                                                                                                                                                                                    New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New New",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 142,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the primary stock exchange for Deutsche Bank AG, whose New York branch is listed as a lender?"
+      }
+    ],
+    "answer": "Frankfurt Stock Exchange",
+    "pred": "\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 143,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the founding year of Morgan Stanley, the parent company of lender Morgan Stanley Bank, N.A.?"
+      }
+    ],
+    "answer": "1935",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 144,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the per annum commitment fee for the 364-day credit agreement, which is included as an exhibit in a report signed by Cynthia A. Nastanski on behalf of PepsiCo?"
+      }
+    ],
+    "answer": "0.025%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n.........\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n........\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n..........................................................................................................        ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 145,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the par value per share of PepsiCo's common stock, for which the associated credit agreements are governed by the law of the State of New York?"
+      }
+    ],
+    "answer": "1-2/3 cents per share",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</[];\n[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 146,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Gregory T. Martin at JPMorgan Chase Bank, N.A., a lender to the company whose principal executive offices are located at 700 Anderson Hill Road, Purchase, New York?"
+      }
+    ],
+    "answer": "Executive Director",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 147,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the value of the terminated 364-day unsecured revolving credit agreement dated May 27, 2022, from the company that entered into a new five-year agreement expiring on May 26, 2028?"
+      }
+    ],
+    "answer": "$3,800,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</<////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 148,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the credit agreements filed with the report signed by Cynthia A. Nastanski, what is the minimum debt amount failure to pay which would constitute an Event of Default?"
+      }
+    ],
+    "answer": "$500,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 149,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company incorporated in North Carolina, what is the value of the swing line subfacility for Euro-denominated borrowings under the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "$750,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 150,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the administrative agent for the new credit agreements for the company whose 0.250% Senior Notes due 2024 trade under the symbol PEP24?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 151,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company with IRS Employer Identification No. 13-1584302, the aggregate amount of secured Debt cannot exceed what percentage of Consolidated Net Tangible Assets?"
+      }
+    ],
+    "answer": "15%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 152,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was the report signed that includes a credit agreement executed by Ryan Van Stedum on behalf of Bank of America, N.A.?"
+      }
+    ],
+    "answer": "May 30, 2023",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 153,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the per annum commitment fee rate under the new Five Year Credit Agreement for the company with Commission File Number 1-1183?"
+      }
+    ],
+    "answer": "0.045%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThereforeThethethethethethethethethethethethethethethethethethethethethethethethe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 154,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company whose common stock trades under the symbol PEP, what is the maximum amount the commitments under the 2023 364 Day Credit Agreement can be increased to?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 155,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is one of the Joint Lead Arrangers for the credit agreements that define a \"Principal Property\" as a manufacturing plant, office building, or warehouse not deemed immaterial by the Board of Directors?"
+      }
+    ],
+    "answer": "BofA Securities, Inc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                       Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material Material",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 156,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the termination date of the 364-day credit agreement signed by Ada Cheng, Senior Vice President, Finance & Treasurer?"
+      }
+    ],
+    "answer": "May 24, 2024",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 157,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the credit agreement where JPMorgan Chase Bank, N.A. is a Syndication Agent, what is the defined interest rate \"Floor\"?"
+      }
+    ],
+    "answer": "0.00%",
+    "pred": "\n\n in                ::::::::::::::::::\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 158,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the company incorporated in North Carolina, what is the processing and recordation fee for an Assignment and Assumption under the 364-day credit agreement?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 159,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total amount of the new five-year unsecured revolving credit agreement entered into by the company, as reported in the document signed by the Senior Vice President, Corporate Law and Deputy Corporate Secretary?"
+      }
+    ],
+    "answer": "$4,200,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------\n\n-------------------------------------------------\n-\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n-\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n -\n\n-\n\n-\n\n--------------------------------------------------------------------------------",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 160,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total value of the two new unsecured revolving credit agreements PepsiCo entered into on May 26, 2023?"
+      }
+    ],
+    "answer": "$8,400,000,000",
+    "pred": "\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 161,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the three financial institutions that served as Joint Lead Arrangers and Joint Bookrunners for both the 2023 364-Day and Five Year Credit Agreements."
+      }
+    ],
+    "answer": "Citibank, N.A., JPMorgan Chase Bank, N.A., and BofA Securities, Inc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 162,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total value of the two credit agreements from 2022 that PepsiCo terminated on May 26, 2023?"
+      }
+    ],
+    "answer": "$7,600,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 163,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Across both the 2023 364-Day and Five-Year credit agreements, what is the maximum total commitment amount if PepsiCo fully exercises its option to increase them?"
+      }
+    ],
+    "answer": "$9,900,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 164,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which entity served as the administrative agent for all four credit agreements mentioned in Item 8.01 (the two new 2023 agreements and the two terminated 2022 agreements)?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 165,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Summarize the three components used to calculate the \"Base Rate\" as defined in the 364-Day Credit Agreement."
+      }
+    ],
+    "answer": "The highest of: Citibank's announced \"base rate\", the Federal Funds Rate plus 0.50%, and the Adjusted Term SOFR for a one-month tenor plus 1.00%.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n`\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 166,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which two entities are named as Syndication Agents for both the 2023 364-Day and Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "JPMorgan Chase Bank, N.A. and Bank of America, N.A.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 167,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the two main categories of negative covenants the Company must adhere to, as listed in Section 5.02 of the Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "Secured Debt and Mergers, Etc.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n$\n\n$\n\n$\n\n$\n\n$\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n$\n\n $\n\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n $\n\n $\n\n $\n\n $\n\n $\n\n $\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 168,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the respective expiration dates for the new 2023 364 Day Credit Agreement and the new 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "The 364 Day Credit Agreement expires on May 24, 2024, and the Five Year Credit Agreement expires on May 26, 2028.",
+    "pred": "\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 169,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List at least five of the initial lenders who are signatories to the 2023 Five Year Credit Agreement, besides the agents and arrangers."
+      }
+    ],
+    "answer": "BNP PARIBAS, DEUTSCHE BANK AG NEW YORK BRANCH, GOLDMAN SACHS BANK USA, HSBC BANK USA, NATIONAL ASSOCIATION, MIZUHO BANK, LTD. (and others).",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 170,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the 2023 364-Day Credit Agreement, what three \"Types\" of Advances can be made?"
+      }
+    ],
+    "answer": "Base Rate Advance, Eurocurrency Rate Advance, or Term SOFR Advance.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 171,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For what purposes can PepsiCo use the funds borrowed under the 2023 Five Year Credit Agreement, as stated in the Preliminary Statement of Exhibit 99.2?"
+      }
+    ],
+    "answer": "General corporate purposes, including but not limited to working capital, capital investments and acquisitions.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n \n\n \n\n \n\n }\n\n }\n\n }\n\n }\n\n }\n\n }\n\n ]\n\n ] ] ] ] ] ] ] ] [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [ [",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 172,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what two currencies can PepsiCo borrow funds under both the 2023 364 Day and Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "U.S. Dollars and/or Euros.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n...................\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 173,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Synthesize the conditions that constitute a financial \"Event of Default\" related to other debts and judgments as described in Section 6.01(d) and 6.01(f) of the credit agreements."
+      }
+    ],
+    "answer": "Failure to pay on any other debt of at least $500,000,000, or having an unstayed judgment for a payment of money in excess of $500,000,000 rendered against the company.",
+    "pred": "\n\n\n\n \n\n \n\n \n\n \n\n \n\n`\n`\n`\n`\n`\n`\n`\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 174,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who signed the Form 8-K on behalf of PepsiCo, and what is their full title?"
+      }
+    ],
+    "answer": "Cynthia A. Nastanski, Senior Vice President, Corporate Law and Deputy Corporate Secretary.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 175,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the three exhibit numbers and their corresponding descriptions listed under Item 9.01 of the Form 8-K?"
+      }
+    ],
+    "answer": "99.1: 364 Day Credit Agreement; 99.2: Five Year Credit Agreement; 104: The cover page from this Current Report on Form 8-K, formatted in Inline XBRL.",
+    "pred": "\n\n All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All All",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 176,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the main form type of this SEC filing?"
+      }
+    ],
+    "answer": "Form 8-K",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 177,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many exhibits are listed under Item 9.01 in the main body of the Form 8-K?"
+      }
+    ],
+    "answer": "3",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 178,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of the document filed as Exhibit 99.1?"
+      }
+    ],
+    "answer": "364-DAY CREDIT AGREEMENT",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 179,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the FIVE YEAR CREDIT AGREEMENT (Exhibit 99.2), how many main Articles are there?"
+      }
+    ],
+    "answer": "Nine",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                       .......\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 180,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Article V in the 364-DAY CREDIT AGREEMENT (Exhibit 99.1)?"
+      }
+    ],
+    "answer": "COVENANTS OF THE COMPANY",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                   ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 181,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the Table of Contents for the FIVE YEAR CREDIT AGREEMENT, which section is titled 'WAIVER OF JURY TRIAL'?"
+      }
+    ],
+    "answer": "Section 8.12",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n...............................................................................................................................................................................................................\n...\n\nnnnnnnnnnnnnnnnnnnn11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 182,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On which page does the 'SIGNATURES' section of the primary Form 8-K document begin?"
+      }
+    ],
+    "answer": "3",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 183,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the FIVE YEAR CREDIT AGREEMENT, which comes first: Article VI (EVENTS OF DEFAULT) or Article VII (THE AGENT)?"
+      }
+    ],
+    "answer": "Article VI (EVENTS OF DEFAULT)",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 184,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many lettered Exhibits (e.g., Exhibit A, Exhibit B) are listed in the Table of Contents for the 364-DAY CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "5",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 185,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What form is provided in Exhibit D to the FIVE YEAR CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "Form of Designation Letter",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 186,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the 364-DAY CREDIT AGREEMENT, which Article is titled 'GUARANTEE'?"
+      }
+    ],
+    "answer": "Article IX",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 187,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Item 9.01 in the main Form 8-K report?"
+      }
+    ],
+    "answer": "Financial Statements and Exhibits.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                          ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 188,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which Article in the 'TABLE OF CONTENTS' for the FIVE YEAR CREDIT AGREEMENT contains the most sections?"
+      }
+    ],
+    "answer": "ARTICLE II",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</      Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advanced Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Advance Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv Adv",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 189,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of Section 7.11 in the 364-DAY CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "Erroneous Payments",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter chapter",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 190,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many schedules are listed in the Table of Contents for the FIVE YEAR CREDIT AGREEMENT?"
+      }
+    ],
+    "answer": "1",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 191,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the last page number of the main body of the FIVE YEAR CREDIT AGREEMENT before the signature pages?"
+      }
+    ],
+    "answer": "68",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 192,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement were a movie, what would be the tagline summarizing the maximum amount PepsiCo could borrow after an increase?"
+      }
+    ],
+    "answer": "$4,950,000,000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 193,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Write a haiku about the termination of the 2022 credit agreements. What specific date marks this event in the document?"
+      }
+    ],
+    "answer": "May 26, 2023",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 194,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Imagine 'Guaranteed Obligations' is a character in a play based on Article IX. Who plays the unwavering guarantor, ensuring all obligations are met?"
+      }
+    ],
+    "answer": "The Company (PepsiCo, Inc.)",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 195,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the credit agreements were secret treaties, what U.S. state's law would be the secret code they are written in, as per Section 8.09?"
+      }
+    ],
+    "answer": "State of New York",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                      ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 196,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the Administrative Agent in the 2023 credit agreements is a superhero, what is its everyday, corporate secret identity?"
+      }
+    ],
+    "answer": "Citibank, N.A.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 197,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You're a financial mixologist creating a cocktail called 'The Default Rate'. According to Section 2.07(d) of the 364-Day agreement, what percentage do you add to the Base Rate to create this potent mix?"
+      }
+    ],
+    "answer": "two percent (2%)",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 198,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the magical world of finance described in the 364-Day Credit Agreement, what is the fee percentage, or 'mana cost', for casting the 'Term Loan Election' spell under Section 3.03(b)?"
+      }
+    ],
+    "answer": "0.50%",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n.\n.\n\n.\n.........\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n.........\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 199,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement was a person, on what date would it celebrate its fifth and final birthday, before any extensions?"
+      }
+    ],
+    "answer": "May 26, 2028",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,>,\n>,\n>,\n>,\n>,\n>,\n>,\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 200,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the signature on this Form 8-K report belonged to an author, what would be the full, multi-part title listed for Cynthia A. Nastanski on the book jacket?"
+      }
+    ],
+    "answer": "Senior Vice President, Corporate Law and Deputy Corporate Secretary",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                        ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 201,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The Administrative Agent has two partners helping with syndication. If this were a crime-fighting trio, what are the names of the two Syndication Agent 'sidekicks' listed in the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "JPMORGAN CHASE BANK, N.A. and BANK OF AMERICA, N.A.",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n </ </ </ </</</</</</</</</</</</</</</</</</</</</</</</</</####################################################################################### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ########################################################################################################################################################################################################################################################################################################################",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 202,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo made a social media post announcing its new $4.2 billion, 364-day credit line, what date would be in the \"in a relationship since\" field?"
+      }
+    ],
+    "answer": "May 26, 2023",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                                                                                 ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 203,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the board game 'Credit Conquest' based on the 364-Day agreement, what is the maximum number of separate Eurocurrency Rate Advance 'armies' a player can have on the board at one time, according to Section 2.02(b)?"
+      }
+    ],
+    "answer": "twelve",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 204,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the 2023 Five Year Credit Agreement were planning a trip, it would need a special sub-agent for its European leg. What is the name of the 'Sub-Agent' for its Euro-denominated travels?"
+      }
+    ],
+    "answer": "Citibank Europe plc, UK Branch",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 205,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the sport of 'Corporate Finance', a player (Borrower) has five business days to correct a payment foul. If they fail, what 'Event' is triggered according to Section 6.01(a) of the Five-Year agreement?"
+      }
+    ],
+    "answer": "Events of Default",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 206,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To join the exclusive 'Lender's Club' by assignment, a new member must pay a processing and recordation fee. According to Section 8.07(a) of the 364-day agreement, what is this 'cover charge'?"
+      }
+    ],
+    "answer": "$3,500",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 207,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To summon funds from the Swing Line Lenders under the Five-Year agreement, a special incantation (a notice) must be uttered before a certain time in London. What is this deadline, as stated in Section 2.20(b)?"
+      }
+    ],
+    "answer": "9:30 A.M. (London time)",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n by by by by by By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By By by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by by",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 208,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the increase in the principal amount, in dollars, from the terminated 2022 364 Day Credit Agreement to the new 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "400000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</.]\n\n]\n\n(The(The(The(ThePuPuPuPuPuPuPuPuPuPuPuPuPuPuPuPuPuPuPu",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 209,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total initial principal amount, in dollars, available to PepsiCo under both the new 2023 364 Day and 2023 Five Year credit agreements combined?"
+      }
+    ],
+    "answer": "8400000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 210,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how much can the commitments under the 2023 364 Day Credit Agreement be increased from its initial amount, in dollars?"
+      }
+    ],
+    "answer": "750000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 211,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the maximum total commitment, in dollars, PepsiCo could have if it fully increases the commitments for both the 2023 364 Day and 2023 Five Year Credit Agreements?"
+      }
+    ],
+    "answer": "9900000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 212,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo has an outstanding principal of $4,200,000,000 under the 364-Day Credit Agreement and elects the Term Loan Conversion, what would be the fee in dollars?"
+      }
+    ],
+    "answer": "21000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 213,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference in the per annum commitment fee rate, as a percentage, between the 2023 364 Day Credit Agreement and the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "0.020",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe********************************************************************************************************************************************",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 214,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo makes a partial reduction to its commitments under the 2023 Five Year Credit Agreement for the minimum aggregate amount plus one integral multiple, what would be the total reduction in dollars?"
+      }
+    ],
+    "answer": "26000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n.........................................................................................................................................................,,,, and and and,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 215,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total value, in dollars, of the two terminated credit agreements from May 27, 2022?"
+      }
+    ],
+    "answer": "7600000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n;\n;\n\n;\n\n;\n\n;\n\n;\n\n;\n\n;\n\n;\n\n;\n\n;\n\n that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that that",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 216,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference, in dollars, between the swing line subfacility amount and the maximum potential increase for the 2023 Five Year Credit Agreement?"
+      }
+    ],
+    "answer": "0",
+    "pred": "\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 217,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, if the outstanding advances reach 106% of the initial $4,200,000,000 commitment, by how much, in dollars, does this exceed the mandatory prepayment threshold of 105%?"
+      }
+    ],
+    "answer": "42000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 218,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference in basis points between the interest rate margin for Term SOFR Advances (0.625%) and the fee for a Term Loan Election (0.50%) under the 364-Day Credit Agreement?"
+      }
+    ],
+    "answer": "12.5",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisThisTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHISTHIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 219,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo had an unused portion of the 364-Day Credit Agreement of $2,000,000,000 for an entire year, what would be the total commitment fee in dollars?"
+      }
+    ],
+    "answer": "500000",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\nIfTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 220,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under the 2023 Five Year Credit Agreement, how many times can a minimum dollar borrowing be made from the initial total commitment of $4,200,000,000?"
+      }
+    ],
+    "answer": "420",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 221,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the sum, in dollars, of the minimum partial reduction amount and the minimum Proposed Aggregate Commitment Increase amount under the 2023 364 Day Credit Agreement?"
+      }
+    ],
+    "answer": "50000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 222,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the total increase in principal, in dollars, from the combined 2022 agreements to the combined initial 2023 agreements?"
+      }
+    ],
+    "answer": "800000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 223,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If PepsiCo wants to add two New Lenders to the 2023 364 Day Credit Agreement, each committing the minimum possible amount, what is the total of their new commitments in dollars?"
+      }
+    ],
+    "answer": "50000000",
+    "pred": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                                ........\n\n.\n\n.\n\n............\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n\n\n\n\n\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n.\n\n\n\n\n\n\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  }
+]

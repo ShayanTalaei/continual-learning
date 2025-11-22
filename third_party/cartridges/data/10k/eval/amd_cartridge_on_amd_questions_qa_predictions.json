@@ -1,0 +1,1458 @@
+[
+  {
+    "idx": 0,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's total revenue for the fiscal year 2022?"
+      }
+    ],
+    "answer": "$23.6 billion",
+    "pred": "......\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n......\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n..................\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 1,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what month and year did AMD complete its acquisition of Xilinx?"
+      }
+    ],
+    "answer": "February 2022",
+    "pred": "**TheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 2,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What company, acquired in May 2022, provides AMD with data processing units (DPUs)?"
+      }
+    ],
+    "answer": "Pensando Systems, Inc.",
+    "pred": " \n\n The The text text is is is mentioned in in in in format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format format",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 3,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the annual revenue for AMD's Data Center segment in 2022?"
+      }
+    ],
+    "answer": "$6.0 billion",
+    "pred": "                                                                                                                                                                                                                                                                ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 4,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By what percentage did AMD's Client segment annual revenue decline in 2022?"
+      }
+    ],
+    "answer": "10 percent",
+    "pred": " \n\n The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 5,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the annual revenue for AMD's Gaming segment in 2022?"
+      }
+    ],
+    "answer": "$6.8 billion",
+    "pred": "  33333444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 6,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the Chair & Chief Executive Officer of AMD as of the 2022 annual report?"
+      }
+    ],
+    "answer": "Dr. Lisa Su",
+    "pred": " \n\n According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 7,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Under what stock symbol is AMD's common stock listed on The NASDAQ Global Select Market?"
+      }
+    ],
+    "answer": "AMD",
+    "pred": " \n\n According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 8,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what date was Advanced Micro Devices, Inc. incorporated?"
+      }
+    ],
+    "answer": "May 1, 1969",
+    "pred": "WhatHereHereHereHereHereHereHereHereHereHereHereHereHere</</</</</</</</</</</</</>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n>\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 9,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Approximately how many employees did AMD have in its global workforce as of December 31, 2022?"
+      }
+    ],
+    "answer": "25,000",
+    "pred": " \n\n The According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 10,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What percentage of AMD's 2022 consolidated net revenue was accounted for by its largest single customer?"
+      }
+    ],
+    "answer": "16%",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n The According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance accordance according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according although although although although among among among among among among among among among among among along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along along",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 11,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total purchase consideration for the acquisition of Pensando in 2022?"
+      }
+    ],
+    "answer": "approximately $1.9 billion",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 12,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How much did AMD invest in Research & Development (R&D) during 2022?"
+      }
+    ],
+    "answer": "$5.0 billion",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccording\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\nTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 13,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the new brand campaign launched by AMD in 2022?"
+      }
+    ],
+    "answer": "together we advance",
+    "pred": " \n\n The There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There There",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 14,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which California city are the three Superfund sites for which AMD has been named a responsible party located?"
+      }
+    ],
+    "answer": "Sunnyvale",
+    "pred": " \n\n \n\n \n\n The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 15,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the aggregate principal amount of the five-year unsecured revolving credit facility AMD entered into in 2022?"
+      }
+    ],
+    "answer": "$3.0 billion",
+    "pred": "\n\n After The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 16,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the parent company of Google, which utilizes AMD EPYC processors for its internal infrastructure?"
+      }
+    ],
+    "answer": "Alphabet Inc.",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 17,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which city is the headquarters of Valve, the company that produces the AMD-powered Steam Deck?"
+      }
+    ],
+    "answer": "Bellevue, Washington",
+    "pred": " \n\n \n\n The The headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters headquarters",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 18,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the founder and CEO of SpaceX, a company that has adopted AMD's adaptive computing products?"
+      }
+    ],
+    "answer": "Elon Musk",
+    "pred": " \n\n The The text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 19,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the current CEO of Microsoft, the company responsible for the Xbox Series X and S consoles powered by AMD chips?"
+      }
+    ],
+    "answer": "Satya Nadella",
+    "pred": " The The the list information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 20,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what country is the headquarters of Sony, the manufacturer of the AMD-powered PlayStation 5, located?"
+      }
+    ],
+    "answer": "Japan",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n ( ( ( ( ( (",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 21,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "From which university did AMD's Chair and CEO, Dr. Lisa Su, receive her Ph.D.?"
+      }
+    ],
+    "answer": "Massachusetts Institute of Technology",
+    "pred": " X X X X X X X X X X X X X X",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 22,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the nickname for the geographic region in California where AMD's headquarters in Santa Clara is located?"
+      }
+    ],
+    "answer": "Silicon Valley",
+    "pred": " \n\n The The information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 23,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who was the CEO of Xilinx at the time of its acquisition by AMD in February 2022?"
+      }
+    ],
+    "answer": "Victor Peng",
+    "pred": " \n\n The The CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO CEO",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 24,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In what year was the NASDAQ stock market, where AMD's common stock is listed under the symbol 'AMD', founded?"
+      }
+    ],
+    "answer": "1971",
+    "pred": "AccordingTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuring",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 25,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Who is the co-founder and current Chairman of Oracle, a company whose cloud services use AMD EPYC processors?"
+      }
+    ],
+    "answer": "Larry Ellison",
+    "pred": " \n\n \n\n \n\n The The co co co co co co co co co co co co co co co co co co co co co co ( ( ( ( ( ( ( ( ( ( ( (...\n\n american american american american american american american american american american american american american american american american american american american american american american american american american american american american american............... \n \n < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < </ </ </ </ > > >\n\n > > > >\n >\n > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 26,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the capital city of Delaware, the state where AMD was incorporated in 1969?"
+      }
+    ],
+    "answer": "Dover",
+    "pred": "\n\n \n\n Based Based the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the wa wa wa wa wa wa wa wa wa wa wa wa wa wa wa wa wa",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 27,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What NASA center is primarily responsible for managing the Perseverance Mars rover, which utilizes AMD's computing products?"
+      }
+    ],
+    "answer": "Jet Propulsion Laboratory (JPL)",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n The The text text text text text text text text text text text text text ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( (                                                                                                                                                                                    ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 28,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the name of the former Cisco CEO who co-founded Pensando, a company AMD acquired in May 2022?"
+      }
+    ],
+    "answer": "John Chambers",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The the the the the the the this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this this",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 29,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which country is the headquarters of Tencent, one of the cloud companies that uses AMD EPYC processors?"
+      }
+    ],
+    "answer": "China",
+    "pred": "\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 30,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which U.S. President signed the Sarbanes-Oxley Act, a law referenced in the risk factors section of the document?"
+      }
+    ],
+    "answer": "George W. Bush",
+    "pred": " AlthoughNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSo",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 31,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the names of the two primary co-founders of Intel Corporation, AMD's main competitor mentioned in the document?"
+      }
+    ],
+    "answer": "Robert Noyce and Gordon Moore",
+    "pred": " \n\n The According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According \n\n \n\n The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 32,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the result in millions when you subtract the total square footage of AMD's owned space from its estimated environmental liability in millions of dollars?"
+      }
+    ],
+    "answer": "2.9",
+    "pred": " \n\n According According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according accordance accordance accordance accordance accordance accordance accordance accordance according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly accordingly according according according according according according according according according according according",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 33,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many employees did AMD have globally at the end of the fiscal year when its annual revenue was $23.6 billion?"
+      }
+    ],
+    "answer": "Approximately 25,000",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 34,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many shares of common stock were repurchased in the fiscal quarter that included the completion of the Xilinx acquisition?"
+      }
+    ],
+    "answer": "15,785,806",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringDuringduringduringduringduringduringduringduringduringduringduringduringduringduringduringduringduring during during during during during during during during during during during during during during during during during during during during during during during during during during during during",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 35,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the approximate net revenue, in billions of dollars, generated from the single largest customer in the Gaming segment in fiscal year 2022?"
+      }
+    ],
+    "answer": "$3.776 billion",
+    "pred": " The The information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information information",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 36,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In the year AMD's international sales represented 66% of its net revenue, how many U.S. patents did the company hold?"
+      }
+    ],
+    "answer": "Approximately 8,200",
+    "pred": " \n\n The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 37,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many full years passed between AMD's incorporation date and the maturity year of its 7.50% Senior Notes?"
+      }
+    ],
+    "answer": "53",
+    "pred": " \n\n \n\n The According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 38,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's Research & Development investment as a percentage of its total revenue in the year its gross profit was $4.3 billion?"
+      }
+    ],
+    "answer": "Approximately 20.4%",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n The UnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwiseOtherwise معمولاINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERNINTERN cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperating cooperate cooperate cooperate cooperate cooperate cooperate cooperate cooperate cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooperation cooper cooper cooper cooper cooper cooper ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( ( mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix mix",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 39,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "The single largest customer, whose sales came from the Gaming segment, accounted for what approximate percentage of that entire segment's 2022 revenue?"
+      }
+    ],
+    "answer": "55.5%",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingaccordingccordingrichTextinsninsninsnsvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesvillesville",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 40,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the one-word response provided for both 'Unresolved Staff Comments' and 'Changes in and Disagreements with Accountants on Accounting and Financial Disclosure'?"
+      }
+    ],
+    "answer": "None",
+    "pred": " \n\n \n\n \n\n \n\n This The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 41,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In which California city, different from its Santa Clara headquarters, has AMD been named a responsible party for three Superfund sites?"
+      }
+    ],
+    "answer": "Sunnyvale",
+    "pred": "AccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingaccordingaccordingaccordingaccordingaccording-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-existing-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so-so",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 42,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many million shares of common stock did AMD issue as part of the transaction described as the 'largest acquisition in semiconductor history'?"
+      }
+    ],
+    "answer": "429 million",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingquetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequetequeteêteête",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 43,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many years after the Wafer Supply Agreement with GLOBALFOUNDRIES is set to expire are the 3.924% Senior Notes scheduled to mature?"
+      }
+    ],
+    "answer": "7 years",
+    "pred": "\n\nAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlyCurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrentlycurrently",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 44,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the risk factors, who is AMD's primary competitor in the microprocessor market, even as AMD powers 75% of the top 20 most energy-efficient supercomputers?"
+      }
+    ],
+    "answer": "Intel Corporation",
+    "pred": " According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According |\n\n AMD AMD's's's’s's's's's's's's's's's's's's's's's's's's's's's (,,,,,,,,,,,,,,,,,,,,,,,,,,,,,))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))\n\n)\n\n)\n\n)\n\n)))))))))))))))))))))))))))))))))))))))",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 45,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "On what page number does the section begin that incorporates by reference the 'Security Ownership of Certain Beneficial Owners and Management' information from the 2023 Proxy Statement?"
+      }
+    ],
+    "answer": "104",
+    "pred": " According Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 46,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "To which reporting segment was the goodwill attributed from the acquisition that closed on May 26, 2022?"
+      }
+    ],
+    "answer": "Data Center",
+    "pred": " \n\n WithAccordingAccordingAccordingAccording                                                                                                                                                                                                                                                          ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 47,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By what percentage did the Client segment's revenue decline in the same year that AMD was recognized by the Bloomberg Gender-Equality Index for the fourth consecutive time?"
+      }
+    ],
+    "answer": "10 percent",
+    "pred": " \n\n In According the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 48,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the four reportable business segments for AMD as of 2022?"
+      }
+    ],
+    "answer": "Data Center, Client, Gaming, and Embedded.",
+    "pred": " \n\n The Based information information information information information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information Information",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 49,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the three main competitors AMD faces in the Data Center segment."
+      }
+    ],
+    "answer": "Intel Corporation, NVIDIA Corporation, and companies with ARM-based designs.",
+    "pred": " \n\n Through Through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through through",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 50,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the names of the two companies AMD acquired in 2022?"
+      }
+    ],
+    "answer": "Xilinx, Inc. and Pensando Systems, Inc.",
+    "pred": "...\n\n UnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpectedUnexpected unexpectedly unexpected unexpected unexpected unexpected unexpected unexpected\n\n\n\n The Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 51,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Summarize the five strategic pillars of AMD's business strategy."
+      }
+    ],
+    "answer": "Compute technology leadership, expanding data center leadership, enabling pervasive artificial intelligence (AI), providing software platforms and developer enablement, and designing custom silicon and solutions.",
+    "pred": "... \n.....................\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 52,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was AMD's total revenue for the three-year period from 2020 to 2022?"
+      }
+    ],
+    "answer": "$49.8 billion",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n                                                                                                                                        \n\n\n\n\n\n                                                                                                              ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 53,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What types of semiconductor products does AMD primarily offer, as listed in the \"Overview\" section of Item 1?"
+      }
+    ],
+    "answer": "Server CPUs and GPUs, DPUs, FPGAs, Adaptive SoC products, desktop and notebook CPUs and APUs, discrete GPUs, and semi-custom SoC products.",
+    "pred": " \n\n AMD AMD primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily primarily",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 54,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which three major game consoles are powered by AMD's semi-custom chips?"
+      }
+    ],
+    "answer": "Sony PlayStation 5, Microsoft Xbox Series X and S, and Valve Steam Deck.",
+    "pred": "                                                                                                                                                                                                                                                                ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 55,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the third-party wafer foundry partners mentioned in the document."
+      }
+    ],
+    "answer": "Taiwan Semiconductor Manufacturing Company Limited (TSMC), GLOBALFOUNDRIES Inc. (GF), United Microelectronics Corporation (UMC), and Samsung Electronics Co., Ltd.",
+    "pred": "**********\n\n**\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 56,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which two recognitions related to gender equality and LGBTQ+ equality did AMD receive in 2022?"
+      }
+    ],
+    "answer": "Member of the 2022 Bloomberg Gender-Equality Index and a 100% score from the Human Rights Campaign’s (HRC) Corporate Equality Index.",
+    "pred": " A In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,],\n\n],\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]\n\n]>]>]>]>]>]>]>]>]>]>\n]>\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n >\n",
+    "em": 0.0,
+    "f1": 0.019801980198019802
+  },
+  {
+    "idx": 57,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Across which major industries does AMD state its products are used, as mentioned in the introductory letter to shareholders?"
+      }
+    ],
+    "answer": "Cloud computing, enterprise, communications, healthcare, aerospace, automotive, PCs, and gaming.",
+    "pred": " According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 58,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What are the different types of intellectual property rights AMD uses to protect its technology?"
+      }
+    ],
+    "answer": "Copyrights, patents, patent applications, trademarks, trade secrets, and mask work rights.",
+    "pred": " \n\n Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Based Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base Base",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 59,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the respective annual revenues for the Data Center, Client, Gaming, and Embedded segments in 2022?"
+      }
+    ],
+    "answer": "Data Center: $6.0 billion; Client: $6.2 billion; Gaming: $6.8 billion; Embedded: $4.6 billion.",
+    "pred": " \n\n \n\n \n\n \n\n \n\n A $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` enc enc enc enc enc enc enc enc enc enc enc enc enc enc enc dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec dec`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 60,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "List the primary competitors AMD faces in the Gaming segment for discrete graphics."
+      }
+    ],
+    "answer": "NVIDIA, Intel, and other suppliers of discrete graphics and integrated graphics processor (IGP) chipsets.",
+    "pred": " The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type Type",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 61,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total R&D investment for AMD from 2020 through 2022?"
+      }
+    ],
+    "answer": "$9.8 billion",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n $$$$_$_$_____________________________________\n\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$=$",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 62,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Identify the five main types of compute engines AMD provides that are central to its AI strategy."
+      }
+    ],
+    "answer": "CPUs, GPUs, FPGAs, DPUs, and adaptive SOCs.",
+    "pred": " \n\n \n\n X AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD...........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 63,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which major cloud companies are listed as using AMD EPYC processors for their infrastructure and services?"
+      }
+    ],
+    "answer": "Amazon, Google, Microsoft Azure, Meta, Oracle Cloud, and Tencent.",
+    "pred": " \n\n According According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 64,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many main parts is the 10-K document divided into according to the index?"
+      }
+    ],
+    "answer": "4",
+    "pred": " \n\n \n\n The Unfortunately                                                                                                                                                                                                                                                            ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 65,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of ITEM 1A in PART I?"
+      }
+    ],
+    "answer": "Risk Factors",
+    "pred": " \n\n the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 66,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the index, on what page does PART II begin?"
+      }
+    ],
+    "answer": "41",
+    "pred": " \n\n                                                                                                                                                                                                                                                               ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 67,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which Item number is marked as '[Reserved]' in the document's index?"
+      }
+    ],
+    "answer": "ITEM 6",
+    "pred": "                                                                                                                                                                                                                                                                ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 68,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the title of the final item, ITEM 16, listed in the index?"
+      }
+    ],
+    "answer": "Form 10-K Summary",
+    "pred": " \n\n The The The The The The The ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **  ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 69,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many items are listed under PART III in the index?"
+      }
+    ],
+    "answer": "5",
+    "pred": "effectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffectiveeffective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective-effective",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 70,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the page number for the beginning of 'ITEM 8. Financial Statements and Supplementary Data'?"
+      }
+    ],
+    "answer": "56",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n                                                                                                                                                                                                                                  ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 71,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Does 'ITEM 2. Properties' come before or after 'ITEM 3. Legal Proceedings' in the document structure?"
+      }
+    ],
+    "answer": "Before",
+    "pred": " The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The The Th Th Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr Thr\n\n\n\n \n\n The In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In In Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem Sem",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 72,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Which main Part of the document contains 'ITEM 15. Exhibits, Financial Statements Schedules'?"
+      }
+    ],
+    "answer": "PART IV",
+    "pred": "`\n\n```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````\n`\n`\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 73,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the full title of ITEM 7 in PART II?"
+      }
+    ],
+    "answer": "Management’s Discussion and Analysis of Financial Condition and Results of Operations",
+    "pred": "HereTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 74,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "According to the index, on what page do the 'SIGNATURES' appear?"
+      }
+    ],
+    "answer": "113",
+    "pred": " \n\n The Unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately Unfortunately UnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyUnfortunatelyResultsController Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher Crusher",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 75,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the full title of ITEM 9A?"
+      }
+    ],
+    "answer": "Controls and Procedures",
+    "pred": "",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 76,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Between 'ITEM 1A. Risk Factors' and 'ITEM 1. Business', which section starts on page 1?"
+      }
+    ],
+    "answer": "ITEM 1. Business",
+    "pred": " The The section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section section",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 77,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the item number for 'Principal Accounting Fees and Services'?"
+      }
+    ],
+    "answer": "ITEM 14",
+    "pred": "TheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 78,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many items are listed in the index for PART I of the document?"
+      }
+    ],
+    "answer": "6",
+    "pred": " Here According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 79,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the page number listed in the index for the start of 'ITEM 1A. Risk Factors'?"
+      }
+    ],
+    "answer": "15",
+    "pred": " \n\n\n\n \n\n \n\n \n\n \n\n A According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 80,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's 2022 annual revenue growth were a character in a comic book, what would be its power level, expressed as a percentage?"
+      }
+    ],
+    "answer": "44 percent",
+    "pred": "\n\n \n\n According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 81,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You are a historian documenting the semiconductor industry. On what date in 2022 would you commemorate the completion of the largest acquisition in semiconductor history by AMD?"
+      }
+    ],
+    "answer": "February 14, 2022",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 82,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's four reportable segments were in a race in 2022, which segment would be the 'comeback kid' with the highest percentage revenue increase year-over-year?"
+      }
+    ],
+    "answer": "Data Center segment",
+    "pred": " \n\n Based According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 83,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "An artist is commissioned to create a sculpture representing AMD's total revenue in 2022. What dollar amount, in billions, should be etched onto the base of this sculpture?"
+      }
+    ],
+    "answer": "$23.6 billion",
+    "pred": "\n\nTheAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAccordingAlthoughAlthoughAlthoughAlthoughAlthoughAlthoughAlthoughAlthoughAlthoughAlthoughAlthough,......\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\nVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 84,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "You are a financial therapist counseling AMD's segments. Which segment would you console for its 10 percent revenue decline in 2022?"
+      }
+    ],
+    "answer": "Client segment",
+    "pred": " \n\n \n\n \n\n \n\n \n\n The AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 85,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In a sci-fi novel, a groundbreaking mission to return astronauts to the moon is powered by AMD's adaptive computing. What is the name of this mission series?"
+      }
+    ],
+    "answer": "Artemis missions",
+    "pred": " \n\nAccordingBasedBasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasedbasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebasebase",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 86,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If you were to write a short poem about AMD's 2022 brand campaign, what three-word slogan would be its centerpiece?"
+      }
+    ],
+    "answer": "together we advance",
+    "pred": " \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 87,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "Imagine you are a video game character on a quest to find the ultimate handheld gaming device. The legendary device you seek is powered by a semi-custom AMD APU. What is this device called?"
+      }
+    ],
+    "answer": "Steam Deck",
+    "pred": " \n\n \n \n\n \n The The The The The...\n...............\n\n...The...................................................................................................\n...\n\nTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHETHE",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 88,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If the world's fastest supercomputer, powered by AMD, could speak, what is the one-word term it would use to describe its performance of one quintillion calculations per second?"
+      }
+    ],
+    "answer": "exaflop",
+    "pred": " The The AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD AMD\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n\n\n\n\n</</</</</",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 89,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If you were writing the script for a movie about AMD's history, what date would you list as the company's incorporation date?"
+      }
+    ],
+    "answer": "May 1, 1969",
+    "pred": " According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 90,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A secret agent is given the codename 'Pensando' and a mission date. What was the date in May 2022 that AMD completed its acquisition of Pensando?"
+      }
+    ],
+    "answer": "May 26, 2022",
+    "pred": " Based According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 91,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In a futuristic city, a monument is built to honor Dr. Lisa Su's leadership at AMD. What is her full title as listed in the 2022 annual report?"
+      }
+    ],
+    "answer": "Chair & Chief Executive Officer",
+    "pred": " Dr Dr Dr Dr Dr Dr Dr Dr Dr Dr Dr \n\n \n\n \n\n \n\n \n\n \n\n \n\n However However however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however however",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 92,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "If AMD's total number of employees at the end of 2022 were to form a new city, what would be its approximate population?"
+      }
+    ],
+    "answer": "25,000",
+    "pred": "\n\n\n\n \n\n Based According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according of of of of of of of of......\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n\n...\n..........................................\n\n...\n\nTheAndTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 93,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A spy is trying to identify a company by its stock market symbol. The only clue is that its common stock is listed on NASDAQ. What three-letter symbol would identify AMD?"
+      }
+    ],
+    "answer": "AMD",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n...\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n...\n\n                                                                                                                                            ",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 94,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "As a futurist predicting energy trends, you note AMD's ambitious 2022 goal for AI and HPC applications. By what multiple does AMD aim to increase energy efficiency by 2025?"
+      }
+    ],
+    "answer": "30x",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 95,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "A treasure map leads to AMD's intellectual property vault. The final clue reveals the approximate number of U.S. patents the company held as of December 31, 2022. What is that number?"
+      }
+    ],
+    "answer": "8,200",
+    "pred": " Unfortunately The The the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of of",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 96,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the percentage increase in total net revenue from 2021 to 2022, rounded to the nearest whole number?"
+      }
+    ],
+    "answer": "44",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n The The text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 97,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the increase in Gross Profit, in millions of dollars, from 2020 to 2022?"
+      }
+    ],
+    "answer": "6256",
+    "pred": " According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 98,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What were the Research and Development expenses as a percentage of total net revenue in 2022, rounded to one decimal place?"
+      }
+    ],
+    "answer": "21.2",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n $\n\n $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ``````\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 99,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the combined net revenue, in millions of dollars, for the Data Center and Gaming segments in 2022?"
+      }
+    ],
+    "answer": "12848",
+    "pred": "wandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwandwand",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 100,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total combined operating income from all four reportable segments (Data Center, Client, Gaming, and Embedded) in 2022, in millions of dollars?"
+      }
+    ],
+    "answer": "6243",
+    "pred": " \n\n \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \" \"\n\n \"\n $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 101,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how many million dollars did the Client segment's annual revenue decrease from 2021 to 2022?"
+      }
+    ],
+    "answer": "686",
+    "pred": "\n\nBasedTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheTheThe",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 102,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In 2022, what were the Marketing, general and administrative expenses as a percentage of gross profit, rounded to one decimal place?"
+      }
+    ],
+    "answer": "22.0",
+    "pred": "\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 103,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "How many total shares of common stock were repurchased as part of the publicly announced program during the first two fiscal quarters of 2022?"
+      }
+    ],
+    "answer": "25945706",
+    "pred": " \n\n According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 104,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What is the difference, in millions of dollars, between the net revenue of the highest-earning and lowest-earning segments in 2022?"
+      }
+    ],
+    "answer": "2253",
+    "pred": "\n\n Based According to to to to to to to to to to to to to to to to to to to to to to ( ( ( ( \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 105,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the value of total stockholders' equity in millions of dollars as of December 31, 2022?"
+      }
+    ],
+    "answer": "54750",
+    "pred": " \n\n The According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according according\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 106,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the gross margin percentage in 2020, rounded to one decimal place?"
+      }
+    ],
+    "answer": "44.5",
+    "pred": "\n\n The The the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 107,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the total net cash provided by operating activities, in millions of dollars, for the fiscal years 2021 and 2022 combined?"
+      }
+    ],
+    "answer": "7086",
+    "pred": " \n\n \n\n \n\n The According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 108,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "By how many million dollars did the principal amount of total debt increase from the end of fiscal year 2021 to the end of fiscal year 2022?"
+      }
+    ],
+    "answer": "2188",
+    "pred": " \n\n According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According According\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 109,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "In 2021, what was the combined net revenue from the Client and Gaming segments, in millions of dollars?"
+      }
+    ],
+    "answer": "12494",
+    "pred": " \n\n The According combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combined combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining combining",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 110,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "What was the sum of Research and development and Marketing, general and administrative expenses in 2022, in millions of dollars?"
+      }
+    ],
+    "answer": "7341",
+    "pred": " According According to to to to to the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+    "em": 0.0,
+    "f1": 0.0
+  },
+  {
+    "idx": 111,
+    "prompt": [
+      {
+        "role": "user",
+        "content": "For the Data Center segment in 2022, what was the operating income as a percentage of net revenue, rounded to one decimal place?"
+      }
+    ],
+    "answer": "30.6",
+    "pred": " \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n......:::::::::\n\n                      ",
+    "em": 0.0,
+    "f1": 0.0
+  }
+]
