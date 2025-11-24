@@ -7,6 +7,7 @@ This script:
 2. Converts to cartridges format if needed
 3. Trains a KV cache cartridge using knowledge distillation
 4. Uploads the trained cartridge to HuggingFace
+5. Optionally learns per-layer positional embeddings that bias cartridge keys/values
 
 Usage:
     python -m src.memory.distillation.distill_into_cartridge
@@ -53,7 +54,7 @@ from cartridges.train import TrainConfig, train, GenerationEvalConfig, LossEvalC
 from cartridges.datasets import TrainDataset, ShayanTrainDataset, ShayanStreamingTrainDataset, DataSource
 from cartridges.models.config import HFModelConfig
 from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM
-from cartridges.cache import KVCacheFactory
+from cartridges.cache import KVCacheFactory, PositionalEmbeddingConfig
 from cartridges.initialization.text import KVFromText
 from cartridges.initialization.random import KVFromRandomVectors
 from cartridges.structs import Conversation, write_conversations
@@ -94,6 +95,15 @@ class OutputConfig(pydra.Config):
         self.upload_to_hf = True  # Whether to upload to HuggingFace after training
 
 
+class PositionalEmbeddingInitConfig(pydra.Config):
+    """Configuration for positional embeddings applied to cartridge keys/values."""
+    def __init__(self):
+        super().__init__()
+        self.enabled = False
+        self.init_mode = "zero"  # "zero" or "random"
+        self.random_std = 0.02  # Std-dev for random initialization
+
+
 class KVCacheInitConfig(pydra.Config):
     """Configuration for KV cache initialization."""
     def __init__(self):
@@ -109,10 +119,13 @@ class KVCacheInitConfig(pydra.Config):
         self.parametrization_hidden_multiplier = 4.0  # MLP hidden dimension multiplier
         self.parametrization_activation = "relu"  # Activation function: "relu" or "gelu"
         self.parametrization_share_across_layers = True  # Whether to share MLP across layers
+        self.parametrization_zero_init_last_layer = False  # Zero last layer to keep init identical
         
         # For text initialization
         self.init_text = None  # Text to initialize from (for method='text')
         self.init_text_file = pydra.REQUIRED  # File containing init text (overrides init_text)
+        # Optional per-layer positional embeddings applied to cartridge keys/values
+        self.positional_embeddings = PositionalEmbeddingInitConfig()
 
 
 class TrainingConfig(pydra.Config):
@@ -230,6 +243,8 @@ class DistillationConfig(pydra.Config):
         self.streaming_dataset = False
         self.generation_server_type = "hf"
         self.toka_server_config = None
+        self.toka_server_port: int | None = None
+        self.toka_server_overrides: list[str] = []
         self.toka_kv_cache_num_tokens = 200_000
 
         self.dataloader_num_workers = 1
@@ -296,6 +311,7 @@ class DistillationConfig(pydra.Config):
         self.run_dir.mkdir(parents=True, exist_ok=True)
 
         if self.toka_server_config is not None:
+            self._apply_toka_server_port_override()
             self.toka_server_overrides += [
                 f"cartridge_dir={self.run_dir}",
             ]
@@ -327,8 +343,20 @@ class DistillationConfig(pydra.Config):
             "use_cudagraphs=F",
             f"use_unrotated_queries_for_cartridges={self.use_unrotated_queries_for_cartridges}",
         ]
+        self._apply_toka_server_port_override()
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
         self.generate_batch_size = 200
+
+    def _apply_toka_server_port_override(self):
+        if self.toka_server_config is None:
+            return
+
+        self.toka_server_overrides = [
+            override for override in self.toka_server_overrides if not override.startswith("port=")
+        ]
+
+        if self.toka_server_port is not None:
+            self.toka_server_overrides.append(f"port={self.toka_server_port}")
 
 
 # ============================================================================
@@ -395,8 +423,18 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
         "hidden_multiplier": config.parametrization_hidden_multiplier,
         "activation": config.parametrization_activation,
         "share_across_layers": config.parametrization_share_across_layers,
+        "zero_init_last_layer": config.parametrization_zero_init_last_layer,
     }
     
+    init_mode: Literal["zero", "random"] = (
+        "random" if config.positional_embeddings.init_mode == "random" else "zero"
+    )
+    positional_embeddings_config = PositionalEmbeddingConfig(
+        enabled=bool(config.positional_embeddings.enabled),
+        init_mode=init_mode,
+        random_std=float(config.positional_embeddings.random_std),
+    )
+
     if config.method == "random":
         print(f"[Distill] Using random initialization for {config.num_tokens} tokens")
         return KVFromRandomVectors.Config(
@@ -404,6 +442,7 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
             num_frozen_tokens=config.num_frozen_tokens,
             parametrization_type=config.parametrization_type,
             parametrization_config=parametrization_config,
+            positional_embeddings=positional_embeddings_config,
         )
     
     elif config.method == "text":
@@ -430,6 +469,7 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
             cartridge_start_position=config.cartridge_start_position,
             parametrization_type=config.parametrization_type,
             parametrization_config=parametrization_config,
+            positional_embeddings=positional_embeddings_config,
         )
     
     else:
@@ -573,7 +613,7 @@ def run_distillation(config: DistillationConfig):
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Save config for reproducibility
-    config_path = output_dir / "distillation_config.yaml"
+    config_path = config.run_dir / "distillation_config.yaml"
     with open(config_path, "w") as f:
         yaml.dump(config.to_dict(), f, default_flow_style=False)
     print(f"[Distill] Config saved to: {config_path}")

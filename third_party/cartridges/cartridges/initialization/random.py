@@ -41,4 +41,5 @@ class KVFromRandomVectors(KVCacheFactory):
             init_values=init_values,
             num_frozen_tokens=self.config.num_frozen_tokens,
             parametrization=parametrization,
+            positional_embeddings=self.config.positional_embeddings,
         )

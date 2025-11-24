@@ -314,6 +314,27 @@ def train(config: TrainConfig):
                     ),
                 }
             )
+            if (
+                cache is not None
+                and hasattr(cache, "parametrization")
+                and cache.parametrization is not None
+            ):
+                param_metrics = cache.parametrization.logging_metrics()
+                if isinstance(param_metrics, dict) and len(param_metrics) > 0:
+                    wandb_log_dict.update(
+                        {f"train/{k}": v for k, v in param_metrics.items()}
+                    )
+
+            # Also log initial positional embedding norms before any optimizer step.
+            # Use an 'init/' prefix so these zero-init values are preserved alongside later 'train/*' logs.
+            if hasattr(cache, "positional_embedding_metrics"):
+                init_pos_embed_metrics = cache.positional_embedding_metrics()
+            else:
+                init_pos_embed_metrics = {}
+            if isinstance(init_pos_embed_metrics, dict) and len(init_pos_embed_metrics) > 0:
+                wandb_log_dict.update(
+                    {f"init/{k}": v for k, v in init_pos_embed_metrics.items()}
+                )
 
         wandb.log(
             wandb_log_dict,
@@ -532,6 +553,12 @@ def train(config: TrainConfig):
                 else:
                     metrics = {}
                 
+                # Get positional embedding metrics
+                if hasattr(cache, "positional_embedding_metrics"):
+                    pos_embed_metrics = cache.positional_embedding_metrics()
+                else:
+                    pos_embed_metrics = {}
+                
                 wandb.log(
                     {
                         "train/loss": accum_loss,
@@ -545,6 +572,7 @@ def train(config: TrainConfig):
                         "train/num_target_tokens": total_num_target_tokens,
                         "train/step_time": step_time,
                         **{f"train/{k}": v for k, v in metrics.items()},
+                        **{f"train/{k}": v for k, v in pos_embed_metrics.items()},
                         **{
                             f"optimizer/lr_group{i}": param_group["lr"]
                             for i, param_group in enumerate(optimizer.param_groups)
@@ -1172,7 +1200,10 @@ def evaluate_generations(
                     all_group_logs.update(log_dict)
             
             if log_to_wandb:
-                wandb.log(all_group_logs, step=optimizer_step)
+                try:
+                    wandb.log(all_group_logs, step=optimizer_step)
+                except Exception as e:
+                    logger.error(f"Error logging to wandb: {e}")
             
             logger.info(f"Grouped eval scores: {all_group_scores}")
             print(f"Avg scores (grouped): {all_group_scores}")

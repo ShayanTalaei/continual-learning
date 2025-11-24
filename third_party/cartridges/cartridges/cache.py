@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from typing import Optional, Literal
 
-from pydrantic import ObjectConfig
+from pydrantic import ObjectConfig, BaseConfig
 from pydantic import Field
 import torch
 import torch.nn as nn
@@ -21,6 +21,14 @@ class AttnConfig:
     head_dim: int
 
 CARTRIDGE_SEQ_ID = -1
+
+
+class PositionalEmbeddingConfig(BaseConfig):
+    _pass_as_config = True
+    enabled: bool = False
+    init_mode: Literal["zero", "random"] = "zero"
+    random_std: float = 0.02
+    zero_init_last_layer: bool = False
 
 
 class CartridgeParametrization(nn.Module, abc.ABC):
@@ -155,6 +163,7 @@ class ResidualMLPParametrization(CartridgeParametrization):
         hidden_multiplier: float = 4.0  # width of the MLP
         activation: Literal["relu", "gelu"] = "relu"
         share_across_layers: bool = True
+        zero_init_last_layer: bool = False  # Zero-initialize last layer to keep init identical
 
     def __init__(
         self,
@@ -207,11 +216,20 @@ class ResidualMLPParametrization(CartridgeParametrization):
 
         def make_mlp():
             act = nn.ReLU() if self.cfg.activation == "relu" else nn.GELU()
-            return nn.Sequential(
+            last_layer = nn.Linear(hidden_dim, head_dim)
+            
+            # Zero-initialize last layer if requested (to keep init identical)
+            if self.cfg.zero_init_last_layer:
+                nn.init.zeros_(last_layer.weight)
+                nn.init.zeros_(last_layer.bias)
+            
+            mlp = nn.Sequential(
                 nn.Linear(head_dim, hidden_dim),
                 act,
-                nn.Linear(hidden_dim, head_dim),
+                last_layer,
             ).to(dtype=input_dtype)
+            
+            return mlp
 
         if self.cfg.share_across_layers:
             self.key_mlp = make_mlp()
@@ -292,6 +310,7 @@ class TrainableCache(nn.Module):
         init_values: list[torch.Tensor]=None,
         num_frozen_tokens: int = 0,
         parametrization: Optional[CartridgeParametrization] = None,
+        positional_embeddings: Optional[PositionalEmbeddingConfig] = None,
     ):
         super().__init__()
         self.config = config
@@ -299,6 +318,12 @@ class TrainableCache(nn.Module):
         self._values = [None] * config.n_layers  # List of tensors per layer
         self._layer_seq_ids: list[Optional[torch.Tensor]] = [None] * config.n_layers
         self._num_tokens = 0
+        self._positional_embeddings_cfg = positional_embeddings
+        self._pos_emb_enabled = bool(
+            positional_embeddings is not None and positional_embeddings.enabled
+        )
+        self._key_positional_embeddings: Optional[nn.ParameterList] = None
+        self._value_positional_embeddings: Optional[nn.ParameterList] = None
 
         assert (init_keys is None) == (init_values is None)
         if init_keys is None:
@@ -308,6 +333,7 @@ class TrainableCache(nn.Module):
             self.parametrization = None
             self._seq_ids = None
             self._init_seq_ids = None
+            self._pos_emb_enabled = False
             return
 
         self._num_init_tokens = init_keys[0].shape[2]
@@ -329,6 +355,9 @@ class TrainableCache(nn.Module):
 
         for vec in itertools.chain(init_keys, init_values):
             assert vec.shape == (1, config.n_heads, self._num_init_tokens, config.head_dim)
+
+        if self._pos_emb_enabled:
+            self._init_positional_embeddings(dtype=init_keys[0].dtype)
 
         # Plug in parametrization (default: OffsetParametrization)
         if parametrization is None:
@@ -353,34 +382,98 @@ class TrainableCache(nn.Module):
 
         logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
         logger.info(f"num_frozen_tokens: {self._num_frozen_tokens}")
+
+    def _init_positional_embeddings(self, dtype: torch.dtype):
+        assert self._positional_embeddings_cfg is not None
+        shape = (1, self.config.n_heads, 1, self.config.head_dim)
+        init_mode = self._positional_embeddings_cfg.init_mode
+        std = self._positional_embeddings_cfg.random_std
+
+        def _make_param():
+            if init_mode == "random":
+                tensor = torch.randn(shape, dtype=dtype) * std
+            else:
+                tensor = torch.zeros(shape, dtype=dtype)
+            return nn.Parameter(tensor)
+
+        self._key_positional_embeddings = nn.ParameterList(
+            [_make_param() for _ in range(self.config.n_layers)]
+        )
+        self._value_positional_embeddings = nn.ParameterList(
+            [_make_param() for _ in range(self.config.n_layers)]
+        )
+
+    def _apply_positional_embedding(
+        self, tensor: torch.Tensor, layer_idx: int, is_key: bool
+    ) -> torch.Tensor:
+        if not self._pos_emb_enabled:
+            return tensor
+        embeddings = (
+            self._key_positional_embeddings if is_key else self._value_positional_embeddings
+        )
+        if embeddings is None or len(embeddings) == 0:
+            return tensor
+        return tensor + embeddings[layer_idx]
     
     @property
     def trainable_keys(self) -> list[torch.Tensor]:
         if self.parametrization is None:
             return []
         ks, _ = self.parametrization.get_trainable()
-        return ks
+        return [
+            self._apply_positional_embedding(k, idx, is_key=True)
+            for idx, k in enumerate(ks)
+        ]
     
     @property
     def trainable_values(self) -> list[torch.Tensor]:
         if self.parametrization is None:
             return []
         _, vs = self.parametrization.get_trainable()
-        return vs
+        return [
+            self._apply_positional_embedding(v, idx, is_key=False)
+            for idx, v in enumerate(vs)
+        ]
 
     @property
     def frozen_keys(self) -> list[torch.Tensor]:
         if self.parametrization is None:
             return []
         ks, _ = self.parametrization.get_frozen()
-        return ks
+        return [
+            self._apply_positional_embedding(k, idx, is_key=True)
+            for idx, k in enumerate(ks)
+        ]
 
     @property
     def frozen_values(self) -> list[torch.Tensor]:
         if self.parametrization is None:
             return []
         _, vs = self.parametrization.get_frozen()
-        return vs
+        return [
+            self._apply_positional_embedding(v, idx, is_key=False)
+            for idx, v in enumerate(vs)
+        ]
+    
+    def positional_embedding_metrics(self) -> dict[str, torch.Tensor]:
+        """Returns metrics for positional embeddings (norms, etc.) for logging."""
+        if not self._pos_emb_enabled:
+            return {}
+        
+        if self._key_positional_embeddings is None or len(self._key_positional_embeddings) == 0:
+            return {}
+        
+        key_norms = torch.stack([p.norm() for p in self._key_positional_embeddings])
+        value_norms = torch.stack([p.norm() for p in self._value_positional_embeddings])
+        
+        return {
+            "mean_key_pos_embed_norm": key_norms.mean(),
+            "mean_value_pos_embed_norm": value_norms.mean(),
+            "max_key_pos_embed_norm": key_norms.max(),
+            "max_value_pos_embed_norm": value_norms.max(),
+            "min_key_pos_embed_norm": key_norms.min(),
+            "min_value_pos_embed_norm": value_norms.min(),
+        }
                 
     def update(
         self, 
@@ -437,13 +530,21 @@ class TrainableCache(nn.Module):
         
         if self._num_trainable_tokens > 0 and self.parametrization is not None:
             trainable_keys, trainable_values = self.parametrization.get_trainable()
-            keys = [trainable_keys[layer_idx]] + keys
-            values = [trainable_values[layer_idx]] + values
+            keys = [
+                self._apply_positional_embedding(trainable_keys[layer_idx], layer_idx, is_key=True)
+            ] + keys
+            values = [
+                self._apply_positional_embedding(trainable_values[layer_idx], layer_idx, is_key=False)
+            ] + values
         
         if self._num_frozen_tokens > 0 and self.parametrization is not None:
             frozen_keys, frozen_values = self.parametrization.get_frozen()
-            keys = [frozen_keys[layer_idx]] + keys
-            values = [frozen_values[layer_idx]] + values
+            keys = [
+                self._apply_positional_embedding(frozen_keys[layer_idx], layer_idx, is_key=True)
+            ] + keys
+            values = [
+                self._apply_positional_embedding(frozen_values[layer_idx], layer_idx, is_key=False)
+            ] + values
         
         # BB: TODO: why is this here?
         # if self._num_trainable_tokens == 0 and self._num_frozen_tokens == 0:
@@ -501,8 +602,30 @@ class TrainableCache(nn.Module):
 
     def save(self, path: str):
         """Saves the trainable keys and values to the specified path."""
-        trainable_keys, trainable_values = self.parametrization.get_trainable() if self.parametrization else ([], [])
-        frozen_keys, frozen_values = self.parametrization.get_frozen() if self.parametrization else ([], [])
+        trainable_keys, trainable_values = (
+            self.parametrization.get_trainable() if self.parametrization else ([], [])
+        )
+        frozen_keys, frozen_values = (
+            self.parametrization.get_frozen() if self.parametrization else ([], [])
+        )
+
+        if self.parametrization is not None and self._pos_emb_enabled:
+            trainable_keys = [
+                self._apply_positional_embedding(k, idx, is_key=True)
+                for idx, k in enumerate(trainable_keys)
+            ]
+            trainable_values = [
+                self._apply_positional_embedding(v, idx, is_key=False)
+                for idx, v in enumerate(trainable_values)
+            ]
+            frozen_keys = [
+                self._apply_positional_embedding(k, idx, is_key=True)
+                for idx, k in enumerate(frozen_keys)
+            ]
+            frozen_values = [
+                self._apply_positional_embedding(v, idx, is_key=False)
+                for idx, v in enumerate(frozen_values)
+            ]
         torch.save(
             {
                 "trainable_keys": trainable_keys,
@@ -635,6 +758,7 @@ class KVCacheFactory(abc.ABC):
         # Parametrization configuration
         parametrization_type: Literal["offset", "mlp_residual"] = "offset"
         parametrization_config: dict = Field(default_factory=dict)
+        positional_embeddings: PositionalEmbeddingConfig = Field(default_factory=PositionalEmbeddingConfig)
 
     def __init__(self, config: Config):
         self.config = config
