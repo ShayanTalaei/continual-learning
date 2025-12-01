@@ -3,6 +3,10 @@ import base64
 import functools
 import json
 from dataclasses import dataclass, field
+<<<<<<< HEAD
+=======
+import time
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 from uuid import uuid4
 
 import numpy as np
@@ -45,12 +49,36 @@ from tokasaurus.server.types import (
     SamplingParams,
     SubmittedBatch,
     SubmittedRequest,
+<<<<<<< HEAD
+=======
+    CartridgeCompletionsRequest,
+    CartridgeChatCompletionRequest,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     TokasaurusRequest,
     nowstamp,
 )
 from tokasaurus.utils import get_eos_token_ids
 
 
+<<<<<<< HEAD
+=======
+LLAMA_CARTRIDGE_TEMPLATE = """\
+{%- for message in messages %}
+    {%- if  (message.role == 'assistant') %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n' }}{% generation %}{{- message['content'] | trim + '<|eot_id|>' }}{% endgeneration %}
+
+    {%- else %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' }}
+        
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|start_header_id|>assistant<|end_header_id|>\n\n' }}
+{%- endif %}
+"""
+
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 async def listen_for_disconnect(request: Request) -> None:
     """
     Returns if a disconnect message is received.
@@ -192,6 +220,23 @@ async def handle_batch(state: ServerState, batch_id: str):
                     item.submitted_req.request,
                     item.submitted_req.request_output,
                 )
+<<<<<<< HEAD
+=======
+            case CartridgeCompletionsRequest():
+                out = process_cartridge_completions_output(
+                    state,
+                    item.user_req,
+                    item.submitted_req.request,
+                    item.submitted_req.request_output,
+                )
+            case CartridgeChatCompletionRequest():
+                out = process_cartridge_chat_completions_output(
+                    state,
+                    item.user_req,
+                    item.submitted_req.request,
+                    item.submitted_req.request_output,
+                )
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
         line = {
             "id": "tokasaurus",
@@ -366,6 +411,7 @@ def make_chat_logprobs(
     return logprobs_obj
 
 
+<<<<<<< HEAD
 def get_stop_strings(request: CompletionsRequest | ChatCompletionRequest) -> list[str]:
     if isinstance(request.stop, list):
         return request.stop
@@ -375,6 +421,17 @@ def get_stop_strings(request: CompletionsRequest | ChatCompletionRequest) -> lis
 
     assert request.stop is None
     return []
+=======
+def get_stop_strings(request: CompletionsRequest | ChatCompletionRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest) -> list[str]:
+    if request.stop is None:
+        stop = []
+    elif isinstance(request.stop, str):
+        stop = [request.stop]
+    else:
+        stop = request.stop
+
+    return stop
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 
 def decode_completion(
@@ -426,7 +483,11 @@ def decode_completion(
 
 
 def validate_chat_completion_request(
+<<<<<<< HEAD
     config: ServerConfig, request: ChatCompletionRequest
+=======
+    config: ServerConfig, request: ChatCompletionRequest | CartridgeChatCompletionRequest
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 ):
     if request.logprobs and not config.enable_chosen_logprobs:
         raise HTTPException(
@@ -456,7 +517,11 @@ def validate_chat_completion_request(
             )
 
 
+<<<<<<< HEAD
 def validate_completions_request(config: ServerConfig, request: CompletionsRequest):
+=======
+def validate_completions_request(config: ServerConfig, request: CompletionsRequest | CartridgeCompletionsRequest):
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     if request.echo not in [False, None]:
         raise HTTPException(
             status_code=400,
@@ -497,6 +562,7 @@ def validate_completions_request(config: ServerConfig, request: CompletionsReque
             )
 
 
+<<<<<<< HEAD
 def validate_args(
     config: ServerConfig, request: ChatCompletionRequest | CompletionsRequest
 ):
@@ -505,6 +571,9 @@ def validate_args(
             status_code=400,
             detail="Streaming is not supported",
         )
+=======
+def validate_args(config: ServerConfig, request: ChatCompletionRequest | CompletionsRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest):
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
     if request.top_p not in [None, 1.0]:
         raise HTTPException(
@@ -531,13 +600,18 @@ def validate_args(
         )
 
     match request:
+<<<<<<< HEAD
         case ChatCompletionRequest():
+=======
+        case ChatCompletionRequest() | CartridgeChatCompletionRequest():
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
             raw_max_tokens = request.max_tokens
             raw_max_completion_tokens = request.max_completion_tokens
 
             exactly_one_is_set = (raw_max_tokens is None) ^ (
                 raw_max_completion_tokens is None
             )
+<<<<<<< HEAD
             if not exactly_one_is_set:
                 raise HTTPException(
                     status_code=400,
@@ -546,6 +620,21 @@ def validate_args(
 
             max_tokens = raw_max_tokens or raw_max_completion_tokens
         case CompletionsRequest():
+=======
+            if not exactly_one_is_set and config.max_completion_tokens is not None:
+                # TODO(SE): This is a hack to allow toka to work with raycast, which 
+                # doesn't allow us to add a max_tokens field to the request. 
+                request.max_completion_tokens = config.max_completion_tokens
+                raw_max_tokens = config.max_completion_tokens   
+            elif not exactly_one_is_set:
+                raise HTTPException(
+                    status_code=400,
+                    detail="Exactly one of max_tokens or max_completion_tokens must be set. If you want to use a default max_completion_tokens, set it in the server config.",
+                )
+
+            max_tokens = raw_max_tokens or raw_max_completion_tokens
+        case CompletionsRequest() | CartridgeCompletionsRequest():
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
             max_tokens = request.max_tokens
 
             if max_tokens is None:
@@ -566,11 +655,23 @@ def validate_args(
         case CompletionsRequest():
             validate_completions_request(config, request)
 
+<<<<<<< HEAD
 
 def process_request(
     state: ServerState, request: ChatCompletionRequest | CompletionsRequest
 ):
     validate_args(state.config, request)
+=======
+def process_request(
+    state: ServerState, request: ChatCompletionRequest | CompletionsRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest
+):
+    try:
+        validate_args(state.config, request)
+    except HTTPException as e:
+        print(f"HTTPException: {e}")
+        print(f"request: {e.detail}")
+        raise e
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
     if (n := request.n) is None:
         n = 1
@@ -591,6 +692,7 @@ def process_request(
 
     match request:
         case ChatCompletionRequest():
+<<<<<<< HEAD
             messages = request.messages
             ends_with_user = messages[-1]["role"] == "user"
             apply_chat_template_kwargs = {
@@ -606,6 +708,120 @@ def process_request(
                 messages, **apply_chat_template_kwargs
             )
             input_ids = state.tokenizer(prompt, add_special_tokens=False)["input_ids"]
+=======
+            # Convert messages to plain dictionaries to avoid ValidatorIterator issues
+            messages = []
+            cartridges_in_system_prompt = []
+            if request.messages is not None:
+                assert request.ids is None
+                for msg in request.messages:
+                    converted_msg = {"role": msg["role"]}
+                    
+                    # Handle content field which might be a ValidatorIterator
+                    content = msg.get("content")
+                    if hasattr(content, '__iter__') and not isinstance(content, str) and content is not None:
+                        # If content is an iterable (like ValidatorIterator), convert to list
+                        try:
+                            converted_msg["content"] = list(content)
+                        except Exception:
+                            # Fallback to string representation if conversion fails
+                            converted_msg["content"] = str(content)
+                    else:
+                        converted_msg["content"] = content
+                        
+                    # Copy other fields that might be present
+                    for key in ["name", "tool_calls", "function_call", "refusal"]:
+                        if key in msg:
+                            converted_msg[key] = msg[key]
+                    if not isinstance(converted_msg["content"], str):
+                        assert isinstance(converted_msg["content"], list)
+                        if len(converted_msg["content"]) != 1:
+                            print(converted_msg["content"])
+                            raise HTTPException(
+                                status_code=400,
+                                detail=f"Invalid content {converted_msg['content']} contains multiple parts. Tokasaurus only supports one part per message.",
+                            )
+                        if converted_msg["content"][0]["type"] != "text":
+                            print(converted_msg["content"])
+                            raise HTTPException(
+                                status_code=400,
+                                detail=f"Invalid content {converted_msg['content']} contains non-text content. Tokasaurus only supports text content.",
+                            )
+                        converted_msg["content"] = converted_msg["content"][0]["text"]
+                    
+                    if converted_msg["role"] == "system":
+                        # search for the following pattern:
+                        # --- begin pattern ---
+                        # <cartridge> 
+                        # {"id": "...", "source": "...", "force_redownload": "..."}
+                        # </cartridge> in the content
+                        # --- end pattern ---
+                        # if found, parse it using the Cartridge BaseModel and add it to the cartridges list
+                        import re
+                        import json
+                        from tokasaurus.server.types import Cartridge
+                        
+                        content = converted_msg["content"]
+                        if isinstance(content, str):
+                            # Find all cartridge blocks in the system message
+                            cartridge_pattern = r'<cartridge>\s*(\{.*?\})\s*</cartridge>'
+                            matches = re.findall(cartridge_pattern, content, re.DOTALL)
+                            
+                            for match in matches:
+                                try:
+                                    # Parse the JSON configuration
+                                    cartridge_config = json.loads(match.strip())
+                                    # Validate using the Cartridge model
+                                    cartridge = Cartridge.model_validate(cartridge_config)
+                                    cartridges_in_system_prompt.append(cartridge)
+                                except (json.JSONDecodeError, ValueError) as e:
+                                    # Skip invalid cartridge configs but don't fail the request
+                                    print(f"Warning: Invalid cartridge config in system prompt: {e}")
+                                    continue
+                            
+                            # Remove all cartridge blocks from the content
+                            if matches:
+                                cleaned_content = re.sub(cartridge_pattern, '', content, flags=re.DOTALL)
+                                # Clean up any extra whitespace left behind
+                                cleaned_content = re.sub(r'\n\s*\n\s*\n', '\n\n', cleaned_content.strip())
+                                converted_msg["content"] = cleaned_content
+
+
+                    messages.append(converted_msg)
+                
+
+                ends_with_user = messages[-1]["role"] == "user"
+                apply_chat_template_kwargs = {
+                    "tokenize": False,
+                    "add_generation_prompt": ends_with_user,
+                    "continue_final_message": not ends_with_user,
+                }
+
+                if (overrides := request.apply_chat_template_overrides) is not None:
+                    apply_chat_template_kwargs.update(overrides)
+                
+                if len(cartridges_in_system_prompt) > 0:                # Create a new CartridgeChatCompletionRequest with the same data
+                    request_dict = request.model_dump()
+                    request_dict['cartridges'] = cartridges_in_system_prompt
+                    cartridge_request = CartridgeChatCompletionRequest(**request_dict)
+                    # Replace the original request with the cartridge request
+                    request = cartridge_request
+                
+                    if "llama" in state.tokenizer.name_or_path:
+                        apply_chat_template_kwargs["chat_template"] = LLAMA_CARTRIDGE_TEMPLATE
+
+                prompt = state.tokenizer.apply_chat_template(
+                    messages, **apply_chat_template_kwargs
+                )
+                input_ids = state.tokenizer(prompt, add_special_tokens=False)["input_ids"]
+            else:
+                assert request.messages is None
+                input_ids = request.ids
+            if isinstance(request, CartridgeChatCompletionRequest):
+                cartridges = request.cartridges
+            else:
+                cartridges = None
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
             top_logprobs = request.top_logprobs
             max_tokens = request.max_completion_tokens or request.max_tokens
         case CompletionsRequest():
@@ -618,6 +834,13 @@ def process_request(
                     status_code=400,
                     detail="Invalid type for prompt",
                 )
+<<<<<<< HEAD
+=======
+            if isinstance(request, CartridgeCompletionsRequest):
+                cartridges = request.cartridges
+            else:
+                cartridges = None
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
             top_logprobs = request.logprobs
             max_tokens = request.max_tokens
 
@@ -634,6 +857,10 @@ def process_request(
         stop=get_stop_strings(request),
         n=n,
         ignore_eos=request.ignore_eos,
+<<<<<<< HEAD
+=======
+        cartridges=cartridges,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         topk_logprobs=top_logprobs,
     )
 
@@ -749,12 +976,81 @@ def process_chat_completions_output(
     )
 
 
+<<<<<<< HEAD
+=======
+def process_cartridge_chat_completions_output(
+    state: ServerState,
+    crequest: CartridgeChatCompletionRequest,
+    request: TokasaurusRequest,
+    output: RequestOutput,
+):
+    # Check for errors first
+    if output.error_message is not None:
+        raise HTTPException(
+            status_code=400,
+            detail=output.error_message,
+        )
+    
+    completions = decode_completion(state, request, output)
+
+    choices = []
+    for i in range(request.n):
+        seq_out = output.sequence_outputs[i]
+        new_message = ChatCompletionMessage(
+            role="assistant",
+            content=completions[i],
+        )
+
+        if crequest.logprobs and not crequest.logprobs_in_fingerprint:
+            logprobs = make_chat_logprobs(
+                crequest=crequest,
+                seq_out=seq_out,
+                inverse_vocab=state.inverse_vocab,
+            )
+        else:
+            # if None or False
+            logprobs = None
+
+        choice = Choice(
+            index=i,
+            message=new_message,
+            logprobs=logprobs,
+            finish_reason=seq_out.finish_reason,
+        )
+        choices.append(choice)
+
+    return dict(
+        id=request.id,
+        model=crequest.model,
+        usage=make_usage_info(request, output),
+        choices=choices,
+        created=nowstamp(),
+        object="chat.completion",
+        system_fingerprint=make_completions_fingerprint(
+            output,
+            add_logprobs=crequest.logprobs_in_fingerprint,
+            topk=crequest.top_logprobs,
+        ),
+    )
+
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 def process_completions_output(
     state: ServerState,
     crequest: CompletionsRequest,
     request: TokasaurusRequest,
     output: RequestOutput,
 ):
+<<<<<<< HEAD
+=======
+    # Check for errors first
+    if output.error_message is not None:
+        raise HTTPException(
+            status_code=400,
+            detail=output.error_message,
+        )
+    
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     completions = decode_completion(state, request, output)
 
     choices = []
@@ -839,11 +1135,19 @@ def make_batch_status(batch: SubmittedBatch):
 
 
 async def generate_output(
+<<<<<<< HEAD
     state: ServerState, request: CompletionsRequest | ChatCompletionRequest
+=======
+    state: ServerState, request: CompletionsRequest | ChatCompletionRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 ):
     req = process_request(state, request)
     submitted = submit_request(state, req)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     try:
         await submitted.event.wait()
     except asyncio.CancelledError:

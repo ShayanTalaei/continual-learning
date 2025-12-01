@@ -26,6 +26,9 @@ class HistoryList(MemoryModule):
     def recall(self):
         return self.history_list
 
+    def reset(self) -> None:
+        self.history_list = []
+
     # Snapshot implementations
     def save_snapshot(self, base_dir: Union[str, Path], snapshot_id: Union[int, str]) -> str:
         base = Path(base_dir)

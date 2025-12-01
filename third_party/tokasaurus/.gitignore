@@ -1,5 +1,9 @@
 local/
 .DS_Store
+<<<<<<< HEAD
+=======
+/cartridges/
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

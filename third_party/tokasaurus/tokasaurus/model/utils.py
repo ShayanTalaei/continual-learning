@@ -292,7 +292,15 @@ def run_overlapped_loop(
             # avoid these whenever possible
             run_work = preprocess()
 
+<<<<<<< HEAD
         assert run_work is not None
+=======
+        # Handle case where preprocess returns None (NoMoreInputs)
+        # Continue waiting for new inputs instead of exiting
+        if run_work is None:
+            continue
+            
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         run_model(run_work)
 
         if postproc_work is not None:
@@ -770,6 +778,10 @@ class ModelRunner:
             num_prefill_tokens > 0
             or num_decode_tokens > self.config.cudagraph_max_size
             or not self.recorded_graphs
+<<<<<<< HEAD
+=======
+            or num_decode_tokens == 0  # Handle empty batches
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         ):
             return None
 
@@ -893,6 +905,7 @@ def setup_and_run_loop(
     if state.config.use_cudagraphs:
         model_runner.record_graphs(state.process_name)
 
+<<<<<<< HEAD
     run_warmup_batches(
         config=state.config,
         input_q=state.input_q,
@@ -904,6 +917,19 @@ def setup_and_run_loop(
         device=model_runner.model.device,
         dtype=model_runner.model.dtype,
     )
+=======
+    # run_warmup_batches(
+    #     config=state.config,
+    #     input_q=state.input_q,
+    #     process_name=state.process_name,
+    #     preprocess=preprocess,
+    #     run_model=run_model,
+    #     synchronize=synchronize,
+    #     postprocess=lambda _: None,
+    #     device=model_runner.model.device,
+    #     dtype=model_runner.model.dtype,
+    # )
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
     state.barrier.wait()
 

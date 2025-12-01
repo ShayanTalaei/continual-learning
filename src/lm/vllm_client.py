@@ -20,6 +20,8 @@ class VLLMConfig(LMConfig):
     trust_remote_code: bool = False
     stop_sequences: Optional[List[str]] = Field(default_factory=lambda: ["FEEDBACK", "OBSERVATION"])
     cache_dir: Optional[str] = None  # Directory to cache/download models
+    temperature: Optional[float] = None
+    shared_model: bool = False
     
     # Enhanced features for parity with Gemini
     use_chat_template: bool = True  # Use tokenizer.apply_chat_template if available
@@ -39,6 +41,9 @@ class VLLMConfig(LMConfig):
 class VLLMClient(LanguageModel):
     """Synchronous vLLM client compatible with `LanguageModel` interface."""
 
+    _SHARED_ENGINES: Dict[str, Dict[str, Any]] = {}
+    _SHARED_LOCK: Lock = Lock()
+
     def __init__(self, config: VLLMConfig, logger: Optional[Logger] = None):
         super().__init__(config=config, logger=logger)
         self.logger.info(f"VLLMConfig: {config}")
@@ -51,42 +56,80 @@ class VLLMClient(LanguageModel):
         self._engine_lock: Lock = Lock()  # Thread-safe engine initialization
         self._tokenizer = None  # Cache tokenizer for chat templates
 
+    def _shared_engine_key(self) -> str:
+        """Generate a cache key for shared engine reuse."""
+        cfg = self.config
+        payload = {
+            "model": cfg.model,
+            "tensor_parallel_size": cfg.tensor_parallel_size,
+            "max_model_len": cfg.max_model_len,
+            "dtype": cfg.dtype,
+            "gpu_memory_utilization": cfg.gpu_memory_utilization,
+            "trust_remote_code": cfg.trust_remote_code,
+            "cache_dir": cfg.cache_dir,
+        }
+        return json.dumps(payload, sort_keys=True, default=str)
+
+    def _create_engine(self) -> Tuple[LLM, Optional[Any]]:
+        """Instantiate a new vLLM engine and tokenizer bundle."""
+        kwargs: Dict[str, Any] = {
+            "model": self.config.model,
+            "tensor_parallel_size": self.config.tensor_parallel_size,
+            "trust_remote_code": self.config.trust_remote_code,
+        }
+        if self.config.max_model_len is not None:
+            kwargs["max_model_len"] = self.config.max_model_len
+        if self.config.dtype:
+            kwargs["dtype"] = self.config.dtype
+        if self.config.gpu_memory_utilization is not None:
+            kwargs["gpu_memory_utilization"] = self.config.gpu_memory_utilization
+        if self.config.cache_dir is not None:
+            kwargs["download_dir"] = self.config.cache_dir
+
+        engine = LLM(**kwargs)
+        tokenizer = None
+        if self.config.use_chat_template:
+            try:
+                tokenizer = engine.get_tokenizer()
+            except Exception as e:
+                self.logger.warning(f"Failed to get tokenizer for chat templates: {e}")
+        return engine, tokenizer
+
+    def _get_shared_engine(self) -> Tuple[LLM, Optional[Any]]:
+        """Return a shared engine/tokenizer pair, creating it if needed."""
+        key = self._shared_engine_key()
+        with self._SHARED_LOCK:
+            bundle = self._SHARED_ENGINES.get(key)
+            if bundle is None:
+                self.logger.info("Creating shared vLLM engine for key=%s", key)
+                engine, tokenizer = self._create_engine()
+                bundle = {"engine": engine, "tokenizer": tokenizer}
+                self._SHARED_ENGINES[key] = bundle
+            else:
+                self.logger.info("Reusing shared vLLM engine for key=%s", key)
+        return bundle["engine"], bundle.get("tokenizer")
+
     def _init_engine(self) -> LLM:
-        """Thread-safe engine initialization."""
+        """Thread-safe engine initialization (optionally shared)."""
         if self._engine is not None:
             return self._engine
-        
+
         with self._engine_lock:
-            # Double-check pattern for thread safety
             if self._engine is not None:
                 return self._engine
-                
-            model_id = self.config.model
 
-            kwargs: Dict[str, Any] = {
-                "model": model_id,
-                "tensor_parallel_size": self.config.tensor_parallel_size,
-                "trust_remote_code": self.config.trust_remote_code,
-            }
-            if self.config.max_model_len is not None:
-                kwargs["max_model_len"] = self.config.max_model_len
-            if self.config.dtype:
-                kwargs["dtype"] = self.config.dtype
-            if self.config.gpu_memory_utilization is not None:
-                kwargs["gpu_memory_utilization"] = self.config.gpu_memory_utilization
-            if self.config.cache_dir is not None:
-                kwargs["download_dir"] = self.config.cache_dir
+            if self.config.use_server:
+                raise RuntimeError("Local vLLM engine requested while in server mode")
 
-            self._engine = LLM(**kwargs)
-            
-            # Cache tokenizer for chat templates if enabled
-            if self.config.use_chat_template:
-                try:
-                    self._tokenizer = self._engine.get_tokenizer()
-                except Exception as e:
-                    self.logger.warning(f"Failed to get tokenizer for chat templates: {e}")
-                    self._tokenizer = None
-            
+            if self.config.shared_model:
+                engine, tokenizer = self._get_shared_engine()
+                self._engine = engine
+                self._tokenizer = tokenizer
+                return self._engine
+
+            engine, tokenizer = self._create_engine()
+            self._engine = engine
+            self._tokenizer = tokenizer
             return self._engine
 
     def _build_prompt(self, messages: List[Dict[str, str]], response_schema: Optional[Dict[str, Any]]) -> str:
@@ -155,6 +198,8 @@ class VLLMClient(LanguageModel):
             "temperature": temperature,
             "max_tokens": self.config.max_output_tokens,
         }
+        if payload["temperature"] is None:
+            del payload["temperature"]
         if self.config.stop_sequences:
             payload["stop"] = self.config.stop_sequences
 
@@ -247,7 +292,7 @@ class VLLMClient(LanguageModel):
                     sanitized.append(s)
             stops = sanitized if sanitized else None
 
-        # Log request characteristics to aid debugging oversized/malformed inputs
+        # Log request characteristics
         try:
             schema_bytes = len(json.dumps(response_schema)) if response_schema else 0
         except Exception:
@@ -289,7 +334,6 @@ class VLLMClient(LanguageModel):
                 raise ValueError("Empty vLLM outputs")
 
             out0 = outputs[0]
-            # Prefer first candidate text
             if not out0.outputs or len(out0.outputs) == 0:
                 raise ValueError("vLLM returned no candidates")
 

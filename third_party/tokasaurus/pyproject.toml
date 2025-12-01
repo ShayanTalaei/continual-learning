@@ -16,6 +16,7 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
 ]
 dependencies = [
+<<<<<<< HEAD
     "transformers==4.53.0",
     "pydra-config>=0.0.13",
     "accelerate",
@@ -32,6 +33,8 @@ dependencies = [
     "torch==2.6.0",
     "flashinfer-python==0.2.0.post2",
     "tqdm",
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 ]
 
 [project.optional-dependencies]

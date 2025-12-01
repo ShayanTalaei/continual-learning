@@ -45,9 +45,12 @@ from datasets import load_dataset
 from transformers import AutoTokenizer
 from huggingface_hub import HfApi, create_repo
 
+# Import tokasaurus components
+from tokasaurus.common_types import ServerConfig as TokaServerConfig
+
 # Import cartridges components
 from cartridges.train import TrainConfig, train, GenerationEvalConfig, LossEvalConfig
-from cartridges.datasets import TrainDataset, ShayanTrainDataset, DataSource
+from cartridges.datasets import TrainDataset, ShayanTrainDataset, ShayanStreamingTrainDataset, DataSource
 from cartridges.models.config import HFModelConfig
 from cartridges.models.llama.modeling_llama import FlexLlamaForCausalLM
 from cartridges.cache import KVCacheFactory
@@ -138,7 +141,7 @@ class DatasetConfig(pydra.Config):
     def __init__(self):
         super().__init__()
         self.packing_mode = "fixed_batch_size_then_pad"  # Sequence packing mode
-        self.packed_seq_length = 32000  # Maximum sequence length
+        self.packed_seq_length = 16000  # Maximum sequence length
         self.targets = "logits"  # Training target type
         self.top_k_logits = 20  # Number of top-k logits to keep
         self.min_prob_mass = 0.8  # Minimum probability mass for logprobs conversion
@@ -182,7 +185,11 @@ class DistillationConfig(pydra.Config):
 
         # Evaluation
         self.do_loss_evals = True  # Whether to do loss evals
-        self.do_gen_evals = True  # Whether to do generation evals
+        self.do_train_gen_eval = False  # Whether to do generation evals
+        self.do_val_gen_eval = True  # Whether to do generation evals
+        self.num_train_generate_problems = 250
+        self.train_gen_split = "train_ICL"
+        self.val_gen_split = "val"
         self.generate_before_training = True
         self.generate_eval_every_n_steps = 50
         self.num_generate_problems = 1000
@@ -193,10 +200,28 @@ class DistillationConfig(pydra.Config):
         self.run_name = None
 
         self.system_prompt_path = pydra.REQUIRED
+
+        self.streaming_dataset = False
+        self.generation_server_type = "hf"
+        self.toka_server_config = None
+        self.toka_kv_cache_num_tokens = 200_000
+
+        self.dataloader_num_workers = 1
+
+        self.load_cache_path = None
+    
+    def quick_data(self):
+        self.input_dataset.local_path = "/scratch/m000122/stalaei/logs/continual_learning/data/finer_v1_train_ICL_exclude_current_subsampling_50_temp_0.7_small/dataset.jsonl"
     
     def no_evals(self):
         self.do_loss_evals = False
-        self.do_gen_evals = False
+        self.do_train_gen_eval = False
+        self.do_val_gen_eval = False
+    
+    def train_gen_eval(self):
+        self.do_train_gen_eval = True
+        self.num_train_eval_problems = 250
+        self.train_gen_split = "train_ICL"
     
     def init_from_text(self):
         self.kv_cache.method = "text"
@@ -211,15 +236,40 @@ class DistillationConfig(pydra.Config):
         
         self.run_dir = Path(self.output.local_dir) / self.run_name
         self.run_dir.mkdir(parents=True, exist_ok=True)
+
+        if self.toka_server_config is not None:
+            self.toka_server_overrides += [
+                f"cartridge_dir={self.run_dir}",
+            ]
+            pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
     
     def matx(self):
         self.output.local_dir = "/matx/u/bcabrown/shayan_memory/outputs"
-        self.input_dataset.packed_seq_length = 8000  # Maximum sequence length
-        self.val_dataset.packed_seq_length = 8000  # Maximum sequence length
-        self.training.global_batch_size = 32  # Total batch size across all devices
-        self.input_dataset.batch_size = 2
-        self.val_dataset.batch_size = 2
-        self.generate_batch_size = 2
+        # self.input_dataset.packed_seq_length = 8000  # Maximum sequence length
+        # self.val_dataset.packed_seq_length = 8000  # Maximum sequence length
+        # self.training.global_batch_size = 32  # Total batch size across all devices
+        # self.input_dataset.batch_size = 2
+        # self.val_dataset.batch_size = 2
+        # self.generate_batch_size = 2
+        self.toka_kv_cache_num_tokens = 100_000
+    
+    def streaming(self):
+        self.streaming_dataset = True
+        self.dataloader_num_workers = 8
+
+    def toka(self):
+        self.generation_server_type = "toka"
+        self.toka_server_config = TokaServerConfig()
+        self.toka_server_overrides = [
+            f"model={self.model_name}",
+            f"tokenizer={self.model_name}",
+            f"trust_remote_code=True",
+            f"kv_cache_num_tokens={self.toka_kv_cache_num_tokens}",
+            f"torch_compile=False",
+        ]
+        pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
+        self.generate_batch_size = 200
+
 
 # ============================================================================
 # Helper Functions
@@ -463,11 +513,13 @@ def run_distillation(config: DistillationConfig):
     # Get dataset path
     train_dataset_path = get_dataset_path(config.input_dataset)
 
+    dataset_cls = ShayanStreamingTrainDataset if config.streaming_dataset else ShayanTrainDataset
+
     if config.do_loss_evals:
         val_dataset_path = get_dataset_path(config.val_dataset)
         loss_evals = [
             LossEvalConfig(
-                dataset=ShayanTrainDataset.Config(
+                dataset=dataset_cls.Config(
                     data_sources=[DataSource(path=val_dataset_path, type="local")],
                     packing_mode=config.dataset.packing_mode,
                     packed_seq_length=config.dataset.packed_seq_length,
@@ -483,12 +535,15 @@ def run_distillation(config: DistillationConfig):
     else:
         loss_evals = []
 
-    if config.do_gen_evals:
-        generate_evals = [
+    generate_evals = []
+    # TODO: generalize beyond finer
+    if config.do_val_gen_eval:
+        generate_evals.append(
             GenerationEvalConfig(
                 dataset=FinerGenerateDataset.Config(
                     num_problems=config.num_generate_problems,
                     system_prompt_path=config.system_prompt_path,
+                    dataset_split=config.val_gen_split,
                 ),
                 name_for_wandb="finer",
                 generate_max_new_tokens=1024,
@@ -496,9 +551,22 @@ def run_distillation(config: DistillationConfig):
                 temperature=config.generate_temperature,
                 batch_size=config.generate_batch_size,
             )
-        ]
-    else:
-        generate_evals = []
+        )
+    if config.do_train_gen_eval:
+        generate_evals.append(
+            GenerationEvalConfig(
+                dataset=FinerGenerateDataset.Config(
+                    num_problems=config.num_train_generate_problems,
+                    system_prompt_path=config.system_prompt_path,
+                    dataset_split=config.train_gen_split,
+                ),
+                name_for_wandb="finer_train",
+                generate_max_new_tokens=1024,
+                num_samples=1,
+                temperature=config.generate_temperature,
+                batch_size=config.generate_batch_size,
+            )
+        )
 
     # Create KV cache factory config
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -524,7 +592,7 @@ def run_distillation(config: DistillationConfig):
             ),
             
             # Dataset
-            dataset=ShayanTrainDataset.Config(
+            dataset=dataset_cls.Config(
                 data_sources=[DataSource(path=train_dataset_path, type="local")],
                 packing_mode=config.dataset.packing_mode,
                 packed_seq_length=config.dataset.packed_seq_length,
@@ -542,6 +610,8 @@ def run_distillation(config: DistillationConfig):
             loss_evals=loss_evals,
 
             # Generate evals
+            generation_server_type=config.generation_server_type,
+            toka_server_config=config.toka_server_config,
             generate_before_training=config.generate_before_training,
             generate_eval_every_n_steps=config.generate_eval_every_n_steps,
             generate_evals=generate_evals,
@@ -558,6 +628,7 @@ def run_distillation(config: DistillationConfig):
             
             # KV Cache
             kv_cache_initializer=kv_cache_factory_config,
+            load_cache_path=config.load_cache_path,
             
             # Checkpointing
             save_every_n_steps=config.training.save_every_n_steps,
@@ -574,6 +645,8 @@ def run_distillation(config: DistillationConfig):
             
             # Misc
             seed=config.training.seed,
+
+            dataloader_num_workers=config.dataloader_num_workers,
         )
         
         print("[Distill] Starting training...")

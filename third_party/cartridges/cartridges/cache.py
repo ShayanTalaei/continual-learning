@@ -61,7 +61,7 @@ class TrainableCache(nn.Module):
         if init_keys is None:
             self._num_trainable_tokens, self._num_frozen_tokens = 0, 0
             self.frozen_keys, self.frozen_values = None, None
-            self.trainable_keys, self.trainable_values = None, None
+            # self.trainable_keys, self.trainable_values = None, None
             self._seq_ids = None
             self._init_seq_ids = None
         else:
@@ -101,24 +101,44 @@ class TrainableCache(nn.Module):
                 if num_frozen_tokens
                 else []
             )
-
-            for param in itertools.chain(self.frozen_keys, self.frozen_values):
-                param.requires_grad = False
-
-            self.trainable_keys = nn.ParameterList(
+            self.reference_keys = nn.ParameterList(
                 [
                     nn.Parameter(keys_vec[:, :, num_frozen_tokens:].contiguous())
                     for keys_vec in init_keys
                 ]
             )
-            self.trainable_values = nn.ParameterList(
+            self.reference_values = nn.ParameterList(
                 [
                     nn.Parameter(values_vec[:, :, num_frozen_tokens:].contiguous())
                     for values_vec in init_values
                 ]
             )
+
+            for param in itertools.chain(self.frozen_keys, self.frozen_values, self.reference_keys, self.reference_values):
+                param.requires_grad = False
+
+            self.trainable_key_offsets = nn.ParameterList(
+                [
+                    torch.zeros_like(layer_key)
+                    for layer_key in self.reference_keys
+                ]
+            )
+            self.trainable_value_offsets = nn.ParameterList(
+                [
+                    torch.zeros_like(layer_value)
+                    for layer_value in self.reference_values
+                ]
+            )
             logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
             logger.info(f"num_frozen_tokens: {self._num_frozen_tokens}")
+    
+    @property
+    def trainable_keys(self) -> list[torch.Tensor]:
+        return [self.reference_keys[layer_idx] + self.trainable_key_offsets[layer_idx] for layer_idx in range(self.config.n_layers)]
+    
+    @property
+    def trainable_values(self) -> list[torch.Tensor]:
+        return [self.reference_values[layer_idx] + self.trainable_value_offsets[layer_idx] for layer_idx in range(self.config.n_layers)]
                 
     def update(
         self, 

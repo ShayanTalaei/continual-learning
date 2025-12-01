@@ -15,11 +15,18 @@ import torch
 from transformers import PreTrainedTokenizerFast
 from pydrantic import ObjectConfig, BaseConfig
 import numpy as np
+<<<<<<< HEAD
 from tqdm import tqdm
 
 from src.data.envs.finer_env import is_correct_finer
+=======
+import time
+from tqdm import tqdm
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
-from cartridges.structs import Conversation, MessageDict, read_conversations
+from src.data.envs.finer_env import is_correct_finer
+
+from cartridges.structs import Conversation, MessageDict, read_conversations, _jsonl_length, get_jsonl_record
 from cartridges.initialization.tokenization_utils import MODEL_TO_CHAT_TEMPLATE, MODELS_WITH_THINKING
 from cartridges.utils import get_logger
 from cartridges.utils.hf import read_conversations_from_hf
@@ -322,6 +329,7 @@ class TrainDataset(Dataset):
         batch_size: Optional[int] = None
 
         user_prompt_prefix: list[str] | None = None
+        shuffle: bool = True
 
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
@@ -330,6 +338,8 @@ class TrainDataset(Dataset):
         self.tokenizer = tokenizer
         
         self.elements: List[DatasetElement] = self._prepare_elements()
+        if self.config.shuffle:
+            random.shuffle(self.elements)
         # each batch is a list of element indices
         self.batches: List[List[int]] = self._prepare_batches(seed=seed) 
 
@@ -416,7 +426,10 @@ class TrainDataset(Dataset):
     
     def _get_batch(self, batch_idx: int):
         elem_idxs = self.batches[batch_idx]
-        elements = [self._get_element(elem_idx) for elem_idx in elem_idxs]
+        elements = []
+        for idx, elem_idx in enumerate(elem_idxs):
+            element = self._get_element(elem_idx)
+            elements.append(element)
         return self.collate(elements)
 
     def __getitem__(self, index: int) -> DatasetBatch:
@@ -503,6 +516,25 @@ class TrainDataset(Dataset):
         )
 
 
+<<<<<<< HEAD
+=======
+# TODO: centralize in util file
+LLAMA_CARTRIDGE_TEMPLATE = """\
+{%- for message in messages %}
+    {%- if  (message.role == 'assistant') %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n' }}{% generation %}{{- message['content'] | trim + '<|eot_id|>' }}{% endgeneration %}
+
+    {%- else %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' }}
+        
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|start_header_id|>assistant<|end_header_id|>\n\n' }}
+{%- endif %}
+"""
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class ShayanTrainDataset(TrainDataset):
     class Config(TrainDataset.Config):
         filter_incorrect: bool = False
@@ -513,6 +545,64 @@ class ShayanTrainDataset(TrainDataset):
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         self.system_prompt = open(config.system_prompt_path, "r").read()
         super().__init__(config, tokenizer, seed)
+<<<<<<< HEAD
+=======
+    
+    def _prepare_element(self, row: Conversation) -> DatasetElement:
+        if self.config.filter_incorrect:
+            assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+            if row["evaluation"]["score"] != 1:
+                return None
+        
+        if self.config.ground_truth_target:
+            assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
+            row["output_ids"] = self.tokenizer.encode(f"The answer is \\boxed{{{row['evaluation']['target']}}}", add_special_tokens=False)
+            row["topk_token_ids"] = [
+                [id] for id in row["output_ids"]
+            ]
+            row["topk_logprobs"] = [
+                0.0 for _ in range(len(row["output_ids"]))
+            ]
+        
+        if self.config.train_without_logits:
+            row["topk_token_ids"] = [
+                [id] for id in row["output_ids"]
+            ]
+            row["topk_logprobs"] = [
+                0.0 for _ in range(len(row["output_ids"]))
+            ]
+
+        messages = [
+            {
+                "role": "system",
+                "content": self.system_prompt,
+            },
+            row['input_messages'][1]
+        ]
+        ids = self.tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            chat_template=LLAMA_CARTRIDGE_TEMPLATE,
+            add_special_tokens=False,
+        )
+        ids += row["output_ids"]
+
+        num_answer_ids = len(row["output_ids"])
+        num_question_ids = len(ids) - num_answer_ids
+        topk_token_idxs = torch.arange(num_question_ids, num_question_ids + num_answer_ids, dtype=torch.long) - 1 # -1 because we want the logits for token i to be predicted by token (i-1)
+
+        assert num_answer_ids == len(row["topk_token_ids"]), "number of answer ids and topk token ids must match"
+        assert num_answer_ids == len(row["topk_logprobs"]), "number of answer ids and topk logprobs must match"
+    
+        return DatasetElement(
+            input_ids=torch.tensor(ids, dtype=torch.long),
+            topk_token_ids=torch.tensor(row["topk_token_ids"], dtype=torch.long),
+            topk_logprobs=torch.tensor(row["topk_logprobs"], dtype=torch.float),
+            topk_token_idxs=topk_token_idxs,
+            metadata=[],
+            token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
+        )
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         
     def _prepare_elements(self) -> list[DatasetElement]:
         data = []
@@ -525,6 +615,7 @@ class ShayanTrainDataset(TrainDataset):
         
         elements = []
         for row in tqdm(data, "Preparing elements"):
+<<<<<<< HEAD
             if self.config.filter_incorrect:
                 assert "evaluation" in row, "evaluation is required for filtering incorrect answers"
                 if row["evaluation"]["score"] != 1:
@@ -576,6 +667,13 @@ class ShayanTrainDataset(TrainDataset):
                 metadata=[],
                 token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
             ))
+=======
+            element = self._prepare_element(row)
+            if element is not None:
+                elements.append(
+                    element
+                )
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         return elements
 
 
@@ -584,6 +682,7 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
         pass
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
+<<<<<<< HEAD
         super().__init__(config, tokenizer, seed)
         
         assert not config.filter_incorrect, "filter_incorrect is not supported for streaming datasets"
@@ -637,6 +736,59 @@ class ShayanStreamingTrainDataset(ShayanTrainDataset):
                 token_counts=TokenCounts(num_system_and_user_tokens=num_question_ids, num_assistant_tokens=num_answer_ids)
             ))
         return elements
+=======
+        assert len(config.data_sources) == 1, "streaming datasets must have exactly one data source"
+        assert not config.filter_incorrect, "filter_incorrect is not supported for streaming datasets"
+
+        self.data_file = config.data_sources[0].path
+        start_loading_lines = time.time()
+        self.jsonl_lines = [
+            line.strip() for line in tqdm(open(self.data_file, "r", encoding="utf-8"), desc="Loading jsonl lines")
+        ]
+        loading_lines_time = time.time() - start_loading_lines
+        print(f"Done loading {len(self.jsonl_lines)} lines in {round(loading_lines_time, 2)} seconds")
+
+        super().__init__(config, tokenizer, seed)
+    
+    def _prepare_elements(self) -> list[DatasetElement]:
+        print(f"Starting _prepare_elements")
+        num_items = len(self.jsonl_lines)
+        print(f"Done _prepare_elements, num_items: {num_items}")
+        return [
+            DatasetElement(
+                input_ids=torch.tensor([], dtype=torch.long),
+                topk_token_ids=torch.tensor([], dtype=torch.long),
+                topk_logprobs=torch.tensor([], dtype=torch.float),
+                topk_token_idxs=torch.tensor([], dtype=torch.long),
+                metadata=[],
+                token_counts=TokenCounts(),
+            )
+            for i in range(num_items)
+        ]
+    
+    def _get_element(self, elem_idx: int) -> DatasetElement:
+        # print("Getting element", elem_idx)
+        # start = time.time()
+        row = json.loads(self.jsonl_lines[elem_idx])
+        # get_record_time = time.time() - start
+        element = self._prepare_element(row)
+        # prepare_element_time = time.time() - get_record_time - start
+        # print("Done getting element", elem_idx, round(get_record_time, 2), round(prepare_element_time, 2))
+        return element
+    
+    def _prepare_batches(self, seed: int) -> List[List[int]]:
+        assert self.config.batch_size is not None
+        if len(self.elements) % self.config.batch_size != 0:
+            print("WARNING: dataset size is not a multiple of batch size, some elements will be dropped")
+
+        return [[batch_idx*self.config.batch_size + i for i in range(self.config.batch_size)] for batch_idx in range(len(self.elements) // self.config.batch_size)]
+    
+    def __getitem__(self, index: int) -> DatasetBatch:
+        batch = self._get_batch(index)
+        assert batch.input_ids.shape[0] <= self.config.packed_seq_length, f"batch size {batch.input_ids.shape[0]} is greater than packed seq length {self.config.packed_seq_length}"
+        # print("Assembled the batch!")
+        return batch
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 
 class LossEvalDataset(TrainDataset):

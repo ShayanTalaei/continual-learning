@@ -20,6 +20,16 @@ class StreamOptions(BaseModel):
     include_usage: Optional[bool] = False
 
 
+<<<<<<< HEAD
+=======
+class Cartridge(BaseModel):
+    """Model for specifying a cartridge to use in requests."""
+    id: str = Field(description="The cartridge ID to use")
+    source: Literal["wandb", "local", "huggingface"] = Field(default="wandb", description="The source to download from ('wandb', 'local', 'huggingface')")
+    force_redownload: bool = Field(default=False, description="Whether to force redownload even if cartridge exists locally")
+
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class CompletionsRequest(BaseModel):
     # Ordered by official OpenAI API documentation
     # https://platform.openai.com/docs/api-reference/completions/create
@@ -57,6 +67,13 @@ class CompletionsRequest(BaseModel):
         extra = "forbid"
 
 
+<<<<<<< HEAD
+=======
+class CartridgeCompletionsRequest(CompletionsRequest):
+    # Tokasaurus-specific fields
+    cartridges: Optional[list[Cartridge]] = None
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class JsonSchemaResponseFormat(BaseModel):
     name: str
     description: Optional[str] = None
@@ -73,7 +90,12 @@ class ResponseFormat(BaseModel):
 class ChatCompletionRequest(BaseModel):
     # Ordered by official OpenAI API documentation
     # https://platform.openai.com/docs/api-reference/chat/create
+<<<<<<< HEAD
     messages: list[ChatCompletionMessageParam]
+=======
+    messages: list[ChatCompletionMessageParam] | None = None
+    ids: list[int] | None = None
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     model: str
     frequency_penalty: Optional[float] = 0.0
     logit_bias: Optional[dict[str, float]] = None
@@ -112,6 +134,16 @@ class ChatCompletionRequest(BaseModel):
         extra = "forbid"
 
 
+<<<<<<< HEAD
+=======
+class CartridgeChatCompletionRequest(ChatCompletionRequest):
+
+    # Tokasaurus-specific fields
+    cartridges: Optional[list[Cartridge]] = None
+
+
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class BatchCreationRequest(BaseModel):
     """Request model for creating a batch"""
 
@@ -127,6 +159,14 @@ class BatchCreationRequest(BaseModel):
     metadata: Optional[dict[str, str]] = Field(default=None)
 
 
+<<<<<<< HEAD
+=======
+class BatchCompletionsRequest(BaseModel):
+    requests: list[ChatCompletionRequest] = Field(
+        description="List of chat completion requests to process"
+    )
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class SynchronousBatchCompletionsRequest(BaseModel):
     """Request model for synchronous batch completions"""
 
@@ -134,11 +174,25 @@ class SynchronousBatchCompletionsRequest(BaseModel):
         description="List of chat completion requests to process"
     )
 
+<<<<<<< HEAD
+=======
+class SynchronousBatchCartridgeChatCompletionsRequest(BaseModel):
+    """Request model for synchronous batch completions"""
+
+    requests: list[CartridgeChatCompletionRequest] = Field(
+        description="List of chat completion requests to process"
+    )
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 @dataclass
 class RequestOutput:
     id: str
     sequence_outputs: list["SequenceOutput"] = field(default_factory=list)
+<<<<<<< HEAD
+=======
+    error_message: Optional[str] = None
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 
 @dataclass
@@ -158,6 +212,10 @@ class TokasaurusRequest:
     stop: list[str]
     n: int
     ignore_eos: bool
+<<<<<<< HEAD
+=======
+    cartridges: Optional[list[Cartridge]] = None
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     topk_logprobs: int | None = None  # Number of top tokens to return log probs for
     created_timestamp: float = field(default_factory=time.time)
 
@@ -174,7 +232,11 @@ class SubmittedRequest:
 class BatchFileLine(BaseModel):
     custom_id: str
     method: Literal["POST"]
+<<<<<<< HEAD
     url: Literal["/v1/completions", "/v1/chat/completions"]
+=======
+    url: Literal["/v1/completions", "/v1/chat/completions", "/v1/cartridge/completions", "/v1/cartridge/chat/completions"]
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     body: dict
 
 
@@ -187,7 +249,11 @@ class FileEntry:
 @dataclass
 class SubmittedBatchItem:
     line: BatchFileLine
+<<<<<<< HEAD
     user_req: CompletionsRequest | ChatCompletionRequest
+=======
+    user_req: CompletionsRequest | ChatCompletionRequest | CartridgeCompletionsRequest | CartridgeChatCompletionRequest
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     submitted_req: SubmittedRequest
 
 

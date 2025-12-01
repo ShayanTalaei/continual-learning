@@ -1,15 +1,31 @@
 import asyncio
 import pickle
 from contextlib import asynccontextmanager
+<<<<<<< HEAD
+=======
+import pickle
+import time
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 from uuid import uuid4
 
 import uvicorn
 from fastapi import FastAPI, Form, HTTPException, Path, Request, Response, UploadFile
+<<<<<<< HEAD
+=======
+from fastapi.responses import StreamingResponse
+from fastapi.exception_handlers import http_exception_handler
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 from openai.pagination import SyncPage
 from openai.types.batch import Batch
 from openai.types.file_deleted import FileDeleted
 from openai.types.file_object import FileObject
 from openai.types.model import Model
+<<<<<<< HEAD
+=======
+from openai.types.chat.chat_completion_chunk import ChatCompletionChunk
+from openai.types.chat.chat_completion_chunk import Choice as StreamChoice
+from openai.types.chat.chat_completion_chunk import ChoiceDelta
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 from tokasaurus.common_types import (
     Engine,
@@ -17,6 +33,10 @@ from tokasaurus.common_types import (
     TimedBarrier,
 )
 from tokasaurus.server.types import (
+<<<<<<< HEAD
+=======
+    BatchCompletionsRequest,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     BatchCreationRequest,
     BatchFileLine,
     ChatCompletionRequest,
@@ -24,6 +44,12 @@ from tokasaurus.server.types import (
     FileEntry,
     SubmittedBatch,
     SubmittedBatchItem,
+<<<<<<< HEAD
+=======
+    CartridgeCompletionsRequest,
+    CartridgeChatCompletionRequest,
+    SynchronousBatchCartridgeChatCompletionsRequest,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     SynchronousBatchCompletionsRequest,
     nowstamp,
 )
@@ -34,6 +60,10 @@ from tokasaurus.server.utils import (
     make_batch_status,
     process_chat_completions_output,
     process_completions_output,
+<<<<<<< HEAD
+=======
+    process_cartridge_chat_completions_output,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     process_request,
     receive_from_manager_loop,
     submit_request,
@@ -56,6 +86,84 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 
+<<<<<<< HEAD
+=======
+def create_streaming_response(completion_response, request):
+    """
+    Convert a completed ChatCompletion to a streaming response format.
+    This waits for the entire completion and then streams it as SSE events.
+    """
+    import json
+
+    
+    async def generate_stream():
+        # First chunk with role
+        first_chunk = ChatCompletionChunk(
+            id=completion_response.id,
+            choices=[
+                StreamChoice(
+                    index=0,
+                    delta=ChoiceDelta(role="assistant", content=""),
+                    finish_reason=None
+                )
+            ],
+            created=completion_response.created,
+            model=completion_response.model,
+            object="chat.completion.chunk"
+        )
+        yield f"data: {json.dumps(first_chunk.model_dump())}\n\n"
+        
+        # Content chunk with the full message
+        for choice in completion_response.choices:
+            content_chunk = ChatCompletionChunk(
+                id=completion_response.id,
+                choices=[
+                    StreamChoice(
+                        index=choice.index,
+                        delta=ChoiceDelta(content=choice.message.content),
+                        finish_reason=None
+                    )
+                ],
+                created=completion_response.created,
+                model=completion_response.model,
+                object="chat.completion.chunk"
+            )
+            yield f"data: {json.dumps(content_chunk.model_dump())}\n\n"
+        
+        # Final chunk with finish reason
+        for choice in completion_response.choices:
+            final_chunk = ChatCompletionChunk(
+                id=completion_response.id,
+                choices=[
+                    StreamChoice(
+                        index=choice.index,
+                        delta=ChoiceDelta(),
+                        finish_reason=choice.finish_reason
+                    )
+                ],
+                created=completion_response.created,
+                model=completion_response.model,
+                object="chat.completion.chunk"
+            )
+            yield f"data: {json.dumps(final_chunk.model_dump())}\n\n"
+        
+        # End of stream
+        yield "data: [DONE]\n\n"
+    
+    return StreamingResponse(
+        generate_stream(),
+        media_type="text/plain",
+        headers={"Cache-Control": "no-cache", "Connection": "keep-alive"}
+    )
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler_w_logging(request: Request, exc: HTTPException):
+    state: ServerState = app.state.state_bundle
+    state.logger.error(f"HTTPException: {exc.status_code} {exc.detail}")
+    return await http_exception_handler(request, exc)
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 @app.get("/ping")
 async def ping():
     return {"message": "pong"}
@@ -74,7 +182,17 @@ async def oai_completions(request: CompletionsRequest, raw_request: Request):
 async def oai_chat_completions(request: ChatCompletionRequest, raw_request: Request):
     state: ServerState = app.state.state_bundle
     req, out = await generate_output(state, request)
+<<<<<<< HEAD
     return process_chat_completions_output(state, request, req, out)
+=======
+    output = process_chat_completions_output(state, request, req, out)
+
+    if request.stream:
+        return create_streaming_response(output, request)
+    else:
+        return output
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
 
 @app.post("/v1/files", response_model=FileObject)
@@ -160,6 +278,13 @@ async def create_batch(request: BatchCreationRequest):
             request_type = CompletionsRequest
         case "/v1/chat/completions":
             request_type = ChatCompletionRequest
+<<<<<<< HEAD
+=======
+        case "/v1/cartridge/completions":
+            request_type = CartridgeCompletionsRequest
+        case "/v1/cartridge/chat/completions":
+            request_type = CartridgeChatCompletionRequest
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         case _:
             raise HTTPException(
                 status_code=400, detail=f"Unsupported endpoint: {request.endpoint}"
@@ -231,12 +356,18 @@ async def list_models():
         ],
     )
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 ### ------------------------------------------------------------
 ### BEGIN NON-OAI ENDPOINTS
 ### ------------------------------------------------------------
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 @app.post("/custom/synchronous-batch-completions")
 @with_cancellation
 async def synchronous_batch_completions(
@@ -258,11 +389,60 @@ async def synchronous_batch_completions(
     return Response(content=pickled_content, media_type="application/octet-stream")
 
 
+<<<<<<< HEAD
+=======
+
+
+@app.post("/custom/cartridge/completions")
+@with_cancellation
+async def cartridge_completions(request: CartridgeCompletionsRequest, raw_request: Request):
+    state: ServerState = app.state.state_bundle
+    req, out = await generate_output(state, request)
+    return process_completions_output(state, request, req, out)
+
+
+@app.post("/custom/cartridge/chat/completions")
+@with_cancellation
+async def cartridge_chat_completions(request: CartridgeChatCompletionRequest, raw_request: Request):
+    state: ServerState = app.state.state_bundle
+    req, out = await generate_output(state, request)
+    return process_cartridge_chat_completions_output(state, request, req, out)
+
+
+@app.post("/custom/cartridge/synchronous-batch-completions")
+@with_cancellation
+async def cartridge_synchronous_chat_completions(request: SynchronousBatchCartridgeChatCompletionsRequest, raw_request: Request):
+    state: ServerState = app.state.state_bundle
+    t0 = time.time()
+    async def generate_and_process(req: CartridgeChatCompletionRequest):
+        internal_req, output = await generate_output(state, req)
+        return process_cartridge_chat_completions_output(state, req, internal_req, output)
+    
+    # Create tasks for each request
+    tasks = [asyncio.create_task(generate_and_process(req)) for req in request.requests]
+    
+    # Wait for all tasks to complete and collect results in order
+    results = await asyncio.gather(*tasks)
+    t1 = time.time()
+    print(f"synchronous_batch_completions took {t1 - t0} seconds")
+
+    # return {"completions": results}
+
+    pickled_content = pickle.dumps(results)
+    return Response(
+        content=pickled_content, media_type="application/octet-stream"
+    )
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 ### ------------------------------------------------------------
 ### END NON-OAI ENDPOINTS
 ### ------------------------------------------------------------
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 def start_server(
     config: ServerConfig,
     engines: list[Engine],
@@ -286,3 +466,18 @@ def start_server(
         port=config.port,
         log_level=config.uvicorn_log_level,
     )
+<<<<<<< HEAD
+=======
+
+
+if __name__ == "__main__":
+    # Useful for debugging
+    app.state.state_bundle = None
+
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=10210,
+        log_level="info",
+    )
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021

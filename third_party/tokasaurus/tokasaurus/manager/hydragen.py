@@ -1,7 +1,11 @@
 from dataclasses import dataclass
 from typing import Iterable
 
+<<<<<<< HEAD
 from tokasaurus.manager.allocator import PrefixTreeBlock
+=======
+from tokasaurus.manager.allocator import Block
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 from tokasaurus.manager.monitoring import track_time_decorator
 from tokasaurus.manager.types import HydragenGroup, ScheduleDecision, Sequence
 
@@ -51,7 +55,11 @@ def reorder_decision_for_hydragen(
     )
 
 
+<<<<<<< HEAD
 def node_to_block_ids(node: PrefixTreeBlock) -> list[int]:
+=======
+def node_to_block_ids(node: Block) -> list[int]:
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     block_ids_last_to_first = []
     cur = node
     while not cur.is_root():
@@ -64,7 +72,11 @@ def node_to_block_ids(node: PrefixTreeBlock) -> list[int]:
 
 @track_time_decorator()
 def group_for_hydragen(
+<<<<<<< HEAD
     root: PrefixTreeBlock,
+=======
+    root: Block,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     seq_ids_to_group: Iterable[str],
     min_group_size: int,
     min_prefix_len: int,
@@ -81,7 +93,11 @@ def group_for_hydragen(
 
     @dataclass
     class StackItem:
+<<<<<<< HEAD
         node: PrefixTreeBlock
+=======
+        node: Block
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         depth: int
         visited_children: bool
         potential_sids: set[str]

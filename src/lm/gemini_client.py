@@ -1,17 +1,90 @@
 import os
 import time
 from typing import Optional, Dict, Any, List
+from contextlib import contextmanager
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai.types import GenerateContentConfig, ThinkingConfig, GenerationConfig
 from google.oauth2 import service_account
+from google.auth.transport.requests import Request
 from logging import Logger
 from src.utils import logger as jsonlogger
 
 from .language_model import LMConfig, LanguageModel
 
 load_dotenv(override=True)
+# Import freezegun bypass utilities for AppWorld compatibility
+try:
+    # AppWorld provides a low-level bypass that uses ctypes to get real system time
+    from appworld.common.time import freezegun_bypassed_datetime
+    APPWORLD_BYPASS_AVAILABLE = True
+except ImportError:
+    APPWORLD_BYPASS_AVAILABLE = False
+    
+    # Fallback: try to import freezegun directly
+    try:
+        from freezegun.api import real_time, real_datetime, real_date
+        FREEZEGUN_AVAILABLE = True
+    except ImportError:
+        FREEZEGUN_AVAILABLE = False
+
+# Load .env from the same directory as this file
+_env_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(dotenv_path=_env_path, override=True)
+
+
+@contextmanager
+def _bypass_freezegun():
+    """
+    Temporarily restore real system time for JWT token generation.
+    
+    This is critical for AppWorld environments which use freezegun to mock time.
+    Google's OAuth2 servers reject JWT tokens with timestamps far from real time.
+    
+    Uses monkey-patching to replace time functions with real implementations
+    that use ctypes to bypass freezegun.
+    """
+    if not (APPWORLD_BYPASS_AVAILABLE or FREEZEGUN_AVAILABLE):
+        yield
+        return
+    
+    # Monkey-patch time module functions with real implementations
+    import time as time_module
+    import datetime as dt_module
+    
+    # Save frozen versions
+    saved_time = time_module.time
+    saved_datetime_now = dt_module.datetime.now
+    saved_datetime_utcnow = dt_module.datetime.utcnow
+    
+    try:
+        if APPWORLD_BYPASS_AVAILABLE:
+            # Use AppWorld's ctypes-based bypass
+            def real_time_func():
+                return freezegun_bypassed_datetime().timestamp()
+            
+            def real_now_func(tz=None):
+                dt = freezegun_bypassed_datetime()
+                if tz:
+                    import pytz
+                    return dt.replace(tzinfo=pytz.UTC).astimezone(tz)
+                return dt
+            
+            def real_utcnow_func():
+                return freezegun_bypassed_datetime()
+            
+            time_module.time = real_time_func
+            dt_module.datetime.now = real_now_func
+            dt_module.datetime.utcnow = real_utcnow_func
+        
+        yield
+    finally:
+        # Restore frozen versions
+        time_module.time = saved_time
+        dt_module.datetime.now = saved_datetime_now
+        dt_module.datetime.utcnow = saved_datetime_utcnow
+
 
 class GeminiConfig(LMConfig):
     thinking_budget: Optional[int] = None
@@ -23,6 +96,7 @@ class GeminiClient(LanguageModel):
     def __init__(self, config: GeminiConfig, logger: Optional[Logger] = None):
         super().__init__(config=config, logger=logger)
         self._gemini_client: Optional[genai.Client] = None
+        self._credentials: Optional[service_account.Credentials] = None
 
     @property
     def cfg(self) -> GeminiConfig:  # typed helper
@@ -58,7 +132,7 @@ class GeminiClient(LanguageModel):
         
         generate_content_config = GenerateContentConfig(
             system_instruction=system_instruction,
-            temperature=self.config.temperature ,
+            temperature=self.config.train_temperature,
             max_output_tokens=self.config.max_output_tokens,
             response_mime_type=("application/json" if use_json_mode else None),
             thinking_config=(
@@ -75,6 +149,9 @@ class GeminiClient(LanguageModel):
         last_err: Optional[Exception] = None
         for attempt in range(1, self.config.max_retries + 2):
             try:
+                # Refresh credentials before each API call to prevent expiration
+                self._refresh_credentials()
+                
                 response = self._client().models.generate_content(
                     model=self.config.model,
                     contents=conversation_messages,
@@ -115,6 +192,22 @@ class GeminiClient(LanguageModel):
         except Exception:
             return None
 
+    def _refresh_credentials(self) -> None:
+        """Refresh OAuth2 access token to prevent expiration.
+        
+        Uses real system time (bypassing freezegun) to ensure JWT tokens
+        have valid timestamps that Google's OAuth2 servers will accept.
+        """
+        if self._credentials is not None:
+            try:
+                # Bypass freezegun to use real system time for JWT generation
+                with _bypass_freezegun():
+                    self._credentials.refresh(Request())
+                self.logger.debug("Gemini credentials refreshed successfully")
+            except Exception as e:
+                self.logger.warning(f"Failed to refresh Gemini credentials: {e}")
+                raise
+
     def _client(self) -> genai.Client:
         if self._gemini_client is None:
             scopes = [
@@ -136,11 +229,29 @@ class GeminiClient(LanguageModel):
             credentials = service_account.Credentials.from_service_account_file(
                 credentials_path, scopes=scopes
             )
+            # Expand path variables and ~
+            credentials_path = os.path.expanduser(os.path.expandvars(credentials_path))
+            
+            # Store credentials for later refresh
+            self._credentials = service_account.Credentials.from_service_account_file(
+                credentials_path, scopes=scopes
+            )
+            
+            # Explicitly refresh credentials to mint a valid OAuth2 access token
+            # This prevents "invalid_grant: Invalid JWT" errors due to timing issues
+            # Use real system time (bypass freezegun) for JWT generation
+            try:
+                with _bypass_freezegun():
+                    self._credentials.refresh(Request())
+                self.logger.info("Gemini credentials refreshed successfully during initialization")
+            except Exception as e:
+                self.logger.warning(f"Gemini credential initial refresh failed: {e}")
+                raise
 
             self._gemini_client = genai.Client(
                 vertexai=True,
                 project=project_id,
                 location=region,
-                credentials=credentials,
+                credentials=self._credentials,
             )
         return self._gemini_client

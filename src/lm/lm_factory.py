@@ -2,13 +2,8 @@ from typing import Optional, Dict, Any, Union
 from logging import Logger
 from src.lm.language_model import LMConfig, LanguageModel
 from src.lm.gemini_client import GeminiClient, GeminiConfig
-try:
-    from src.lm.vllm_client import VLLMClient, VLLMConfig
-except Exception:
-    VLLMClient = None  # type: ignore
-    VLLMConfig = None  # type: ignore
-
 from src.lm.tokasaurus_client import TokasaurusClient, TokasaurusConfig
+from src.lm.vllm_client import VLLMClient, VLLMConfig
 
 
 
@@ -37,12 +32,12 @@ def get_lm_client(lm_config: Union[LMConfig, Dict[str, Any]], logger: Optional[L
         cfg_dict["model"] = model_id
         toka_cfg = TokasaurusConfig(**cfg_dict)  
         return TokasaurusClient(toka_cfg, logger=logger)
-    if lm_config.model.startswith("vllm:"):
+
+    if model.startswith("vllm:"):
         if VLLMClient is None or VLLMConfig is None:
-            raise ValueError("vLLM client not available. Ensure vLLM is installed and src/lm/vllm_client.py exists.")
-        model_id = lm_config.model.split(":", 1)[1]
-        # Build VLLMConfig from base LMConfig plus parsed model id
-        cfg_dict = lm_config.model_dump()
+            raise ValueError("VLLM client not available. Ensure vllm is installed and src/lm/vllm_client.py exists.")
+        model_id = model.split(":", 1)[1]
+        # Build VLLMConfig from config dict plus parsed model id
         cfg_dict["model"] = model_id
         vllm_cfg = VLLMConfig(**cfg_dict)  
         return VLLMClient(vllm_cfg, logger=logger)

@@ -1,7 +1,5 @@
-from pydantic import BaseModel
-from typing import Optional, Dict, Any, List
 from pydantic import BaseModel, ConfigDict
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from pathlib import Path
 from threading import Lock
 from datetime import datetime
@@ -19,7 +17,7 @@ class LMConfig(BaseModel):
     starting_delay: float = 1.0
     backoff_factor: float = 2.0
     max_delay: float = 10.0
-    model_config = ConfigDict(extra='allow') 
+    
 class LLMResponseMetrics(BaseModel):
     duration: float
     input_tokens: int
@@ -27,7 +25,7 @@ class LLMResponseMetrics(BaseModel):
     output_tokens: int
     total_tokens: int
 
- 
+
 class LanguageModel:
     def __init__(self, config: LMConfig, logger: Optional[Logger] = None):
         self.config = config

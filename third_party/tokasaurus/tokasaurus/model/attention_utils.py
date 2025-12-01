@@ -117,7 +117,10 @@ def tokasaurus_attention(
     """
     Assumes rope has been already applied.
     """
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
     append_to_kv_cache(
         token_indices=attn_info.append_kv_token_indices,
         key=ragged_k,

@@ -11,17 +11,43 @@ from src.data.envs.finer_env import is_correct_finer
 from cartridges.datasets import GenerateEvalDataset, GenerateEvalDatasetElement
 
 
+<<<<<<< HEAD
+=======
+# TODO: centralize in util file
+LLAMA_CARTRIDGE_TEMPLATE = """\
+{%- for message in messages %}
+    {%- if  (message.role == 'assistant') %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n' }}{% generation %}{{- message['content'] | trim + '<|eot_id|>' }}{% endgeneration %}
+
+    {%- else %}
+        {{- '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n'+ message['content'] | trim + '<|eot_id|>' }}
+        
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|start_header_id|>assistant<|end_header_id|>\n\n' }}
+{%- endif %}
+"""
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 class FinerGenerateDataset(GenerateEvalDataset):
     class Config(GenerateEvalDataset.Config):
         num_problems: int = 1000
         system_prompt_path: str = "/scratch/m000122/bcabrown/continual-learning/src/memory/distillation/prompts/system_prompt.txt"
+<<<<<<< HEAD
+=======
+        dataset_split: str = "val"
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
     def __init__(self, config: Config, tokenizer: PreTrainedTokenizerFast, seed: int):
         self.config = config
         self.tokenizer = tokenizer
         
         self.dataset = [
+<<<<<<< HEAD
             instance for instance in load_dataset("stalaei/finer_v1")["val"]
+=======
+            instance for instance in load_dataset("stalaei/finer_v1")[self.config.dataset_split]
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         ][:self.config.num_problems]
 
         self.system_prompt = open(self.config.system_prompt_path).read()
@@ -46,6 +72,11 @@ class FinerGenerateDataset(GenerateEvalDataset):
         input_ids = self.tokenizer.apply_chat_template(
             messages,
             add_generation_prompt=True,
+<<<<<<< HEAD
+=======
+            chat_template=LLAMA_CARTRIDGE_TEMPLATE,
+            add_special_tokens=False,
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         )
 
         return GenerateEvalDatasetElement(

@@ -254,7 +254,10 @@ class LlamaAttention(nn.Module):
 
         query_states = query_states.to(dtype)
         key_states = key_states.to(dtype)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         raw_attn_output = self.attn_fn(
             ragged_q=query_states,
             ragged_k=key_states,
@@ -355,7 +358,16 @@ class LlamaBlock(nn.Module):
 
     def forward(self, batch_state: BatchState):
         out = self.self_attn(batch_state)
+<<<<<<< HEAD
         out = self.mlp(out)
+=======
+        # torch.save(out.hidden_states, f"/scratch/m000122/bcabrown/debug/attn_tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        # print("After attention", self.layer_idx, out.hidden_states.sum(), out.hidden_states.shape)
+        out = self.mlp(out)
+        # torch.save(out.hidden_states, f"/scratch/m000122/bcabrown/debug/tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
+        # print("After MLP", self.layer_idx, out.hidden_states.sum(), out.hidden_states.shape)
+
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         return out
 
 
@@ -478,6 +490,15 @@ class LlamaLMHead(nn.Module):
             hidden_states = self.input_norm(needed_hidden_states)
 
             logits = self.lm_head(hidden_states).float()
+<<<<<<< HEAD
+=======
+            # if not torch.cuda.is_current_stream_capturing():
+            #     print("batch_state:", batch_state)
+            #     if 32767 in batch_state.attention_info.prefill_info.kv_indices:
+            #         print("llama model logits:", logits)
+            #         torch.save(logits, "/tmp/tokasaurus_logits.pt")
+            #         raise Exception("Stop here")
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
 
             assert batch_state.sampling_params.top_p is None
             assert batch_state.sampling_params.temperature is not None
@@ -591,8 +612,15 @@ class LlamaModel(nn.Module):
         sin = self.rope_sin[batch_state.position_ids]
         out.position_embeddings = (cos, sin)
 
+<<<<<<< HEAD
         for layer in self.layers:
             out = layer(out)
+=======
+        for layer_idx, layer in enumerate(self.layers):
+            out = layer(out)
+            # if not torch.cuda.is_current_stream_capturing() and layer_idx == 0:
+            #     torch.save(out.hidden_states, "/tmp/tokasaurus_layer_0_hidden_states.pt")
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         return out
 
 
@@ -665,7 +693,10 @@ class LlamaForCausalLM(nn.Module):
         # making a copy of the input state - needed when combining cudagraphs + pp,
         # where we need to keep track of references to both the input
         # and output hidden states.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         out = BatchState(
             input_ids=batch_state.input_ids,
             attention_info=batch_state.attention_info,
@@ -937,6 +968,10 @@ class LlamaForCausalLM(nn.Module):
         self,
         model_path: Path,
     ):
+<<<<<<< HEAD
+=======
+        print("Loading from safetensors model_path", model_path)
+>>>>>>> 2093065b870fe4b222df153b1243640e8bf44021
         name_to_hf_name = self.make_name_to_hf_name()
         all_hf_names = set(name_to_hf_name.values())
 

@@ -7,6 +7,33 @@ from logging import getLogger, Logger
 from pydantic import BaseModel
 
 from src.data.env import Environment, EnvDataset, EnvDatasetConfig
+from appworld.common.code_tools import extract_code_from_text
+
+
+def extract_python_code_loose(text: str) -> str:
+    """Extract Python code from markdown fences without requiring strict newlines.
+
+    Supports variants like:
+    - ```python\n...\n```
+    - ```python ... ``` (inline, no newlines required)
+    - ```python ... (no closing fence) -> captures to end of string
+    Returns the first matched code block content or an empty string if none.
+    """
+    try:
+        import re
+        # Prefer standard fenced block with optional newline after header
+        pattern_block = re.compile(r"```\s*python\b[^\n]*\n?([\s\S]*?)\n?```", re.IGNORECASE)
+        m = pattern_block.search(text)
+        if m and m.group(1) is not None:
+            return m.group(1).strip()
+        # Fallback: capture until end if closing fence is missing
+        pattern_open_ended = re.compile(r"```\s*python\b[^\n]*\n?([\s\S]*)$", re.IGNORECASE)
+        m2 = pattern_open_ended.search(text)
+        if m2 and m2.group(1) is not None:
+            return m2.group(1).strip()
+        return ""
+    except Exception:
+        return ""
 
 
 class AppWorldEnvConfig(BaseModel):
@@ -41,6 +68,17 @@ class AppWorldEnv(Environment):
                 "AppWorldEnv requires an explicit task_id. Provide one via AppWorldEnvConfig or use AppWorldEnvDataset to construct environments."
             )
         return self.cfg.task_id
+    
+    def close(self) -> None:
+        """Close the AppWorld environment and release database connections."""
+        if self._app is not None:
+            try:
+                self._app.close()
+                self._logger.debug("Closed AppWorld instance for task %s", self._task_id)
+            except Exception as e:
+                self._logger.warning("Failed to close AppWorld instance: %s", e)
+            finally:
+                self._app = None
 
     def _build_initial_prompt(self) -> str:
         # AppWorld provides task specification; use instruction as observation header
@@ -66,6 +104,11 @@ class AppWorldEnv(Environment):
                 "{{ supervisor.last_name }}": getattr(sup, "last_name", ""),
                 "{{ supervisor.email }}": getattr(sup, "email", ""),
                 "{{ supervisor.phone_number }}": getattr(sup, "phone_number", ""),
+                # Add main_user aliases (same as supervisor for AppWorld)
+                "{{ main_user.first_name }}": getattr(sup, "first_name", ""),
+                "{{ main_user.last_name }}": getattr(sup, "last_name", ""),
+                "{{ main_user.email }}": getattr(sup, "email", ""),
+                "{{ main_user.phone_number }}": getattr(sup, "phone_number", ""),
             }
             for k, v in replacements.items():
                 rendered = rendered.replace(k, str(v))
@@ -75,6 +118,11 @@ class AppWorldEnv(Environment):
                 "{{supervisor.last_name}}": getattr(sup, "last_name", ""),
                 "{{supervisor.email}}": getattr(sup, "email", ""),
                 "{{supervisor.phone_number}}": getattr(sup, "phone_number", ""),
+                # Add main_user aliases (same as supervisor for AppWorld)
+                "{{main_user.first_name}}": getattr(sup, "first_name", ""),
+                "{{main_user.last_name}}": getattr(sup, "last_name", ""),
+                "{{main_user.email}}": getattr(sup, "email", ""),
+                "{{main_user.phone_number}}": getattr(sup, "phone_number", ""),
             }
             for k, v in replacements_no_space.items():
                 rendered = rendered.replace(k, str(v))
@@ -103,7 +151,6 @@ class AppWorldEnv(Environment):
         act = (action or "").strip()
         # Handle deliberate thinking without advancing the environment
         if act.lower().startswith("think:"):
-            self._step_count += 1
             feedback = {
                 "score": 0.0,
                 "message": "OK.",
@@ -116,8 +163,14 @@ class AppWorldEnv(Environment):
                 feedback["done"] = True
             return "OK.", feedback, done, {}
 
-        # AppWorld expects Python code in execute(). Allow direct code or wrap common intents.
-        code = act
+        # AppWorld expects Python code in execute(). Prefer AppWorld extractor first.
+        code = extract_code_from_text(act)
+        if not code.strip():
+            code = extract_python_code_loose(act)
+            if not code.strip():
+                code = extract_code_from_text(act)
+        if not code.strip():
+            code = act
 
         try:
             message: str = self._app.execute(code)
@@ -140,7 +193,7 @@ class AppWorldEnv(Environment):
         # Default binary score; will refine using AppWorld's evaluate() when possible
         score: float = 1.0 if won else 0.0
         evaluation_dict: Dict[str, Any] = {}
-        # Use in-Python evalua`tion when we reach a terminal condition to derive a more informative score
+        # Use in-Python evaluation when we reach a terminal condition to derive a more informative score
         if done:
             tracker = self._app.evaluate(suppress_errors=True)
             # tracker is a TestTracker; convert to dict for portability
@@ -170,7 +223,7 @@ class AppWorldEnv(Environment):
 
         feedback = {
             "score": score,
-            "message": message,
+            "message": "OK.",
             "done": done,
             "won": won,
         }
@@ -253,5 +306,77 @@ class AppWorldEnvDataset(EnvDataset):
             )
             dataset.append(AppWorldEnv(env_cfg, logger=env_logger, prompts=prompts))
         return dataset
+    
+    def evaluate_appworld_metrics(self, environments: Optional[List[Environment]] = None) -> Optional[Dict[str, Any]]:
+        """Compute TGC and SGC metrics using AppWorld's evaluation tools.
+        
+        This reads the saved database snapshots from the experiment output directory
+        and runs AppWorld's unit tests to compute official metrics.
+        
+        Args:
+            environments: Optional list of environments that were actually run. 
+                         If None, evaluates all environments in the dataset.
+        
+        Returns:
+            Dictionary with 'tgc', 'sgc', and full 'evaluation' results, or None if evaluation fails.
+        """
+        try:
+            from appworld.evaluator import evaluate_tasks
+        except ImportError:
+            if self.logger:
+                self.logger.warning("AppWorld evaluator not available")
+            return None
+        
+        # Use provided environments or fall back to full dataset
+        envs_to_evaluate = environments if environments is not None else self.dataset
+        
+        # Extract task_ids from the environments that were actually run
+        task_ids = []
+        for env in envs_to_evaluate:
+            if hasattr(env, '_task_id') and env._task_id:
+                task_ids.append(env._task_id)
+            elif hasattr(env, 'cfg') and hasattr(env.cfg, 'task_id') and env.cfg.task_id:
+                task_ids.append(env.cfg.task_id)
+        
+        if not task_ids:
+            if self.logger:
+                self.logger.warning("No AppWorld task_ids found to evaluate")
+            return None
+        
+        try:
+            if self.logger:
+                self.logger.info("Running AppWorld evaluation on %d tasks", len(task_ids))
+            
+            # Run AppWorld's evaluation
+            evaluation = evaluate_tasks(
+                task_ids=task_ids,
+                experiment_name=self.config.experiment_name,
+                suppress_errors=True,
+                include_details=True,  # Include individual task details
+                save_reports=True
+            )
+            
+            # Extract TGC and SGC
+            aggregate = evaluation.get("aggregate", {})
+            tgc = aggregate.get("task_goal_completion")
+            sgc = aggregate.get("scenario_goal_completion")
+            
+            if tgc is not None and sgc is not None:
+                if self.logger:
+                    self.logger.info("AppWorld evaluation: TGC=%.1f%% SGC=%.1f%%", tgc, sgc)
+                return {
+                    "tgc": tgc,
+                    "sgc": sgc,
+                    "evaluation": evaluation
+                }
+            else:
+                if self.logger:
+                    self.logger.warning("AppWorld evaluation returned no TGC/SGC metrics")
+                return None
+            
+        except Exception as e:
+            if self.logger:
+                self.logger.warning("Failed to compute AppWorld metrics: %s", e)
+            return None
 
 
