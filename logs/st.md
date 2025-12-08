@@ -1939,3 +1939,521 @@ torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
     gen_val_num_repeats=5 \
     .long_seqs \
     dataset.packed_seq_length=82000
+
+
+# Nov 26
+
+### n30
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov26_dataset_15000_old_cities_2500_new_cities_unrot_queries_mlp_residual_8_toka_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### gh005
+torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=nov26_ataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/projects/bfsg/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/projects/bfsg/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/projects/bfsg/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+# Dec 1
+
+### n05 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec1_dataset_15000_old_cities_2500_new_cities_unrot_queries_mlp_residual_8_toka_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n05 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec1_dataset_15000_old_cities_2500_new_cities_unrot_queries_mlp_residual_8_per_layer_toka_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n04 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec1_dataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n04 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec1_dataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_mlp_residual_8_per_layer_toka_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+# Dec 2
+
+### n12 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec2_dataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-4_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=True \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n12 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec2_dataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_mlp_residual_8_per_layer_toka_lr_5e-4_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+# Dec 6
+### n17 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_20k_old_cities_2500_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_boxed_only_20000_with_subsample_and_original_experiences/dataset_with_up_to_50_new_cities_distractors.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n17 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_150k_old_cities_2500_new_cities_10_splits_unrot_queries_1024_mlp_residual_8_different_per_layer_toka_lr_5e-4_pos_random_std_02 \
+    kv_cache.num_tokens=1024 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/dataset_150k_old_cities_2500_new_cities_10_splits.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n18 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_12.5_2.5_2.5_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-3_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-3 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/2500_old_no_dist_12500_old_upto_50_dist_2500_new_ICL.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n18 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_12.5_2.5_2.5_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-4_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/2500_old_no_dist_12500_old_upto_50_dist_2500_new_ICL.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n19 (0,1,2,3)
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node 4 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_20k_old_cities_2500_unrot_queries_mlp_residual_8_toka_different_per_layer_lr_5e-4_pos_random \
+    kv_cache.num_tokens=128 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_gen_l8b_non_collapsed_boxed_only_20000_with_subsample_and_original_experiences/dataset_with_up_to_50_new_cities_distractors.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
+
+### n19 (4,5,6,7)
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node 4 --master_port 29501 -m src.memory.distillation.distill_into_cartridge \
+    run_name=dec6_dataset_12.5_2.5_2.5_unrot_queries_1024_mlp_residual_8_toka_different_per_layer_lr_5e-4_pos_random \
+    kv_cache.num_tokens=1024 \
+    kv_cache.cartridge_start_position=0 \
+    kv_cache.parametrization_type=mlp_residual \
+    kv_cache.parametrization_hidden_multiplier=8.0 \
+    kv_cache.parametrization_activation=relu \
+    kv_cache.parametrization_share_across_layers=False \
+    kv_cache.positional_embeddings.enabled=True \
+    kv_cache.positional_embeddings.init_mode=random \
+    kv_cache.positional_embeddings.random_std=0.02 \
+    non_cartridge_start_position_id_offset=0 \
+    use_unrotated_queries_for_cartridges=True \
+    training.train_temperature=1 \
+    .init_from_text \
+    .toka \
+    toka_server_port=10301 \
+    do_loss_evals=F \
+    system_prompt_path=src/data/prompts/cities_easy/brad_magic_on_top_shayan_finesse.txt \
+    generate_eval_every_n_steps=50 \
+    streaming_dataset=T \
+    dataloader_num_workers=8 \
+    .streaming \
+    .train_gen_eval \
+    .synth_cities \
+    training.weight_decay=0.0 \
+    training.lr=5e-4 \
+    input_dataset.local_path=/scratch/m000122/stalaei/logs/continual_learning/data/cities_easy_synthetic_old_cities_with_up_to_50_distractors_new_cities_with_1-50_fewshots/2500_old_no_dist_12500_old_upto_50_dist_2500_new_ICL.jsonl \
+    output.local_dir=/scratch/m000122/stalaei/continual-learning/cartridges/ \
+    gen_max_incontext_examples=50 \
+    gen_min_incontext_examples=0 \
+    in_context_examples_path=/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_181024/experiences.jsonl \
+    gen_val_num_repeats=5 \
+    .long_seqs \
+    dataset.packed_seq_length=82000
