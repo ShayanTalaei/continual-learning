@@ -198,6 +198,7 @@ class LlamaAttention(nn.Module):
                 attn_info=attention_info,
                 wrappers=self.wrapper_collection,
                 use_unrotated_queries=self.extra_config.use_unrotated_queries_for_cartridges,
+                cartridge_attention_mode=self.extra_config.cartridge_attention_mode,
             )
 
             if num_padding > 0:

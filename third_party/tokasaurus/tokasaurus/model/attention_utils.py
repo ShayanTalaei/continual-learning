@@ -313,6 +313,7 @@ def _multi_route_attention(
     v_cache: Tensor,
     attn_info: AttentionInfo,
     wrappers: WrapperCollection,
+    cartridge_attention_mode: str = "global_softmax",
 ) -> Tensor:
     """
     Multi-route attention with unrotated queries for cartridges.
@@ -330,6 +331,8 @@ def _multi_route_attention(
     
     outputs = []
     
+    use_separate_sum = cartridge_attention_mode == "separate_sum"
+
     # --- 1. Prefill phase ---
     if prefill_q.numel() > 0:
         prefill_norm, prefill_cart = attn_info.prefill_info.split_by_cartridge_blocks(
@@ -343,21 +346,49 @@ def _multi_route_attention(
 
         # Run Normal Route
         out_norm, lse_norm = _run_wrapper(
-            wrapper, prefill_q, prefill_norm, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=True, is_decode=False, return_lse=True
+            wrapper,
+            prefill_q,
+            prefill_norm,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=True,
+            is_decode=False,
+            return_lse=True,
         )
         
         # Run Cartridge Route
         out_cart, lse_cart = _run_wrapper(
-            wrapper, prefill_q_unrot, prefill_cart, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=True, is_decode=False, return_lse=True
+            wrapper,
+            prefill_q_unrot,
+            prefill_cart,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=True,
+            is_decode=False,
+            return_lse=True,
         )
         
-        # Merge
-        assert lse_norm is not None and lse_cart is not None
-        merged_out, _ = _merge_attention_outputs_with_lse(out_norm, lse_norm, out_cart, lse_cart)
+        if use_separate_sum:
+            # New behavior: independent softmaxes, then sum value projections.
+            merged_out = out_norm + out_cart
+        else:
+            # Existing behavior: combine using LSE (numerically stable).
+            assert lse_norm is not None and lse_cart is not None
+            merged_out, _ = _merge_attention_outputs_with_lse(
+                out_norm,
+                lse_norm,
+                out_cart,
+                lse_cart,
+            )
+
         outputs.append(merged_out)
     else:
         outputs.append(prefill_q) # Append empty tensor if needed, or nothing
@@ -378,21 +409,56 @@ def _multi_route_attention(
         
         # Run Normal Route
         out_norm, lse_norm = _run_wrapper(
-            wrapper, decode_q, decode_norm, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=True, is_decode=True, return_lse=True
+            wrapper,
+            decode_q,
+            decode_norm,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=True,
+            is_decode=True,
+            return_lse=True,
         )
         
         # Run Cartridge Route
         out_cart, lse_cart = _run_wrapper(
-            wrapper, decode_q_unrot, decode_cart, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=True, is_decode=True, return_lse=True
+            wrapper,
+            decode_q_unrot,
+            decode_cart,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=True,
+            is_decode=True,
+            return_lse=True,
         )
         
         # Merge
         assert lse_norm is not None and lse_cart is not None
-        decode_output, decode_lse = _merge_attention_outputs_with_lse(out_norm, lse_norm, out_cart, lse_cart)
+        if use_separate_sum:
+            # Outputs: independent softmaxes, then sum of value projections.
+            decode_output = out_norm + out_cart
+            # LSE: use combined logZ for downstream Hydragen merging.
+            _, decode_lse = _merge_attention_outputs_with_lse(
+                out_norm,
+                lse_norm,
+                out_cart,
+                lse_cart,
+            )
+        else:
+            decode_output, decode_lse = _merge_attention_outputs_with_lse(
+                out_norm,
+                lse_norm,
+                out_cart,
+                lse_cart,
+            )
+
         outputs.append(decode_output)
     else:
         outputs.append(decode_q)
@@ -411,26 +477,53 @@ def _multi_route_attention(
         
         # Run Normal Route (Shared Prefix)
         sp_out_norm, sp_lse_norm = _run_wrapper(
-            wrapper, hydragen_q, hydragen_norm, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=False, is_decode=False, return_lse=True
+            wrapper,
+            hydragen_q,
+            hydragen_norm,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=False,
+            is_decode=False,
+            return_lse=True,
         )
         
         # Run Cartridge Route (Shared Prefix)
         sp_out_cart, sp_lse_cart = _run_wrapper(
-            wrapper, hydragen_q_unrot, hydragen_cart, k_cache, v_cache,
-            num_kv_heads, num_qo_heads, head_dim, page_size, 
-            causal=False, is_decode=False, return_lse=True
+            wrapper,
+            hydragen_q_unrot,
+            hydragen_cart,
+            k_cache,
+            v_cache,
+            num_kv_heads,
+            num_qo_heads,
+            head_dim,
+            page_size,
+            causal=False,
+            is_decode=False,
+            return_lse=True,
         )
         
         # Merge Shared Prefix
         assert sp_lse_norm is not None and sp_lse_cart is not None
-        shared_prefill_output, shared_prefill_lse = _merge_attention_outputs_with_lse(
-            sp_out_norm,
-            sp_lse_norm,
-            sp_out_cart,
-            sp_lse_cart,
-        )
+        if use_separate_sum:
+            shared_prefill_output = sp_out_norm + sp_out_cart
+            _, shared_prefill_lse = _merge_attention_outputs_with_lse(
+                sp_out_norm,
+                sp_lse_norm,
+                sp_out_cart,
+                sp_lse_cart,
+            )
+        else:
+            shared_prefill_output, shared_prefill_lse = _merge_attention_outputs_with_lse(
+                sp_out_norm,
+                sp_lse_norm,
+                sp_out_cart,
+                sp_lse_cart,
+            )
         
         # Get Unique (Decode) Part
         assert attn_info.hydragen_info is not None
@@ -477,6 +570,7 @@ def tokasaurus_attention(
     attn_info: AttentionInfo,
     wrappers: WrapperCollection,
     use_unrotated_queries: bool = False,  # config flag
+    cartridge_attention_mode: str = "global_softmax",
 ) -> Tensor:
     """
     Assumes rope has been already applied to ragged_q.
@@ -503,5 +597,13 @@ def tokasaurus_attention(
     # Multi-route attention with unrotated queries
     assert ragged_q_unrot is not None, "ragged_q_unrot must be provided for multi-route attention"
     return _multi_route_attention(
-        ragged_q, ragged_q_unrot, ragged_k, ragged_v, k_cache, v_cache, attn_info, wrappers
+        ragged_q,
+        ragged_q_unrot,
+        ragged_k,
+        ragged_v,
+        k_cache,
+        v_cache,
+        attn_info,
+        wrappers,
+        cartridge_attention_mode=cartridge_attention_mode,
     )

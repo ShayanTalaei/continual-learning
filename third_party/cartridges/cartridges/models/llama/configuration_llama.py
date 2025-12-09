@@ -133,6 +133,17 @@ class LlamaConfig(PretrainedConfig):
             Whether to use unrotated queries when attending to cartridge tokens. When `True`, queries
             use rotary position embeddings (RoPE) for normal tokens but not for cartridge tokens.
             When `False`, uses standard behavior with rotated queries for all tokens.
+        cartridge_attention_mode (`str`, *optional*, defaults to `"global_softmax"`):
+            Strategy for combining attention over context vs cartridge tokens when
+            `use_unrotated_queries_for_cartridges=True`.
+            
+            - `"global_softmax"`: (default) approximate a single softmax over both
+              context and cartridge keys by running flex attention twice and merging
+              via log-sum-exp (current behavior).
+            - `"separate_sum"`: compute two independent softmaxes, one over context
+              keys (with rotated queries) and one over cartridge keys (with unrotated
+              queries), then sum the resulting value projections
+              (i.e., `O = O_context + O_cartridge`).
 
     ```python
     >>> from transformers import LlamaModel, LlamaConfig
@@ -191,6 +202,7 @@ class LlamaConfig(PretrainedConfig):
         head_dim=None,
         non_cartridge_start_position_id_offset=0,
         use_unrotated_queries_for_cartridges=False,
+        cartridge_attention_mode="global_softmax",
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -218,6 +230,7 @@ class LlamaConfig(PretrainedConfig):
         self.head_dim = head_dim if head_dim is not None else self.hidden_size // self.num_attention_heads
         self.non_cartridge_start_position_id_offset = non_cartridge_start_position_id_offset
         self.use_unrotated_queries_for_cartridges = use_unrotated_queries_for_cartridges
+        self.cartridge_attention_mode = cartridge_attention_mode
         # Validate the correctness of rotary position embeddings parameters
         # BC: if there is a 'type' field, copy it it to 'rope_type'.
         if self.rope_scaling is not None and "type" in self.rope_scaling:

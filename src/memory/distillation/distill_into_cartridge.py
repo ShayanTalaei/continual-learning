@@ -194,6 +194,11 @@ class DistillationConfig(pydra.Config):
         self.model_name = "meta-llama/Llama-3.1-8B-Instruct"  # Model name
         self.non_cartridge_start_position_id_offset = 0  # Offset for non-cartridge start position IDs
         self.use_unrotated_queries_for_cartridges = False  # Use unrotated queries for cartridge attention
+        # How to combine cartridge vs context attention when unrotated queries are enabled.
+        # Options:
+        # - "global_softmax": approximate a single softmax over context + cartridge (default)
+        # - "separate_sum": independent softmaxes over each, then sum value projections
+        self.cartridge_attention_mode = "global_softmax"
         
         # KV Cache
         self.kv_cache = KVCacheInitConfig()
@@ -301,6 +306,14 @@ class DistillationConfig(pydra.Config):
         self.matx()
         # self.input_dataset.local_path = "/matx/u/bcabrown/shayan_memory/data/cities_easy_synthetic_gen_l8b_20000_with_subsample_and_original_experiences.jsonl"
 
+    def separate_cartridge_attention(self):
+        """
+        Convenience helper: enable unrotated queries and use separate-sum attention
+        for cartridges vs context.
+        """
+        self.use_unrotated_queries_for_cartridges = True
+        self.cartridge_attention_mode = "separate_sum"
+
     def finalize(self):
         if self.run_name is None:
             if self.input_dataset.local_path:
@@ -343,6 +356,7 @@ class DistillationConfig(pydra.Config):
             f"torch_compile=False",
             "use_cudagraphs=F",
             f"use_unrotated_queries_for_cartridges={self.use_unrotated_queries_for_cartridges}",
+            f"cartridge_attention_mode={self.cartridge_attention_mode}",
         ]
         self._apply_toka_server_port_override()
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
@@ -740,6 +754,7 @@ def run_distillation(config: DistillationConfig):
                 load_kwargs={
                     "non_cartridge_start_position_id_offset": config.non_cartridge_start_position_id_offset,
                     "use_unrotated_queries_for_cartridges": config.use_unrotated_queries_for_cartridges,
+                    "cartridge_attention_mode": config.cartridge_attention_mode,
                 },
             ),
             

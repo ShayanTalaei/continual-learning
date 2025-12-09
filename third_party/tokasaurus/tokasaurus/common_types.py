@@ -136,6 +136,11 @@ class ServerConfig(pydra.Config):
     # Cartridge configuration
     cartridge_dir: str = "./cartridges"
     use_unrotated_queries_for_cartridges: bool = False
+    # How to combine cartridge vs context attention when unrotated queries are enabled.
+    # Options:
+    # - "global_softmax": approximate a single softmax over context + cartridge (default)
+    # - "separate_sum": independent softmaxes over each, then sum value projections
+    cartridge_attention_mode: str = "global_softmax"
 
     def uvsh(self):
         self.uvicorn_log_level = "warning"

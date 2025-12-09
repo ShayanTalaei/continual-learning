@@ -262,6 +262,10 @@ def flex_attention_forward(
     
     # Handle cartridge attention with unrotated queries
     if query_unrot is not None and cartridge_mask is not None:
+        # Determine how to combine cartridge vs context attention
+        cfg = getattr(module, "config", None)
+        attention_mode = getattr(cfg, "cartridge_attention_mode", "global_softmax")
+
         # First call: normal keys only, rotated queries
         out_norm, lse_norm = attn(
             query,                        # rotated
@@ -289,24 +293,39 @@ def flex_attention_forward(
             kernel_options=kernel_options,
             return_lse=True,
         )
-        
-        # Combine using LSE (numerically stable)
-        # Cast LSE to output dtype
-        lse_norm = lse_norm.to(out_norm.dtype)
-        lse_cart = lse_cart.to(out_cart.dtype)
-        
-        # logZ = log(exp(lse_norm) + exp(lse_cart)) in a stable way
-        logZ = torch.logaddexp(lse_norm, lse_cart)
-        
-        # Mixture weights for the two groups
-        w_norm = torch.exp(lse_norm - logZ)[..., None]  # (B,H,L,1)
-        w_cart = torch.exp(lse_cart - logZ)[..., None]
-        
-        attn_output = out_norm * w_norm + out_cart * w_cart
-        
-        if _PROFILE_ATTENTION:
-            t_end = perf_counter()
-            print(f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s (Q={q_len}, KV={kv_len}, mode={mode}, cartridge=True)")
+
+        if attention_mode == "separate_sum":
+            # New behavior: independent softmaxes, then sum value projections.
+            attn_output = out_norm + out_cart
+
+            if _PROFILE_ATTENTION:
+                t_end = perf_counter()
+                print(
+                    f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s "
+                    f"(Q={q_len}, KV={kv_len}, mode={mode}, cartridge=True, mode=separate_sum)"
+                )
+        else:
+            # Existing behavior: combine using LSE (numerically stable), approximating a
+            # single softmax over context + cartridge keys.
+            # Cast LSE to output dtype
+            lse_norm = lse_norm.to(out_norm.dtype)
+            lse_cart = lse_cart.to(out_cart.dtype)
+            
+            # logZ = log(exp(lse_norm) + exp(lse_cart)) in a stable way
+            logZ = torch.logaddexp(lse_norm, lse_cart)
+            
+            # Mixture weights for the two groups
+            w_norm = torch.exp(lse_norm - logZ)[..., None]  # (B,H,L,1)
+            w_cart = torch.exp(lse_cart - logZ)[..., None]
+            
+            attn_output = out_norm * w_norm + out_cart * w_cart
+            
+            if _PROFILE_ATTENTION:
+                t_end = perf_counter()
+                print(
+                    f"[PROFILE] flex_attention L{layer_idx}: {t_end - t_start:.4f}s "
+                    f"(Q={q_len}, KV={kv_len}, mode={mode}, cartridge=True, mode=global_softmax)"
+                )
     else:
         # Standard single call (backward compatible)
         attn_output = attn(

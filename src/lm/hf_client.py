@@ -43,6 +43,11 @@ class HFClientConfig(LMConfig):
     torch_dtype: str = "bfloat16"  # Model dtype
     use_unrotated_queries_for_cartridges: bool = False  # Cartridge query rotation setting
     non_cartridge_start_position_id_offset: int = 0  # Position offset for non-cartridge tokens
+    # How to combine cartridge vs context attention when unrotated queries are enabled.
+    # Options:
+    # - "global_softmax": approximate a single softmax over context + cartridge (default)
+    # - "separate_sum": independent softmaxes over each, then sum value projections
+    cartridge_attention_mode: str = "global_softmax"
     load_kwargs: Optional[Dict[str, Any]] = None  # Additional kwargs for from_pretrained
     stop_sequences: Optional[List[str]] = None  # Stop sequences (converted to token IDs)
     model_cls: Optional[str] = None  # Optional: "FlexLlamaForCausalLM" or "FlexQwen3ForCausalLM" (auto-detected if None)
@@ -122,6 +127,8 @@ class HFClient(LanguageModel):
             load_kwargs["non_cartridge_start_position_id_offset"] = self.cfg.non_cartridge_start_position_id_offset
         if "use_unrotated_queries_for_cartridges" not in load_kwargs:
             load_kwargs["use_unrotated_queries_for_cartridges"] = self.cfg.use_unrotated_queries_for_cartridges
+        if "cartridge_attention_mode" not in load_kwargs:
+            load_kwargs["cartridge_attention_mode"] = self.cfg.cartridge_attention_mode
         
         # Determine which model class to use
         # Flex models are required for cartridge-specific parameters to work
@@ -139,7 +146,12 @@ class HFClient(LanguageModel):
             raise ValueError(f"Model {model_id} not supported")
         
         self.logger.info(f"Loading model: {model_id} using {model_cls.__name__}")
-        self.logger.debug(f"Model config parameters: non_cartridge_start_position_id_offset={load_kwargs.get('non_cartridge_start_position_id_offset')}, use_unrotated_queries_for_cartridges={load_kwargs.get('use_unrotated_queries_for_cartridges')}")
+        self.logger.debug(
+            "Model config parameters: "
+            f"non_cartridge_start_position_id_offset={load_kwargs.get('non_cartridge_start_position_id_offset')}, "
+            f"use_unrotated_queries_for_cartridges={load_kwargs.get('use_unrotated_queries_for_cartridges')}, "
+            f"cartridge_attention_mode={load_kwargs.get('cartridge_attention_mode')}"
+        )
         
         self._model = model_cls.from_pretrained(
             model_id,

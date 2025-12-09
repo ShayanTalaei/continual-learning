@@ -353,6 +353,7 @@ def make_model(
         enable_chosen_logprobs=config.enable_chosen_logprobs,
         topk_logprobs=config.max_topk_logprobs,
         use_unrotated_queries_for_cartridges=config.use_unrotated_queries_for_cartridges,
+        cartridge_attention_mode=config.cartridge_attention_mode,
     )
 
     if config.rope_scaling is not None:

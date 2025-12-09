@@ -411,7 +411,7 @@ def train(config: TrainConfig):
         lr_scheduler: Scheduler = config.lr_scheduler.instantiate()
     else:
         lr_scheduler = None
-
+    
     # Dataloader length is fixed for our non-streaming datasets; we use it to
     # compute how many batches within the current epoch have already been seen
     # when resuming from a checkpoint.
@@ -647,7 +647,6 @@ def train(config: TrainConfig):
                 save_training_state(
                     config=config,
                     optimizer=optimizer,
-                    lr_scheduler=lr_scheduler,
                     epoch_idx=epoch_idx,
                     iter_idx=iter_idx,
                     optimizer_step=optimizer_step,
@@ -680,7 +679,6 @@ def train(config: TrainConfig):
         save_training_state(
             config=config,
             optimizer=optimizer,
-            lr_scheduler=lr_scheduler,
             epoch_idx=epoch_idx,
             iter_idx=iter_idx,
             optimizer_step=optimizer_step,
