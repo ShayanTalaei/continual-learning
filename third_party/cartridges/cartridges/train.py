@@ -4,6 +4,7 @@ import contextlib
 from dataclasses import dataclass, field
 import math
 from math import cos, pi
+import itertools
 import os
 from pathlib import Path
 import re
@@ -139,6 +140,11 @@ class TrainConfig(RunConfig):
     dataloader_num_workers: int = 1
 
     load_cache_path: Optional[str] = None
+
+    # Path to a training checkpoint created by this script to resume from.
+    # When None, training starts from scratch (but may still load a cache via
+    # `load_cache_path` / `kv_cache_initializer`).
+    resume_from_checkpoint: Optional[str] = None
 
     def run(self):
         return train(self)
@@ -405,20 +411,56 @@ def train(config: TrainConfig):
         lr_scheduler: Scheduler = config.lr_scheduler.instantiate()
     else:
         lr_scheduler = None
-    
-    for epoch_idx in range(1, config.epochs + 1):
+
+    # Dataloader length is fixed for our non-streaming datasets; we use it to
+    # compute how many batches within the current epoch have already been seen
+    # when resuming from a checkpoint.
+    batches_per_epoch = len(dataloader)
+
+    # Optionally load optimizer / scheduler / counter state.
+    start_epoch, start_iter_idx, optimizer_step, saved_batches_per_epoch = load_training_state(
+        config=config,
+        optimizer=optimizer,
+        lr_scheduler=lr_scheduler,
+        device=local_rank,
+    )
+    if saved_batches_per_epoch is not None and saved_batches_per_epoch != batches_per_epoch:
+        logger.warning(
+            f"Resuming from checkpoint with batches_per_epoch={saved_batches_per_epoch}, "
+            f"but current dataloader has {batches_per_epoch} batches. "
+            "Batch-level resume may not be exact."
+        )
+
+    iter_idx = start_iter_idx
+
+    for epoch_idx in range(start_epoch, config.epochs + 1):
 
         if is_ddp and train_sampler is not None:
             train_sampler.set_epoch(epoch_idx)
 
+        # Recreate dataloader each epoch so that the sampler uses the correct epoch seed.
+        dataloader = DataLoader(
+            dataset,
+            sampler=train_sampler,
+            batch_size=1,
+            collate_fn=_collate_fn_first,
+            num_workers=config.dataloader_num_workers,
+        )
+
+        batches_per_epoch = len(dataloader)
+        logger.info(f"Dataloader length: {batches_per_epoch}")
+
+        # On resume, we may already have processed some batches in this epoch.
+        batches_seen_in_epoch = iter_idx % batches_per_epoch if batches_per_epoch > 0 else 0
+
         train_pbar = tqdm(
-            dataloader,
-            total=len(dataloader),
+            itertools.islice(dataloader, batches_seen_in_epoch, None),
+            total=batches_per_epoch - batches_seen_in_epoch,
             desc=f"Epoch {epoch_idx}",
             leave=False,
             disable=not is_rank_zero,
         )
-        logger.info(f"Dataloader length: {len(dataloader)}")
+
         for batch in train_pbar:
             batch: DatasetBatch
             step_start_time = time.time()
@@ -587,7 +629,7 @@ def train(config: TrainConfig):
                 and optimizer_step > 0  # don't save on the first step
                 and optimizer_step % config.save_every_n_steps == 0
                 and is_rank_zero
-            ) or (optimizer_step == config.max_optimizer_steps):
+            ) or (optimizer_step == config.max_optimizer_steps and is_rank_zero):
                 if cache_tuning:
                     save_cache(config, cache, optimizer_step=optimizer_step)
                 else:
@@ -600,6 +642,17 @@ def train(config: TrainConfig):
                     model.save_pretrained(
                         f"{config.run_dir}/peft_model_{optimizer_step}"
                     )
+
+                # Save training state alongside cache / model so we can resume
+                save_training_state(
+                    config=config,
+                    optimizer=optimizer,
+                    lr_scheduler=lr_scheduler,
+                    epoch_idx=epoch_idx,
+                    iter_idx=iter_idx,
+                    optimizer_step=optimizer_step,
+                    batches_per_epoch=batches_per_epoch,
+                )
 
             if cache_tuning:
                 cache.clear()
@@ -622,6 +675,17 @@ def train(config: TrainConfig):
             # Save PEFT model
             logger.info(f"Saving PEFT model to {config.run_dir}/peft_model")
             model.save_pretrained(f"{config.run_dir}/peft_model")
+
+        # Also persist final training state for potential future resume.
+        save_training_state(
+            config=config,
+            optimizer=optimizer,
+            lr_scheduler=lr_scheduler,
+            epoch_idx=epoch_idx,
+            iter_idx=iter_idx,
+            optimizer_step=optimizer_step,
+            batches_per_epoch=batches_per_epoch,
+        )
     
     logger.info(f"Done training waiting for final barrier.")
 
@@ -1414,5 +1478,80 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     while len(all_checkpoints) > config.keep_last_n_saved:
         oldest = all_checkpoints.pop(0)
         os.remove(os.path.join(config.run_dir, oldest))
+
+
+def save_training_state(
+    config: TrainConfig,
+    optimizer: optim.Optimizer,
+    epoch_idx: int,
+    iter_idx: int,
+    optimizer_step: int,
+    batches_per_epoch: int,
+) -> str:
+    """
+    Save optimizer, scheduler, and counter state so that training can be resumed.
+    """
+    run_dir = Path(config.run_dir)
+    run_dir.mkdir(exist_ok=True, parents=True)
+
+    filename = f"training_state_step{optimizer_step}.pt"
+    ckpt_path = run_dir / filename
+
+    state = {
+        "epoch_idx": epoch_idx,
+        "iter_idx": iter_idx,
+        "optimizer_step": optimizer_step,
+        "batches_per_epoch": batches_per_epoch,
+        "optimizer": optimizer.state_dict(),
+    }
+    torch.save(state, ckpt_path)
+
+    # Create/update symlink to latest training checkpoint
+    symlink_path = run_dir / "training_state_last.pt"
+    if symlink_path.exists() or symlink_path.is_symlink():
+        symlink_path.unlink()
+    try:
+        symlink_path.symlink_to(ckpt_path.name)
+    except OSError:
+        # On filesystems that don't support symlinks, just skip creating it.
+        pass
+
+    return str(ckpt_path)
+
+
+def load_training_state(
+    config: TrainConfig,
+    optimizer: optim.Optimizer,
+    lr_scheduler: Optional[Scheduler],
+    device,
+) -> tuple[int, int, int, Optional[int]]:
+    """
+    Load optimizer, scheduler, and counter state.
+
+    Returns:
+        start_epoch (int): epoch index to start from (1-based).
+        start_iter_idx (int): global iter_idx to start from.
+        start_optimizer_step (int): optimizer_step to resume from.
+        saved_batches_per_epoch (Optional[int]): batches_per_epoch saved in the checkpoint.
+    """
+    if config.resume_from_checkpoint is None:
+        return 1, 0, 0, None
+
+    ckpt_path = Path(config.resume_from_checkpoint)
+    if not ckpt_path.exists():
+        raise FileNotFoundError(f"Training checkpoint not found: {ckpt_path}")
+
+    logger.info(f"Resuming training state from checkpoint: {ckpt_path}")
+    # We can safely load optimizer state on CPU and move tensors as needed.
+    ckpt = torch.load(ckpt_path, map_location="cpu")
+
+    optimizer.load_state_dict(ckpt["optimizer"])
+    start_epoch = int(ckpt.get("epoch_idx", 1))
+    start_iter_idx = int(ckpt.get("iter_idx", 0))
+    start_optimizer_step = int(ckpt.get("optimizer_step", 0))
+    saved_batches_per_epoch = ckpt.get("batches_per_epoch", None)
+
+    return start_epoch, start_iter_idx, start_optimizer_step, saved_batches_per_epoch
+
 
 

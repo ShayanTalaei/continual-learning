@@ -250,6 +250,7 @@ class DistillationConfig(pydra.Config):
         self.dataloader_num_workers = 1
 
         self.load_cache_path = None
+        self.resume_from_checkpoint = None
     
     def long_seqs(self):
         self.dataset.packed_seq_length = 128_000
@@ -798,6 +799,7 @@ def run_distillation(config: DistillationConfig):
             seed=config.training.seed,
 
             dataloader_num_workers=config.dataloader_num_workers,
+            resume_from_checkpoint=config.resume_from_checkpoint,
         )
         
         print("[Distill] Starting training...")
