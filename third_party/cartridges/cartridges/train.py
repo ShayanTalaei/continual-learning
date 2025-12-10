@@ -423,6 +423,7 @@ def train(config: TrainConfig):
         optimizer=optimizer,
         lr_scheduler=lr_scheduler,
         device=local_rank,
+        cache=cache if cache_tuning else None,
     )
     if saved_batches_per_epoch is not None and saved_batches_per_epoch != batches_per_epoch:
         logger.warning(
@@ -651,6 +652,7 @@ def train(config: TrainConfig):
                     iter_idx=iter_idx,
                     optimizer_step=optimizer_step,
                     batches_per_epoch=batches_per_epoch,
+                    cache=cache if cache_tuning else None,
                 )
 
             if cache_tuning:
@@ -683,6 +685,7 @@ def train(config: TrainConfig):
             iter_idx=iter_idx,
             optimizer_step=optimizer_step,
             batches_per_epoch=batches_per_epoch,
+            cache=cache if cache_tuning else None,
         )
     
     logger.info(f"Done training waiting for final barrier.")
@@ -1485,6 +1488,7 @@ def save_training_state(
     iter_idx: int,
     optimizer_step: int,
     batches_per_epoch: int,
+    cache: Optional[TrainableCache] = None,
 ) -> str:
     """
     Save optimizer, scheduler, and counter state so that training can be resumed.
@@ -1501,6 +1505,9 @@ def save_training_state(
         "optimizer_step": optimizer_step,
         "batches_per_epoch": batches_per_epoch,
         "optimizer": optimizer.state_dict(),
+        # Persist cache parameters (including parametrization / pos-embeddings) so
+        # resume uses an identical parameter set to what the optimizer expects.
+        "cache": cache.state_dict() if cache is not None else None,
     }
     torch.save(state, ckpt_path)
 
@@ -1522,6 +1529,7 @@ def load_training_state(
     optimizer: optim.Optimizer,
     lr_scheduler: Optional[Scheduler],
     device,
+    cache: Optional[TrainableCache] = None,
 ) -> tuple[int, int, int, Optional[int]]:
     """
     Load optimizer, scheduler, and counter state.
@@ -1543,7 +1551,27 @@ def load_training_state(
     # We can safely load optimizer state on CPU and move tensors as needed.
     ckpt = torch.load(ckpt_path, map_location="cpu")
 
-    optimizer.load_state_dict(ckpt["optimizer"])
+    # Restore cache parameters first so optimizer param shapes match.
+    if cache is not None and ckpt.get("cache") is not None:
+        try:
+            cache.load_state_dict(ckpt["cache"])
+            logger.info("Loaded cache parameters from training checkpoint")
+        except Exception as e:  # pragma: no cover
+            logger.warning(f"Failed to load cache state (continuing fresh): {e}")
+    elif cache is not None:
+        logger.warning(
+            "Training checkpoint missing cache state; optimizer state may not match."
+        )
+
+    try:
+        optimizer.load_state_dict(ckpt["optimizer"])
+    except ValueError as e:
+        logger.warning(
+            "Optimizer state did not match current parameter groups; "
+            f"restarting optimizer state. Details: {e}"
+        )
+    except Exception as e:  # pragma: no cover
+        logger.warning(f"Failed to load optimizer state (continuing fresh): {e}")
     start_epoch = int(ckpt.get("epoch_idx", 1))
     start_iter_idx = int(ckpt.get("iter_idx", 0))
     start_optimizer_step = int(ckpt.get("optimizer_step", 0))
