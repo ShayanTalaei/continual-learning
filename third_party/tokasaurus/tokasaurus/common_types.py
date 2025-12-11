@@ -141,6 +141,9 @@ class ServerConfig(pydra.Config):
     # - "global_softmax": approximate a single softmax over context + cartridge (default)
     # - "separate_sum": independent softmaxes over each, then sum value projections
     cartridge_attention_mode: str = "global_softmax"
+    cartridge_attention_gate_enabled: bool = False
+    cartridge_attention_gate_granularity: str = "per_head"  # "global" | "per_layer" | "per_head"
+    cartridge_attention_gate_init: float = 0.0
 
     def uvsh(self):
         self.uvicorn_log_level = "warning"

@@ -280,6 +280,161 @@ class ResidualMLPParametrization(CartridgeParametrization):
         }
 
 
+class GatedResidualMLPParametrization(CartridgeParametrization):
+    """MLP + residual with learnable gates: trainable = ref + α * MLP(ref)."""
+
+    class Config(ResidualMLPParametrization.Config):
+        gate_granularity: Literal["global", "per_layer", "per_head"] = "per_head"
+        gate_init: float = 0.0  # α init; keep small/zero to preserve baseline
+
+    def __init__(
+        self,
+        config: Config,
+        attn_config: AttnConfig,
+        init_keys: list[torch.Tensor],
+        init_values: list[torch.Tensor],
+        num_frozen_tokens: int,
+    ):
+        super().__init__(attn_config, init_keys, init_values, num_frozen_tokens)
+        self.cfg = config
+
+        # Reuse reference/frozen storage from ResidualMLPParametrization pattern
+        if num_frozen_tokens > 0:
+            self.frozen_keys = nn.ParameterList(
+                [
+                    nn.Parameter(k[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for k in init_keys
+                ]
+            )
+            self.frozen_values = nn.ParameterList(
+                [
+                    nn.Parameter(v[:, :, :num_frozen_tokens].contiguous(), requires_grad=False)
+                    for v in init_values
+                ]
+            )
+        else:
+            self.frozen_keys = nn.ParameterList([])
+            self.frozen_values = nn.ParameterList([])
+
+        self.reference_keys = nn.ParameterList(
+            [
+                nn.Parameter(k[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for k in init_keys
+            ]
+        )
+        self.reference_values = nn.ParameterList(
+            [
+                nn.Parameter(v[:, :, num_frozen_tokens:].contiguous(), requires_grad=False)
+                for v in init_values
+            ]
+        )
+
+        head_dim = attn_config.head_dim
+        hidden_dim = int(head_dim * self.cfg.hidden_multiplier)
+        input_dtype = init_keys[0].dtype
+
+        def make_mlp():
+            act = nn.ReLU() if self.cfg.activation == "relu" else nn.GELU()
+            last_layer = nn.Linear(hidden_dim, head_dim)
+            if self.cfg.zero_init_last_layer:
+                nn.init.zeros_(last_layer.weight)
+                nn.init.zeros_(last_layer.bias)
+            mlp = nn.Sequential(
+                nn.Linear(head_dim, hidden_dim),
+                act,
+                last_layer,
+            ).to(dtype=input_dtype)
+            return mlp
+
+        if self.cfg.share_across_layers:
+            self.key_mlp = make_mlp()
+            self.value_mlp = make_mlp()
+        else:
+            self.key_mlp = nn.ModuleList([make_mlp() for _ in range(attn_config.n_layers)])
+            self.value_mlp = nn.ModuleList([make_mlp() for _ in range(attn_config.n_layers)])
+
+        # Learnable gates
+        def make_gate():
+            g_init = torch.tensor(self.cfg.gate_init, dtype=input_dtype)
+            if self.cfg.gate_granularity == "global":
+                return nn.Parameter(g_init.clone())
+            if self.cfg.gate_granularity == "per_layer":
+                return nn.Parameter(torch.full((attn_config.n_layers,), g_init.item(), dtype=input_dtype))
+            # per_head: shape (n_layers, n_heads)
+            return nn.Parameter(
+                torch.full((attn_config.n_layers, attn_config.n_heads), g_init.item(), dtype=input_dtype)
+            )
+
+        self.gate_k = make_gate()
+        self.gate_v = make_gate()
+
+    def _apply_mlp(self, mlp, x: torch.Tensor) -> torch.Tensor:
+        b, h, t, d = x.shape
+        y = x.view(-1, d)
+        y = mlp(y)
+        return (y.view(b, h, t, d) + x)
+
+    def _gate(self, gate_param, layer_idx: int, num_heads: int, device, dtype) -> torch.Tensor:
+        if self.cfg.gate_granularity == "global":
+            return gate_param.to(device=device, dtype=dtype)
+        if self.cfg.gate_granularity == "per_layer":
+            return gate_param[layer_idx].to(device=device, dtype=dtype)
+        # per_head
+        return gate_param[layer_idx].view(1, num_heads, 1, 1).to(device=device, dtype=dtype)
+
+    def get_frozen(self):
+        return list(self.frozen_keys), list(self.frozen_values)
+
+    def get_trainable(self):
+        keys, values = [], []
+        num_heads = self.attn_config.n_heads
+        for layer_idx, (ref_k, ref_v) in enumerate(
+            zip(self.reference_keys, self.reference_values)
+        ):
+            if isinstance(self.key_mlp, nn.ModuleList):
+                k_mlp = self.key_mlp[layer_idx]
+                v_mlp = self.value_mlp[layer_idx]
+            else:
+                k_mlp = self.key_mlp
+                v_mlp = self.value_mlp
+
+            k_delta = self._apply_mlp(k_mlp, ref_k)
+            v_delta = self._apply_mlp(v_mlp, ref_v)
+
+            alpha_k = self._gate(self.gate_k, layer_idx, num_heads, ref_k.device, ref_k.dtype)
+            alpha_v = self._gate(self.gate_v, layer_idx, num_heads, ref_v.device, ref_v.dtype)
+
+            if self.cfg.gate_granularity == "per_head":
+                keys.append(ref_k + alpha_k * k_delta)
+                values.append(ref_v + alpha_v * v_delta)
+            else:
+                keys.append(ref_k + alpha_k.view(1, 1, 1, 1) * k_delta)
+                values.append(ref_v + alpha_v.view(1, 1, 1, 1) * v_delta)
+
+        return keys, values
+
+    def logging_metrics(self) -> dict[str, torch.Tensor]:
+        ks, vs = self.get_trainable()
+        ref_k_norm = torch.stack([rk.norm() for rk in self.reference_keys]).mean()
+        ref_v_norm = torch.stack([rv.norm() for rv in self.reference_values]).mean()
+        k_norm = torch.stack([k.norm() for k in ks]).mean()
+        v_norm = torch.stack([v.norm() for v in vs]).mean()
+        gate_k_mean = (
+            self.gate_k.mean() if isinstance(self.gate_k, torch.Tensor) else torch.tensor(0.0, device=ks[0].device)
+        )
+        gate_v_mean = (
+            self.gate_v.mean() if isinstance(self.gate_v, torch.Tensor) else torch.tensor(0.0, device=vs[0].device)
+        )
+        return {
+            "mean_reference_key_norm": ref_k_norm,
+            "mean_reference_value_norm": ref_v_norm,
+            "mean_gated_mlp_key_norm": k_norm,
+            "mean_gated_mlp_value_norm": v_norm,
+            "mean_gate_k": gate_k_mean,
+            "mean_gate_v": gate_v_mean,
+        }
+
+
 class TrainableCache(nn.Module):
     """A trainable packed cache for generation with FlexAttention.
     
@@ -715,6 +870,7 @@ class TrainableCache(nn.Module):
 PARAM_REGISTRY = {
     "offset": OffsetParametrization,
     "mlp_residual": ResidualMLPParametrization,
+    "mlp_residual_gated": GatedResidualMLPParametrization,
 }
 
 
@@ -731,6 +887,15 @@ def create_parametrization(
 
     if ParamCls is ResidualMLPParametrization:
         param_cfg = ResidualMLPParametrization.Config(**parametrization_config)
+        parametrization = ParamCls(
+            config=param_cfg,
+            attn_config=attn_config,
+            init_keys=init_keys,
+            init_values=init_values,
+            num_frozen_tokens=num_frozen_tokens,
+        )
+    elif ParamCls is GatedResidualMLPParametrization:
+        param_cfg = GatedResidualMLPParametrization.Config(**parametrization_config)
         parametrization = ParamCls(
             config=param_cfg,
             attn_config=attn_config,
@@ -757,7 +922,7 @@ class KVCacheFactory(abc.ABC):
         num_frozen_tokens: int = 1
 
         # Parametrization configuration
-        parametrization_type: Literal["offset", "mlp_residual"] = "offset"
+        parametrization_type: Literal["offset", "mlp_residual", "mlp_residual_gated"] = "offset"
         parametrization_config: dict = Field(default_factory=dict)
         positional_embeddings: PositionalEmbeddingConfig = Field(default_factory=PositionalEmbeddingConfig)
 

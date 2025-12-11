@@ -221,6 +221,7 @@ def flex_attention_forward(
     mode: Literal["train", "generate"] = "train",
     query_unrot: Optional[torch.Tensor] = None,
     cartridge_mask: Optional["BlockMask"] = None,
+    attn_gate: Optional[torch.Tensor] = None,
     **kwargs,
 ) -> torch.Tensor:
 
@@ -294,10 +295,15 @@ def flex_attention_forward(
             return_lse=True,
         )
 
-        if attention_mode == "separate_sum":
-            # New behavior: independent softmaxes, then sum value projections.
-            attn_output = out_norm + out_cart
+        if attn_gate is not None:
+            attn_gate = attn_gate.to(device=query.device, dtype=out_norm.dtype)
+            if attn_gate.dim() == 0:
+                attn_gate = attn_gate.view(1, 1, 1, 1)
 
+        if attention_mode == "separate_sum":
+            attn_output = out_norm + out_cart
+            if attn_gate is not None:
+                attn_output = (1 - attn_gate) * out_norm + attn_gate * out_cart
             if _PROFILE_ATTENTION:
                 t_end = perf_counter()
                 print(
@@ -305,21 +311,17 @@ def flex_attention_forward(
                     f"(Q={q_len}, KV={kv_len}, mode={mode}, cartridge=True, mode=separate_sum)"
                 )
         else:
-            # Existing behavior: combine using LSE (numerically stable), approximating a
-            # single softmax over context + cartridge keys.
-            # Cast LSE to output dtype
+            # combine via log-sum-exp
             lse_norm = lse_norm.to(out_norm.dtype)
             lse_cart = lse_cart.to(out_cart.dtype)
-            
-            # logZ = log(exp(lse_norm) + exp(lse_cart)) in a stable way
             logZ = torch.logaddexp(lse_norm, lse_cart)
-            
-            # Mixture weights for the two groups
             w_norm = torch.exp(lse_norm - logZ)[..., None]  # (B,H,L,1)
             w_cart = torch.exp(lse_cart - logZ)[..., None]
-            
-            attn_output = out_norm * w_norm + out_cart * w_cart
-            
+            attn_raw = out_norm * w_norm + out_cart * w_cart
+            if attn_gate is not None:
+                attn_output = (1 - attn_gate) * out_norm + attn_gate * attn_raw
+            else:
+                attn_output = attn_raw
             if _PROFILE_ATTENTION:
                 t_end = perf_counter()
                 print(
@@ -374,6 +376,18 @@ class LlamaAttention(nn.Module):
         self.o_proj = nn.Linear(
             config.num_attention_heads * self.head_dim, config.hidden_size, bias=config.attention_bias
         )
+        # Optional attention gate mixing cartridge vs context
+        self.attn_gate = None
+        self.attn_gate_granularity = getattr(config, "cartridge_attention_gate_granularity", "per_head")
+        gate_enabled = getattr(config, "cartridge_attention_gate_enabled", False)
+        gate_init = getattr(config, "cartridge_attention_gate_init", 0.0)
+        if gate_enabled:
+            if self.attn_gate_granularity == "per_head":
+                self.attn_gate = nn.Parameter(
+                    torch.full((1, config.num_attention_heads, 1, 1), gate_init, dtype=torch.float32)
+                )
+            else:
+                self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
 
     def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> torch.Tensor:
         if _PROFILE_ATTENTION:
@@ -466,6 +480,7 @@ class LlamaAttention(nn.Module):
             mode=batch.mode,
             query_unrot=query_states_unrot,
             cartridge_mask=batch.cartridge_mask,
+            attn_gate=self.attn_gate,
         )
 
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()

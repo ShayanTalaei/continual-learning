@@ -120,6 +120,8 @@ class KVCacheInitConfig(pydra.Config):
         self.parametrization_activation = "relu"  # Activation function: "relu" or "gelu"
         self.parametrization_share_across_layers = True  # Whether to share MLP across layers
         self.parametrization_zero_init_last_layer = False  # Zero last layer to keep init identical
+        self.parametrization_gate_granularity = "per_head"  # for gated MLP: "global", "per_layer", "per_head"
+        self.parametrization_gate_init = 0.0  # gate init for gated MLP; keep 0 to suppress at start
         
         # For text initialization
         self.init_text = None  # Text to initialize from (for method='text')
@@ -199,6 +201,9 @@ class DistillationConfig(pydra.Config):
         # - "global_softmax": approximate a single softmax over context + cartridge (default)
         # - "separate_sum": independent softmaxes over each, then sum value projections
         self.cartridge_attention_mode = "global_softmax"
+        self.cartridge_attention_gate_enabled = False
+        self.cartridge_attention_gate_granularity = "per_head"  # "global" | "per_layer" | "per_head"
+        self.cartridge_attention_gate_init = 0.0
         
         # KV Cache
         self.kv_cache = KVCacheInitConfig()
@@ -440,6 +445,14 @@ def create_kv_cache_factory(config: KVCacheInitConfig, temp_dir: Path) -> KVCach
         "share_across_layers": config.parametrization_share_across_layers,
         "zero_init_last_layer": config.parametrization_zero_init_last_layer,
     }
+    parametrization_config.update(
+        {
+            "gate_granularity": config.parametrization_gate_granularity,
+            "gate_init": config.parametrization_gate_init,
+        }
+        if config.parametrization_type == "mlp_residual_gated"
+        else {}
+    )
     
     init_mode: Literal["zero", "random"] = (
         "random" if config.positional_embeddings.init_mode == "random" else "zero"
@@ -755,6 +768,9 @@ def run_distillation(config: DistillationConfig):
                     "non_cartridge_start_position_id_offset": config.non_cartridge_start_position_id_offset,
                     "use_unrotated_queries_for_cartridges": config.use_unrotated_queries_for_cartridges,
                     "cartridge_attention_mode": config.cartridge_attention_mode,
+                    "cartridge_attention_gate_enabled": config.cartridge_attention_gate_enabled,
+                    "cartridge_attention_gate_granularity": config.cartridge_attention_gate_granularity,
+                    "cartridge_attention_gate_init": config.cartridge_attention_gate_init,
                 },
             ),
             

@@ -354,6 +354,9 @@ def make_model(
         topk_logprobs=config.max_topk_logprobs,
         use_unrotated_queries_for_cartridges=config.use_unrotated_queries_for_cartridges,
         cartridge_attention_mode=config.cartridge_attention_mode,
+        cartridge_attention_gate_enabled=getattr(config, "cartridge_attention_gate_enabled", False),
+        cartridge_attention_gate_granularity=getattr(config, "cartridge_attention_gate_granularity", "per_head"),
+        cartridge_attention_gate_init=getattr(config, "cartridge_attention_gate_init", 0.0),
     )
 
     if config.rope_scaling is not None:

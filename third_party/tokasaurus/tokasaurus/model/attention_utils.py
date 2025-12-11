@@ -314,6 +314,7 @@ def _multi_route_attention(
     attn_info: AttentionInfo,
     wrappers: WrapperCollection,
     cartridge_attention_mode: str = "global_softmax",
+    attn_gate: Tensor | None = None,
 ) -> Tensor:
     """
     Multi-route attention with unrotated queries for cartridges.
@@ -332,6 +333,15 @@ def _multi_route_attention(
     outputs = []
     
     use_separate_sum = cartridge_attention_mode == "separate_sum"
+
+    def apply_gate(base: Tensor, cart: Tensor) -> Tensor:
+        if attn_gate is None:
+            return base + cart if use_separate_sum else cart
+        g = attn_gate.to(device=base.device, dtype=base.dtype)
+        if g.dim() == 0:
+            g = g.view(1, 1, 1, 1)
+        # broadcast to (tokens, heads, head_dim) via implicit broadcast
+        return (1 - g) * base + g * cart
 
     # --- 1. Prefill phase ---
     if prefill_q.numel() > 0:
@@ -377,17 +387,16 @@ def _multi_route_attention(
         )
         
         if use_separate_sum:
-            # New behavior: independent softmaxes, then sum value projections.
-            merged_out = out_norm + out_cart
+            merged_out = apply_gate(out_norm, out_cart)
         else:
-            # Existing behavior: combine using LSE (numerically stable).
             assert lse_norm is not None and lse_cart is not None
-            merged_out, _ = _merge_attention_outputs_with_lse(
+            attn_raw, _ = _merge_attention_outputs_with_lse(
                 out_norm,
                 lse_norm,
                 out_cart,
                 lse_cart,
             )
+            merged_out = apply_gate(out_norm, attn_raw)
 
         outputs.append(merged_out)
     else:
@@ -442,9 +451,7 @@ def _multi_route_attention(
         # Merge
         assert lse_norm is not None and lse_cart is not None
         if use_separate_sum:
-            # Outputs: independent softmaxes, then sum of value projections.
-            decode_output = out_norm + out_cart
-            # LSE: use combined logZ for downstream Hydragen merging.
+            decode_output = apply_gate(out_norm, out_cart)
             _, decode_lse = _merge_attention_outputs_with_lse(
                 out_norm,
                 lse_norm,
@@ -452,12 +459,13 @@ def _multi_route_attention(
                 lse_cart,
             )
         else:
-            decode_output, decode_lse = _merge_attention_outputs_with_lse(
+            attn_raw, decode_lse = _merge_attention_outputs_with_lse(
                 out_norm,
                 lse_norm,
                 out_cart,
                 lse_cart,
             )
+            decode_output = apply_gate(out_norm, attn_raw)
 
         outputs.append(decode_output)
     else:
@@ -510,7 +518,7 @@ def _multi_route_attention(
         # Merge Shared Prefix
         assert sp_lse_norm is not None and sp_lse_cart is not None
         if use_separate_sum:
-            shared_prefill_output = sp_out_norm + sp_out_cart
+            shared_prefill_output = apply_gate(sp_out_norm, sp_out_cart)
             _, shared_prefill_lse = _merge_attention_outputs_with_lse(
                 sp_out_norm,
                 sp_lse_norm,
@@ -518,12 +526,13 @@ def _multi_route_attention(
                 sp_lse_cart,
             )
         else:
-            shared_prefill_output, shared_prefill_lse = _merge_attention_outputs_with_lse(
+            sp_attn_raw, shared_prefill_lse = _merge_attention_outputs_with_lse(
                 sp_out_norm,
                 sp_lse_norm,
                 sp_out_cart,
                 sp_lse_cart,
             )
+            shared_prefill_output = apply_gate(sp_out_norm, sp_attn_raw)
         
         # Get Unique (Decode) Part
         assert attn_info.hydragen_info is not None
@@ -571,6 +580,7 @@ def tokasaurus_attention(
     wrappers: WrapperCollection,
     use_unrotated_queries: bool = False,  # config flag
     cartridge_attention_mode: str = "global_softmax",
+    attn_gate: Tensor | None = None,
 ) -> Tensor:
     """
     Assumes rope has been already applied to ragged_q.
@@ -606,4 +616,5 @@ def tokasaurus_attention(
         attn_info,
         wrappers,
         cartridge_attention_mode=cartridge_attention_mode,
+        attn_gate=attn_gate,
     )

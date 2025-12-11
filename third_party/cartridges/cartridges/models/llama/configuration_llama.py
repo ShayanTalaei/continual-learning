@@ -144,6 +144,12 @@ class LlamaConfig(PretrainedConfig):
               keys (with rotated queries) and one over cartridge keys (with unrotated
               queries), then sum the resulting value projections
               (i.e., `O = O_context + O_cartridge`).
+        cartridge_attention_gate_enabled (`bool`, *optional*, defaults to `False`):
+            If True, applies a learnable gate α mixing context vs cartridge attention outputs.
+        cartridge_attention_gate_granularity (`str`, *optional*, defaults to `"per_head"`):
+            Granularity of gate α: `"global"`, `"per_layer"`, or `"per_head"`.
+        cartridge_attention_gate_init (`float`, *optional*, defaults to `0.0`):
+            Initial value for the gate parameter(s); small/zero keeps cartridge suppressed at init.
 
     ```python
     >>> from transformers import LlamaModel, LlamaConfig
@@ -203,6 +209,9 @@ class LlamaConfig(PretrainedConfig):
         non_cartridge_start_position_id_offset=0,
         use_unrotated_queries_for_cartridges=False,
         cartridge_attention_mode="global_softmax",
+        cartridge_attention_gate_enabled=False,
+        cartridge_attention_gate_granularity="per_head",
+        cartridge_attention_gate_init=0.0,
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -231,6 +240,9 @@ class LlamaConfig(PretrainedConfig):
         self.non_cartridge_start_position_id_offset = non_cartridge_start_position_id_offset
         self.use_unrotated_queries_for_cartridges = use_unrotated_queries_for_cartridges
         self.cartridge_attention_mode = cartridge_attention_mode
+        self.cartridge_attention_gate_enabled = cartridge_attention_gate_enabled
+        self.cartridge_attention_gate_granularity = cartridge_attention_gate_granularity
+        self.cartridge_attention_gate_init = cartridge_attention_gate_init
         # Validate the correctness of rotary position embeddings parameters
         # BC: if there is a 'type' field, copy it it to 'rope_type'.
         if self.rope_scaling is not None and "type" in self.rope_scaling:

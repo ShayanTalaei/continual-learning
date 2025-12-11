@@ -154,6 +154,20 @@ class LlamaAttention(nn.Module):
         self.attention_info: AttentionInfo | None = None
 
         self.attn_fn = self.make_attn_fn()
+        # Optional attention gate mixing cartridge vs context
+        self.attn_gate = None
+        gate_enabled = getattr(extra_config, "cartridge_attention_gate_enabled", False)
+        gate_granularity = getattr(extra_config, "cartridge_attention_gate_granularity", "per_head")
+        gate_init = getattr(extra_config, "cartridge_attention_gate_init", 0.0)
+        if gate_enabled:
+            if gate_granularity == "per_head":
+                self.attn_gate = nn.Parameter(
+                    torch.full((1, self.num_attention_heads, 1, 1), gate_init, dtype=torch.float32)
+                )
+            elif gate_granularity == "per_layer":
+                self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
+            else:  # global
+                self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
 
     def head_dim(self):
         return self.config.hidden_size // self.config.num_attention_heads
@@ -199,6 +213,7 @@ class LlamaAttention(nn.Module):
                 wrappers=self.wrapper_collection,
                 use_unrotated_queries=self.extra_config.use_unrotated_queries_for_cartridges,
                 cartridge_attention_mode=self.extra_config.cartridge_attention_mode,
+                attn_gate=self.attn_gate,
             )
 
             if num_padding > 0:
