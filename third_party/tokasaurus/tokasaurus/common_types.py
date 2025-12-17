@@ -135,6 +135,7 @@ class ServerConfig(pydra.Config):
 
     # Cartridge configuration
     cartridge_dir: str = "./cartridges"
+    gate_state_path: str | None = None
     use_unrotated_queries_for_cartridges: bool = False
     # How to combine cartridge vs context attention when unrotated queries are enabled.
     # Options:
@@ -144,6 +145,12 @@ class ServerConfig(pydra.Config):
     cartridge_attention_gate_enabled: bool = False
     cartridge_attention_gate_granularity: str = "per_head"  # "global" | "per_layer" | "per_head"
     cartridge_attention_gate_init: float = 0.0
+    cartridge_attention_gate_type: str = "scalar"  # "scalar" | "router_moe" | "router_residual"
+    cartridge_attention_gate_pooling: str = "per_token"  # "per_token" | "mean" | "last"
+    cartridge_attention_gate_init_bias: float = 5.0
+    cartridge_attention_gate_temperature: float = 1.0
+    cartridge_attention_gate_router_per_layer: bool = True
+    cartridge_attention_gate_use_norm: bool = False
 
     def uvsh(self):
         self.uvicorn_log_level = "warning"

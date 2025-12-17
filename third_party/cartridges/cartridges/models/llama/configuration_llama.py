@@ -150,6 +150,22 @@ class LlamaConfig(PretrainedConfig):
             Granularity of gate α: `"global"`, `"per_layer"`, or `"per_head"`.
         cartridge_attention_gate_init (`float`, *optional*, defaults to `0.0`):
             Initial value for the gate parameter(s); small/zero keeps cartridge suppressed at init.
+        cartridge_attention_gate_type (`str`, *optional*, defaults to `"scalar"`):
+            Gating variant: `"scalar"` (legacy), `"router_moe"` (softmax over context vs cartridge),
+            or `"router_residual"` (additive cartridge expert).
+        cartridge_attention_gate_pooling (`str`, *optional*, defaults to `"per_token"`):
+            How router input is pooled before gating when using router_*:
+            `"per_token"` (default) uses full sequence, `"mean"` pools over sequence,
+            `"last"` uses the last token only (per-head gate, broadcast over sequence).
+        cartridge_attention_gate_init_bias (`float`, *optional*, defaults to `5.0`):
+            Bias used to initialize the router gate so that the cartridge path is nearly closed at init.
+            Only used when `cartridge_attention_gate_type` is a router.
+        cartridge_attention_gate_temperature (`float`, *optional*, defaults to `1.0`):
+            Temperature applied to router logits before softmax (router_moe).
+        cartridge_attention_gate_router_per_layer (`bool`, *optional*, defaults to `True`):
+            Whether to build an independent router module per layer (True) or to share (not implemented).
+        cartridge_attention_gate_use_norm (`bool`, *optional*, defaults to `False`):
+            If True, applies a LayerNorm over the per-head query vector before the router.
 
     ```python
     >>> from transformers import LlamaModel, LlamaConfig
@@ -212,6 +228,12 @@ class LlamaConfig(PretrainedConfig):
         cartridge_attention_gate_enabled=False,
         cartridge_attention_gate_granularity="per_head",
         cartridge_attention_gate_init=0.0,
+        cartridge_attention_gate_type="scalar",
+        cartridge_attention_gate_pooling="per_token",
+        cartridge_attention_gate_init_bias=5.0,
+        cartridge_attention_gate_temperature=1.0,
+        cartridge_attention_gate_router_per_layer=True,
+        cartridge_attention_gate_use_norm=False,
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -243,6 +265,12 @@ class LlamaConfig(PretrainedConfig):
         self.cartridge_attention_gate_enabled = cartridge_attention_gate_enabled
         self.cartridge_attention_gate_granularity = cartridge_attention_gate_granularity
         self.cartridge_attention_gate_init = cartridge_attention_gate_init
+        self.cartridge_attention_gate_type = cartridge_attention_gate_type
+        self.cartridge_attention_gate_pooling = cartridge_attention_gate_pooling
+        self.cartridge_attention_gate_init_bias = cartridge_attention_gate_init_bias
+        self.cartridge_attention_gate_temperature = cartridge_attention_gate_temperature
+        self.cartridge_attention_gate_router_per_layer = cartridge_attention_gate_router_per_layer
+        self.cartridge_attention_gate_use_norm = cartridge_attention_gate_use_norm
         # Validate the correctness of rotary position embeddings parameters
         # BC: if there is a 'type' field, copy it it to 'rope_type'.
         if self.rope_scaling is not None and "type" in self.rope_scaling:

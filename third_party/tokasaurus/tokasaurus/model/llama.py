@@ -156,10 +156,18 @@ class LlamaAttention(nn.Module):
         self.attn_fn = self.make_attn_fn()
         # Optional attention gate mixing cartridge vs context
         self.attn_gate = None
+        self.attn_gate_router: nn.Module | None = None
+        self.attn_gate_norm: nn.Module | None = None
+        self.gate_type = getattr(extra_config, "cartridge_attention_gate_type", "scalar")
+        self.gate_pooling = getattr(extra_config, "cartridge_attention_gate_pooling", "per_token")
+        self.gate_temperature = getattr(extra_config, "cartridge_attention_gate_temperature", 1.0)
+        self.gate_init_bias = getattr(extra_config, "cartridge_attention_gate_init_bias", 5.0)
+        self.gate_use_norm = getattr(extra_config, "cartridge_attention_gate_use_norm", False)
+
         gate_enabled = getattr(extra_config, "cartridge_attention_gate_enabled", False)
         gate_granularity = getattr(extra_config, "cartridge_attention_gate_granularity", "per_head")
         gate_init = getattr(extra_config, "cartridge_attention_gate_init", 0.0)
-        if gate_enabled:
+        if gate_enabled and self.gate_type == "scalar":
             if gate_granularity == "per_head":
                 self.attn_gate = nn.Parameter(
                     torch.full((1, self.num_attention_heads, 1, 1), gate_init, dtype=torch.float32)
@@ -168,6 +176,15 @@ class LlamaAttention(nn.Module):
                 self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
             else:  # global
                 self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
+        elif gate_enabled:
+            self.attn_gate_router = nn.Linear(self.head_dim(), 2, bias=True)
+            nn.init.zeros_(self.attn_gate_router.weight)
+            nn.init.zeros_(self.attn_gate_router.bias)
+            with torch.no_grad():
+                if self.attn_gate_router.bias.numel() >= 2:
+                    self.attn_gate_router.bias[1] = -float(self.gate_init_bias)
+            if self.gate_use_norm:
+                self.attn_gate_norm = nn.LayerNorm(self.head_dim(), elementwise_affine=False)
 
     def head_dim(self):
         return self.config.hidden_size // self.config.num_attention_heads
@@ -213,7 +230,8 @@ class LlamaAttention(nn.Module):
                 wrappers=self.wrapper_collection,
                 use_unrotated_queries=self.extra_config.use_unrotated_queries_for_cartridges,
                 cartridge_attention_mode=self.extra_config.cartridge_attention_mode,
-                attn_gate=self.attn_gate,
+                attn_gate=getattr(self, "_attn_gate_runtime", None),
+                gate_type=getattr(self, "_gate_type_runtime", self.gate_type),
             )
 
             if num_padding > 0:
@@ -281,6 +299,32 @@ class LlamaAttention(nn.Module):
 
         query_states = query_states.to(dtype)
         key_states = key_states.to(dtype)
+        # Router gate (per-token/head) if enabled
+        attn_gate_tensor = self.attn_gate
+        if self.attn_gate_router is not None:
+            router_input = query_states_unrot if query_states_unrot is not None else query_states
+            if self.gate_pooling == "mean":
+                router_input = router_input.mean(dim=2)  # [B,H,D]
+            elif self.gate_pooling == "last":
+                router_input = router_input[:, :, -1, :]  # [B,H,D]
+            if self.attn_gate_norm is not None:
+                router_input = self.attn_gate_norm(router_input)
+            # Ensure dtype matches router weights (can differ if router was materialized/loaded in fp32)
+            if router_input.dtype != self.attn_gate_router.weight.dtype:
+                router_input = router_input.to(self.attn_gate_router.weight.dtype)
+            gate_logits = self.attn_gate_router(router_input)
+            if self.gate_temperature != 1.0:
+                gate_logits = gate_logits / self.gate_temperature
+            if self.gate_type == "router_moe":
+                gate = torch.softmax(gate_logits, dim=-1)[..., 1:2]
+            else:
+                gate = torch.sigmoid(gate_logits[..., 1:2])
+            if self.gate_pooling in ("mean", "last"):
+                gate = gate.unsqueeze(2)  # [B,H,1,1] for broadcast
+            attn_gate_tensor = gate
+        # Store runtime gate for the custom op call
+        self._attn_gate_runtime = attn_gate_tensor
+        self._gate_type_runtime = self.gate_type
         raw_attn_output = self.attn_fn(
             ragged_q=query_states,
             ragged_q_unrot=query_states_unrot,  # NEW: unrotated queries
@@ -870,6 +914,11 @@ class LlamaForCausalLM(nn.Module):
             print("Loading from hf")
             model.load_from_hf_pretrained(model_path, device, dtype)
 
+        # If gating is enabled, load gate/router weights from an explicit gate_state_path
+        if getattr(model.extra_config, "cartridge_attention_gate_enabled", False):
+            gate_state_path = getattr(model.extra_config, "gate_state_path", None)
+            model._load_gate_state_from_path(gate_state_path, device=device, dtype=dtype)
+
         # SE (10/18/24): It is important not to call model.to(device, dtype) because
         # this will convert the `inv_freq` buffer in the rotary embeddings to fp16
         # the HF load from pretrained is careful to not do this and keeps it in fp32.
@@ -880,6 +929,40 @@ class LlamaForCausalLM(nn.Module):
         model.to(device=device)
 
         return model
+
+    def _load_gate_state_from_path(self, gate_state_path: str | None, device, dtype) -> None:
+        if gate_state_path is None:
+            raise RuntimeError(
+                "Gating is enabled but no gate_state_path was provided. "
+                "Ensure the training export supplies gate weights and pass gate_state_path to tokasaurus."
+            )
+        gate_sd = torch.load(gate_state_path, map_location="cpu")
+        if "attention_gate_state_dict" not in gate_sd:
+            raise RuntimeError(
+                f"gate_state_path={gate_state_path} missing 'attention_gate_state_dict'. "
+                "Export must include gate weights."
+            )
+        state = gate_sd["attention_gate_state_dict"]
+        if not isinstance(state, dict) or not state:
+            raise RuntimeError(
+                f"gate_state_path={gate_state_path} contains empty or invalid attention_gate_state_dict"
+            )
+        casted = {
+            k: (v.to(device=device, dtype=dtype) if isinstance(v, torch.Tensor) else v)
+            for k, v in state.items()
+        }
+        # assign=True is required to replace meta tensors created under init_empty_weights
+        self.load_state_dict(casted, strict=False, assign=True)
+
+        # Fail fast if any gate params remain meta
+        meta_params = [
+            n for n, p in self.named_parameters()
+            if p.is_meta and ("attn_gate" in n or "attn_gate_router" in n or "attn_gate_norm" in n)
+        ]
+        if meta_params:
+            raise RuntimeError(
+                f"Gate parameters remain meta after loading gate_state_path={gate_state_path}: {meta_params}"
+            )
 
     def make_name_to_hf_name(self):
         keys = self.state_dict().keys()
@@ -958,14 +1041,23 @@ class LlamaForCausalLM(nn.Module):
         )
 
         state_dict = hf_model.state_dict()
-        patched_state_dict = state_dict.copy()
+        patched_state_dict = {}
 
         name_to_hf_name = self.make_name_to_hf_name()
+        missing_router_params = []
 
         for name, hf_name in name_to_hf_name.items():
-            if name != hf_name:
-                patched_state_dict[name] = state_dict[hf_name]
-                patched_state_dict.pop(hf_name)
+            if hf_name in state_dict:
+                if name != hf_name:
+                    patched_state_dict[name] = state_dict[hf_name]
+                else:
+                    patched_state_dict[name] = state_dict[name]
+            elif "attn_gate_router" in name or "attn_gate_norm" in name:
+                # Router params not in checkpoint - will use initialized values
+                missing_router_params.append(name)
+
+        if missing_router_params:
+            print(f"Note: Router parameters not found in checkpoint (will use initialized values): {missing_router_params[:5]}{'...' if len(missing_router_params) > 5 else ''}")
 
         tp_size = self.extra_config.tp_size
         tp_rank = self.extra_config.tp_rank
@@ -996,6 +1088,18 @@ class LlamaForCausalLM(nn.Module):
             tp_map=self.make_tp_map(),
         )
 
-        state_dict = {k: hf_state_dict[v] for k, v in name_to_hf_name.items()}
+        # Build state_dict, only including parameters that exist in checkpoint
+        # Router params may not exist in older checkpoints or base models
+        state_dict = {}
+        missing_router_params = []
+        for k, v in name_to_hf_name.items():
+            if v in hf_state_dict:
+                state_dict[k] = hf_state_dict[v]
+            elif "attn_gate_router" in k or "attn_gate_norm" in k:
+                # Router params not in checkpoint - will use initialized values
+                missing_router_params.append(k)
+        
+        if missing_router_params:
+            print(f"Note: Router parameters not found in checkpoint (will use initialized values): {missing_router_params[:5]}{'...' if len(missing_router_params) > 5 else ''}")
 
         self.load_state_dict(state_dict, assign=True, strict=False)

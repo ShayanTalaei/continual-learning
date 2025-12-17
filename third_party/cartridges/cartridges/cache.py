@@ -755,8 +755,15 @@ class TrainableCache(nn.Module):
         self._num_tokens = 0
         self._seq_ids = self._init_seq_ids
 
-    def save(self, path: str):
-        """Saves the trainable keys and values to the specified path."""
+    def save(self, path: str, extra_state: Optional[dict] = None):
+        """Saves the trainable keys and values to the specified path.
+
+        Args:
+            path: Output path for the checkpoint.
+            extra_state: Optional additional metadata/state to include in the saved dict.
+                This is used to store auxiliary learned parameters (e.g. attention-gating)
+                alongside the cartridge so inference servers can load them.
+        """
         trainable_keys, trainable_values = (
             self.parametrization.get_trainable() if self.parametrization else ([], [])
         )
@@ -782,15 +789,16 @@ class TrainableCache(nn.Module):
                 for idx, v in enumerate(frozen_values)
             ]
 
-        torch.save(
-            {
-                "trainable_keys": trainable_keys,
-                "trainable_values": trainable_values,
-                "frozen_keys": frozen_keys,
-                "frozen_values": frozen_values,
-            },
-            path,
-        )
+        payload = {
+            "trainable_keys": trainable_keys,
+            "trainable_values": trainable_values,
+            "frozen_keys": frozen_keys,
+            "frozen_values": frozen_values,
+        }
+        if extra_state:
+            payload.update(extra_state)
+
+        torch.save(payload, path)
 
     @classmethod
     def from_pretrained(cls, path: str, device: Optional[str] = None):

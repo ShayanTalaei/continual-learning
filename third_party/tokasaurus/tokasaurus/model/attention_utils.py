@@ -315,6 +315,7 @@ def _multi_route_attention(
     wrappers: WrapperCollection,
     cartridge_attention_mode: str = "global_softmax",
     attn_gate: Tensor | None = None,
+    gate_type: str = "scalar",
 ) -> Tensor:
     """
     Multi-route attention with unrotated queries for cartridges.
@@ -341,7 +342,10 @@ def _multi_route_attention(
         if g.dim() == 0:
             g = g.view(1, 1, 1, 1)
         # broadcast to (tokens, heads, head_dim) via implicit broadcast
-        return (1 - g) * base + g * cart
+        if gate_type == "router_residual":
+            return base + g * cart
+        else:
+            return (1 - g) * base + g * cart
 
     # --- 1. Prefill phase ---
     if prefill_q.numel() > 0:
@@ -581,6 +585,7 @@ def tokasaurus_attention(
     use_unrotated_queries: bool = False,  # config flag
     cartridge_attention_mode: str = "global_softmax",
     attn_gate: Tensor | None = None,
+    gate_type: str = "scalar",
 ) -> Tensor:
     """
     Assumes rope has been already applied to ragged_q.
@@ -617,4 +622,5 @@ def tokasaurus_attention(
         wrappers,
         cartridge_attention_mode=cartridge_attention_mode,
         attn_gate=attn_gate,
+        gate_type=gate_type,
     )

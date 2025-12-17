@@ -222,6 +222,7 @@ def flex_attention_forward(
     query_unrot: Optional[torch.Tensor] = None,
     cartridge_mask: Optional["BlockMask"] = None,
     attn_gate: Optional[torch.Tensor] = None,
+    gate_type: str = "scalar",
     **kwargs,
 ) -> torch.Tensor:
 
@@ -266,6 +267,7 @@ def flex_attention_forward(
         # Determine how to combine cartridge vs context attention
         cfg = getattr(module, "config", None)
         attention_mode = getattr(cfg, "cartridge_attention_mode", "global_softmax")
+        gate_type = gate_type or getattr(cfg, "cartridge_attention_gate_type", "scalar")
 
         # First call: normal keys only, rotated queries
         out_norm, lse_norm = attn(
@@ -295,15 +297,17 @@ def flex_attention_forward(
             return_lse=True,
         )
 
-        if attn_gate is not None:
-            attn_gate = attn_gate.to(device=query.device, dtype=out_norm.dtype)
-            if attn_gate.dim() == 0:
-                attn_gate = attn_gate.view(1, 1, 1, 1)
-
         if attention_mode == "separate_sum":
-            attn_output = out_norm + out_cart
-            if attn_gate is not None:
-                attn_output = (1 - attn_gate) * out_norm + attn_gate * out_cart
+            if attn_gate is None:
+                attn_output = out_norm + out_cart
+            else:
+                gate_tensor = attn_gate.to(device=query.device, dtype=out_norm.dtype)
+                if gate_tensor.dim() == 0:
+                    gate_tensor = gate_tensor.view(1, 1, 1, 1)
+                if gate_type == "router_residual":
+                    attn_output = out_norm + gate_tensor * out_cart
+                else:
+                    attn_output = (1 - gate_tensor) * out_norm + gate_tensor * out_cart
             if _PROFILE_ATTENTION:
                 t_end = perf_counter()
                 print(
@@ -319,7 +323,13 @@ def flex_attention_forward(
             w_cart = torch.exp(lse_cart - logZ)[..., None]
             attn_raw = out_norm * w_norm + out_cart * w_cart
             if attn_gate is not None:
-                attn_output = (1 - attn_gate) * out_norm + attn_gate * attn_raw
+                gate_tensor = attn_gate.to(device=query.device, dtype=out_norm.dtype)
+                if gate_tensor.dim() == 0:
+                    gate_tensor = gate_tensor.view(1, 1, 1, 1)
+                if gate_type == "router_residual":
+                    attn_output = out_norm + gate_tensor * (attn_raw - out_norm)
+                else:
+                    attn_output = (1 - gate_tensor) * out_norm + gate_tensor * attn_raw
             else:
                 attn_output = attn_raw
             if _PROFILE_ATTENTION:
@@ -378,16 +388,37 @@ class LlamaAttention(nn.Module):
         )
         # Optional attention gate mixing cartridge vs context
         self.attn_gate = None
+        self.attn_gate_router: Optional[nn.Module] = None
+        self.attn_gate_norm: Optional[nn.Module] = None
+        self._last_router_gate: Optional[torch.Tensor] = None
         self.attn_gate_granularity = getattr(config, "cartridge_attention_gate_granularity", "per_head")
+        self.gate_type = getattr(config, "cartridge_attention_gate_type", "scalar")
+        self.gate_pooling = getattr(config, "cartridge_attention_gate_pooling", "per_token")
+        self.gate_temperature = getattr(config, "cartridge_attention_gate_temperature", 1.0)
+        self.gate_init_bias = getattr(config, "cartridge_attention_gate_init_bias", 5.0)
+        self.gate_router_per_layer = getattr(config, "cartridge_attention_gate_router_per_layer", True)
+        self.gate_use_norm = getattr(config, "cartridge_attention_gate_use_norm", False)
+
         gate_enabled = getattr(config, "cartridge_attention_gate_enabled", False)
         gate_init = getattr(config, "cartridge_attention_gate_init", 0.0)
-        if gate_enabled:
+        if gate_enabled and self.gate_type == "scalar":
             if self.attn_gate_granularity == "per_head":
                 self.attn_gate = nn.Parameter(
                     torch.full((1, config.num_attention_heads, 1, 1), gate_init, dtype=torch.float32)
                 )
             else:
                 self.attn_gate = nn.Parameter(torch.tensor(gate_init, dtype=torch.float32))
+        elif gate_enabled:
+            if not self.gate_router_per_layer:
+                raise ValueError("Shared cartridge attention router is not implemented; set gate_router_per_layer=True.")
+            self.attn_gate_router = nn.Linear(self.head_dim, 2, bias=True)
+            nn.init.zeros_(self.attn_gate_router.weight)
+            nn.init.zeros_(self.attn_gate_router.bias)
+            with torch.no_grad():
+                if self.attn_gate_router.bias.numel() >= 2:
+                    self.attn_gate_router.bias[1] = -float(self.gate_init_bias)
+            if self.gate_use_norm:
+                self.attn_gate_norm = nn.LayerNorm(self.head_dim, elementwise_affine=False)
 
     def forward(self, hidden_states: torch.Tensor, batch: LlamaBatch) -> torch.Tensor:
         if _PROFILE_ATTENTION:
@@ -444,6 +475,17 @@ class LlamaAttention(nn.Module):
         elif batch.attention_capture is not None:
             kv_seq_ids = batch.seq_ids
 
+        # flex_attention requires query/key/value to have the same dtype.
+        # Enforce that invariant here to avoid mixed-dtype cache/model interactions
+        # (e.g. bf16-initialized cartridges with fp32 training).
+        target_dtype = query_states.dtype
+        if key_states.dtype != target_dtype:
+            key_states = key_states.to(dtype=target_dtype)
+        if value_states.dtype != target_dtype:
+            value_states = value_states.to(dtype=target_dtype)
+        if query_states_unrot is not None and query_states_unrot.dtype != target_dtype:
+            query_states_unrot = query_states_unrot.to(dtype=target_dtype)
+
         capture = batch.attention_capture
         # Store Q/K/V tensors before flex_attention_forward to avoid compilation issues
         if capture is not None:
@@ -470,6 +512,37 @@ class LlamaAttention(nn.Module):
                 t_capture_end = perf_counter()
                 print(f"[PROFILE] capture.record L{self.layer_idx}: {t_capture_end - t_capture_start:.4f}s")
 
+        # Compute attention gate (scalar or router)
+        attn_gate_tensor: Optional[torch.Tensor] = None
+        self._last_router_gate = None
+        if getattr(self.config, "cartridge_attention_gate_enabled", False):
+            if self.gate_type == "scalar":
+                attn_gate_tensor = self.attn_gate
+                if attn_gate_tensor is not None:
+                    self._last_router_gate = attn_gate_tensor.detach()
+            elif self.attn_gate_router is not None:
+                router_input = query_states_unrot if query_states_unrot is not None else query_states
+                # Optional pooling to reduce gate activation size
+                if self.gate_pooling == "mean":
+                    router_input = router_input.mean(dim=2)  # [B,H,D]
+                elif self.gate_pooling == "last":
+                    router_input = router_input[:, :, -1, :]  # [B,H,D]
+
+                if self.attn_gate_norm is not None:
+                    router_input = self.attn_gate_norm(router_input)
+                gate_logits = self.attn_gate_router(router_input)
+                gate_logits = gate_logits if self.gate_temperature == 1.0 else gate_logits / self.gate_temperature
+                if self.gate_type == "router_moe":
+                    gate = torch.softmax(gate_logits, dim=-1)[..., 1:2]
+                else:
+                    gate = torch.sigmoid(gate_logits[..., 1:2])
+                # Broadcast over sequence if pooled
+                if self.gate_pooling in ("mean", "last"):
+                    gate = gate.unsqueeze(2)  # [B,H,1,1]
+                attn_gate_tensor = gate
+                # Store only scalar summary for logging
+                self._last_router_gate = gate.mean().detach()
+
         attn_output = flex_attention_forward(
             self,
             query_states,
@@ -480,7 +553,8 @@ class LlamaAttention(nn.Module):
             mode=batch.mode,
             query_unrot=query_states_unrot,
             cartridge_mask=batch.cartridge_mask,
-            attn_gate=self.attn_gate,
+            attn_gate=attn_gate_tensor,
+            gate_type=self.gate_type,
         )
 
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
@@ -491,6 +565,26 @@ class LlamaAttention(nn.Module):
             print(f"[PROFILE] LlamaAttention.forward L{self.layer_idx}: {t_attn_end - t_attn_start:.4f}s")
 
         return attn_output, batch
+
+    def gate_regularizer(self, weight: float = 1.0, detach: bool = False) -> Optional[torch.Tensor]:
+        """
+        Optional helper to penalize router usage (e.g., on ICL-only batches).
+        Returns `weight * mean(gate)` or None if no gate was computed this forward.
+        """
+        gate = self._last_router_gate
+        if gate is None:
+            return None
+        # gate is already a scalar summary; detach controls gradients explicitly
+        gate_value = gate.detach() if detach else gate
+        return weight * gate_value
+
+    def last_router_gate(self, detach: bool = False) -> Optional[torch.Tensor]:
+        """
+        Returns the last router gate tensor computed in forward for logging/debug.
+        """
+        if self._last_router_gate is None:
+            return None
+        return self._last_router_gate.detach() if detach else self._last_router_gate
 
 class LlamaDecoderLayer(GradientCheckpointingLayer):
     def __init__(self, config: LlamaConfig, layer_idx: int):

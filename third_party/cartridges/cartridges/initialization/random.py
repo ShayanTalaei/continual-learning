@@ -15,10 +15,13 @@ class KVFromRandomVectors(KVCacheFactory):
         model,
         attn_config: AttnConfig,
     ) -> TrainableCache:
+        # Initialize in the same dtype as the model parameters to avoid mixed-dtype
+        # Q/K/V entering flex_attention.
+        model_dtype = next(model.parameters()).dtype
         rand_vectors = lambda: [
             torch.randn(
                 1, attn_config.n_heads, self.config.max_tokens, attn_config.head_dim,
-                dtype=torch.bfloat16,
+                dtype=model_dtype,
             )
             for _ in range(attn_config.n_layers)
         ]

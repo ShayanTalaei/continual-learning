@@ -357,6 +357,13 @@ def make_model(
         cartridge_attention_gate_enabled=getattr(config, "cartridge_attention_gate_enabled", False),
         cartridge_attention_gate_granularity=getattr(config, "cartridge_attention_gate_granularity", "per_head"),
         cartridge_attention_gate_init=getattr(config, "cartridge_attention_gate_init", 0.0),
+        cartridge_attention_gate_type=getattr(config, "cartridge_attention_gate_type", "scalar"),
+        cartridge_attention_gate_pooling=getattr(config, "cartridge_attention_gate_pooling", "per_token"),
+        cartridge_attention_gate_init_bias=getattr(config, "cartridge_attention_gate_init_bias", 5.0),
+        cartridge_attention_gate_temperature=getattr(config, "cartridge_attention_gate_temperature", 1.0),
+        cartridge_attention_gate_router_per_layer=getattr(config, "cartridge_attention_gate_router_per_layer", True),
+        cartridge_attention_gate_use_norm=getattr(config, "cartridge_attention_gate_use_norm", False),
+        gate_state_path=getattr(config, "gate_state_path", None),
     )
 
     if config.rope_scaling is not None:

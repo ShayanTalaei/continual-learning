@@ -14,7 +14,7 @@ Usage:
     python -m src.memory.distillation.distill_into_cartridge input_dataset.local_path=/path/to/dataset.jsonl
 """
 
-# import torch
+import torch
 # torch._inductor.config.max_autotune_gemm_backends = ["ATEN", "TRITON", "CPP"]
 # torch._inductor.config.max_autotune = True
 # torch._inductor.config.epilogue_fusion = True
@@ -26,6 +26,8 @@ from pathlib import Path
 from typing import Optional, Literal, Dict, Any
 import tempfile
 import os
+import random
+import numpy as np
 
 # Set up cartridges environment variables BEFORE importing
 REPO_ROOT = Path(__file__).parent.parent.parent.parent
@@ -158,6 +160,11 @@ class TrainingConfig(pydra.Config):
         self.distributed_backend = "nccl"  # Distributed backend: 'nccl' for GPU (faster), 'gloo' for CPU/fallback
 
         self.train_without_logits = False  # Whether to train without logits
+        # Precision
+        # model_dtype controls the parameter/activation dtype of the model ("bf16" or "fp32")
+        # autocast_dtype controls AMP context for forward passes ("bf16" or "none")
+        self.model_dtype = "bf16"
+        self.autocast_dtype = "bf16"
 
 
 class DatasetConfig(pydra.Config):
@@ -204,6 +211,11 @@ class DistillationConfig(pydra.Config):
         self.cartridge_attention_gate_enabled = False
         self.cartridge_attention_gate_granularity = "per_head"  # "global" | "per_layer" | "per_head"
         self.cartridge_attention_gate_init = 0.0
+        self.cartridge_attention_gate_type = "scalar"  # "scalar" | "router_moe" | "router_residual"
+        self.cartridge_attention_gate_init_bias = 5.0
+        self.cartridge_attention_gate_temperature = 1.0
+        self.cartridge_attention_gate_router_per_layer = True
+        self.cartridge_attention_gate_use_norm = False
         
         # KV Cache
         self.kv_cache = KVCacheInitConfig()
@@ -319,6 +331,14 @@ class DistillationConfig(pydra.Config):
         self.use_unrotated_queries_for_cartridges = True
         self.cartridge_attention_mode = "separate_sum"
 
+    def high_precision(self):
+        """
+        Convenience helper: enable high precision training (FP32 params + no autocast).
+        """
+        self.training.model_dtype = "fp32"
+        self.dataset.batch_size //= 2
+        self.training.autocast_dtype = "none"
+
     def finalize(self):
         if self.run_name is None:
             if self.input_dataset.local_path:
@@ -333,6 +353,15 @@ class DistillationConfig(pydra.Config):
             self._apply_toka_server_port_override()
             self.toka_server_overrides += [
                 f"cartridge_dir={self.run_dir}",
+                f"gate_state_path={Path(self.run_dir) / 'cache_for_generation' / 'cartridge.pt'}",
+                f"cartridge_attention_gate_enabled={self.cartridge_attention_gate_enabled}",
+                f"cartridge_attention_gate_granularity={self.cartridge_attention_gate_granularity}",
+                f"cartridge_attention_gate_init={self.cartridge_attention_gate_init}",
+                f"cartridge_attention_gate_type={self.cartridge_attention_gate_type}",
+                f"cartridge_attention_gate_init_bias={self.cartridge_attention_gate_init_bias}",
+                f"cartridge_attention_gate_temperature={self.cartridge_attention_gate_temperature}",
+                f"cartridge_attention_gate_router_per_layer={self.cartridge_attention_gate_router_per_layer}",
+                f"cartridge_attention_gate_use_norm={self.cartridge_attention_gate_use_norm}",
             ]
             pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
     
@@ -362,6 +391,17 @@ class DistillationConfig(pydra.Config):
             "use_cudagraphs=F",
             f"use_unrotated_queries_for_cartridges={self.use_unrotated_queries_for_cartridges}",
             f"cartridge_attention_mode={self.cartridge_attention_mode}",
+            f"cartridge_attention_gate_enabled={self.cartridge_attention_gate_enabled}",
+            f"cartridge_attention_gate_granularity={self.cartridge_attention_gate_granularity}",
+            f"cartridge_attention_gate_init={self.cartridge_attention_gate_init}",
+            f"cartridge_attention_gate_type={self.cartridge_attention_gate_type}",
+            f"cartridge_attention_gate_init_bias={self.cartridge_attention_gate_init_bias}",
+            f"cartridge_attention_gate_temperature={self.cartridge_attention_gate_temperature}",
+            f"cartridge_attention_gate_router_per_layer={self.cartridge_attention_gate_router_per_layer}",
+            f"cartridge_attention_gate_use_norm={self.cartridge_attention_gate_use_norm}",
+            # Gate weights are saved with the cartridge; point tokasaurus to that file
+            # for eval during training (.toka path).
+            f"gate_state_path={Path(self.output.local_dir) / (self.run_name or 'distill_run') / 'cache_for_generation' / 'cartridge.pt'}",
         ]
         self._apply_toka_server_port_override()
         pydra.apply_overrides(self.toka_server_config, self.toka_server_overrides)
@@ -382,6 +422,44 @@ class DistillationConfig(pydra.Config):
 # ============================================================================
 # Helper Functions
 # ============================================================================
+
+
+def set_global_determinism(seed: int) -> None:
+    """Force global determinism for Python, NumPy, and PyTorch (CPU/GPU).
+    
+    Notes:
+    - Some CUDA ops may still be non-deterministic; we enable deterministic
+      algorithms and set CUBLAS workspace to a deterministic mode to minimize this.
+    - We disable TF32 to avoid precision-dependent divergence across GPUs.
+    """
+    # Ensure reproducible hashing (effective if set early; harmless otherwise)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    # cuBLAS deterministic workspace size
+    # See: https://docs.nvidia.com/cuda/cublas/index.html#cublasApi_reproducibility
+    os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+    
+    # Python and NumPy RNG
+    random.seed(seed)
+    np.random.seed(seed)
+    
+    # PyTorch RNG (CPU and CUDA)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    
+    # Deterministic behavior in PyTorch backends
+    # Warn instead of raise to avoid crashing on unsupported ops, but prefer deterministic paths.
+    torch.use_deterministic_algorithms(True, warn_only=True)
+    
+    # Disable autotuner that can introduce nondeterminism
+    if hasattr(torch.backends, "cudnn"):
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        # Disable TF32 in cuDNN
+        torch.backends.cudnn.allow_tf32 = False
+    # Disable TF32 in matmul
+    if hasattr(torch.backends, "cuda") and hasattr(torch.backends.cuda, "matmul"):
+        torch.backends.cuda.matmul.allow_tf32 = False
 
 
 def get_dataset_path(dataset) -> str:
@@ -628,6 +706,9 @@ def run_distillation(config: DistillationConfig):
     Args:
         config: Distillation configuration
     """
+    # Set global determinism BEFORE constructing any components
+    set_global_determinism(int(config.training.seed))
+    
     print("=" * 80)
     print("CARTRIDGE DISTILLATION TRAINING")
     print("=" * 80)
@@ -771,6 +852,11 @@ def run_distillation(config: DistillationConfig):
                     "cartridge_attention_gate_enabled": config.cartridge_attention_gate_enabled,
                     "cartridge_attention_gate_granularity": config.cartridge_attention_gate_granularity,
                     "cartridge_attention_gate_init": config.cartridge_attention_gate_init,
+                    "cartridge_attention_gate_type": config.cartridge_attention_gate_type,
+                    "cartridge_attention_gate_init_bias": config.cartridge_attention_gate_init_bias,
+                    "cartridge_attention_gate_temperature": config.cartridge_attention_gate_temperature,
+                    "cartridge_attention_gate_router_per_layer": config.cartridge_attention_gate_router_per_layer,
+                    "cartridge_attention_gate_use_norm": config.cartridge_attention_gate_use_norm,
                 },
             ),
             
@@ -808,6 +894,8 @@ def run_distillation(config: DistillationConfig):
             lr=config.training.lr,
             weight_decay=config.training.weight_decay,
             gradient_checkpointing=config.training.gradient_checkpointing,
+            model_dtype=config.training.model_dtype,
+            autocast_dtype=config.training.autocast_dtype,
             
             # KV Cache
             kv_cache_initializer=kv_cache_factory_config,
@@ -823,7 +911,7 @@ def run_distillation(config: DistillationConfig):
             wandb=WandBConfig(
                 project=config.wandb.project or "cartridges-distillation",
                 entity=config.wandb.entity,
-                name=config.wandb.name or run_name,
+                name=config.wandb.name or config.run_name,
             ) if config.wandb.enabled else None,
             
             # Misc
@@ -844,16 +932,30 @@ def run_distillation(config: DistillationConfig):
         
     # Upload to HuggingFace if requested
     if config.output.upload_to_hf and config.output.hf_repo_id:
-        # Find the final cartridge file
-        cartridge_file = output_dir / "cache-final.pt"
-        if not cartridge_file.exists():
-            # Look for latest checkpoint
-            checkpoints = sorted(output_dir.glob("cache-step*.pt"))
-            if checkpoints:
-                cartridge_file = checkpoints[-1]
-            else:
-                print("[Distill] Warning: No cartridge file found to upload")
-                return
+        # Find a cartridge file in the formats we actually write during training.
+        # `cartridges.train` saves toka-compatible cartridges to:
+        # - {run_dir}/cache_for_generation/cartridge.pt (for tokasaurus eval)
+        # - {run_dir}/cache_last.pt (symlink to the latest saved checkpoint's cartridge.pt)
+        cartridge_candidates = [
+            Path(config.run_dir) / "cache_last.pt",
+            Path(config.run_dir) / "cache_for_generation" / "cartridge.pt",
+        ]
+        cartridge_file = next((p for p in cartridge_candidates if p.exists()), None)
+        if cartridge_file is None:
+            # As a last resort, pick the newest checkpoint directory emitted by save_cache().
+            ckpt_dirs = sorted(
+                Path(config.run_dir).parent.glob(f"{Path(config.run_dir).name}-cache-step*"),
+                key=lambda p: p.stat().st_mtime if p.exists() else 0,
+            )
+            for d in reversed(ckpt_dirs):
+                p = d / "cartridge.pt"
+                if p.exists():
+                    cartridge_file = p
+                    break
+
+        if cartridge_file is None:
+            print("[Distill] Warning: No cartridge file found to upload")
+            return
         
         print(f"[Distill] Found cartridge file: {cartridge_file}")
         
@@ -892,6 +994,4 @@ def main(config: DistillationConfig):
 
 
 if __name__ == "__main__":
-    main()
-
     main()

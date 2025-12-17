@@ -87,6 +87,9 @@ class TrainConfig(RunConfig):
 
     train_temperature: float = 1.0
     val_temperature: float = 1.0
+    # Precision controls
+    model_dtype: Literal["bf16","fp32"] = "bf16"
+    autocast_dtype: Literal["bf16","none"] = "bf16"
 
     # datasets for evaluating perplexity on other generations
     # NOTE: steps here is the number of **optimizer steps**, which we keep track of
@@ -200,7 +203,9 @@ def train(config: TrainConfig):
         f"Finished loading eval and generate datasets from disk, took {(time.time() - t0):.2}s"
     )
 
-    model = config.model.instantiate().to(local_rank).to(torch.bfloat16)
+    # Select model dtype
+    model_dtype = torch.bfloat16 if config.model_dtype == "bf16" else torch.float32
+    model = config.model.instantiate().to(local_rank).to(model_dtype)
     if config.gradient_checkpointing:
         # Enable activation checkpointing. We assume model exposes this API.
         model.gradient_checkpointing_enable()
@@ -248,7 +253,8 @@ def train(config: TrainConfig):
         for param in model.parameters():
             param.requires_grad = False
 
-        cache = cache.to(local_rank)
+        # Ensure cache lives on the right device and matches model dtype
+        cache = cache.to(local_rank).to(model_dtype)
         wrapped_model = CacheAndModel(cache, model,)
 
     if is_ddp:
@@ -378,7 +384,7 @@ def train(config: TrainConfig):
             config.toka_server_config.dp_size = torch.distributed.get_world_size() if is_ddp else 1
             if not is_ddp or torch.distributed.get_rank() == 0:
                 server_wrapper = partial(toka_server_manager, config=config.toka_server_config)
-                save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
+                save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation", model=model)
         # save_cache_to_toka_format(config, cache, Path(config.run_dir) / "cache_for_generation")
         
         if is_ddp:
@@ -500,7 +506,13 @@ def train(config: TrainConfig):
                 wrapped_model.model.train()
             
             with ddp_ctx_manager:
-                with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+                # Conditionally enable autocast for forward pass
+                from contextlib import nullcontext
+                ac_dtype = None if config.autocast_dtype == "none" else torch.bfloat16
+                autocast_ctx = (
+                    torch.amp.autocast(device_type="cuda", dtype=ac_dtype) if ac_dtype is not None else nullcontext()
+                )
+                with autocast_ctx:
 
                     assert batch.topk_token_ids is not None
                     assert batch.topk_logprobs is not None
@@ -632,7 +644,7 @@ def train(config: TrainConfig):
                 and is_rank_zero
             ) or (optimizer_step == config.max_optimizer_steps and is_rank_zero):
                 if cache_tuning:
-                    save_cache(config, cache, optimizer_step=optimizer_step)
+                    save_cache(config, cache, optimizer_step=optimizer_step, model=model)
                 else:
                     assert use_peft
 
@@ -671,7 +683,7 @@ def train(config: TrainConfig):
 
     if config.save_after_training and is_rank_zero:
         if cache_tuning:
-            save_cache(config, cache, optimizer_step=optimizer_step)
+            save_cache(config, cache, optimizer_step=optimizer_step, model=model)
         else:
             # Save PEFT model
             logger.info(f"Saving PEFT model to {config.run_dir}/peft_model")
@@ -752,7 +764,13 @@ def evaluate_perplexity(
 
         for batch in dataloader_pbar:
             batch: DatasetBatch
-            with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+            # Conditionally enable autocast during eval forward
+            from contextlib import nullcontext
+            ac_dtype = None if config.autocast_dtype == "none" else torch.bfloat16
+            autocast_ctx = (
+                torch.amp.autocast(device_type="cuda", dtype=ac_dtype) if ac_dtype is not None else nullcontext()
+            )
+            with autocast_ctx:
 
                 assert batch.topk_token_ids is not None
                 assert batch.topk_logprobs is not None
@@ -1406,10 +1424,49 @@ class CacheAndModel(nn.Module):
         return out
 
 
-def save_cache_to_toka_format(config: TrainConfig, cache: TrainableCache, save_dir: Path):
+def _extract_attention_gate_state_for_checkpoint(model: nn.Module) -> dict:
+    """
+    Extract attention gate / router parameters to store alongside a cartridge.
+
+    We store these with the cartridge artifact because tokasaurus eval loads
+    (base model weights + cartridge) rather than a fine-tuned model checkpoint.
+    """
+    gate_sd: dict[str, torch.Tensor] = {}
+    for k, v in model.state_dict().items():
+        if ("attn_gate_router" in k) or ("attn_gate_norm" in k) or (k.endswith(".attn_gate")):
+            if isinstance(v, torch.Tensor):
+                gate_sd[k] = v.detach().cpu()
+    return gate_sd
+
+
+def save_cache_to_toka_format(
+    config: TrainConfig,
+    cache: TrainableCache,
+    save_dir: Path,
+    model: Optional[nn.Module] = None,
+):
     save_dir.mkdir(exist_ok=True, parents=True)
 
-    cache.save(save_dir / "cartridge.pt")
+    extra_state = None
+    if model is not None and getattr(model, "config", None) is not None:
+        # Only store gate state if gating is enabled (scalar or router).
+        if getattr(model.config, "cartridge_attention_gate_enabled", False):
+            gate_sd = _extract_attention_gate_state_for_checkpoint(model)
+            extra_state = {
+                "attention_gate_state_dict": gate_sd,
+                "attention_gate_config": {
+                    "cartridge_attention_gate_enabled": True,
+                    "cartridge_attention_gate_type": getattr(model.config, "cartridge_attention_gate_type", "scalar"),
+                    "cartridge_attention_gate_granularity": getattr(model.config, "cartridge_attention_gate_granularity", "per_head"),
+                    "cartridge_attention_gate_init": getattr(model.config, "cartridge_attention_gate_init", 0.0),
+                    "cartridge_attention_gate_init_bias": getattr(model.config, "cartridge_attention_gate_init_bias", 5.0),
+                    "cartridge_attention_gate_temperature": getattr(model.config, "cartridge_attention_gate_temperature", 1.0),
+                    "cartridge_attention_gate_router_per_layer": getattr(model.config, "cartridge_attention_gate_router_per_layer", True),
+                    "cartridge_attention_gate_use_norm": getattr(model.config, "cartridge_attention_gate_use_norm", False),
+                },
+            }
+
+    cache.save(str(save_dir / "cartridge.pt"), extra_state=extra_state)
 
     yaml_info = {
         "kv_cache_initializer": {
@@ -1419,13 +1476,15 @@ def save_cache_to_toka_format(config: TrainConfig, cache: TrainableCache, save_d
             "pretrained_model_name_or_path": config.model.pretrained_model_name_or_path,
         }
     }
+    if extra_state is not None and "attention_gate_config" in extra_state:
+        yaml_info["attention_gate_config"] = extra_state["attention_gate_config"]
     # Save yaml config
     yaml_path = save_dir / "config.yaml"
     with open(yaml_path, "w") as f:
         yaml.dump(yaml_info, f)
 
 
-def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
+def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int, model: Optional[nn.Module] = None):
     """
     Saves the trainable cache to a file and manages saved checkpoints.
 
@@ -1444,7 +1503,7 @@ def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     filename = f"cache-step{optimizer_step}"
     save_dir = Path(config.run_dir + "-" + filename)
 
-    save_cache_to_toka_format(config, cache, save_dir)
+    save_cache_to_toka_format(config, cache, save_dir, model=model)
 
     # Create/update symlink to latest checkpoint
     symlink_path = os.path.join(config.run_dir, "cache_last.pt")

@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from typing import Literal, Optional
 import torch
+import contextlib
 
 from cartridges.cache import AttnConfig, KVCacheFactory, TrainableCache, create_parametrization
 from cartridges.initialization.tokenization_utils import MODEL_TO_SYSTEM_PROMPT_TOKENIZER
@@ -39,7 +40,15 @@ class KVFromText(KVCacheFactory):
         init_cache = TrainableCache(config=attn_config)
         
         with torch.no_grad():
-            with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+            model_dtype = next(model.parameters()).dtype
+            # Only use bf16 autocast when the model itself is bf16. For FP32 runs,
+            # keep everything in FP32 to avoid mixed-dtype cache tensors.
+            autocast_ctx = (
+                torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16)
+                if model_dtype == torch.bfloat16
+                else contextlib.nullcontext()
+            )
+            with autocast_ctx:
 
                 input_ids = input_ids.to(model.device)
                 seq_ids = torch.full_like(input_ids, 0, dtype=torch.long)
@@ -55,6 +64,9 @@ class KVFromText(KVCacheFactory):
                 
             init_keys = init_cache._keys
             init_values = init_cache._values
+            # Ensure init tensors match model dtype (important if autocast was used).
+            init_keys = [k.to(model_dtype) if k is not None else None for k in init_keys]
+            init_values = [v.to(model_dtype) if v is not None else None for v in init_values]
 
             parametrization = create_parametrization(
                 parametrization_type=self.config.parametrization_type,

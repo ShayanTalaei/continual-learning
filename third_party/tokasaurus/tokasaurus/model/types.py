@@ -519,6 +519,32 @@ class CartridgeManager:
         except FileNotFoundError:
             raise FileNotFoundError(f"Cartridge file not found: {cartridge_path}")
 
+        # Optional: load attention gate/router parameters stored alongside the cartridge.
+        gate_sd = state_dict.get("attention_gate_state_dict")
+        if isinstance(gate_sd, dict) and gate_sd:
+            try:
+                # Move gate params to model device/dtype before loading
+                casted_gate_sd = {}
+                for k, v in gate_sd.items():
+                    if isinstance(v, torch.Tensor):
+                        casted_gate_sd[k] = v.to(
+                            device=self.model.device,
+                            dtype=getattr(self.model, "dtype", v.dtype),
+                        )
+                self.model.load_state_dict(casted_gate_sd, strict=False)
+                self.logger.info(f"Loaded {len(casted_gate_sd)} attention gate parameters from cartridge {cartridge_id}")
+            except Exception as e:
+                self.logger.warning(
+                    f"Failed to load attention gate parameters from cartridge {cartridge_id}: {e}"
+                )
+        else:
+            # If gating is enabled but no gate state was provided, surface a clear error.
+            if getattr(self.model.extra_config, "cartridge_attention_gate_enabled", False):
+                raise RuntimeError(
+                    f"Cartridge {cartridge_id} is missing attention_gate_state_dict "
+                    "while gating is enabled. Ensure training saves gate params with the cartridge."
+                )
+
         if "frozen_keys" in state_dict:
             state_dict["fixed_keys"] = state_dict["frozen_keys"]
             state_dict["fixed_values"] = state_dict["frozen_values"]
@@ -782,3 +808,10 @@ class ExtraModelConfig:
     cartridge_attention_gate_enabled: bool = False
     cartridge_attention_gate_granularity: str = "per_head"  # "global" | "per_layer" | "per_head"
     cartridge_attention_gate_init: float = 0.0
+    cartridge_attention_gate_type: str = "scalar"  # "scalar" | "router_moe" | "router_residual"
+    cartridge_attention_gate_pooling: str = "per_token"  # "per_token" | "mean" | "last"
+    cartridge_attention_gate_init_bias: float = 5.0
+    cartridge_attention_gate_temperature: float = 1.0
+    cartridge_attention_gate_router_per_layer: bool = True
+    cartridge_attention_gate_use_norm: bool = False
+    gate_state_path: str | None = None
