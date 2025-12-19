@@ -4,20 +4,20 @@ runtime:
   max_envs_to_visit: 1000
   max_steps_per_episode: 1
   scores_path: scores.jsonl
-  run_validation_at_start: true
+  run_validation_at_start: false
   validation_num_workers: 200
-  validation_freq: 25
+  validation_freq: 100
   # Checkpointing
   checkpoint_dir: checkpoints
-  checkpoint_every_episodes: 50
+  checkpoint_every_episodes: 100
   # Use one of the following strategies:
   # - last_n: keeps the last N checkpoints saved every `checkpoint_every_episodes`
   # - top_k_val: keeps the top-K checkpoints by validation mean score (saved on validation)
   checkpoint_strategy: last_n
-  checkpoint_keep_last: 20
+  checkpoint_keep_last: 1
   checkpoint_on_start: false
-  # start_episode_index: 500
-  # resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500"
+  start_episode_index: 500
+  resume_from: "/scratch/m000122/stalaei/logs/continual_learning/outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_non_collapsed_only_boxed/20251103_101129/checkpoints/ep_000500"
 
 train_dataset:
   type: qa
@@ -49,7 +49,7 @@ agent:
     train_temperature: 0.7
     val_temperature: 0.0
     max_output_tokens: 2048
-    log_calls: true
+    log_calls: false
     base_url: "http://localhost:8096"
     tensor_parallel_size: 4
     stop_sequences: ["FEEDBACK", "OBSERVATION"]
@@ -64,7 +64,7 @@ agent:
   merge_feedback_and_observation: false
 
 output:
-  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_no_checkpoint
+  results_dir: outputs/stalaei_cities_easy/history_agent/easy_synth_cities_40_25_l8b_500_1000_shuffled_from_ICL_500_checkpoint
   log_level: INFO
 
 
