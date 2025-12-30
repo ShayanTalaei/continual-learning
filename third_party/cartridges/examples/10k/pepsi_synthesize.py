@@ -31,7 +31,7 @@ config = SynthesizeConfig(
                     "question",        # Generate questions about the content
                     "summarization",   # Summarize sections
                     "structuring",     # Extract structured information
-                    # "aggregation",     # Aggregate / analyze information
+                    "creative",    
                     "use_case",        # Compare / apply information
                 ],
                 chunker=TokenChunker.Config(
@@ -43,9 +43,9 @@ config = SynthesizeConfig(
         ],
     ),
     wandb=None,
-    num_samples=20000,  # Generate 512 Q&A pairs
-    batch_size=1,
-    max_num_batches_in_parallel=128,
+    num_samples=65536,  # Generate 512 Q&A pairs
+    batch_size=32,
+    max_num_batches_in_parallel=12,
 
     name=FormatStringVariable("pepsi_10k_synthesize_{synthesizer.client.model_name}_n{num_samples}"),
     run_id=FormatStringVariable("{name}"),

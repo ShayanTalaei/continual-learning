@@ -18,7 +18,7 @@ import numpy as np
 import time
 from tqdm import tqdm
 
-from src.data.envs.finer_env import is_correct_finer
+# from src.data.envs.finer_env import is_correct_finer
 
 from cartridges.structs import Conversation, MessageDict, read_conversations, _jsonl_length, get_jsonl_record
 from cartridges.initialization.tokenization_utils import MODEL_TO_CHAT_TEMPLATE, MODELS_WITH_THINKING
@@ -239,6 +239,9 @@ class DatasetElement:
 
     metadata: list[dict[str, Any]]
     token_counts: TokenCounts
+    
+    # The "real context" / system prompt used during synthesis (for layer distillation)
+    system_prompt: Optional[str] = None
 
 
 @dataclass
@@ -266,6 +269,9 @@ class DatasetBatch:
     topk_logprobs: Optional[torch.Tensor] = None
     topk_token_ids: Optional[torch.Tensor] = None
     topk_token_idxs: Optional[torch.Tensor] = None
+    
+    # The "real context" / system prompts for each element in the batch (for layer distillation)
+    system_prompts: Optional[list[str]] = None
 
 
 def msg(content, role: Literal["user"] | Literal["assistant"] | Literal["system"]):
@@ -344,11 +350,14 @@ class TrainDataset(Dataset):
 
         elements = []
         for row in data:
-            elements.append(MODEL_TO_MESSAGE_CONVERTER[self.tokenizer.name_or_path.lower()](
+            element = MODEL_TO_MESSAGE_CONVERTER[self.tokenizer.name_or_path.lower()](
                 row.messages,
                 retokenize=self.config.targets == "tokens",
                 tokenizer=self.tokenizer,
-            ))
+            )
+            # Preserve system_prompt (real context) for layer distillation
+            element.system_prompt = row.system_prompt
+            elements.append(element)
 
         return elements
     
@@ -455,6 +464,7 @@ class TrainDataset(Dataset):
         input_ids, element_ids, position_ids = [], [], []
         topk_token_ids, topk_logprobs, topk_token_idxs = [], [], []
         metadatas = []
+        system_prompts = []
         token_counts = TokenCounts()
         curr_token_idx = 0
         for element_id, element in enumerate(batch):
@@ -465,6 +475,7 @@ class TrainDataset(Dataset):
             topk_logprobs.append(element.topk_logprobs)
             topk_token_idxs.append(element.topk_token_idxs + curr_token_idx)
             metadatas.append(element.metadata)
+            system_prompts.append(element.system_prompt)
             token_counts += element.token_counts
             curr_token_idx += len(element.input_ids)
         
@@ -510,6 +521,7 @@ class TrainDataset(Dataset):
             topk_token_idxs=topk_token_idxs,
             metadata=metadatas,
             token_counts=token_counts,
+            system_prompts=system_prompts,
         )
 
 
@@ -685,6 +697,8 @@ class LossEvalDataset(TrainDataset):
 
         packing_mode: Literal["truncate", "pad"]="pad"
         packed_seq_length: int = 2048
+        batch_size: Optional[int] = None
+        shuffle: bool = False
 
         system_prompt: str | None = None
         

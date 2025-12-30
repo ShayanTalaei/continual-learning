@@ -4,7 +4,7 @@ import pydrantic
 from pydrantic.variables import FormatStringVariable
 
 from cartridges.initialization import KVFromText
-from cartridges.train import TrainConfig, LossEvalConfig, GenerationEvalConfig
+from cartridges.train import TrainConfig, LossEvalConfig, GenerationEvalConfig, LayerDistillConfig
 from cartridges.models import HFModelConfig, FlexLlamaForCausalLM
 from cartridges.datasets import TrainDataset, LossEvalDataset, DataSource, GenerateEvalDataset
 from cartridges.utils.wandb import WandBConfig
@@ -21,7 +21,7 @@ DATA_DIR = CARTRIDGES_DIR / "data" / "10k"
 
 
 config = TrainConfig(
-    name="amd-10k-cartridge-gemini-eval",
+    name="amd-10k-cartridge-layer-distill",
 
     # Model configuration (Llama 3)
     model=HFModelConfig(
@@ -66,7 +66,7 @@ config = TrainConfig(
         packing_mode="truncate",
     ),
 
-    # Training hyperparameters
+    # Training hyperparam/ters
     lr=2e-2,
     epochs=1,
     global_batch_size=32,  # Smaller batch size for single GPU
@@ -75,8 +75,26 @@ config = TrainConfig(
     save_after_training=True,
     distributed_backend="gloo",  # Use gloo for single GPU
 
+    # === LAYER DISTILLATION CONFIG ===
+    # Enable layer-wise distillation (teacher forward with real context)
+    use_layer_distill=True,
+
+
+
+
+    layer_distill=LayerDistillConfig(
+        # Which signals to distill: "post_attn" (after attention), "post_mlp" (layer output)
+        signals=["post_mlp"],
+        # Which layers: "all" or list of layer indices like [0, 8, 16, 24]
+        layers="all",
+        # Loss type: "mse" or "cosine"
+        loss_type="mse",
+        # Weight for layer loss (relative to logit distillation loss)
+        weight=1.0,
+    ),
+
     # Loss evaluation on Gemini QA conversations
-    generate_eval_every_n_steps=128,
+    generate_eval_every_n_steps=512,
     generate_evals=[
         GenerationEvalConfig(
             dataset=GenerateEvalDataset.Config(
@@ -85,14 +103,13 @@ config = TrainConfig(
                     type="local",
                 ),
             ),
-            name_for_wandb="amd_gemini_loss_eval",
+            name_for_wandb="amd_gemini_loss_eval_31-28",
             batch_size=16
         ),
     ],
-    wandb=WandBConfig(tags=["train", "amd10k"]),
+    wandb=WandBConfig(tags=["train", "amd10k", "layer-distill"]),
 )
 
 
 if __name__ == "__main__":
     pydrantic.main([config])
-

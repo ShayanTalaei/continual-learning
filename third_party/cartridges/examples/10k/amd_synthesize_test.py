@@ -43,7 +43,7 @@ config = SynthesizeConfig(
         ],
     ),
     wandb=None,
-    num_samples=65536,  
+    num_samples=10,  
     batch_size=32,
     max_num_batches_in_parallel=16,
 

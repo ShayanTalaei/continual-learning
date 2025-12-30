@@ -46,6 +46,7 @@ from transformers.modeling_utils import ALL_ATTENTION_FUNCTIONS, PreTrainedModel
 from transformers.utils import auto_docstring, can_return_tuple, logging
 
 from cartridges.models.attention_capture import AttentionCapture
+from cartridges.models.layer_capture import LayerCapture
 from .configuration_llama import LlamaConfig
 
 
@@ -83,6 +84,7 @@ class LlamaBatch:
     use_cache: Optional[bool] = None
     mode: Literal["train", "generate"] = "train"
     attention_capture: Optional[AttentionCapture] = None
+    layer_capture: Optional[LayerCapture] = None
 
     def update(self, **kwargs) -> "LlamaBatch":
         return LlamaBatch(
@@ -421,16 +423,20 @@ class LlamaDecoderLayer(GradientCheckpointingLayer):
         # Self Attention
         hidden_states, batch = self.self_attn(hidden_states=hidden_states, batch=batch)
         hidden_states = residual + hidden_states
-        # def rabs(a,b): return 2 * (a - b).abs() / (a.abs() + b.abs() + 1e-8)
-        # if hidden_states.shape[1] > 1000:
-        #     ohidden_states = torch.load(f"/scratch/m000122/bcabrown/debug/attn_tokasaurus_layer_{self.layer_idx}_hidden_states.pt")
-        #     print("After attention rabs mean: ", rabs(hidden_states[0], ohidden_states).mean())
+        
+        # Capture post-attention residual for layer distillation
+        if batch.layer_capture is not None:
+            batch.layer_capture.record("post_attn", self.layer_idx, hidden_states)
 
         # Fully Connected
         residual = hidden_states
         hidden_states = self.post_attention_layernorm(hidden_states)
         hidden_states = self.mlp(hidden_states)
         hidden_states = residual + hidden_states
+        
+        # Capture post-MLP residual for layer distillation
+        if batch.layer_capture is not None:
+            batch.layer_capture.record("post_mlp", self.layer_idx, hidden_states)
         
         if _PROFILE_ATTENTION:
             t_layer_end = perf_counter()
@@ -509,6 +515,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
         use_cache: Optional[bool] = None,
         mode: Literal["train", "generate"] = "train",
         attention_capture: Optional[AttentionCapture] = None,
+        layer_capture: Optional[LayerCapture] = None,
     ) -> BaseModelOutputWithPast:
         """
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -517,6 +524,8 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             or generation. Affects which compiled version of flex attention is used.
         attention_capture (`AttentionCapture`, *optional*):
             Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
+        layer_capture (`LayerCapture`, *optional*):
+            Recorder for per-layer hidden states for layer-wise distillation.
         """
         input_ids = input_ids.unsqueeze(0)
         position_ids = position_ids.unsqueeze(0)
@@ -567,6 +576,7 @@ class FlexLlamaModel(FlexLlamaPreTrainedModel):
             attention_mask=block_mask,
             mode=mode,
             attention_capture=attention_capture,
+            layer_capture=layer_capture,
         )
         
         if self.training: ## ST: Added this to avoid grad computation slowdown for generation
@@ -641,6 +651,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
         logits_to_keep: Union[int, torch.Tensor] = 0,
         mode: Literal["train", "generate"] = "train",
         attention_capture: Optional[AttentionCapture] = None,
+        layer_capture: Optional[LayerCapture] = None,
     ) -> CausalLMOutputWithPast:
         r"""
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -653,6 +664,8 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
             or generation.
         attention_capture (`AttentionCapture`, *optional*):
             Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
+        layer_capture (`LayerCapture`, *optional*):
+            Recorder for per-layer hidden states for layer-wise distillation.
 
         Example:
 
@@ -679,6 +692,7 @@ class FlexLlamaForCausalLM(FlexLlamaPreTrainedModel, GenerationMixin):
             use_cache=use_cache,
             mode=mode,
             attention_capture=attention_capture,
+            layer_capture=layer_capture,
         )
 
         hidden_states = outputs.last_hidden_state

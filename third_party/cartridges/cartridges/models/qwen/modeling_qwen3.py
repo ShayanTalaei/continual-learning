@@ -35,6 +35,7 @@ from transformers.utils import auto_docstring, can_return_tuple, logging
 from .configuration_qwen3 import Qwen3Config
 from cartridges.models.attention import create_block_mask_w_cache, flex_attention_forward, repeat_kv
 from cartridges.models.attention_capture import AttentionCapture
+from cartridges.models.layer_capture import LayerCapture
 
 
 logger = logging.get_logger(__name__)
@@ -53,6 +54,7 @@ class Qwen3Batch:
     use_cache: Optional[bool] = None
     mode: Literal["train", "generate"] = "train"
     attention_capture: Optional[AttentionCapture] = None
+    layer_capture: Optional[LayerCapture] = None
 
     def update(self, **kwargs) -> "Qwen3Batch":
         return Qwen3Batch(
@@ -262,6 +264,10 @@ class Qwen3DecoderLayer(GradientCheckpointingLayer):
             print(f"self_attn time: {time.time() - t0}")
 
         hidden_states = residual + batch.hidden_states
+        
+        # Capture post-attention residual for layer distillation
+        if batch.layer_capture is not None:
+            batch.layer_capture.record("post_attn", self.layer_idx, hidden_states)
 
         # Fully Connected
         residual = hidden_states
@@ -272,6 +278,10 @@ class Qwen3DecoderLayer(GradientCheckpointingLayer):
             torch.cuda.synchronize()
             print(f"self_attn time: {time.time() - t0}")
         hidden_states = residual + hidden_states
+        
+        # Capture post-MLP residual for layer distillation
+        if batch.layer_capture is not None:
+            batch.layer_capture.record("post_mlp", self.layer_idx, hidden_states)
 
         return batch.update(hidden_states=hidden_states)
 
@@ -378,6 +388,7 @@ class FlexQwen3Model(FlexQwen3PreTrainedModel):
         use_cache: Optional[bool] = None,
         mode: Literal["train", "generate"] = "train",
         attention_capture: Optional[AttentionCapture] = None,
+        layer_capture: Optional[LayerCapture] = None,
     ) -> BaseModelOutputWithPast:
         """
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -386,6 +397,8 @@ class FlexQwen3Model(FlexQwen3PreTrainedModel):
             or generation.
         attention_capture (`AttentionCapture`, *optional*):
             Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
+        layer_capture (`LayerCapture`, *optional*):
+            Recorder for per-layer hidden states for layer-wise distillation.
         """
         input_ids = input_ids.unsqueeze(0)
         position_ids = position_ids.unsqueeze(0)
@@ -419,6 +432,7 @@ class FlexQwen3Model(FlexQwen3PreTrainedModel):
             attention_mask=block_mask,
             mode=mode,
             attention_capture=attention_capture,
+            layer_capture=layer_capture,
         )
 
         for decoder_layer in self.layers[: self.config.num_hidden_layers]:
@@ -478,6 +492,7 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
         logits_to_keep: Union[int, torch.Tensor] = 0,
         mode: Literal["train", "generate"] = "train",
         attention_capture: Optional[AttentionCapture] = None,
+        layer_capture: Optional[LayerCapture] = None,
     ) -> CausalLMOutputWithPast:
         r"""
         seq_ids (`torch.LongTensor` of shape `(sequence_length,)`):
@@ -490,6 +505,8 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
             or generation.
         attention_capture (`AttentionCapture`, *optional*):
             Recorder that stores Q/K/V tensors and metadata during the forward pass when diagnostics are enabled.
+        layer_capture (`LayerCapture`, *optional*):
+            Recorder for per-layer hidden states for layer-wise distillation.
 
         Example:
 
@@ -516,6 +533,7 @@ class FlexQwen3ForCausalLM(FlexQwen3PreTrainedModel, GenerationMixin):
             use_cache=use_cache,
             mode=mode,
             attention_capture=attention_capture,
+            layer_capture=layer_capture,
         )
 
         hidden_states = outputs.last_hidden_state

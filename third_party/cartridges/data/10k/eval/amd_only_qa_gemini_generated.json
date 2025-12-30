@@ -1,0 +1,1122 @@
+[
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 0,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What was AMD's total revenue for the fiscal year 2022?",
+    "answer": "$23.6 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 1,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "In what month and year did AMD complete its acquisition of Xilinx?",
+    "answer": "February 2022",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 2,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What company, acquired in May 2022, provides AMD with data processing units (DPUs)?",
+    "answer": "Pensando Systems, Inc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 3,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What was the annual revenue for AMD's Data Center segment in 2022?",
+    "answer": "$6.0 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 4,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "By what percentage did AMD's Client segment annual revenue decline in 2022?",
+    "answer": "10 percent",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 5,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What was the annual revenue for AMD's Gaming segment in 2022?",
+    "answer": "$6.8 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 6,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Who is the Chair & Chief Executive Officer of AMD as of the 2022 annual report?",
+    "answer": "Dr. Lisa Su",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 7,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Under what stock symbol is AMD's common stock listed on The NASDAQ Global Select Market?",
+    "answer": "AMD",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 8,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "On what date was Advanced Micro Devices, Inc. incorporated?",
+    "answer": "May 1, 1969",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 9,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "Approximately how many employees did AMD have in its global workforce as of December 31, 2022?",
+    "answer": "25,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 10,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What percentage of AMD's 2022 consolidated net revenue was accounted for by its largest single customer?",
+    "answer": "16%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 11,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What was the total purchase consideration for the acquisition of Pensando in 2022?",
+    "answer": "approximately $1.9 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 12,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "How much did AMD invest in Research & Development (R&D) during 2022?",
+    "answer": "$5.0 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 13,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the name of the new brand campaign launched by AMD in 2022?",
+    "answer": "together we advance",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 14,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "In which California city are the three Superfund sites for which AMD has been named a responsible party located?",
+    "answer": "Sunnyvale",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "factual",
+    "seed_index": 15,
+    "seed_template": "Factual Prompt Template\nPlease generate a question to test someone\u2019s ability to remember factual details from the document. The\nanswer should be a few tokens long and be a factual detail from the statement, such as a number, entity,\ndate, title, or name.\nThis question should not be common knowledge: instead, it should be something that is only answerable\nvia information in the document.",
+    "question": "What is the aggregate principal amount of the five-year unsecured revolving credit facility AMD entered into in 2022?",
+    "answer": "$3.0 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 0,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the name of the parent company of Google, which utilizes AMD EPYC processors for its internal infrastructure?",
+    "answer": "Alphabet Inc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 1,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In which city is the headquarters of Valve, the company that produces the AMD-powered Steam Deck?",
+    "answer": "Bellevue, Washington",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 2,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the name of the founder and CEO of SpaceX, a company that has adopted AMD's adaptive computing products?",
+    "answer": "Elon Musk",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 3,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who is the current CEO of Microsoft, the company responsible for the Xbox Series X and S consoles powered by AMD chips?",
+    "answer": "Satya Nadella",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 4,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what country is the headquarters of Sony, the manufacturer of the AMD-powered PlayStation 5, located?",
+    "answer": "Japan",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 5,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "From which university did AMD's Chair and CEO, Dr. Lisa Su, receive her Ph.D.?",
+    "answer": "Massachusetts Institute of Technology",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 6,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the nickname for the geographic region in California where AMD's headquarters in Santa Clara is located?",
+    "answer": "Silicon Valley",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 7,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who was the CEO of Xilinx at the time of its acquisition by AMD in February 2022?",
+    "answer": "Victor Peng",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 8,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In what year was the NASDAQ stock market, where AMD's common stock is listed under the symbol 'AMD', founded?",
+    "answer": "1971",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 9,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Who is the co-founder and current Chairman of Oracle, a company whose cloud services use AMD EPYC processors?",
+    "answer": "Larry Ellison",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 10,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the capital city of Delaware, the state where AMD was incorporated in 1969?",
+    "answer": "Dover",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 11,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What NASA center is primarily responsible for managing the Perseverance Mars rover, which utilizes AMD's computing products?",
+    "answer": "Jet Propulsion Laboratory (JPL)",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 12,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What is the name of the former Cisco CEO who co-founded Pensando, a company AMD acquired in May 2022?",
+    "answer": "John Chambers",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 13,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "In which country is the headquarters of Tencent, one of the cloud companies that uses AMD EPYC processors?",
+    "answer": "China",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 14,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "Which U.S. President signed the Sarbanes-Oxley Act, a law referenced in the risk factors section of the document?",
+    "answer": "George W. Bush",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "knowledge",
+    "seed_index": 15,
+    "seed_template": "Knowledge Prompt Template\nPlease generate a question that requires combining information mentioned both inside and outside the\ndocument.\nThis question should require using a fact from the document and also a fact that you are confident about,\nbut is not mentioned in the document. For instance: - What are the founding dates of the companies\nthat got acquired this year? This is a good question because the names of the acquired companies are\nmentioned in the document and the founding dates are not mentioned. - What is the name of the CEO\u2019s spouse? This is a good question because the name of the CEO is mentioned in the document and the\nspouse\u2019s name is not mentioned.\nThe answer should be a fact that is a few tokens long such as a number, entity, date, title, or name.",
+    "question": "What are the names of the two primary co-founders of Intel Corporation, AMD's main competitor mentioned in the document?",
+    "answer": "Robert Noyce and Gordon Moore",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 0,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the result in millions when you subtract the total square footage of AMD's owned space from its estimated environmental liability in millions of dollars?",
+    "answer": "2.9",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 1,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "How many employees did AMD have globally at the end of the fiscal year when its annual revenue was $23.6 billion?",
+    "answer": "Approximately 25,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 2,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "How many shares of common stock were repurchased in the fiscal quarter that included the completion of the Xilinx acquisition?",
+    "answer": "15,785,806",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 3,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What was the approximate net revenue, in billions of dollars, generated from the single largest customer in the Gaming segment in fiscal year 2022?",
+    "answer": "$3.776 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 4,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "In the year AMD's international sales represented 66% of its net revenue, how many U.S. patents did the company hold?",
+    "answer": "Approximately 8,200",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 5,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "How many full years passed between AMD's incorporation date and the maturity year of its 7.50% Senior Notes?",
+    "answer": "53",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 6,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What was AMD's Research & Development investment as a percentage of its total revenue in the year its gross profit was $4.3 billion?",
+    "answer": "Approximately 20.4%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 7,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "The single largest customer, whose sales came from the Gaming segment, accounted for what approximate percentage of that entire segment's 2022 revenue?",
+    "answer": "55.5%",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 8,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "What is the one-word response provided for both 'Unresolved Staff Comments' and 'Changes in and Disagreements with Accountants on Accounting and Financial Disclosure'?",
+    "answer": "None",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 9,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "In which California city, different from its Santa Clara headquarters, has AMD been named a responsible party for three Superfund sites?",
+    "answer": "Sunnyvale",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 10,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "How many million shares of common stock did AMD issue as part of the transaction described as the 'largest acquisition in semiconductor history'?",
+    "answer": "429 million",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 11,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "How many years after the Wafer Supply Agreement with GLOBALFOUNDRIES is set to expire are the 3.924% Senior Notes scheduled to mature?",
+    "answer": "7 years",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 12,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "According to the risk factors, who is AMD's primary competitor in the microprocessor market, even as AMD powers 75% of the top 20 most energy-efficient supercomputers?",
+    "answer": "Intel Corporation",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 13,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "On what page number does the section begin that incorporates by reference the 'Security Ownership of Certain Beneficial Owners and Management' information from the 2023 Proxy Statement?",
+    "answer": "104",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 14,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "To which reporting segment was the goodwill attributed from the acquisition that closed on May 26, 2022?",
+    "answer": "Data Center",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "disjoint",
+    "seed_index": 15,
+    "seed_template": "Disjoint Prompt Template\nPlease generate a multi-hop question that tests someone\u2019s ability to use factual information mentioned\nin at least two very different sub-sections of the document.\nThis question shouldn\u2019t be a standard question about this kind of document. Instead, it should ask\nabout two particularly disconnected ideas, like comparing information about the amount of owned space\nfor the company headquarters with the amount of dollars of estimated liability or comparing the revenue\nnumber with the number of employees.\nThis question should also test one\u2019s ability to do retrieval: do not give away part of the answer in\nthe question. Ensure that for one to get the correct answer to the question, they need to understand\nthe document.\nThe answer should be a short: for example, a number, entity, date, title, or name.",
+    "question": "By what percentage did the Client segment's revenue decline in the same year that AMD was recognized by the Bloomberg Gender-Equality Index for the fourth consecutive time?",
+    "answer": "10 percent",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 0,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What are the four reportable business segments for AMD as of 2022?",
+    "answer": "Data Center, Client, Gaming, and Embedded.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 1,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "List the three main competitors AMD faces in the Data Center segment.",
+    "answer": "Intel Corporation, NVIDIA Corporation, and companies with ARM-based designs.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 2,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What were the names of the two companies AMD acquired in 2022?",
+    "answer": "Xilinx, Inc. and Pensando Systems, Inc.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 3,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Summarize the five strategic pillars of AMD's business strategy.",
+    "answer": "Compute technology leadership, expanding data center leadership, enabling pervasive artificial intelligence (AI), providing software platforms and developer enablement, and designing custom silicon and solutions.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 4,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What was AMD's total revenue for the three-year period from 2020 to 2022?",
+    "answer": "$49.8 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 5,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What types of semiconductor products does AMD primarily offer, as listed in the \"Overview\" section of Item 1?",
+    "answer": "Server CPUs and GPUs, DPUs, FPGAs, Adaptive SoC products, desktop and notebook CPUs and APUs, discrete GPUs, and semi-custom SoC products.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 6,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Which three major game consoles are powered by AMD's semi-custom chips?",
+    "answer": "Sony PlayStation 5, Microsoft Xbox Series X and S, and Valve Steam Deck.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 7,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "List the third-party wafer foundry partners mentioned in the document.",
+    "answer": "Taiwan Semiconductor Manufacturing Company Limited (TSMC), GLOBALFOUNDRIES Inc. (GF), United Microelectronics Corporation (UMC), and Samsung Electronics Co., Ltd.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 8,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Which two recognitions related to gender equality and LGBTQ+ equality did AMD receive in 2022?",
+    "answer": "Member of the 2022 Bloomberg Gender-Equality Index and a 100% score from the Human Rights Campaign\u2019s (HRC) Corporate Equality Index.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 9,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Across which major industries does AMD state its products are used, as mentioned in the introductory letter to shareholders?",
+    "answer": "Cloud computing, enterprise, communications, healthcare, aerospace, automotive, PCs, and gaming.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 10,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What are the different types of intellectual property rights AMD uses to protect its technology?",
+    "answer": "Copyrights, patents, patent applications, trademarks, trade secrets, and mask work rights.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 11,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What were the respective annual revenues for the Data Center, Client, Gaming, and Embedded segments in 2022?",
+    "answer": "Data Center: $6.0 billion; Client: $6.2 billion; Gaming: $6.8 billion; Embedded: $4.6 billion.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 12,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "List the primary competitors AMD faces in the Gaming segment for discrete graphics.",
+    "answer": "NVIDIA, Intel, and other suppliers of discrete graphics and integrated graphics processor (IGP) chipsets.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 13,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "What was the total R&D investment for AMD from 2020 through 2022?",
+    "answer": "$9.8 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 14,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Identify the five main types of compute engines AMD provides that are central to its AI strategy.",
+    "answer": "CPUs, GPUs, FPGAs, DPUs, and adaptive SOCs.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "synthesize",
+    "seed_index": 15,
+    "seed_template": "Synthesize Prompt Template\nPlease generate a question that requires synthesizing and aggregating information in the document.\nFor instance, you could ask someone to summarize a page of the document, list all the key competitors\nmentioned in the document, or summarize the company\u2019s business mode",
+    "question": "Which major cloud companies are listed as using AMD EPYC processors for their infrastructure and services?",
+    "answer": "Amazon, Google, Microsoft Azure, Meta, Oracle Cloud, and Tencent.",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 0,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many main parts is the 10-K document divided into according to the index?",
+    "answer": "4",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 1,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of ITEM 1A in PART I?",
+    "answer": "Risk Factors",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 2,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "According to the index, on what page does PART II begin?",
+    "answer": "41",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 3,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "Which Item number is marked as '[Reserved]' in the document's index?",
+    "answer": "ITEM 6",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 4,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the title of the final item, ITEM 16, listed in the index?",
+    "answer": "Form 10-K Summary",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 5,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many items are listed under PART III in the index?",
+    "answer": "5",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 6,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the page number for the beginning of 'ITEM 8. Financial Statements and Supplementary Data'?",
+    "answer": "56",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 7,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "Does 'ITEM 2. Properties' come before or after 'ITEM 3. Legal Proceedings' in the document structure?",
+    "answer": "Before",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 8,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "Which main Part of the document contains 'ITEM 15. Exhibits, Financial Statements Schedules'?",
+    "answer": "PART IV",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 9,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the full title of ITEM 7 in PART II?",
+    "answer": "Management\u2019s Discussion and Analysis of Financial Condition and Results of Operations",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 10,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "According to the index, on what page do the 'SIGNATURES' appear?",
+    "answer": "113",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 11,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the full title of ITEM 9A?",
+    "answer": "Controls and Procedures",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 12,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "Between 'ITEM 1A. Risk Factors' and 'ITEM 1. Business', which section starts on page 1?",
+    "answer": "ITEM 1. Business",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 13,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the item number for 'Principal Accounting Fees and Services'?",
+    "answer": "ITEM 14",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 14,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "How many items are listed in the index for PART I of the document?",
+    "answer": "6",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "structure",
+    "seed_index": 15,
+    "seed_template": "Structure Prompt Template\nPlease generate a question that requires understanding the structure of the document.\nThis question should be more about the structure of the document, rather than the precise statement\ndetails. For instance, you could ask someone to list the titles of all the sections in the document,\ndescribe the document structure, report the total number of pages, ask which section amongst two sections\ncomes first, or report the section with the largest number of tables.",
+    "question": "What is the page number listed in the index for the start of 'ITEM 1A. Risk Factors'?",
+    "answer": "15",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 0,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If AMD's 2022 annual revenue growth were a character in a comic book, what would be its power level, expressed as a percentage?",
+    "answer": "44 percent",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 1,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "You are a historian documenting the semiconductor industry. On what date in 2022 would you commemorate the completion of the largest acquisition in semiconductor history by AMD?",
+    "answer": "February 14, 2022",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 2,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If AMD's four reportable segments were in a race in 2022, which segment would be the 'comeback kid' with the highest percentage revenue increase year-over-year?",
+    "answer": "Data Center segment",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 3,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "An artist is commissioned to create a sculpture representing AMD's total revenue in 2022. What dollar amount, in billions, should be etched onto the base of this sculpture?",
+    "answer": "$23.6 billion",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 4,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "You are a financial therapist counseling AMD's segments. Which segment would you console for its 10 percent revenue decline in 2022?",
+    "answer": "Client segment",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 5,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "In a sci-fi novel, a groundbreaking mission to return astronauts to the moon is powered by AMD's adaptive computing. What is the name of this mission series?",
+    "answer": "Artemis missions",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 6,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If you were to write a short poem about AMD's 2022 brand campaign, what three-word slogan would be its centerpiece?",
+    "answer": "together we advance",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 7,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "Imagine you are a video game character on a quest to find the ultimate handheld gaming device. The legendary device you seek is powered by a semi-custom AMD APU. What is this device called?",
+    "answer": "Steam Deck",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 8,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If the world's fastest supercomputer, powered by AMD, could speak, what is the one-word term it would use to describe its performance of one quintillion calculations per second?",
+    "answer": "exaflop",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 9,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If you were writing the script for a movie about AMD's history, what date would you list as the company's incorporation date?",
+    "answer": "May 1, 1969",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 10,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "A secret agent is given the codename 'Pensando' and a mission date. What was the date in May 2022 that AMD completed its acquisition of Pensando?",
+    "answer": "May 26, 2022",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 11,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "In a futuristic city, a monument is built to honor Dr. Lisa Su's leadership at AMD. What is her full title as listed in the 2022 annual report?",
+    "answer": "Chair & Chief Executive Officer",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 12,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "If AMD's total number of employees at the end of 2022 were to form a new city, what would be its approximate population?",
+    "answer": "25,000",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 13,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "A spy is trying to identify a company by its stock market symbol. The only clue is that its common stock is listed on NASDAQ. What three-letter symbol would identify AMD?",
+    "answer": "AMD",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 14,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "As a futurist predicting energy trends, you note AMD's ambitious 2022 goal for AI and HPC applications. By what multiple does AMD aim to increase energy efficiency by 2025?",
+    "answer": "30x",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "creative",
+    "seed_index": 15,
+    "seed_template": "Creative Prompt Template\nPlease generate a question about the document to test someone\u2019s ability to comprehend the content of the\ndocument. This question specifically should be focused on their ability to generalize the information\nabout the document to a strange question of sorts.\nThis question shouldn\u2019t be a standard question about this kind of document, it should ask to do something\nabnormal and creative, like writing a poem about a financial document.",
+    "question": "A treasure map leads to AMD's intellectual property vault. The final clue reveals the approximate number of U.S. patents the company held as of December 31, 2022. What is that number?",
+    "answer": "8,200",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 0,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the percentage increase in total net revenue from 2021 to 2022, rounded to the nearest whole number?",
+    "answer": "44",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 1,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the increase in Gross Profit, in millions of dollars, from 2020 to 2022?",
+    "answer": "6256",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 2,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What were the Research and Development expenses as a percentage of total net revenue in 2022, rounded to one decimal place?",
+    "answer": "21.2",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 3,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the combined net revenue, in millions of dollars, for the Data Center and Gaming segments in 2022?",
+    "answer": "12848",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 4,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the total combined operating income from all four reportable segments (Data Center, Client, Gaming, and Embedded) in 2022, in millions of dollars?",
+    "answer": "6243",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 5,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "By how many million dollars did the Client segment's annual revenue decrease from 2021 to 2022?",
+    "answer": "686",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 6,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "In 2022, what were the Marketing, general and administrative expenses as a percentage of gross profit, rounded to one decimal place?",
+    "answer": "22.0",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 7,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "How many total shares of common stock were repurchased as part of the publicly announced program during the first two fiscal quarters of 2022?",
+    "answer": "25945706",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 8,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What is the difference, in millions of dollars, between the net revenue of the highest-earning and lowest-earning segments in 2022?",
+    "answer": "2253",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 9,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the value of total stockholders' equity in millions of dollars as of December 31, 2022?",
+    "answer": "54750",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 10,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the gross margin percentage in 2020, rounded to one decimal place?",
+    "answer": "44.5",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 11,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the total net cash provided by operating activities, in millions of dollars, for the fiscal years 2021 and 2022 combined?",
+    "answer": "7086",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 12,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "By how many million dollars did the principal amount of total debt increase from the end of fiscal year 2021 to the end of fiscal year 2022?",
+    "answer": "2188",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 13,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "In 2021, what was the combined net revenue from the Client and Gaming segments, in millions of dollars?",
+    "answer": "12494",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 14,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "What was the sum of Research and development and Marketing, general and administrative expenses in 2022, in millions of dollars?",
+    "answer": "7341",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  },
+  {
+    "company": "amd",
+    "seed_type": "reasoning",
+    "seed_index": 15,
+    "seed_template": "Reasoning Prompt Template\nPlease generate a question that requires mathematical reasoning over the values in the document.\nThis question should require going beyond the facts directly mentioned in the statement, such as asking\nto compute the percentage increase in revenue between two years, find the largest expense category, or\ncalculate difference in profit between two years.\nThe answer should be a number.",
+    "question": "For the Data Center segment in 2022, what was the operating income as a percentage of net revenue, rounded to one decimal place?",
+    "answer": "30.6",
+    "model": "gemini-2.5-pro",
+    "document_path": "/home/ubuntu/ding/continual-learning/third_party/cartridges/data/10k/amd_10k_financebench.txt"
+  }
+]

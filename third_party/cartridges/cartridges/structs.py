@@ -73,7 +73,7 @@ class Conversation:
                     role=message["role"],
                     token_ids=message["token_ids"],
                     top_logprobs=(
-                        FlatTopLogprobs(**message["top_logprobs"]) 
+                        _parse_flat_top_logprobs(message["top_logprobs"]) 
                         if message["top_logprobs"] is not None else None
                     )
                 ) 
@@ -83,6 +83,17 @@ class Conversation:
             metadata=row["metadata"],
             type=row["type"],
         )
+
+
+def _parse_flat_top_logprobs(data: dict) -> FlatTopLogprobs:
+    """Convert dict (from parquet) to FlatTopLogprobs, handling list->numpy conversion."""
+    import numpy as np
+    return FlatTopLogprobs(
+        token_idx=np.array(data["token_idx"]),
+        token_id=np.array(data["token_id"]),
+        logprobs=np.array(data["logprobs"]),
+        shape=tuple(data["shape"]),
+    )
 
 def write_conversations(conversations: list[Conversation], path: str):
     path_str = str(path)
@@ -113,10 +124,28 @@ def _conversations_to_parquet(conversations: list[Conversation], path: str):
     table = pa.Table.from_pylist(list(rows)) 
     pq.write_table(table, path, compression="snappy")
 
+# def _conversations_from_parquet(path: str) -> list[Conversation]:
+#     import pandas as pd 
+#     rows = pd.read_parquet(path).to_dict(orient="records")
+#     return [Conversation.from_dict(row) for row in rows]
+
+# def _conversations_from_parquet(path: str) -> list[Conversation]:
+#     import pyarrow.parquet as pq
+    
+#     # Use pyarrow directly instead of pandas to handle nested structures
+#     table = pq.read_table(path)
+#     rows = table.to_pylist()
+#     return [Conversation.from_dict(row) for row in rows]
+
 def _conversations_from_parquet(path: str) -> list[Conversation]:
-    import pandas as pd 
-    rows = pd.read_parquet(path).to_dict(orient="records")
-    return [Conversation.from_dict(row) for row in rows]
+    import pyarrow.parquet as pq
+    
+    # Read in small batches to avoid chunked array issues with deeply nested data
+    pf = pq.ParquetFile(path)
+    all_rows = []
+    for batch in pf.iter_batches(batch_size=1000):
+        all_rows.extend(batch.to_pylist())
+    return [Conversation.from_dict(row) for row in all_rows]
 
 def _conversations_to_pkl(conversations: list[Conversation], path: str):
     """For backwards compatibility, we will eventually only support parquet as it is 
